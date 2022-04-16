@@ -1,11 +1,12 @@
 package br.com.rd.ved.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.rd.ved.modell.Pedido;
 
 @Repository
-public interface PedidoRepository extends CrudRepository<Pedido,Integer>{
+public interface PedidoRepository extends JpaRepository<Pedido, Integer>, CrudRepository<Pedido,Integer>{
 
 }
