@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,9 +13,11 @@ public class Boleto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_boleto")
 	private Integer id;
+	@Column(name="codigo_barra")
 	private String codigoBarras;
-	
+	@Column(name="id_marca")
 	private Marca marca;
 
 	public Boleto() {

@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,18 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="itemPedidos")
+@Table(name = "itemPedidos")
 public class ItemPedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_item_pedido")
 	private Integer id;
+	@Column(name = "quantidade_total")
 	private Integer quantidade;
+	@Column(name = "porcentagem_icms")
 	private Double porcentagemIcms;
+	@Column(name = "valor_icms")
 	private Double valorIcms;
-	
+	@Column(name = "id_produto")
 	private Produto produto;
-	
+	@Column(name = "id_pedido")
 	private Pedido pedido;
 
 	public ItemPedido() {
@@ -96,6 +101,5 @@ public class ItemPedido {
 		return "ItemPedido [id=" + id + ", quantidade=" + quantidade + ", porcentagemIcms=" + porcentagemIcms
 				+ ", valorIcms=" + valorIcms + ", produto=" + produto + ", pedido=" + pedido + "]";
 	}
-	
-	
+
 }

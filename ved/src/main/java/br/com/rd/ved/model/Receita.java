@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,29 +8,33 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bandeiras")
+@Table(name = "bandeiras")
 public class Receita {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_receita")
 	private Integer id;
-	private String nome;
+	@Column(name = "titulo")
+	private String titulo;
+	@Column(name = "ingredientes")
 	private String ingredientes;
+	@Column(name = "preparo")
 	private String preparo;
-	
+
 	public Receita() {
 		super();
 	}
 
 	public Receita(Integer id, String nome, String ingredientes, String preparo) {
 		this.id = id;
-		this.nome = nome;
+		this.titulo = nome;
 		this.ingredientes = ingredientes;
 		this.preparo = preparo;
 	}
 
 	public Receita(String nome, String ingredientes, String preparo) {
-		this.nome = nome;
+		this.titulo = nome;
 		this.ingredientes = ingredientes;
 		this.preparo = preparo;
 	}
@@ -43,11 +48,11 @@ public class Receita {
 	}
 
 	public String getNome() {
-		return nome;
+		return titulo;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.titulo = nome;
 	}
 
 	public String getIngredientes() {
@@ -68,8 +73,8 @@ public class Receita {
 
 	@Override
 	public String toString() {
-		return "Receita [id=" + id + ", nome=" + nome + ", ingredientes=" + ingredientes + ", preparo=" + preparo + "]";
+		return "Receita [id=" + id + ", nome=" + titulo + ", ingredientes=" + ingredientes + ", preparo=" + preparo
+				+ "]";
 	}
-	
-	
+
 }

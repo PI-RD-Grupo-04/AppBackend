@@ -1,7 +1,8 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,16 +10,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="historicoPedidos")
+@Table(name = "historicoPedidos")
 public class HistoricoPedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_historico_pedido")
 	private Integer id;
+	@Column(name = "data_pedido")
 	private Date dataPedido;
-	
+	@Column(name = "id_pedido")
 	private Pedido pedido;
-	
+	@Column(name = "id_pedido_status")
 	private PedidoStatus pedidoStatus;
 
 	public HistoricoPedido() {
@@ -43,6 +46,5 @@ public class HistoricoPedido {
 		return "HistoricoPedido [id=" + id + ", dataPedido=" + dataPedido + ", pedido=" + pedido + ", pedidoStatus="
 				+ pedidoStatus + "]";
 	}
-	
-	
+
 }

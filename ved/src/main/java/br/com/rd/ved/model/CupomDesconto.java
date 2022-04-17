@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +13,11 @@ public class CupomDesconto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_cupom_desconto")
 	private Integer id;
+	@Column(name="descricao_desconto")
 	private String descricao;
+	@Column(name="porcentagem_desconto")
 	private Integer porcentagemDesconto;
 	
 	public CupomDesconto() {

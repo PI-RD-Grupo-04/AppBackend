@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,22 +8,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="produtos")
+@Table(name = "produtos")
 public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_produto")
 	private Integer id;
+	@Column(name = "nome_produto")
 	private String nomeProduto;
+	@Column(name = "preco")
 	private Double preco;
+	@Column(name = "imagem_url")
 	private String url;
+	@Column(name = "descricao_produto")
 	private String descricao;
+	@Column(name = "peso_kilo")
 	private Double peso;
-	
+	@Column(name = "id_categoria")
 	private Categoria categoria;
+	@Column(name = "id_marca")
 	private Marca marca;
+	@Column(name = "id_status_produto")
 	private StatusProduto statusProduto;
-	
+
 	public Produto() {
 		super();
 	}
@@ -130,7 +139,5 @@ public class Produto {
 				+ ", descricao=" + descricao + ", peso=" + peso + ", categoria=" + categoria + ", marca=" + marca
 				+ ", statusProduto=" + statusProduto + "]";
 	}
-	
-	
-	
+
 }

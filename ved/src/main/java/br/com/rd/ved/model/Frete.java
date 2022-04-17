@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,17 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="fretes")
+@Table(name = "fretes")
 public class Frete {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_frete")
 	private Integer id;
+	@Column(name = "")
 	private Double valor;
-	
+	@Column(name = "id_uf")
 	private Uf uf;
+	@Column(name = "id_tipo_frete")
 	private TipoFrete tipoFrete;
-	
+
 	public Frete() {
 		super();
 	}
@@ -71,6 +75,5 @@ public class Frete {
 	public String toString() {
 		return "Frete [id=" + id + ", valor=" + valor + ", uf=" + uf + ", tipoFrete=" + tipoFrete + "]";
 	}
-	
-	
+
 }

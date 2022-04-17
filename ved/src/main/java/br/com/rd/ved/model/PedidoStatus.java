@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,24 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="marcas")
-public class Marca {
+@Table(name = "pedidoStatus")
+public class PedidoStatus {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_pedido_status")
 	private Integer id;
+	@Column(name = "descricao_status")
 	private String descricao;
-	
-	public Marca() {
+
+	public PedidoStatus() {
 		super();
 	}
 
-	public Marca(Integer id, String descricao) {
+	public PedidoStatus(Integer id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}
 
-	public Marca(String descricao) {
+	public PedidoStatus(String descricao) {
 		this.descricao = descricao;
 	}
 
@@ -46,9 +49,7 @@ public class Marca {
 
 	@Override
 	public String toString() {
-		return "Marca [id=" + id + ", descricao=" + descricao + "]";
+		return "PedidoStatus [id=" + id + ", descricao=" + descricao + "]";
 	}
-	
-	
-	
+
 }

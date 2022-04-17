@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,9 +13,13 @@ public class Fornecedor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_fornecedor")
 	private Integer id;
+	@Column(name="razao_social")
 	private String razaoSocial;
+	@Column(name="cnpj")
 	private String cnpj;
+	@Column(name="email")
 	private String email;
 	
 	public Fornecedor() {

@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,13 +13,20 @@ public class Cartao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_cartao")
 	private Integer id;
+	@Column(name="numeracao_cartao")
 	private String numeroCartao;
+	@Column(name="nome_titular")
 	private String nomeTitular;
+	@Column(name="cpf_titular")
 	private String cpfTitular;
+	@Column(name="dia_vencimento")
 	private Integer diaVencimento;
+	@Column(name="ano_vencimento")
 	private Integer anoVencimento;
-	
+
+	@Column(name="id_bandeira")
 	private Bandeira bandeiraId;
 
 	public Cartao() {

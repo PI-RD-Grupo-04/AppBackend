@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.rd.ved.modell.Armazenamento;
+import br.com.rd.ved.model.Armazenamento;
 
 @Repository
 public interface ArmazenamentoRepository extends JpaRepository<Armazenamento, Integer>, CrudRepository<Armazenamento,Integer>{

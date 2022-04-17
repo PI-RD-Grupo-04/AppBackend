@@ -1,7 +1,8 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,22 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pedidos")
+@Table(name = "pedidos")
 public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_pedido")
 	private Integer id;
+	@Column(name = "data_pedido")
 	private Date data;
-	
+	@Column(name = "id_cliente")
 	private Cliente cliente;
-	
+	@Column(name = "id_cupom_desconto")
 	private CupomDesconto cupomDesconto;
-	
+	@Column(name = "id_pedido_status")
 	private PedidoStatus pedidoStatus;
-	
+	@Column(name = "id_frete")
 	private Frete frete;
-	
+	@Column(name = "id_endereco")
 	private Endereco endereco;
 
 	public Pedido() {
@@ -113,6 +116,5 @@ public class Pedido {
 		return "Pedido [id=" + id + ", data=" + data + ", cliente=" + cliente + ", cupomDesconto=" + cupomDesconto
 				+ ", pedidoStatus=" + pedidoStatus + ", frete=" + frete + ", endereco=" + endereco + "]";
 	}
-	
-	
+
 }

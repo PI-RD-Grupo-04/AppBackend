@@ -1,7 +1,8 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,21 +10,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="clientes")
+@Table(name = "clientes")
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_cliente")
 	private Integer id;
+	@Column(name = "nome")
 	private String nome;
+	@Column(name = "sobrenome")
 	private String sobreNome;
+	@Column(name = "nome_social")
 	private String nomeSocial;
+	@Column(name = "cpf")
 	private String cpf;
+	@Column(name = "data_nascimento")
 	private Date dataNascimento;
+	@Column(name = "email")
 	private String email;
+	@Column(name = "telefone")
 	private String telefone;
+	@Column(name = "senha")
 	private String senha;
-	
+
 	public Cliente() {
 		super();
 	}
@@ -41,8 +51,8 @@ public class Cliente {
 		this.senha = senha;
 	}
 
-	public Cliente(String nome, String sobreNome, String nomeSocial, String cpf, Date dataNascimento,
-			String email, String telefone, String senha) {
+	public Cliente(String nome, String sobreNome, String nomeSocial, String cpf, Date dataNascimento, String email,
+			String telefone, String senha) {
 		this.nome = nome;
 		this.sobreNome = sobreNome;
 		this.nomeSocial = nomeSocial;
@@ -131,7 +141,5 @@ public class Cliente {
 				+ ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", email=" + email + ", telefone=" + telefone
 				+ ", senha=" + senha + "]";
 	}
-	
-	
-	
+
 }

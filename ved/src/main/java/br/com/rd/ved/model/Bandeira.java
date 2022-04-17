@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,18 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bandeiras")
+@Table(name = "bandeiras")
 public class Bandeira {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_bandeira")
 	private Integer id;
+	@Column(name = "nome_bandeira")
 	private String nome;
-	
+
 	public Bandeira() {
 		super();
 	}
-	
+
 	public Bandeira(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
@@ -48,6 +51,5 @@ public class Bandeira {
 	public String toString() {
 		return "Bandeira [id=" + id + ", nome=" + nome + "]";
 	}
-	
-	
+
 }

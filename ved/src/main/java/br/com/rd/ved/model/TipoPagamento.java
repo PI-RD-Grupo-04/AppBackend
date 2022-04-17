@@ -1,5 +1,6 @@
-package br.com.rd.ved.modell;
+package br.com.rd.ved.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,24 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="armazenamentos")
-public class Armazenamento {
+@Table(name="tipoPagamentos")
+public class TipoPagamento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_tipo_pagamento")
 	private Integer id;
+	@Column(name="descricao_pagamento")
 	private String descricao;
 	
-	public Armazenamento() {
+	public TipoPagamento() {
 		super();
 	}
 
-	public Armazenamento(Integer id, String descricao) {
+	public TipoPagamento(Integer id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}
 
-	public Armazenamento(String descricao) {
+	public TipoPagamento(String descricao) {
 		this.descricao = descricao;
 	}
 
@@ -46,8 +49,9 @@ public class Armazenamento {
 
 	@Override
 	public String toString() {
-		return "Armazenamento [id=" + id + ", descricao=" + descricao + "]";
+		return "TipoPagamento [id=" + id + ", descricao=" + descricao + "]";
 	}
+	
 	
 	
 }
