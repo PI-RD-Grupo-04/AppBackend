@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "produtos")
@@ -16,6 +17,7 @@ public class Produto {
 	@Column(name = "id_produto")
 	private Integer id;
 	@Column(name = "nome_produto")
+	@Size(max = 50)
 	private String nomeProduto;
 	@Column(name = "preco")
 	private Double preco;
@@ -23,6 +25,7 @@ public class Produto {
 	private String url;
 	@Column(name = "descricao_produto")
 	private String descricao;
+	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
 	@Column(name = "id_categoria")

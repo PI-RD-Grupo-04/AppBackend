@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "enderecos")
@@ -16,16 +17,22 @@ public class Endereco {
 	@Column(name = "id_endereco")
 	private Integer id;
 	@Column(name = "cep")
+	@Size(max = 10)
 	private String cep;
 	@Column(name = "rua")
+	@Size(max = 100)
 	private String rua;
 	@Column(name = "numero")
+	@Size(max = 10)
 	private Integer numero;
 	@Column(name = "complemento")
+	@Size(max = 50)
 	private String complemento;
 	@Column(name = "municipio")
+	@Size(max = 50)
 	private String municipio;
 	@Column(name = "cidade")
+	@Size(max = 50)
 	private String cidade;
 
 	@Column(name = "id_uf")

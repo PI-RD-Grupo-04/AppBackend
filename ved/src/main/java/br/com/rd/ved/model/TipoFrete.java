@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="tipoFretes")
@@ -16,6 +17,7 @@ public class TipoFrete {
 	@Column(name="id_tipo_frete")
 	private Integer id;
 	@Column(name="descricao_frete")
+	@Size(max = 50)
 	private String descricao;
 	
 	public TipoFrete() {

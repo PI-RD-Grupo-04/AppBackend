@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "bandeiras")
@@ -15,7 +16,8 @@ public class Bandeira {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_bandeira")
 	private Integer id;
-	@Column(name = "nome_bandeira")
+	@Column(name = "nome_bandeira", nullable = false)
+	@Size(max = 30)
 	private String nome;
 
 	public Bandeira() {

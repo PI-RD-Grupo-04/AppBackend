@@ -15,18 +15,18 @@ public class Cartao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_cartao")
 	private Integer id;
-	@Column(name="numeracao_cartao")
+	@Column(name="numeracao_cartao", nullable = false)
 	private String numeroCartao;
-	@Column(name="nome_titular")
+	@Column(name="nome_titular", nullable = false)
 	private String nomeTitular;
-	@Column(name="cpf_titular")
+	@Column(name="cpf_titular", nullable = false)
 	private String cpfTitular;
-	@Column(name="dia_vencimento")
+	@Column(name="dia_vencimento", nullable = false)
 	private Integer diaVencimento;
-	@Column(name="ano_vencimento")
+	@Column(name="ano_vencimento" , nullable = false)
 	private Integer anoVencimento;
 
-	@Column(name="id_bandeira")
+	@Column(name="id_bandeira", nullable = false)
 	private Bandeira bandeiraId;
 
 	public Cartao() {
