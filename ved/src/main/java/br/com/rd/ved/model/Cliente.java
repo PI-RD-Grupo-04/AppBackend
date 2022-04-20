@@ -11,17 +11,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "cliente")
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
-	@Column(name = "nome") 
+	@Column(name = "nome_cliente") 
 	@Size(max = 50)
-	private String nome;
-	@Column(name = "sobrenome")
+	private String nomeCliente;
+	@Column(name = "sobrenomeCliente")
 	@Size(max = 50)
 	private String sobreNome;
 	@Column(name = "nome_social")
@@ -45,10 +45,10 @@ public class Cliente {
 		super();
 	}
 
-	public Cliente(Integer id, String nome, String sobreNome, String nomeSocial, String cpf, Date dataNascimento,
+	public Cliente(Integer id, String nomeCliente, String sobreNome, String nomeSocial, String cpf, Date dataNascimento,
 			String email, String telefone, String senha) {
 		this.id = id;
-		this.nome = nome;
+		this.nomeCliente = nomeCliente;
 		this.sobreNome = sobreNome;
 		this.nomeSocial = nomeSocial;
 		this.cpf = cpf;
@@ -58,9 +58,9 @@ public class Cliente {
 		this.senha = senha;
 	}
 
-	public Cliente(String nome, String sobreNome, String nomeSocial, String cpf, Date dataNascimento, String email,
+	public Cliente(String nomeCliente, String sobreNome, String nomeSocial, String cpf, Date dataNascimento, String email,
 			String telefone, String senha) {
-		this.nome = nome;
+		this.nomeCliente = nomeCliente;
 		this.sobreNome = sobreNome;
 		this.nomeSocial = nomeSocial;
 		this.cpf = cpf;
@@ -78,12 +78,12 @@ public class Cliente {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeCliente() {
+		return nomeCliente;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeCliente(String nome) {
+		this.nomeCliente = nome;
 	}
 
 	public String getSobreNome() {
@@ -144,7 +144,7 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", sobreNome=" + sobreNome + ", nomeSocial=" + nomeSocial
+		return "Cliente [id=" + id + ", nome=" + nomeCliente + ", sobreNome=" + sobreNome + ", nomeSocial=" + nomeSocial
 				+ ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", email=" + email + ", telefone=" + telefone
 				+ ", senha=" + senha + "]";
 	}
