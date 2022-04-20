@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -35,7 +36,8 @@ public class Endereco {
 	@Size(max = 50)
 	private String cidade;
 
-	@Column(name = "id_uf")
+//	@Column(name = "id_uf")
+	@Transient
 	private Uf uf;
 
 	public Endereco() {

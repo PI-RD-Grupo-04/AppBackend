@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="cartoes")
@@ -26,7 +27,8 @@ public class Cartao {
 	@Column(name="ano_vencimento" , nullable = false)
 	private Integer anoVencimento;
 
-	@Column(name="id_bandeira", nullable = false)
+//	@Column(name="id_bandeira", nullable = false)
+	@Transient
 	private Bandeira bandeiraId;
 
 	public Cartao() {

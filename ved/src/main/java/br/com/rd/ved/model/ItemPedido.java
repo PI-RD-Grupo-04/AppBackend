@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -23,9 +24,14 @@ public class ItemPedido {
 	private Double porcentagemIcms;
 	@Column(name = "valor_icms")
 	private Double valorIcms;
-	@Column(name = "id_produto")
+	
+	
+//	@Column(name = "id_produto")
+	@Transient
 	private Produto produto;
-	@Column(name = "id_pedido")
+	
+//	@Column(name = "id_pedido")
+	@Transient
 	private Pedido pedido;
 
 	public ItemPedido() {

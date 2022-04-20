@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="notaFiscais")
@@ -17,9 +18,14 @@ public class NotaFiscal {
 	private Integer id;
 	@Column(name="chave_acesso")
 	private String chaveAcesso;
-	@Column(name="id_serie")
+	
+	
+//	@Column(name="id_serie")
+	@Transient
 	private Serie serie;
-	@Column(name="id_pedido")
+	
+//	@Column(name="id_pedido")
+	@Transient
 	private Pedido pedido;
 
 	public NotaFiscal() {

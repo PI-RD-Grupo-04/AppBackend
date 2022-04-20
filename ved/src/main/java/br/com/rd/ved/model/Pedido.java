@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pedidos")
@@ -19,15 +20,25 @@ public class Pedido {
 	private Integer id;
 	@Column(name = "data_pedido")
 	private Date data;
-	@Column(name = "id_cliente")
+	
+//	@Column(name = "id_cliente")
+	@Transient
 	private Cliente cliente;
-	@Column(name = "id_cupom_desconto")
+	
+//	@Column(name = "id_cupom_desconto")
+	@Transient
 	private CupomDesconto cupomDesconto;
-	@Column(name = "id_pedido_status")
+	
+//	@Column(name = "id_pedido_status")
+	@Transient
 	private PedidoStatus pedidoStatus;
-	@Column(name = "id_frete")
+	
+//	@Column(name = "id_frete")
+	@Transient
 	private Frete frete;
-	@Column(name = "id_endereco")
+	
+//	@Column(name = "id_endereco")
+	@Transient
 	private Endereco endereco;
 
 	public Pedido() {

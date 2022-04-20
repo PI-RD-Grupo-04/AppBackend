@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -28,11 +29,18 @@ public class Produto {
 	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
-	@Column(name = "id_categoria")
+	
+	
+//	@Column(name = "id_categoria")
+	@Transient
 	private Categoria categoria;
-	@Column(name = "id_marca")
+	
+//	@Column(name = "id_marca")
+	@Transient
 	private Marca marca;
-	@Column(name = "id_status_produto")
+	
+//	@Column(name = "id_status_produto")
+	@Transient
 	private StatusProduto statusProduto;
 
 	public Produto() {

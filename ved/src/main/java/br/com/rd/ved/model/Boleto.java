@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -19,7 +20,9 @@ public class Boleto {
 	@Column(name="codigo_barra", nullable = false)
 	@Size(max = 25)
 	private String codigoBarras;
-	@Column(name="id_marca", nullable = false)
+	
+//	@Column(name="id_marca", nullable = false)
+	@Transient
 	private Marca marca;
 
 	public Boleto() {

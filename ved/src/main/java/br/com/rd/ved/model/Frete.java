@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "fretes")
@@ -17,9 +18,12 @@ public class Frete {
 	private Integer id;
 	@Column(name = "")
 	private Double valor;
-	@Column(name = "id_uf")
+	
+//	@Column(name = "id_uf")
+	@Transient
 	private Uf uf;
-	@Column(name = "id_tipo_frete")
+//	@Column(name = "id_tipo_frete")
+	@Transient
 	private TipoFrete tipoFrete;
 
 	public Frete() {

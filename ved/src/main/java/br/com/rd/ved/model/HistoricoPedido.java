@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "historicoPedidos")
@@ -19,9 +20,13 @@ public class HistoricoPedido {
 	private Integer id;
 	@Column(name = "data_pedido")
 	private Date dataPedido;
-	@Column(name = "id_pedido")
+	
+	
+//	@Column(name = "id_pedido")
+	@Transient
 	private Pedido pedido;
-	@Column(name = "id_pedido_status")
+//	@Column(name = "id_pedido_status")
+	@Transient
 	private PedidoStatus pedidoStatus;
 
 	public HistoricoPedido() {
