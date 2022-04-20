@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="boletos")
@@ -15,9 +16,10 @@ public class Boleto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_boleto")
 	private Integer id;
-	@Column(name="codigo_barra")
+	@Column(name="codigo_barra", nullable = false)
+	@Size(max = 25)
 	private String codigoBarras;
-	@Column(name="id_marca")
+	@Column(name="id_marca", nullable = false)
 	private Marca marca;
 
 	public Boleto() {

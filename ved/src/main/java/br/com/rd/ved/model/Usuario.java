@@ -8,20 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
-	@Column(name="email")
+	@Column(name = "email")
 	private String email;
-	@Column(name="senha")
+	@Column(name = "senha")
 	private String senha;
-	
+
 	public Usuario() {
 		super();
 	}
@@ -75,7 +75,5 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
 	}
-	
-	
-	
+
 }
