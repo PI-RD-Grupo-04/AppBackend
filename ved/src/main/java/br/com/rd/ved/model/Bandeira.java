@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "bandeiras")
+@Table(name = "bandeira")
 public class Bandeira {
 
 	@Id

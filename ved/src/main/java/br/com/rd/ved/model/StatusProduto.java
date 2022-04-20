@@ -9,17 +9,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="statusProdutos")
+@Table(name = "status_produto")
 public class StatusProduto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_status_produto")
+	@Column(name = "id_status_produto")
 	private Integer id;
-	@Column(name="descricao_status")
+	@Column(name = "descricao_status")
 	@Size(max = 30)
 	private String descricao;
-	
+
 	public StatusProduto() {
 		super();
 	}
@@ -54,7 +54,5 @@ public class StatusProduto {
 	public String toString() {
 		return "StatusProduto [id=" + id + ", descricao=" + descricao + "]";
 	}
-	
-	
-	
+
 }

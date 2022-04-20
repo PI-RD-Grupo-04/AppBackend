@@ -9,14 +9,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "fretes")
+@Table(name = "frete")
 public class Frete {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_frete")
 	private Integer id;
-	@Column(name = "")
+	@Column(name = "valor")
 	private Double valor;
 	
 //	@Column(name = "id_uf")

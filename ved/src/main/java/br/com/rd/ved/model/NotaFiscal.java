@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="notaFiscais")
+@Table(name="nota_fiscal")
 public class NotaFiscal {
 
 	@Id

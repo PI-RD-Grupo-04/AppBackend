@@ -10,7 +10,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "enderecos")
+@Table(name = "endereco")
 public class Endereco {
 
 	@Id
@@ -64,14 +64,6 @@ public class Endereco {
 		this.cidade = cidade;
 	}
 
-	public Endereco(String cep, String rua, Integer numero, String complemento, String municipio, Uf uf) {
-		this.cep = cep;
-		this.rua = rua;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.municipio = municipio;
-		this.uf = uf;
-	}
 
 	public Integer getId() {
 		return id;
