@@ -8,18 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "fretes")
+@Table(name = "frete")
 public class Frete {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_frete")
 	private Integer id;
-	@Column(name = "")
+	@Column(name = "valor")
 	private Double valor;
-	@Column(name = "id_uf")
+
 	private Uf uf;
-	@Column(name = "id_tipo_frete")
+	
 	private TipoFrete tipoFrete;
 
 	public Frete() {

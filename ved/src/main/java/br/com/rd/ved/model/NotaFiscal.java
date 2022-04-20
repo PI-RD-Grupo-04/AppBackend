@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="notaFiscais")
+@Table(name="nota_fiscal")
 public class NotaFiscal {
 
 	@Id
@@ -17,9 +17,9 @@ public class NotaFiscal {
 	private Integer id;
 	@Column(name="chave_acesso")
 	private String chaveAcesso;
-	@Column(name="id_serie")
+
 	private Serie serie;
-	@Column(name="id_pedido")
+	
 	private Pedido pedido;
 
 	public NotaFiscal() {

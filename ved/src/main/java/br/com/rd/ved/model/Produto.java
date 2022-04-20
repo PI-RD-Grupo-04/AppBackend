@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "produto")
 public class Produto {
 
 	@Id
@@ -28,11 +28,11 @@ public class Produto {
 	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
-	@Column(name = "id_categoria")
+
 	private Categoria categoria;
-	@Column(name = "id_marca")
+
 	private Marca marca;
-	@Column(name = "id_status_produto")
+
 	private StatusProduto statusProduto;
 
 	public Produto() {

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "enderecos")
+@Table(name = "endereco")
 public class Endereco {
 
 	@Id
@@ -35,7 +35,6 @@ public class Endereco {
 	@Size(max = 50)
 	private String cidade;
 
-	@Column(name = "id_uf")
 	private Uf uf;
 
 	public Endereco() {
@@ -62,14 +61,6 @@ public class Endereco {
 		this.cidade = cidade;
 	}
 
-	public Endereco(String cep, String rua, Integer numero, String complemento, String municipio, Uf uf) {
-		this.cep = cep;
-		this.rua = rua;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.municipio = municipio;
-		this.uf = uf;
-	}
 
 	public Integer getId() {
 		return id;

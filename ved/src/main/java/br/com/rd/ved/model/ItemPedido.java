@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "itemPedidos")
+@Table(name = "item_pedido")
 public class ItemPedido {
 
 	@Id
@@ -23,9 +23,9 @@ public class ItemPedido {
 	private Double porcentagemIcms;
 	@Column(name = "valor_icms")
 	private Double valorIcms;
-	@Column(name = "id_produto")
+
 	private Produto produto;
-	@Column(name = "id_pedido")
+
 	private Pedido pedido;
 
 	public ItemPedido() {

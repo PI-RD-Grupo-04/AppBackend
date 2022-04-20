@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "historicoPedidos")
+@Table(name = "historico_pedidos")
 public class HistoricoPedido {
 
 	@Id
@@ -19,9 +19,9 @@ public class HistoricoPedido {
 	private Integer id;
 	@Column(name = "data_pedido")
 	private Date dataPedido;
-	@Column(name = "id_pedido")
+	
 	private Pedido pedido;
-	@Column(name = "id_pedido_status")
+
 	private PedidoStatus pedidoStatus;
 
 	public HistoricoPedido() {
