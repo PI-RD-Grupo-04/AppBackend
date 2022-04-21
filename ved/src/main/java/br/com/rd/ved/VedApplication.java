@@ -1,12 +1,12 @@
 package br.com.rd.ved;
 
 import java.util.Scanner;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import br.com.rd.ved.model.CupomDesconto;
 import br.com.rd.ved.service.ClienteService;
+import br.com.rd.ved.service.CupomDescontoService;
 import br.com.rd.ved.service.FornecedorService;
 import br.com.rd.ved.service.ReceitaService;
 
@@ -15,13 +15,15 @@ public class VedApplication implements CommandLineRunner {
 
 	private ClienteService clienteService;
 	private FornecedorService fornecedorService;
-	private Boolean sistema = true;
 	private ReceitaService receitaService;
+	private CupomDescontoService cupomDescontoService;
+	private Boolean sistema = true;
 
-	public VedApplication(ClienteService clienteService, FornecedorService fornecedorService, ReceitaService receitaService) {
+	public VedApplication(ClienteService clienteService, FornecedorService fornecedorService, ReceitaService receitaService, CupomDescontoService cupomDescontoService) {
 		this.clienteService = clienteService;
 		this.fornecedorService = fornecedorService;
 		this.receitaService = receitaService;
+		this.cupomDescontoService = cupomDescontoService;
 	}
 
 	public static void main(String[] args) {
@@ -39,6 +41,8 @@ public class VedApplication implements CommandLineRunner {
 			System.out.println("1 - Gestão de Clientes");
 			System.out.println("2 - Gestão de Fornecedores");
 			System.out.println("3 - Gestão de Receitas");
+			System.out.println("4 - Gestão de Cupom de Desconto");
+			
 			
 			acao = sc.nextInt();
 			if (acao == 1) {
@@ -47,6 +51,8 @@ public class VedApplication implements CommandLineRunner {
 				fornecedorService.iniciar(sc);
 			} else if (acao == 3) {
 				receitaService.iniciar(sc);
+			} else if (acao == 4) {
+				cupomDescontoService.iniciar(sc);
 
 			} else {
 				sistema = false;
