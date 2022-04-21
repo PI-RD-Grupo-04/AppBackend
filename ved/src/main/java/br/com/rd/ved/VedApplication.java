@@ -17,6 +17,7 @@ import br.com.rd.ved.service.PixService;
 import br.com.rd.ved.service.SerieService;
 import br.com.rd.ved.service.StatusProdutoService;
 import br.com.rd.ved.service.TipoFreteService;
+import br.com.rd.ved.service.UfService;
 
 @EnableJpaRepositories 
 @SpringBootApplication
@@ -34,8 +35,11 @@ public class VedApplication implements CommandLineRunner  {
 	private final ArmazenamentoService armazenamentoService;
 	private final SerieService serieService;
 	private final TipoFreteService tipoFreteService;
+	private final UfService ufService;
+	
+	
 
-	public VedApplication(BandeiraService bandeiraService, CartaoService cataoService , CategoriaService categoriaService , StatusProdutoService statusProdutoService, MarcaService marcaService , PixService pixService, BoletoService boletoService , ArmazenamentoService armazenamentoService , SerieService serieService,TipoFreteService tipoFreteService) {
+	public VedApplication(BandeiraService bandeiraService, CartaoService cataoService , CategoriaService categoriaService , StatusProdutoService statusProdutoService, MarcaService marcaService , PixService pixService, BoletoService boletoService , ArmazenamentoService armazenamentoService , SerieService serieService,TipoFreteService tipoFreteService, UfService ufService) {
 		this.bandeiraService = bandeiraService;
 		this.cataoService = cataoService;
 		this.categoriaService = categoriaService;
@@ -46,6 +50,7 @@ public class VedApplication implements CommandLineRunner  {
 		this.armazenamentoService = armazenamentoService;
 		this.serieService = serieService;
 		this.tipoFreteService = tipoFreteService;
+		this.ufService = ufService;
 		
 		
 	}
@@ -72,6 +77,7 @@ public class VedApplication implements CommandLineRunner  {
 			System.out.println("8 - Armazenamento");
 			System.out.println("9 - Serie");
 			System.out.println("10 - Tipo Frete");
+			System.out.println("11 - Uf");
 			
 			
 			
@@ -107,6 +113,9 @@ public class VedApplication implements CommandLineRunner  {
 				}
 				else if (acao == 10){
 				tipoFreteService.iniciar(sc);
+				}
+				else if (acao == 11){
+				ufService.iniciar(sc);
 				}
 				else {
 				sistema = false;
