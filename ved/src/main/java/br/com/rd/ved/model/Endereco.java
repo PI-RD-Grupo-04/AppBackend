@@ -41,8 +41,8 @@ public class Endereco {
 		super();
 	}
 
-	public Endereco(String cep, String rua, Integer numero, String complemento, String municipio, String cidade,
-			Uf uf) {
+	public Endereco(String cep, String rua, Integer numero, String complemento, String municipio, String cidade
+			) {
 		super();
 		this.cep = cep;
 		this.rua = rua;
@@ -50,7 +50,6 @@ public class Endereco {
 		this.complemento = complemento;
 		this.municipio = municipio;
 		this.cidade = cidade;
-		this.uf = uf;
 	}
 
 	public String getCidade() {
