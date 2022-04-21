@@ -40,6 +40,8 @@ public class Pedido {
 //	@Column(name = "id_endereco")
 	@Transient
 	private Endereco endereco;
+	
+	
 
 	public Pedido() {
 		super();
