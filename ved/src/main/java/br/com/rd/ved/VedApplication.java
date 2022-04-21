@@ -192,7 +192,7 @@ public class VedApplication implements CommandLineRunner  {
 				System.out.println("funcionou");
 				break;
 			case 16:
-				System.out.println("funcionou");
+				pedidoStatusService.iniciar(sc);
 				break;
 			case 17:
 				pixService.iniciar(sc);
@@ -213,13 +213,13 @@ public class VedApplication implements CommandLineRunner  {
 				tipoFreteService.iniciar(sc);
 				break;
 			case 23:
-				System.out.println("funcionou");
+				tipoPagamentoService.iniciar(sc);
 				break;
 			case 24:
 				ufService.iniciar(sc);
 				break;
 			case 25:
-				System.out.println("funcionou");
+				usuarioService.iniciar(sc);
 				break;
 			default:
 			       System.out.println("Número inválido");
