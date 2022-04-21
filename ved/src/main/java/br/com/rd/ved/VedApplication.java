@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.rd.ved.service.ClienteService;
 import br.com.rd.ved.service.FornecedorService;
+import br.com.rd.ved.service.ReceitaService;
 
 @SpringBootApplication
 public class VedApplication implements CommandLineRunner {
@@ -15,11 +16,12 @@ public class VedApplication implements CommandLineRunner {
 	private ClienteService clienteService;
 	private FornecedorService fornecedorService;
 	private Boolean sistema = true;
+	private ReceitaService receitaService;
 
-	public VedApplication(ClienteService clienteService, FornecedorService fornecedorService) {
+	public VedApplication(ClienteService clienteService, FornecedorService fornecedorService, ReceitaService receitaService) {
 		this.clienteService = clienteService;
 		this.fornecedorService = fornecedorService;
-
+		this.receitaService = receitaService;
 	}
 
 	public static void main(String[] args) {
@@ -36,12 +38,15 @@ public class VedApplication implements CommandLineRunner {
 			System.out.println("0 - Sair");
 			System.out.println("1 - Gestão de Clientes");
 			System.out.println("2 - Gestão de Fornecedores");
-
+			System.out.println("3 - Gestão de Receitas");
+			
 			acao = sc.nextInt();
 			if (acao == 1) {
 				clienteService.iniciar(sc);
 			} else if (acao == 2) {
 				fornecedorService.iniciar(sc);
+			} else if (acao == 3) {
+				receitaService.iniciar(sc);
 
 			} else {
 				sistema = false;
