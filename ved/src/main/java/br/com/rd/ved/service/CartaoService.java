@@ -45,6 +45,10 @@ public class CartaoService {
 			case 2:
 				deletar(sc);
 				break;
+			case 3:
+				visualizar();
+				break;
+				
 			default:
 				sistema = false;
 				break;
@@ -110,8 +114,8 @@ public class CartaoService {
 	
 	private void visualizar() {
 		Iterable<Cartao> cartao = cartaoRepository.findAll();
-		cartao.forEach(Cartao -> System.out.println(cartao));
+		cartao.forEach(bandeira-> System.out.println(cartao));
 		} 
 
-
+	
 }

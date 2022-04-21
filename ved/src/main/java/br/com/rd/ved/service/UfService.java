@@ -53,7 +53,6 @@ public class UfService {
 			ufRepository.save(uf);
 		
 	}
-	
 	private void deletar(Scanner sc) {
 		System.out.println("Digite o ID do uf");
 		sc.nextLine(); 
@@ -61,12 +60,6 @@ public class UfService {
 		ufRepository.deleteById(id);
 		System.out.println(" Deletado com Sucesso");
 	}
-	
-	
-
-
-
-
 }
 	
 	

@@ -1,5 +1,6 @@
 package br.com.rd.ved.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ public class Cartao {
 	@Column(name = "ano_vencimento", nullable = false)
 	private Integer anoVencimento;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name="id_bandeira", nullable=false)
 	private Bandeira idBandeira;
 
