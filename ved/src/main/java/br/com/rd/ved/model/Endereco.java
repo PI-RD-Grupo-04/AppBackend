@@ -1,10 +1,14 @@
 package br.com.rd.ved.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
@@ -36,16 +40,15 @@ public class Endereco {
 	@Size(max = 50)
 	private String cidade;
 
-//	@Column(name = "id_uf")
-	@Transient
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
 
 	public Endereco() {
 		super();
 	}
 
-	public Endereco(String cep, String rua, Integer numero, String complemento, String municipio, String cidade
-			) {
+	public Endereco(String cep, String rua, Integer numero, String complemento, String municipio, String cidade) {
 		super();
 		this.cep = cep;
 		this.rua = rua;
@@ -53,6 +56,7 @@ public class Endereco {
 		this.complemento = complemento;
 		this.municipio = municipio;
 		this.cidade = cidade;
+
 	}
 
 	public String getCidade() {
@@ -62,7 +66,6 @@ public class Endereco {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-
 
 	public Integer getId() {
 		return id;
