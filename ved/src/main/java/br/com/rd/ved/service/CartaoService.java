@@ -42,14 +42,9 @@ public class CartaoService {
 			case 1:
 				salvar(sc);
 				break;
-				
 			case 2:
 				deletar(sc);
 				break;
-			case 3:
-				deletar(sc);
-				break;
-				
 			default:
 				sistema = false;
 				break;

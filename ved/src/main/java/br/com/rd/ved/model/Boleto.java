@@ -22,22 +22,22 @@ public class Boleto {
 	private String codigoBarras;
 	
 //	@Column(name="id_marca", nullable = false)
-	@Transient
-	private Marca marca;
+//	@Transient
+//	private Marca marca;
 
 	public Boleto() {
 		super();
 	}
 
-	public Boleto(Integer id, String codigoBarras, Marca marca) {
+	public Boleto(Integer id, String codigoBarras) {
 		this.id = id;
 		this.codigoBarras = codigoBarras;
-		this.marca = marca;
+
 	}
 
-	public Boleto(String codigoBarras, Marca marca) {
+	public Boleto(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
-		this.marca = marca;
+	
 	}
 
 	public Integer getId() {
@@ -56,18 +56,13 @@ public class Boleto {
 		this.codigoBarras = codigoBarras;
 	}
 
-	public Marca getMarca() {
-		return marca;
-	}
-
-	public void setMarca(Marca marca) {
-		this.marca = marca;
-	}
-
 	@Override
 	public String toString() {
-		return "Boleto [id=" + id + ", codigoBarras=" + codigoBarras + ", marca=" + marca + "]";
+		return "Boleto [codigoBarras=" + codigoBarras + "]";
 	}
+
+
+
 	
 	
 }
