@@ -22,6 +22,9 @@ public class Uf {
 	@Column(name = "descricao_uf")
 	@Size(max = 50)
 	private String descricao;
+	
+	@OneToMany(mappedBy = "uf")
+	private List<Endereco> enderecos;
 
 	@OneToMany(mappedBy = "uf")
 	private List<Endereco> enderecos;
@@ -61,6 +64,14 @@ public class Uf {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	@Override

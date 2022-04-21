@@ -2,9 +2,18 @@ package br.com.rd.ved.service;
 
 import java.util.Scanner;
 
+<<<<<<< HEAD
 import br.com.rd.ved.model.Uf;
 import br.com.rd.ved.repository.UfRepository;
 
+=======
+import org.springframework.stereotype.Service;
+
+import br.com.rd.ved.model.Uf;
+import br.com.rd.ved.repository.UfRepository;
+
+@Service
+>>>>>>> 940589b45b034af1a17abad97913d16d6159efca
 public class UfService {
 	private final UfRepository ufRepository;
 	private Boolean sistema = true;
@@ -81,4 +90,8 @@ public class UfService {
 		System.out.println("UF Deletado com Sucesso");
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 940589b45b034af1a17abad97913d16d6159efca

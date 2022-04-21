@@ -55,7 +55,6 @@ public class Endereco {
 		this.complemento = complemento;
 		this.municipio = municipio;
 		this.cidade = cidade;
-
 	}
 
 	public String getCidade() {
