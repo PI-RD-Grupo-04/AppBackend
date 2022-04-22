@@ -5,8 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 
+import org.springframework.stereotype.Service;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.repository.ClienteRepository;
 
@@ -21,8 +22,8 @@ public class ClienteService {
 	private String nomeSocial;
 	private String cpf;
 	private Date dataNascimento;
-	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	private String email;
+	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	private String telefone;
 	private String senha;
 
@@ -78,14 +79,17 @@ public class ClienteService {
 		Iterable<Cliente> clientes = clienteRepository.findAll();
 		clientes.forEach(cliente -> System.out.println(cliente));
 	}
-
+@Transactional	//não executa se todos não derem certo
 	private void atualizar(Scanner sc) {
 
 		System.out.println("Informe o Id do registro a ser atualizado");
 		id = sc.nextInt();
-
+		Cliente cliente = clienteRepository.findById(id).get(); //select no banco pelo id
+		
 		System.out.println("Informe o nome para o Cliente");
+		sc.nextLine();
 		nomeCliente = sc.nextLine();
+		
 
 		System.out.println("Informe o sobre Nome para o Cliente");
 		sobreNomeCliente = sc.nextLine();
@@ -93,25 +97,20 @@ public class ClienteService {
 		System.out.println("Informe o nome Social para o Cliente");
 		nomeSocial = sc.nextLine();
 
-		System.out.println("Informe a nova email para o Cliente");
-		email = sc.next();
-
 		System.out.println("Informe a nova telefone para o Cliente");
-		telefone = sc.next();
+		telefone = sc.nextLine();
 
 		System.out.println("Informe a nova senha para o Cliente");
-		senha = sc.next();
-
-		Cliente cliente = new Cliente();
-		cliente.setId(id);
+		senha = sc.nextLine();
+		
 		cliente.setNomeCliente(nomeCliente);
 		cliente.setSobreNome(sobreNomeCliente);
 		cliente.setNomeSocial(nomeSocial);
-		cliente.setEmail(email);
 		cliente.setTelefone(telefone);
 		cliente.setSenha(senha);
-
-		clienteRepository.save(cliente);
+		
+		
+		clienteRepository.saveAndFlush(cliente);
 
 		System.out.println("Cliente Atualizado com Sucesso");
 
