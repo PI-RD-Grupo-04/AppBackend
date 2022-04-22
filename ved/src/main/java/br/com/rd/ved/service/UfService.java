@@ -1,5 +1,6 @@
 package br.com.rd.ved.service;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
@@ -62,13 +63,11 @@ public class UfService {
 	private void atualizar(Scanner sc) {
 		System.out.println("Informe o ID da Uf:");
 		Integer id = Integer.parseInt(sc.nextLine());
-
 		System.out.println("Informe a nova descrição:");
 		String descricao = sc.nextLine();
-		Uf uf = new Uf();
-		uf.setId(id);
-		uf.setDescricao(descricao);
-		ufRepository.save(uf);
+		Optional<Uf> uf = ufRepository.findById(id);
+		uf.get().setDescricao(descricao);
+		ufRepository.save(uf.get());
 		System.out.println("UF Alterado com Sucesso");
 	}
 

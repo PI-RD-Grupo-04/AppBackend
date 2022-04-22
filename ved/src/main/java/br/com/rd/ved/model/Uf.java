@@ -26,6 +26,19 @@ public class Uf {
 	@OneToMany(mappedBy = "uf")
 	private List<Endereco> enderecos;
 
+	
+	@OneToMany(mappedBy = "uf")
+	private List<Frete> fretes;
+	
+	
+	public List<Frete> getFretes() {
+		return fretes;
+	}
+
+	public void setFretes(List<Frete> fretes) {
+		this.fretes = fretes;
+	}
+
 	public Uf() {
 		super();
 	}
@@ -55,6 +68,14 @@ public class Uf {
 		this.descricao = descricao;
 	}
 	
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
