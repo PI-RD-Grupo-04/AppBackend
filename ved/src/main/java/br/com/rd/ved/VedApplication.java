@@ -17,7 +17,6 @@ import br.com.rd.ved.service.CupomDescontoService;
 import br.com.rd.ved.service.EnderecoService;
 import br.com.rd.ved.service.FornecedorService;
 import br.com.rd.ved.service.FreteService;
-import br.com.rd.ved.service.HistoricoPedidoService;
 import br.com.rd.ved.service.ItemPedidoService;
 import br.com.rd.ved.service.MarcaService;
 import br.com.rd.ved.service.NotaFiscalService;
@@ -49,7 +48,6 @@ public class VedApplication implements CommandLineRunner  {
 	private final EnderecoService enderecoService;
 	private final FornecedorService fornecedorService;
 	private final FreteService freteService;
-	private final HistoricoPedidoService historicoPedidoService;
 	private final ItemPedidoService itemPedidoService;
 	private final MarcaService marcaService;
 	private final NotaFiscalService notaFiscalService;
@@ -70,8 +68,7 @@ public class VedApplication implements CommandLineRunner  {
 	public VedApplication(ArmazenamentoService armazenamentoService, BandeiraService bandeiraService,
 			BoletoService boletoService, CartaoService cartaoService, CategoriaService categoriaService,
 			ClienteService clienteService, CupomDescontoService cupomDescontoService, EnderecoService enderecoService,
-			FornecedorService fornecedorService, FreteService freteService,
-			HistoricoPedidoService historicoPedidoService, ItemPedidoService itemPedidoService,
+			FornecedorService fornecedorService, FreteService freteService, ItemPedidoService itemPedidoService,
 			MarcaService marcaService, NotaFiscalService notaFiscalService, PedidoService pedidoService,
 			PedidoStatusService pedidoStatusService, PixService pixService, ProdutoService produtoService,
 			ReceitaService receitaService, SerieService serieService, StatusProdutoService statusProdutoService,
@@ -87,7 +84,6 @@ public class VedApplication implements CommandLineRunner  {
 		this.enderecoService = enderecoService;
 		this.fornecedorService = fornecedorService;
 		this.freteService = freteService;
-		this.historicoPedidoService = historicoPedidoService;
 		this.itemPedidoService = itemPedidoService;
 		this.marcaService = marcaService;
 		this.notaFiscalService = notaFiscalService;

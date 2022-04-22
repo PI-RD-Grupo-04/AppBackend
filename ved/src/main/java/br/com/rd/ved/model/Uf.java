@@ -76,14 +76,6 @@ public class Uf {
 		this.enderecos = enderecos;
 	}
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
 	@Override
 	public String toString() {
 		return "Uf [id=" + id + ", descricao=" + descricao + "]";
