@@ -198,6 +198,7 @@ public class VedApplication implements CommandLineRunner  {
 				pixService.iniciar(sc);
 				break;
 			case 18:
+				produtoService.iniciar(sc);
 				System.out.println("funcionou");
 				break;
 			case 19:

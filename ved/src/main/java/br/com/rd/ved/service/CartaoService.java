@@ -70,7 +70,6 @@ public class CartaoService {
 		 	sc.nextLine(); 
 		 	numeroCartao = sc.nextLine(); 
 			
-			
 			System.out.println("Informe o Nome do titular Cartao");
 			nomeTitular = sc.nextLine(); 
 			

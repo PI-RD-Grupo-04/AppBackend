@@ -1,12 +1,15 @@
 package br.com.rd.ved.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -31,17 +34,18 @@ public class Produto {
 	private Double peso;
 	
 	
-//	@Column(name = "id_categoria")
-	@Transient
-	private Categoria categoria;
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_categoria", nullable=false)
+	private Categoria idcategoria;
 	
-//	@Column(name = "id_marca")
-	@Transient
-	private Marca marca;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_marca", nullable=false)
+	private Marca idmarca;
 	
-//	@Column(name = "id_status_produto")
-	@Transient
-	private StatusProduto statusProduto;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_status_produto", nullable=false)
+	private StatusProduto idstatusProduto;
 
 	public Produto() {
 		super();
@@ -55,21 +59,9 @@ public class Produto {
 		this.url = url;
 		this.descricao = descricao;
 		this.peso = peso;
-		this.categoria = categoria;
-		this.marca = marca;
-		this.statusProduto = statusProduto;
-	}
-
-	public Produto(String nomeProduto, Double preco, String url, String descricao, Double peso, Categoria categoria,
-			Marca marca, StatusProduto statusProduto) {
-		this.nomeProduto = nomeProduto;
-		this.preco = preco;
-		this.url = url;
-		this.descricao = descricao;
-		this.peso = peso;
-		this.categoria = categoria;
-		this.marca = marca;
-		this.statusProduto = statusProduto;
+		this.idcategoria = categoria;
+		this.idmarca = marca;
+		this.idstatusProduto = statusProduto;
 	}
 
 	public Integer getId() {
@@ -120,35 +112,36 @@ public class Produto {
 		this.peso = peso;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public Categoria getIdcategoria() {
+		return idcategoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setIdcategoria(Categoria idcategoria) {
+		this.idcategoria = idcategoria;
 	}
 
-	public Marca getMarca() {
-		return marca;
+	public Marca getIdmarca() {
+		return idmarca;
 	}
 
-	public void setMarca(Marca marca) {
-		this.marca = marca;
+	public void setIdmarca(Marca idmarca) {
+		this.idmarca = idmarca;
 	}
 
-	public StatusProduto getStatusProduto() {
-		return statusProduto;
+	public StatusProduto getIdstatusProduto() {
+		return idstatusProduto;
 	}
 
-	public void setStatusProduto(StatusProduto statusProduto) {
-		this.statusProduto = statusProduto;
+	public void setIdstatusProduto(StatusProduto idstatusProduto) {
+		this.idstatusProduto = idstatusProduto;
 	}
 
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nomeProduto=" + nomeProduto + ", preco=" + preco + ", url=" + url
-				+ ", descricao=" + descricao + ", peso=" + peso + ", categoria=" + categoria + ", marca=" + marca
-				+ ", statusProduto=" + statusProduto + "]";
+				+ ", descricao=" + descricao + ", peso=" + peso + ", idcategoria=" + idcategoria + ", idmarca="
+				+ idmarca + ", idstatusProduto=" + idstatusProduto + "]";
 	}
+
 
 }
