@@ -1,10 +1,13 @@
 package br.com.rd.ved.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -20,6 +23,17 @@ public class TipoFrete {
 	@Size(max = 50)
 	private String descricao;
 	
+	@OneToMany(mappedBy = "tipoFrete")
+	private List<Frete> fretes;
+	
+	public List<Frete> getFretes() {
+		return fretes;
+	}
+
+	public void setFretes(List<Frete> fretes) {
+		this.fretes = fretes;
+	}
+
 	public TipoFrete() {
 		super();
 	}
