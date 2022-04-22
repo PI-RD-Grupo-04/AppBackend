@@ -21,7 +21,7 @@ public class EnderecoService {
 	public EnderecoService(EnderecoRepository enderecoRepository, CrudRepository ufRepository) {
 		super();
 		this.enderecoRepository = enderecoRepository;
-		this.ufRepository = ufRepository;
+		this.ufRepository = (UfRepository) ufRepository;
 	}
 
 	public void iniciar(Scanner sc) {
