@@ -169,7 +169,7 @@ public class VedApplication implements CommandLineRunner  {
 				fornecedorService.iniciar(sc);
 				break;
 			case 10:
-				System.out.println("frete");
+				freteService.iniciar(sc);
 				break;
 			case 11:
 				itemPedidoService.iniciar(sc);
@@ -190,7 +190,7 @@ public class VedApplication implements CommandLineRunner  {
 				pixService.iniciar(sc);
 				break;
 			case 17:
-				System.out.println("funcionou");
+				produtoService.iniciar(sc);
 				break;
 			case 18:
 				receitaService.iniciar(sc);
