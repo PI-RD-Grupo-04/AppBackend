@@ -183,11 +183,13 @@ public class FornecedorService {
 		String municipio = sc.nextLine();
 		System.out.println("Digite o Cidade do Endereço");
 		String cidade = sc.nextLine();
+		
 		System.out.println("Digite o ID da Uf do endereco");
 		Integer ufId = Integer.parseInt(sc.nextLine());
 		Optional<Uf> uf = ufRepository.findById(ufId);
+				
 		Endereco endereco = new Endereco(cep, rua, numero, comlemento, municipio, cidade);
-		endereco.setUf(uf.get());
+		endereco.setUf(  uf.get()    );
 		enderecoRepository.save(endereco);
 		System.out.println("Endereco Salvo com Sucesso");
 		enderecos.add(endereco);
