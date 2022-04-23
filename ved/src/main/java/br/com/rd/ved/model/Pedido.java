@@ -1,12 +1,18 @@
 package br.com.rd.ved.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,22 +31,24 @@ public class Pedido {
 	@Transient
 	private Cliente cliente;
 	
-//	@Column(name = "id_cupom_desconto")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_cupomDesconto", nullable=false)
 	private CupomDesconto cupomDesconto;
 	
-//	@Column(name = "id_pedido_status")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_pedidoStatus", nullable=false)
 	private PedidoStatus pedidoStatus;
 	
-//	@Column(name = "id_frete")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_frete", nullable=false)
 	private Frete frete;
 	
-//	@Column(name = "id_endereco")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_endereco", nullable=false)
 	private Endereco endereco;
 	
+	@OneToMany(mappedBy = "pedido")
+	private List<ItemPedido> itemPedidos;
 	
 
 	public Pedido() {
@@ -122,6 +130,14 @@ public class Pedido {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+	
+	public List<ItemPedido> getItemPedidos() {
+		return itemPedidos;
+	}
+
+	public void setItemPedidos(List<ItemPedido> itemPedidos) {
+		this.itemPedidos = itemPedidos;
 	}
 
 	@Override

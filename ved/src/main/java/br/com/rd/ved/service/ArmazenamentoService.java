@@ -35,8 +35,7 @@ public class ArmazenamentoService {
 				break;
 			case 2:
 				deletar(sc);
-				break;
-				
+				break;				
 			default:
 				sistema = false;
 				break;

@@ -1,5 +1,7 @@
 package br.com.rd.ved.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -38,10 +42,16 @@ public class Endereco {
 	@Column(name = "cidade")
 	@Size(max = 50)
 	private String cidade;
+	
+	@OneToMany(mappedBy = "endereco")
+	private List <Pedido> pedidos; 
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
+	
+	@ManyToMany(mappedBy="enderecos",fetch = FetchType.EAGER)
+	private List<Fornecedor> fornecedores; 
 
 	public Endereco() {
 		super();
@@ -120,6 +130,24 @@ public class Endereco {
 
 	public void setUf(Uf uf) {
 		this.uf = uf;
+	}
+
+	
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public List<Fornecedor> getFornecedores() {
+		return fornecedores;
+	}
+
+	public void setFornecedores(List<Fornecedor> fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 
 	@Override

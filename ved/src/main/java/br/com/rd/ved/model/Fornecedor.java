@@ -1,12 +1,21 @@
 package br.com.rd.ved.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="fornecedore")
@@ -25,6 +34,12 @@ public class Fornecedor {
 	@Column(name="email")
 	@Size(max = 30)
 	private String email;
+	
+	@Fetch(FetchMode.SELECT)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "fornecedor_endereco", joinColumns = {
+			@JoinColumn(name = "id_fornecedor") }, inverseJoinColumns = { @JoinColumn(name = "id_endereco") })
+	private List<Endereco> enderecos;
 	
 	public Fornecedor() {
 		super();
@@ -73,6 +88,14 @@ public class Fornecedor {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+		
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	@Override

@@ -1,12 +1,17 @@
 package br.com.rd.ved.model;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "frete")
@@ -17,27 +22,32 @@ public class Frete {
 	@Column(name = "id_frete")
 	private Integer id;
 	@Column(name = "valor")
-	private Double valor;
+	private BigDecimal valor;
 	
-//	@Column(name = "id_uf")
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
-//	@Column(name = "id_tipo_frete")
-	@Transient
+	
+	@ManyToOne
+	@JoinColumn(name = "id_tipo_frete", nullable = false)
 	private TipoFrete tipoFrete;
+	
+	
+	@OneToMany(mappedBy = "pedidoStatus")
+	private List <Pedido> lista; 
 
 	public Frete() {
 		super();
 	}
 
-	public Frete(Integer id, Double valor, Uf uf, TipoFrete tipoFrete) {
+	public Frete(Integer id, BigDecimal valor, Uf uf, TipoFrete tipoFrete) {
 		this.id = id;
 		this.valor = valor;
 		this.uf = uf;
 		this.tipoFrete = tipoFrete;
 	}
 
-	public Frete(Double valor, Uf uf, TipoFrete tipoFrete) {
+	public Frete(BigDecimal valor, Uf uf, TipoFrete tipoFrete) {
 		this.valor = valor;
 		this.uf = uf;
 		this.tipoFrete = tipoFrete;
@@ -51,11 +61,11 @@ public class Frete {
 		this.id = id;
 	}
 
-	public Double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 
