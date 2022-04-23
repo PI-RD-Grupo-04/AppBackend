@@ -23,11 +23,11 @@ public class Frete {
 	private Integer id;
 	@Column(name = "valor")
 	private BigDecimal valor;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_frete", nullable = false)
 	private TipoFrete tipoFrete;
@@ -38,13 +38,6 @@ public class Frete {
 
 	public Frete() {
 		super();
-	}
-
-	public Frete(Integer id, BigDecimal valor, Uf uf, TipoFrete tipoFrete) {
-		this.id = id;
-		this.valor = valor;
-		this.uf = uf;
-		this.tipoFrete = tipoFrete;
 	}
 
 	public Frete(BigDecimal valor, Uf uf, TipoFrete tipoFrete) {

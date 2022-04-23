@@ -18,20 +18,20 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name="fornecedore")
+@Table(name = "fornecedor")
 public class Fornecedor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_fornecedor")
+	@Column(name = "id_fornecedor")
 	private Integer id;
-	@Column(name="razao_social")
+	@Column(name = "razao_social")
 	@Size(max = 50)
 	private String razaoSocial;
-	@Column(name="cnpj")
+	@Column(name = "cnpj")
 	@Size(max = 20)
 	private String cnpj;
-	@Column(name="email")
+	@Column(name = "email")
 	@Size(max = 30)
 	private String email;
 	
@@ -40,16 +40,11 @@ public class Fornecedor {
 	@JoinTable(name = "fornecedor_endereco", joinColumns = {
 			@JoinColumn(name = "id_fornecedor") }, inverseJoinColumns = { @JoinColumn(name = "id_endereco") })
 	private List<Endereco> enderecos;
-	
+
+
+
 	public Fornecedor() {
 		super();
-	}
-
-	public Fornecedor(Integer id, String razaoSocial, String cnpj, String email) {
-		this.id = id;
-		this.razaoSocial = razaoSocial;
-		this.cnpj = cnpj;
-		this.email = email;
 	}
 
 	public Fornecedor(String razaoSocial, String cnpj, String email) {
@@ -102,8 +97,5 @@ public class Fornecedor {
 	public String toString() {
 		return "Fornecedor [id=" + id + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + ", email=" + email + "]";
 	}
-	
-	
-	
-	
+
 }

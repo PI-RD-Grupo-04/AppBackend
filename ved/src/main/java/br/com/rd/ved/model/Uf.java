@@ -28,6 +28,7 @@ public class Uf {
 	
 	@OneToMany(mappedBy = "uf")
 	private List<Endereco> enderecos;
+	
 
 	public Uf() {
 		super();

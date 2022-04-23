@@ -2,7 +2,6 @@ package br.com.rd.ved.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,13 +45,14 @@ public class Endereco {
 	@OneToMany(mappedBy = "endereco")
 	private List <Pedido> pedidos; 
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
 	
 	@ManyToMany(mappedBy="enderecos",fetch = FetchType.EAGER)
 	private List<Fornecedor> fornecedores; 
-
+	
+	
 	public Endereco() {
 		super();
 	}
@@ -131,8 +131,6 @@ public class Endereco {
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
-
-	
 	
 	public List<Pedido> getPedidos() {
 		return pedidos;

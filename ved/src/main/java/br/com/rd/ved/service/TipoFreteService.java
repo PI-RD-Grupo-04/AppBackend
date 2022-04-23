@@ -83,5 +83,4 @@ public class TipoFreteService {
 		tipoFrete.forEach(tipo -> System.out.println(tipo));
 	}
 
-
 }
