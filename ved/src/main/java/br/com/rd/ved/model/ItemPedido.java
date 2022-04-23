@@ -30,8 +30,8 @@ public class ItemPedido {
 	private Double valorIcms;
 	
 	
-//	@Column(name = "id_produto")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_produto", nullable=false)
 	private Produto produto;
 	
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)

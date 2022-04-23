@@ -172,7 +172,7 @@ public class VedApplication implements CommandLineRunner  {
 				System.out.println("frete");
 				break;
 			case 11:
-				System.out.println("Item-Pedido");
+				itemPedidoService.iniciar(sc);
 				break;
 			case 12:
 				marcaService.iniciar(sc);

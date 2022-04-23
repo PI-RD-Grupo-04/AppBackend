@@ -27,8 +27,8 @@ public class Pedido {
 	@Column(name = "data_pedido")
 	private Date data;
 	
-//	@Column(name = "id_cliente")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_cliente", nullable=false)
 	private Cliente cliente;
 	
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
@@ -45,7 +45,7 @@ public class Pedido {
 	
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name="id_endereco", nullable=false)
-	private Endereco endereco;
+	private Endereco enderecos;
 	
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itemPedidos;
@@ -56,24 +56,24 @@ public class Pedido {
 	}
 
 	public Pedido(Integer id, Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus,
-			Frete frete, Endereco endereco) {
+			Frete frete, Endereco enderecos) {
 		this.id = id;
 		this.data = data;
 		this.cliente = cliente;
 		this.cupomDesconto = cupomDesconto;
 		this.pedidoStatus = pedidoStatus;
 		this.frete = frete;
-		this.endereco = endereco;
+		this.enderecos = enderecos;
 	}
 
 	public Pedido(Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus, Frete frete,
-			Endereco endereco) {
+			Endereco enderecos) {
 		this.data = data;
 		this.cliente = cliente;
 		this.cupomDesconto = cupomDesconto;
 		this.pedidoStatus = pedidoStatus;
 		this.frete = frete;
-		this.endereco = endereco;
+		this.enderecos = enderecos;
 	}
 
 	public Integer getId() {
@@ -124,12 +124,12 @@ public class Pedido {
 		this.frete = frete;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public Endereco getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setEnderecos(Endereco endereco) {
+		this.enderecos = endereco;
 	}
 	
 	public List<ItemPedido> getItemPedidos() {
@@ -143,7 +143,7 @@ public class Pedido {
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", data=" + data + ", cliente=" + cliente + ", cupomDesconto=" + cupomDesconto
-				+ ", pedidoStatus=" + pedidoStatus + ", frete=" + frete + ", endereco=" + endereco + "]";
+				+ ", pedidoStatus=" + pedidoStatus + ", frete=" + frete + ", endereco=" + enderecos + "]";
 	}
 
 }

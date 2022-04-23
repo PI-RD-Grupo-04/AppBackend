@@ -42,7 +42,7 @@ public class Endereco {
 	@Size(max = 50)
 	private String cidade;
 	
-	@OneToMany(mappedBy = "endereco")
+	@OneToMany(mappedBy = "enderecos")
 	private List <Pedido> pedidos; 
 
 	@ManyToOne(fetch = FetchType.EAGER)

@@ -112,14 +112,13 @@ public class PedidoService {
 	}
 
 	private void atualizar(Scanner sc) throws ParseException {
+		System.out.println("Informe o ID do Pedido a ser atualizado:");
+		Integer id = Integer.parseInt(sc.nextLine());
 		
 		System.out.println("Informe a data do Pedido (dd/MM/yyyy)");
 		String dt = sc.nextLine();
 		Date dataPedido = formato.parse(dt);
 		
-		System.out.println("Informe o ID do Pedido a ser atualizado:");
-		Integer id = Integer.parseInt(sc.nextLine());
-
 		System.out.println("Digite o ID do Cliente para Pedido:");
 		Integer clienteId = Integer.parseInt(sc.nextLine());
 
@@ -146,7 +145,7 @@ public class PedidoService {
 		pedido.get().setCupomDesconto(cupomDesconto.get());
 		pedido.get().setPedidoStatus(pedidoStatus.get());
 		pedido.get().setFrete(frete.get());
-		pedido.get().setEndereco(endereco.get());
+		pedido.get().setEnderecos(endereco.get());
 		pedidoRepository.save(pedido.get());
 		System.out.println("Pedido Alterado com Sucesso");
 	}

@@ -26,7 +26,7 @@ public class CupomDesconto {
 	private Integer porcentagemDesconto;
 	
 	@OneToMany(mappedBy = "cupomDesconto")
-	private List <Pedido> lista; 
+	private List <Pedido> pedidos; 
 	
 	public CupomDesconto() {
 		super();
@@ -65,6 +65,14 @@ public class CupomDesconto {
 
 	public void setPorcentagemDesconto(Integer porcentagemDesconto) {
 		this.porcentagemDesconto = porcentagemDesconto;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override
