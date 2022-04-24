@@ -16,6 +16,7 @@ public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	@Column(name = "id_cliente")
 	private Integer id;
 	@Column(name = "nome_cliente") 
@@ -40,6 +41,7 @@ public class Cliente {
 	private String telefone;
 	@Column(name = "senha")
 	private String senha;
+	
 
 	public Cliente() {
 		super();
