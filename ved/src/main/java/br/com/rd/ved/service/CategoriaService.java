@@ -50,7 +50,7 @@ public class CategoriaService {
 	private void salvar(Scanner sc) {
 		 String descricao;
 			System.out.println("Informe descrição para a categoria");
-			descricao = sc.next(); 
+			descricao = sc.nextLine(); 
 			Categoria categoria = new Categoria(descricao);
 			categoriaRepository.save(categoria);
 		
@@ -58,7 +58,6 @@ public class CategoriaService {
 	
 	private void deletar(Scanner sc) {
 		System.out.println("Digite o ID da categoria");
-		sc.nextLine(); 
 		Integer id = Integer.parseInt(sc.nextLine());
 		categoriaRepository.deleteById(id);
 		System.out.println(" Deletado com Sucesso");

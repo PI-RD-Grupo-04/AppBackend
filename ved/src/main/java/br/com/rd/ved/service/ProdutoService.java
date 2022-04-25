@@ -66,7 +66,6 @@ public class ProdutoService {
 	private void salvar(Scanner sc) {
 		
 		 	System.out.println("Informe nome para o produto");
-		 	sc.next();
 		 	String nomeProduto = sc.nextLine(); 
 			
 			System.out.println("Informe o preço para o produto");
@@ -116,7 +115,6 @@ public class ProdutoService {
 	
 	private void deletar(Scanner sc) {
 		System.out.println("Digite o ID do produto");
-		sc.nextLine(); 
 		Integer id = Integer.parseInt(sc.nextLine());
 		produtoRepository.deleteById(id);
 		System.out.println(" Deletado com Sucesso");
