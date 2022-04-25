@@ -1,12 +1,14 @@
 package br.com.rd.ved.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -18,7 +20,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
-	@Column(name = "nome") 
+	@Column(name = "nome")
 	@Size(max = 50)
 	private String nome;
 	@Column(name = "sobrenome")
@@ -40,22 +42,13 @@ public class Cliente {
 	private String telefone;
 	@Column(name = "senha")
 	private String senha;
-
+	
+	
+	@OneToMany(mappedBy = "cupomDesconto")
+	private List <Pedido> pedidos; 
+	
 	public Cliente() {
 		super();
-	}
-
-	public Cliente(Integer id, String nome, String sobreNome, String nomeSocial, String cpf, Date dataNascimento,
-			String email, String telefone, String senha) {
-		this.id = id;
-		this.nome = nome;
-		this.sobreNome = sobreNome;
-		this.nomeSocial = nomeSocial;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-		this.email = email;
-		this.telefone = telefone;
-		this.senha = senha;
 	}
 
 	public Cliente(String nome, String sobreNome, String nomeSocial, String cpf, Date dataNascimento, String email,
@@ -140,6 +133,14 @@ public class Cliente {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override

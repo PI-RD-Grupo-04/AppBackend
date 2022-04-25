@@ -27,7 +27,7 @@ public class MarcaService {
 			System.out.println("3 - Visualizar");
 			System.out.println("4 - atualizar");
 
-			acao = sc.nextInt();
+			acao = Integer.parseInt(sc.nextLine());
 
 			switch (acao) {
 			case 1:
@@ -48,7 +48,7 @@ public class MarcaService {
 	private void salvar(Scanner sc) {
 		 String nome_bandeira;
 			System.out.println("Informe descrição para a marca");
-			nome_bandeira = sc.next(); 
+			nome_bandeira = sc.nextLine(); 
 			Marca marca = new Marca(nome_bandeira);
 			marcaRepository.save(marca);
 		
@@ -56,7 +56,6 @@ public class MarcaService {
 	
 	private void deletar(Scanner sc) {
 		System.out.println("Digite o ID da marca");
-		sc.nextLine(); 
 		Integer id = Integer.parseInt(sc.nextLine());
 		marcaRepository.deleteById(id);
 		System.out.println(" Deletado com Sucesso");

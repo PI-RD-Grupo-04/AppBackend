@@ -23,10 +23,10 @@ public class StatusProduto {
 	@Size(max = 30)
 	private String descricao;
 
-	@OneToMany(mappedBy = "idstatusProduto")
+	@OneToMany(mappedBy = "statusProduto")
 	private List <Produto> statusprodutos;
-	
-	
+
+
 	public StatusProduto() {
 		super();
 	}
@@ -59,9 +59,7 @@ public class StatusProduto {
 
 	@Override
 	public String toString() {
-		return "StatusProduto [descricao=" + descricao + "]";
+		return "StatusProduto [id=" + id + ", descricao=" + descricao + "]";
 	}
-
-
 
 }

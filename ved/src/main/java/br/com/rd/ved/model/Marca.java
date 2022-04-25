@@ -23,7 +23,7 @@ public class Marca {
 	@Size(max = 50)
 	private String descricao;
 	
-	@OneToMany(mappedBy = "idmarca")
+	@OneToMany(mappedBy = "marca")
 	private List <Produto> marcas;
 	
 	
@@ -59,10 +59,9 @@ public class Marca {
 
 	@Override
 	public String toString() {
-		return "Marca [descricao=" + descricao + "]";
+		return "Marca [id=" + id + ", descricao=" + descricao + "]";
 	}
-
-
+	
 	
 	
 }

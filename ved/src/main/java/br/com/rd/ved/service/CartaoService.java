@@ -36,7 +36,7 @@ public class CartaoService {
 			System.out.println("3 - Visualizar");
 			System.out.println("4 - Atualizar");
 
-			acao = sc.nextInt();
+			acao = Integer.parseInt(sc.nextLine());
 
 			switch (acao) {
 			case 1:
@@ -69,6 +69,7 @@ public class CartaoService {
 		 	System.out.println("Informe numero do Cartao");
 		 	sc.nextLine(); 
 		 	numeroCartao = sc.nextLine(); 
+			
 			
 			System.out.println("Informe o Nome do titular Cartao");
 			nomeTitular = sc.nextLine(); 

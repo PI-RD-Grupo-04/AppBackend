@@ -1,10 +1,14 @@
 package br.com.rd.ved.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
@@ -26,12 +30,12 @@ public class ItemPedido {
 	private Double valorIcms;
 	
 	
-//	@Column(name = "id_produto")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_produto", nullable=false)
 	private Produto produto;
 	
-//	@Column(name = "id_pedido")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_pedido", nullable=false)
 	private Pedido pedido;
 
 	public ItemPedido() {

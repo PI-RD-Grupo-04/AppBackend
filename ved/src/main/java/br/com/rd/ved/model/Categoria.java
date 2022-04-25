@@ -23,7 +23,8 @@ public class Categoria {
 	@Size(max = 50)
 	private String descricao;
 	
-	@OneToMany(mappedBy="idcategoria")
+	
+	@OneToMany(mappedBy="categoria")
 	private List <Produto> categorias;
 	
 	
@@ -56,12 +57,12 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-
+	@Override
 	public String toString() {
-		return "Categoria [descricao=" + descricao + "]";
+		return "Categoria [id=" + id + ", descricao=" + descricao + "]";
 	}
-
-
+	
+	
 	
 	
 }

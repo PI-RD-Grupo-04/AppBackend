@@ -28,7 +28,7 @@ public class StatusProdutoService {
 			System.out.println("3 - Visualizar");
 			System.out.println("4 - atualizar");
 
-			acao = sc.nextInt();
+			acao = Integer.parseInt(sc.nextLine());
 
 			switch (acao) {
 			case 1:
@@ -49,7 +49,7 @@ public class StatusProdutoService {
 	private void salvar(Scanner sc) {
 		 String descricao_status;
 			System.out.println("Informe descrição para o status do produto");
-			descricao_status = sc.next(); 
+			descricao_status = sc.nextLine(); 
 			StatusProduto statusProduto = new StatusProduto(descricao_status);
 			statusProdutoRepository.save(statusProduto);
 		
@@ -57,7 +57,6 @@ public class StatusProdutoService {
 	
 	private void deletar(Scanner sc) {
 		System.out.println("Digite o ID do bandeira");
-		sc.nextLine(); 
 		Integer id = Integer.parseInt(sc.nextLine());
 		statusProdutoRepository.deleteById(id);
 		System.out.println(" Deletado com Sucesso");

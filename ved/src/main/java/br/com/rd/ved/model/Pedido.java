@@ -1,12 +1,18 @@
 package br.com.rd.ved.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,49 +27,53 @@ public class Pedido {
 	@Column(name = "data_pedido")
 	private Date data;
 	
-//	@Column(name = "id_cliente")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_cliente", nullable=false)
 	private Cliente cliente;
 	
-//	@Column(name = "id_cupom_desconto")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_cupomDesconto", nullable=false)
 	private CupomDesconto cupomDesconto;
 	
-//	@Column(name = "id_pedido_status")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_pedidoStatus", nullable=false)
 	private PedidoStatus pedidoStatus;
 	
-//	@Column(name = "id_frete")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_frete", nullable=false)
 	private Frete frete;
 	
-//	@Column(name = "id_endereco")
-	@Transient
-	private Endereco endereco;
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_endereco", nullable=false)
+	private Endereco enderecos;
+	
+	@OneToMany(mappedBy = "pedido")
+	private List<ItemPedido> itemPedidos;
+	
 
 	public Pedido() {
 		super();
 	}
 
 	public Pedido(Integer id, Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus,
-			Frete frete, Endereco endereco) {
+			Frete frete, Endereco enderecos) {
 		this.id = id;
 		this.data = data;
 		this.cliente = cliente;
 		this.cupomDesconto = cupomDesconto;
 		this.pedidoStatus = pedidoStatus;
 		this.frete = frete;
-		this.endereco = endereco;
+		this.enderecos = enderecos;
 	}
 
 	public Pedido(Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus, Frete frete,
-			Endereco endereco) {
+			Endereco enderecos) {
 		this.data = data;
 		this.cliente = cliente;
 		this.cupomDesconto = cupomDesconto;
 		this.pedidoStatus = pedidoStatus;
 		this.frete = frete;
-		this.endereco = endereco;
+		this.enderecos = enderecos;
 	}
 
 	public Integer getId() {
@@ -114,18 +124,26 @@ public class Pedido {
 		this.frete = frete;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public Endereco getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setEnderecos(Endereco endereco) {
+		this.enderecos = endereco;
+	}
+	
+	public List<ItemPedido> getItemPedidos() {
+		return itemPedidos;
+	}
+
+	public void setItemPedidos(List<ItemPedido> itemPedidos) {
+		this.itemPedidos = itemPedidos;
 	}
 
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", data=" + data + ", cliente=" + cliente + ", cupomDesconto=" + cupomDesconto
-				+ ", pedidoStatus=" + pedidoStatus + ", frete=" + frete + ", endereco=" + endereco + "]";
+				+ ", pedidoStatus=" + pedidoStatus + ", frete=" + frete + ", endereco=" + enderecos + "]";
 	}
 
 }

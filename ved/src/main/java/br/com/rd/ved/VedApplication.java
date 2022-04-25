@@ -17,7 +17,6 @@ import br.com.rd.ved.service.CupomDescontoService;
 import br.com.rd.ved.service.EnderecoService;
 import br.com.rd.ved.service.FornecedorService;
 import br.com.rd.ved.service.FreteService;
-import br.com.rd.ved.service.HistoricoPedidoService;
 import br.com.rd.ved.service.ItemPedidoService;
 import br.com.rd.ved.service.MarcaService;
 import br.com.rd.ved.service.NotaFiscalService;
@@ -49,7 +48,6 @@ public class VedApplication implements CommandLineRunner  {
 	private final EnderecoService enderecoService;
 	private final FornecedorService fornecedorService;
 	private final FreteService freteService;
-	private final HistoricoPedidoService historicoPedidoService;
 	private final ItemPedidoService itemPedidoService;
 	private final MarcaService marcaService;
 	private final NotaFiscalService notaFiscalService;
@@ -70,8 +68,7 @@ public class VedApplication implements CommandLineRunner  {
 	public VedApplication(ArmazenamentoService armazenamentoService, BandeiraService bandeiraService,
 			BoletoService boletoService, CartaoService cartaoService, CategoriaService categoriaService,
 			ClienteService clienteService, CupomDescontoService cupomDescontoService, EnderecoService enderecoService,
-			FornecedorService fornecedorService, FreteService freteService,
-			HistoricoPedidoService historicoPedidoService, ItemPedidoService itemPedidoService,
+			FornecedorService fornecedorService, FreteService freteService, ItemPedidoService itemPedidoService,
 			MarcaService marcaService, NotaFiscalService notaFiscalService, PedidoService pedidoService,
 			PedidoStatusService pedidoStatusService, PixService pixService, ProdutoService produtoService,
 			ReceitaService receitaService, SerieService serieService, StatusProdutoService statusProdutoService,
@@ -87,7 +84,6 @@ public class VedApplication implements CommandLineRunner  {
 		this.enderecoService = enderecoService;
 		this.fornecedorService = fornecedorService;
 		this.freteService = freteService;
-		this.historicoPedidoService = historicoPedidoService;
 		this.itemPedidoService = itemPedidoService;
 		this.marcaService = marcaService;
 		this.notaFiscalService = notaFiscalService;
@@ -126,21 +122,20 @@ public class VedApplication implements CommandLineRunner  {
 			System.out.println("8 - Endereço");
 			System.out.println("9 - Fornecedor");
 			System.out.println("10 - Frete");
-			System.out.println("11 - Historico-Pedido");
-			System.out.println("12 - Item-Pedido");
-			System.out.println("13 - Marca");
-			System.out.println("14 - Nota-Fiscal");
-			System.out.println("15 - Pedido");
-			System.out.println("16 - Pedido-Status");
-			System.out.println("17 - Pix");
-			System.out.println("18 - Produto");
-			System.out.println("19 - Receita");
-			System.out.println("20 - Serie");
-			System.out.println("21 - Status-Produto");
-			System.out.println("22 - Tipo-Frete");
-			System.out.println("23 - Tipo-Pagamento");
-			System.out.println("24 - UF");
-			System.out.println("25 - Usuario");
+			System.out.println("11 - Item-Pedido");
+			System.out.println("12 - Marca");
+			System.out.println("13 - Nota-Fiscal");
+			System.out.println("14 - Pedido");
+			System.out.println("15 - Pedido-Status");
+			System.out.println("16 - Pix");
+			System.out.println("17 - Produto");
+			System.out.println("18 - Receita");
+			System.out.println("19 - Serie");
+			System.out.println("20 - Status-Produto");
+			System.out.println("21 - Tipo-Frete");
+			System.out.println("22 - Tipo-Pagamento");
+			System.out.println("23 - UF");
+			System.out.println("24 - Usuario");
 			System.out.print(">>>");
 	
 			acao = Integer.parseInt(sc.nextLine());
@@ -162,7 +157,7 @@ public class VedApplication implements CommandLineRunner  {
 				categoriaService.iniciar(sc);
 				break;
 			case 6:
-				System.out.println("funcionou");
+				System.out.println("cliente");
 				break;
 			case 7:
 				cupomDescontoService.iniciar(sc);			
@@ -174,53 +169,49 @@ public class VedApplication implements CommandLineRunner  {
 				fornecedorService.iniciar(sc);
 				break;
 			case 10:
-				System.out.println("funcionou");
+				freteService.iniciar(sc);
 				break;
 			case 11:
-				System.out.println("funcionou");
+				itemPedidoService.iniciar(sc);
 				break;
 			case 12:
-				System.out.println("funcionou");
-				break;
-			case 13:
 				marcaService.iniciar(sc);
 				break;
-			case 14:
+			case 13:
 				System.out.println("funcionou");
+				break;
+			case 14:
+				pedidoService.iniciar(sc);
 				break;
 			case 15:
-				System.out.println("funcionou");
+				pedidoStatusService.iniciar(sc);
 				break;
 			case 16:
-				System.out.println("funcionou");
-				break;
-			case 17:
 				pixService.iniciar(sc);
 				break;
-			case 18:
+			case 17:
 				produtoService.iniciar(sc);
-				System.out.println("funcionou");
 				break;
-			case 19:
+			case 18:
 				receitaService.iniciar(sc);
 				break;
-			case 20:
+			case 19:
 				serieService.iniciar(sc);
 				break;
-			case 21:
+			case 20:
 				statusProdutoService.iniciar(sc);
 				break;
-			case 22:
+			case 21:
 				tipoFreteService.iniciar(sc);
 				break;
-			case 23:
-				System.out.println("funcionou");
+			case 22:
+				tipoPagamentoService.iniciar(sc);
 				break;
-			case 24:
+			case 23:
 				ufService.iniciar(sc);
 				break;
-			case 25:
-				System.out.println("funcionou");
+			case 24:
+				usuarioService.iniciar(sc);
 				break;
 			default:
 			       System.out.println("Número inválido");

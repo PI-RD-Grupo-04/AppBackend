@@ -22,10 +22,10 @@ public class Bandeira {
 	@Column(name = "nome_bandeira", nullable = false)
 	@Size(max = 30)
 	private String nome;
-
-	@OneToMany(mappedBy = "idBandeira")
-	private List <Cartao> lista;
 	
+	@OneToMany(mappedBy = "idBandeira")
+	private List <Cartao> lista; 
+
 	public Bandeira() {
 		super();
 	}
