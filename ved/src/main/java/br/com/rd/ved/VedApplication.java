@@ -68,8 +68,7 @@ public class VedApplication implements CommandLineRunner  {
 	public VedApplication(ArmazenamentoService armazenamentoService, BandeiraService bandeiraService,
 			BoletoService boletoService, CartaoService cartaoService, CategoriaService categoriaService,
 			ClienteService clienteService, CupomDescontoService cupomDescontoService, EnderecoService enderecoService,
-			FornecedorService fornecedorService, FreteService freteService,
-			ItemPedidoService itemPedidoService,
+			FornecedorService fornecedorService, FreteService freteService, ItemPedidoService itemPedidoService,
 			MarcaService marcaService, NotaFiscalService notaFiscalService, PedidoService pedidoService,
 			PedidoStatusService pedidoStatusService, PixService pixService, ProdutoService produtoService,
 			ReceitaService receitaService, SerieService serieService, StatusProdutoService statusProdutoService,
@@ -170,10 +169,10 @@ public class VedApplication implements CommandLineRunner  {
 				fornecedorService.iniciar(sc);
 				break;
 			case 10:
-				System.out.println("frete");
+				freteService.iniciar(sc);
 				break;
 			case 11:
-				System.out.println("Item-Pedido");
+				itemPedidoService.iniciar(sc);
 				break;
 			case 12:
 				marcaService.iniciar(sc);
@@ -182,7 +181,7 @@ public class VedApplication implements CommandLineRunner  {
 				System.out.println("funcionou");
 				break;
 			case 14:
-				System.out.println("funcionou");
+				pedidoService.iniciar(sc);
 				break;
 			case 15:
 				pedidoStatusService.iniciar(sc);
@@ -191,7 +190,7 @@ public class VedApplication implements CommandLineRunner  {
 				pixService.iniciar(sc);
 				break;
 			case 17:
-				System.out.println("funcionou");
+				produtoService.iniciar(sc);
 				break;
 			case 18:
 				receitaService.iniciar(sc);

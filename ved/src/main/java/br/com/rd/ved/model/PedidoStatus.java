@@ -23,6 +23,9 @@ public class PedidoStatus {
 	@Size(max = 50)
 	private String descricao;
 	
+	@OneToMany(mappedBy = "pedidoStatus")
+	private List <Pedido> lista; 
+	
 	public PedidoStatus() {
 		super();
 	}

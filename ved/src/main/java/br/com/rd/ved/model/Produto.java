@@ -1,12 +1,18 @@
 package br.com.rd.ved.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -29,19 +35,21 @@ public class Produto {
 	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
-	
-	
-//	@Column(name = "id_categoria")
-	@Transient
+		
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_categoria", nullable=false)
 	private Categoria categoria;
 	
-//	@Column(name = "id_marca")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_marca", nullable=false)
 	private Marca marca;
 	
-//	@Column(name = "id_status_produto")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_status_produto", nullable=false)
 	private StatusProduto statusProduto;
+	
+	@OneToMany(mappedBy = "produto")
+	private List <ItemPedido> itemPedido; 
 
 	public Produto() {
 		super();
@@ -50,18 +58,6 @@ public class Produto {
 	public Produto(Integer id, String nomeProduto, Double preco, String url, String descricao, Double peso,
 			Categoria categoria, Marca marca, StatusProduto statusProduto) {
 		this.id = id;
-		this.nomeProduto = nomeProduto;
-		this.preco = preco;
-		this.url = url;
-		this.descricao = descricao;
-		this.peso = peso;
-		this.categoria = categoria;
-		this.marca = marca;
-		this.statusProduto = statusProduto;
-	}
-
-	public Produto(String nomeProduto, Double preco, String url, String descricao, Double peso, Categoria categoria,
-			Marca marca, StatusProduto statusProduto) {
 		this.nomeProduto = nomeProduto;
 		this.preco = preco;
 		this.url = url;
@@ -120,35 +116,44 @@ public class Produto {
 		this.peso = peso;
 	}
 
-	public Categoria getCategoria() {
+	public Categoria getIdcategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setIdcategoria(Categoria idcategoria) {
+		this.categoria = idcategoria;
 	}
 
-	public Marca getMarca() {
+	public Marca getIdmarca() {
 		return marca;
 	}
 
-	public void setMarca(Marca marca) {
-		this.marca = marca;
+	public void setIdmarca(Marca idmarca) {
+		this.marca = idmarca;
 	}
 
-	public StatusProduto getStatusProduto() {
+	public StatusProduto getIdstatusProduto() {
 		return statusProduto;
 	}
 
-	public void setStatusProduto(StatusProduto statusProduto) {
-		this.statusProduto = statusProduto;
+	public void setIdstatusProduto(StatusProduto idstatusProduto) {
+		this.statusProduto = idstatusProduto;
+	}
+	
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nomeProduto=" + nomeProduto + ", preco=" + preco + ", url=" + url
-				+ ", descricao=" + descricao + ", peso=" + peso + ", categoria=" + categoria + ", marca=" + marca
-				+ ", statusProduto=" + statusProduto + "]";
+				+ ", descricao=" + descricao + ", peso=" + peso + ", idcategoria=" + categoria + ", idmarca="
+				+ marca + ", idstatusProduto=" + statusProduto + "]";
 	}
+
 
 }
