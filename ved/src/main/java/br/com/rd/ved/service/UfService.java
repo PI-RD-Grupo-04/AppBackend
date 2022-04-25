@@ -22,7 +22,7 @@ public class UfService {
 		int acao;
 
 		while (sistema) {
-			System.out.println("Qual a ação que será realizada no Funcionario");
+			System.out.println("Qual a ação que será realizada no UF");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
 			System.out.println("2 - Atualizar");
