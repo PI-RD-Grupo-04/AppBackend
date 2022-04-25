@@ -7,27 +7,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="categoria")
+@Table(name = "categoria")
 public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_categoria")
+	@Column(name = "id_categoria")
 	private Integer id;
-	@Column(name="descricao_categoria")
+	@Column(name = "descricao_categoria")
 	@Size(max = 50)
 	private String descricao;
-	
-	
-	@ManyToMany(mappedBy="categoria")
-	private List <Produto> produtos;
-	
-	
+
+	@OneToMany(mappedBy = "categoria")
+	private List<Produto> produtos;
+
 	public Categoria() {
 		super();
 	}
@@ -61,8 +59,5 @@ public class Categoria {
 	public String toString() {
 		return "Categoria [id=" + id + ", descricao=" + descricao + "]";
 	}
-	
-	
-	
-	
+
 }

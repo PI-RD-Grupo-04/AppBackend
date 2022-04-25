@@ -31,7 +31,7 @@ public class ItemPedido {
 	
 	@ManyToOne(fetch=FetchType.EAGER )
 	@JoinColumn(name="id_produto", nullable=false)
-	private Produto produto;
+	private Produto produtos;
 	
 	
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
@@ -48,7 +48,7 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 		this.porcentagemIcms = porcentagemIcms;
 		this.valorIcms = valorIcms;
-		this.produto = produto;
+		this.produtos = produto;
 		this.pedido = pedido;
 	}
 
@@ -56,7 +56,7 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 		this.porcentagemIcms = porcentagemIcms;
 		this.valorIcms = valorIcms;
-		this.produto = produto;
+		this.produtos = produto;
 		this.pedido = pedido;
 	}
 
@@ -93,11 +93,11 @@ public class ItemPedido {
 	}
 
 	public Produto getProduto() {
-		return produto;
+		return produtos;
 	}
 
 	public void setProduto(Produto produto) {
-		this.produto = produto;
+		this.produtos = produto;
 	}
 
 	public Pedido getPedido() {
@@ -111,7 +111,7 @@ public class ItemPedido {
 	@Override
 	public String toString() {
 		return "ItemPedido [id=" + id + ", quantidade=" + quantidade + ", porcentagemIcms=" + porcentagemIcms
-				+ ", valorIcms=" + valorIcms + ", produto=" + produto + ", pedido=" + pedido + "]";
+				+ ", valorIcms=" + valorIcms + ", produto=" + produtos + ", pedido=" + pedido + "]";
 	}
 
 }
