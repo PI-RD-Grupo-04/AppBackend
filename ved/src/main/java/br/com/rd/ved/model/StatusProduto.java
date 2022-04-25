@@ -24,7 +24,8 @@ public class StatusProduto {
 	private String descricao;
 
 	@OneToMany(mappedBy = "statusProduto")
-	private List <Produto> statusprodutos;
+	private List <Produto> produtos;
+
 
 
 	public StatusProduto() {

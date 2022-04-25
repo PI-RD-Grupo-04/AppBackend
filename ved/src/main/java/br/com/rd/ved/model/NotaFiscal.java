@@ -2,11 +2,14 @@ package br.com.rd.ved.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 @Entity
 @Table(name="nota_fiscal")
@@ -20,12 +23,13 @@ public class NotaFiscal {
 	private String chaveAcesso;
 	
 	
-//	@Column(name="id_serie")
-	@Transient
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_serie", nullable=false)
 	private Serie serie;
 	
-//	@Column(name="id_pedido")
-	@Transient
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_pedido", nullable=false)
 	private Pedido pedido;
 
 	public NotaFiscal() {

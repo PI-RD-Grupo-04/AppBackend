@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pedidos")
@@ -49,6 +48,9 @@ public class Pedido {
 	
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itemPedidos;
+	
+	@OneToMany(mappedBy = "pedido")
+	private List <NotaFiscal> notafiscal; 
 	
 
 	public Pedido() {

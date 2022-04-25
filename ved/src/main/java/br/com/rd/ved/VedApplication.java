@@ -32,11 +32,11 @@ import br.com.rd.ved.service.TipoPagamentoService;
 import br.com.rd.ved.service.UfService;
 import br.com.rd.ved.service.UsuarioService;
 
-@EnableJpaRepositories 
+@EnableJpaRepositories
 @SpringBootApplication
 
-public class VedApplication implements CommandLineRunner  {
-	
+public class VedApplication implements CommandLineRunner {
+
 	private Boolean sistema = true;
 	private final ArmazenamentoService armazenamentoService;
 	private final BandeiraService bandeiraService;
@@ -62,8 +62,6 @@ public class VedApplication implements CommandLineRunner  {
 	private final TipoPagamentoService tipoPagamentoService;
 	private final UfService ufService;
 	private final UsuarioService usuarioService;
-
-	
 
 	public VedApplication(ArmazenamentoService armazenamentoService, BandeiraService bandeiraService,
 			BoletoService boletoService, CartaoService cartaoService, CategoriaService categoriaService,
@@ -103,7 +101,7 @@ public class VedApplication implements CommandLineRunner  {
 	public static void main(String[] args) {
 		SpringApplication.run(VedApplication.class, args);
 	}
-   
+
 	@Override
 	public void run(String... args) throws Exception {
 		Scanner sc = new Scanner(System.in);
@@ -137,10 +135,10 @@ public class VedApplication implements CommandLineRunner  {
 			System.out.println("23 - UF");
 			System.out.println("24 - Usuario");
 			System.out.print(">>>");
-	
+
 			acao = Integer.parseInt(sc.nextLine());
 
-			switch(acao) {
+			switch (acao) {
 			case 1:
 				armazenamentoService.iniciar(sc);
 				break;
@@ -160,7 +158,7 @@ public class VedApplication implements CommandLineRunner  {
 				System.out.println("cliente");
 				break;
 			case 7:
-				cupomDescontoService.iniciar(sc);			
+				cupomDescontoService.iniciar(sc);
 				break;
 			case 8:
 				enderecoService.iniciar(sc);
@@ -213,12 +211,13 @@ public class VedApplication implements CommandLineRunner  {
 			case 24:
 				usuarioService.iniciar(sc);
 				break;
+			case 0:
+				this.sistema = false;
+				break;
 			default:
-			       System.out.println("Número inválido");
+				System.out.println("Numero Invalido!");
+			}
 		}
-	}
 		sc.close();
 	}
 }
-
-

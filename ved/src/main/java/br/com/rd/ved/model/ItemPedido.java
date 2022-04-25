@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -30,9 +29,10 @@ public class ItemPedido {
 	private Double valorIcms;
 	
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER )
 	@JoinColumn(name="id_produto", nullable=false)
 	private Produto produto;
+	
 	
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name="id_pedido", nullable=false)

@@ -24,10 +24,18 @@ public class Marca {
 	private String descricao;
 	
 	@OneToMany(mappedBy = "marca")
-	private List <Produto> marcas;
+	private List <Produto> produtos;
 	
 	
-	
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
 	public Marca() {
 		super();
 	}

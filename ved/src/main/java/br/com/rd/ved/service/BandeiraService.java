@@ -11,16 +11,16 @@ import br.com.rd.ved.repository.BandeiraRepository;
 public class BandeiraService {
 	private final BandeiraRepository bandeiraRepository;
 	private Boolean sistema = true;
-	
+
 	public BandeiraService(BandeiraRepository bandeiraRepository) {
 		this.bandeiraRepository = bandeiraRepository;
 	}
-	
+
 	public void iniciar(Scanner sc) {
 		int acao;
 
 		while (sistema) {
-			System.out.println("Qual a ação que será realizada no Funcionario");
+			System.out.println("Qual a ação que será realizada no Bandeira");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
 			System.out.println("2 - deletar");
@@ -36,31 +36,27 @@ public class BandeiraService {
 			case 2:
 				deletar(sc);
 				break;
-				
+
 			default:
 				sistema = false;
 				break;
 			}
 		}
 	}
-	
-	
+
 	private void salvar(Scanner sc) {
-		 String nome;
-			System.out.println("Informe descrição para o Nome da bandeira");
-			nome = sc.next(); 
-			Bandeira bandeira = new Bandeira(nome);
-			bandeiraRepository.save(bandeira);
-		
+		System.out.println("Informe descrição para o Nome da bandeira");
+		String nome = sc.next();
+		Bandeira bandeira = new Bandeira(nome);
+		bandeiraRepository.save(bandeira);
+
 	}
-	
+
 	private void deletar(Scanner sc) {
 		System.out.println("Digite o ID do bandeira");
-		sc.nextLine(); 
 		Integer id = Integer.parseInt(sc.nextLine());
 		bandeiraRepository.deleteById(id);
 		System.out.println(" Deletado com Sucesso");
 	}
-	
-	
+
 }
