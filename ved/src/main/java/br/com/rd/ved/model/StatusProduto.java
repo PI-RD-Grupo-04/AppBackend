@@ -20,6 +20,10 @@ public class StatusProduto {
 	@Size(max = 30)
 	private String descricao;
 
+	@OneToMany(mappedBy = "idstatusProduto")
+	private List <Produto> statusprodutos;
+
+
 	public StatusProduto() {
 		super();
 	}

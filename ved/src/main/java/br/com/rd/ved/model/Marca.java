@@ -20,6 +20,11 @@ public class Marca {
 	@Size(max = 50)
 	private String descricao;
 	
+	@OneToMany(mappedBy = "idmarca")
+	private List <Produto> marcas;
+	
+	
+	
 	public Marca() {
 		super();
 	}

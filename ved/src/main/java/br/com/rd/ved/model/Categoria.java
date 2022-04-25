@@ -20,6 +20,11 @@ public class Categoria {
 	@Size(max = 50)
 	private String descricao;
 	
+	
+	@OneToMany(mappedBy="idcategoria")
+	private List <Produto> categorias;
+	
+	
 	public Categoria() {
 		super();
 	}
