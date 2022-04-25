@@ -2,7 +2,6 @@ package br.com.rd.ved.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,6 +49,31 @@ public class Produto {
 	
 	@OneToMany(mappedBy = "produto")
 	private List <ItemPedido> itemPedido; 
+
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public StatusProduto getStatusProduto() {
+		return statusProduto;
+	}
+
+	public void setStatusProduto(StatusProduto statusProduto) {
+		this.statusProduto = statusProduto;
+	}
 
 	public Produto() {
 		super();
