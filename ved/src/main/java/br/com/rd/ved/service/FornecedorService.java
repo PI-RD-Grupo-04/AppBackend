@@ -74,6 +74,9 @@ public class FornecedorService {
 		Iterable<Fornecedor> fornecedores = fornecedorRepository.findAll();
 		fornecedores.forEach(fornecedor -> System.out.println(fornecedor));
 	}
+	
+	
+	
 
 	private void atualizar(Scanner sc) {
 
@@ -98,6 +101,7 @@ public class FornecedorService {
 		String resposta = sc.nextLine();
 		if (resposta.equals("s")) {
 			System.out.println("informe o endereco que deseja Atualizar:");
+			
 			List<Endereco> enderecos = fornecedor.get().getEnderecos(); 
 			enderecos.forEach(f -> System.out.println(f)); 
 			
@@ -114,6 +118,11 @@ public class FornecedorService {
 
 	}
 
+	
+	
+	
+	
+	
 	private void salvar(Scanner sc) throws ParseException {
 
 		System.out.println("Informe a razão social do fornecedor");
@@ -128,9 +137,10 @@ public class FornecedorService {
 		Fornecedor fornecedor = new Fornecedor(razaoSocial, cnpj, email);
 
 		System.out.println("deseja cadastrar o endereco do fornecedor [s/n] ? ");
+		
 		String resposta = sc.nextLine();
 		if (resposta.equals("s")) {
-			fornecedor.setEnderecos(salvarEndereco(sc));
+			fornecedor.setEnderecos( salvarEndereco(sc) );
 		}
 
 		fornecedorRepository.save(fornecedor);
@@ -171,6 +181,8 @@ public class FornecedorService {
 	
 	private List<Endereco> salvarEndereco(Scanner sc) {
 		List<Endereco> enderecos = new ArrayList<>();
+		
+		
 		System.out.println("Digite o Cep do Endereço");
 		String cep = sc.nextLine();
 		System.out.println("Digite a Rua do Endereço");
@@ -186,10 +198,14 @@ public class FornecedorService {
 		
 		System.out.println("Digite o ID da Uf do endereco");
 		Integer ufId = Integer.parseInt(sc.nextLine());
+		
+		
 		Optional<Uf> uf = ufRepository.findById(ufId);
 				
 		Endereco endereco = new Endereco(cep, rua, numero, comlemento, municipio, cidade);
 		endereco.setUf(  uf.get()    );
+		
+		
 		enderecoRepository.save(endereco);
 		System.out.println("Endereco Salvo com Sucesso");
 		enderecos.add(endereco);

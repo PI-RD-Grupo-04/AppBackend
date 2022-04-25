@@ -26,7 +26,7 @@ public class CupomDescontoService {
 			System.out.println("3 - Visualizar");
 			System.out.println("4 - Deletar");
 
-			acao = sc.nextInt();
+			acao = Integer.parseInt(sc.nextLine());
 
 			switch (acao) {
 			case 1:

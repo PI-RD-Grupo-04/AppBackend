@@ -36,7 +36,7 @@ public class CartaoService {
 			System.out.println("3 - Visualizar");
 			System.out.println("4 - Atualizar");
 
-			acao = sc.nextInt();
+			acao = Integer.parseInt(sc.nextLine());
 
 			switch (acao) {
 			case 1:
