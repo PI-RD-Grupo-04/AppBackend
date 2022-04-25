@@ -143,6 +143,7 @@ public class Cliente {
 		this.pedidos = pedidos;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nome=" + nome + ", sobreNome=" + sobreNome + ", nomeSocial=" + nomeSocial

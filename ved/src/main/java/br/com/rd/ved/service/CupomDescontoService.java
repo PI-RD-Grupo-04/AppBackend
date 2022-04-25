@@ -69,8 +69,8 @@ public class CupomDescontoService {
 		String descricao = sc.nextLine();
 
 		System.out.println("Informe a Porcentagem Desconto");
-		Integer porcentagemDesconto = sc.nextInt();
-
+		Integer porcentagemDesconto = Integer.parseInt(sc.nextLine());
+		
 		CupomDesconto cupomDesconto = new CupomDesconto();
 		cupomDesconto.setDescricao(descricao);
 		cupomDesconto.setPorcentagemDesconto(porcentagemDesconto);
