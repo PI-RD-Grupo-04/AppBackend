@@ -42,11 +42,10 @@ public class Cliente {
 	private String telefone;
 	@Column(name = "senha")
 	private String senha;
-	
-	
+
 	@OneToMany(mappedBy = "cupomDesconto")
-	private List <Pedido> pedidos; 
-	
+	private List<Pedido> pedidos;
+
 	public Cliente() {
 		super();
 	}
@@ -134,7 +133,7 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
