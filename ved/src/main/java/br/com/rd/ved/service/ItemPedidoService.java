@@ -14,12 +14,12 @@ import br.com.rd.ved.repository.ProdutoRepository;
 
 @Service
 public class ItemPedidoService {
-	
+
 	private final ItemPedidoRepository itemPedidoRepository;
 	private final ProdutoRepository produtoRepository;
 	private final PedidoRepository pedidoRepository;
 	private Boolean sistema = true;
-	
+
 	public ItemPedidoService(ItemPedidoRepository itemPedidoRepository, ProdutoRepository produtoRepository,
 			PedidoRepository pedidoRepository) {
 		super();
@@ -62,47 +62,48 @@ public class ItemPedidoService {
 	}
 
 	private void salvar(Scanner sc) {
-		
-		System.out.println("Digite a descricao a Quantidade do produto a ser adicionada:");
+
+		System.out.println("Digite o ID do produto que deseja adicionar ");
 		Integer qnt = Integer.parseInt(sc.nextLine());
-		
+
 		System.out.println("Informe uma porcentagem de valor para ICMS:");
-		Double picms= Double.parseDouble(sc.nextLine());
-		
+		Double pIcms = Double.parseDouble(sc.nextLine());
+
 		System.out.println("Informe um valor para ICMS:");
-		Double vicms= Double.parseDouble(sc.nextLine());
-		
+		Double vIcms = Double.parseDouble(sc.nextLine());
+
 		System.out.println("Digite o ID do Produto para Item-pedido:");
 		Integer produtoId = Integer.parseInt(sc.nextLine());
+
 		Optional<Produto> produto = produtoRepository.findById(produtoId);
-		
+
 		System.out.println("Digite o ID do Pedido para Item-pedido:");
 		Integer pedidoId = Integer.parseInt(sc.nextLine());
 		Optional<Pedido> pedido = pedidoRepository.findById(pedidoId);
-		
-		ItemPedido itemPedido = new ItemPedido(qnt, picms, vicms, produto.get(), pedido.get());
+
+		ItemPedido itemPedido = new ItemPedido(qnt, pIcms, vIcms, produto.get(), pedido.get());
 		itemPedidoRepository.save(itemPedido);
 		System.out.println("Item do pedido Salvo com Sucesso");
 
 	}
 
 	private void atualizar(Scanner sc) {
-		
+
 		System.out.println("Informe o ID do Item do pedido que deseja Atualizar:");
 		Integer id = Integer.parseInt(sc.nextLine());
-		
+
 		System.out.println("Informe uma nova quantidade deste produto:");
-		Integer qnt= Integer.parseInt(sc.nextLine());
-		
+		Integer qnt = Integer.parseInt(sc.nextLine());
+
 		System.out.println("Informe uma porcentagem de valor para ICMS:");
-		Double picms= Double.parseDouble(sc.nextLine());
-		
+		Double picms = Double.parseDouble(sc.nextLine());
+
 		System.out.println("Informe um valor para ICMS:");
-		Double vicms= Double.parseDouble(sc.nextLine());
-		
+		Double vicms = Double.parseDouble(sc.nextLine());
+
 		System.out.println("Digite o ID do Produto para Item-Pedido:");
 		Integer produtoId = Integer.parseInt(sc.nextLine());
-		
+
 		System.out.println("Digite o ID do Pedido para Item-Pedido:");
 		Integer pedidoId = Integer.parseInt(sc.nextLine());
 
@@ -122,6 +123,7 @@ public class ItemPedidoService {
 		Iterable<ItemPedido> itemPedido = itemPedidoRepository.findAll();
 		itemPedido.forEach(uf -> System.out.println(uf));
 	}
+
 
 	private void deletar(Scanner sc) {
 		System.out.println("Digite o ID do Item do pedido que deseja deletar");

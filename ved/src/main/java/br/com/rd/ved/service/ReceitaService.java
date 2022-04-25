@@ -1,5 +1,4 @@
 package br.com.rd.ved.service;
-
 import java.text.ParseException;
 import java.util.Scanner;
 import org.springframework.stereotype.Service;
