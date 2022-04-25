@@ -29,7 +29,7 @@ public class CategoriaService {
 			System.out.println("3 - Visualizar");
 			System.out.println("4 - atualizar");
 
-			acao = sc.nextInt();
+			acao = Integer.parseInt(sc.nextLine());
 
 			switch (acao) {
 			case 1:
