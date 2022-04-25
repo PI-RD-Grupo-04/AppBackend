@@ -2,7 +2,6 @@ package br.com.rd.ved.model;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -20,27 +20,36 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
-	@Column(name = "nome")
+	@NotBlank
+	@Column(name = "nome", nullable = false, length = 3)
 	@Size(max = 50)
 	private String nome;
-	@Column(name = "sobrenome")
+	@NotBlank
+	@Column(name = "sobrenome", nullable = false)
 	@Size(max = 50)
 	private String sobreNome;
+	
 	@Column(name = "nome_social")
 	@Size(max = 30)
 	private String nomeSocial;
-	@Column(name = "cpf")
+	
+	@NotBlank
+	@Column(name = "cpf", nullable = false)
 	@Size(max = 16)
 	private String cpf;
-	@Column(name = "data_nascimento")
+	@NotBlank
+	@Column(name = "data_nascimento", nullable = false)
 	private Date dataNascimento;
-	@Column(name = "email")
+	@NotBlank
+	@Column(name = "email", nullable = false)
 	@Size(max = 30)
 	private String email;
-	@Column(name = "telefone")
+	@NotBlank
+	@Column(name = "telefone", nullable = false)
 	@Size(max = 16)
 	private String telefone;
-	@Column(name = "senha")
+	@NotBlank
+	@Column(name = "senha", nullable = false)
 	private String senha;
 
 	@OneToMany(mappedBy = "cupomDesconto")
