@@ -67,7 +67,6 @@ public class CartaoService {
 		 
 		 
 		 	System.out.println("Informe numero do Cartao");
-		 	sc.nextLine(); 
 		 	numeroCartao = sc.nextLine(); 
 			
 			
@@ -78,13 +77,13 @@ public class CartaoService {
 			cpfTitular = sc.nextLine(); 
 			
 			System.out.println("Informe dia de vencimento do Cartao");
-			diaVencimento = Integer.parseInt(sc.next()); 
+			diaVencimento = Integer.parseInt(sc.nextLine()); 
 			
 			System.out.println("Informe ano de vencimento do Cartao");
-			anoVencimento = Integer.parseInt(sc.next()) ;
+			anoVencimento = Integer.parseInt(sc.nextLine()) ;
 			
 			System.out.println("Informe id da bandeira");
-			Bandeira = Integer.parseInt(sc.next());
+			Bandeira = Integer.parseInt(sc.nextLine());
 			
 			Cartao cartao = new Cartao();
 			
