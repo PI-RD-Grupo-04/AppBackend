@@ -1,5 +1,6 @@
 package br.com.rd.ved.service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -69,7 +70,7 @@ public class ProdutoService {
 		 	String nomeProduto = sc.nextLine(); 
 			
 			System.out.println("Informe o preço para o produto");
-			Double preco = Double.parseDouble(sc.nextLine()); 
+			BigDecimal preco = new BigDecimal(sc.nextLine()); 
 			
 			System.out.println("Informe a url ");
 			String url = sc.nextLine(); 

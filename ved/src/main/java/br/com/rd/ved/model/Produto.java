@@ -1,8 +1,8 @@
 package br.com.rd.ved.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,7 +28,7 @@ public class Produto {
 	@Size(max = 50)
 	private String nomeProduto;
 	@Column(name = "preco")
-	private Double preco;
+	private BigDecimal preco;
 	@Column(name = "imagem_url")
 	private String url;
 	@Column(name = "descricao_produto")
@@ -35,27 +36,31 @@ public class Produto {
 	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
-		
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id_categoria", nullable=false)
-	private Categoria categoria;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id_marca", nullable=false)
-	private Marca marca;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id_status_produto", nullable=false)
-	private StatusProduto statusProduto;
-	
-	@OneToMany(mappedBy = "produto")
-	private List <ItemPedido> itemPedido; 
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_categoria", nullable = false)
+	private Categoria categoria;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_marca", nullable = false)
+	private Marca marca;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_status_produto", nullable = false)
+	private StatusProduto statusProduto;
+
+	@OneToMany(mappedBy = "produto")
+	private List<ItemPedido> itemPedido;
+
+	
+	@ManyToMany(mappedBy="produtos",fetch = FetchType.EAGER)
+	private List<Fornecedor> fornecedores;
+	
 	public Produto() {
 		super();
 	}
 
-	public Produto(Integer id, String nomeProduto, Double preco, String url, String descricao, Double peso,
+	public Produto(Integer id, String nomeProduto, BigDecimal preco, String url, String descricao, Double peso,
 			Categoria categoria, Marca marca, StatusProduto statusProduto) {
 		this.id = id;
 		this.nomeProduto = nomeProduto;
@@ -84,11 +89,11 @@ public class Produto {
 		this.nomeProduto = nomeProduto;
 	}
 
-	public Double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(Double preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
@@ -139,7 +144,7 @@ public class Produto {
 	public void setIdstatusProduto(StatusProduto idstatusProduto) {
 		this.statusProduto = idstatusProduto;
 	}
-	
+
 	public List<ItemPedido> getItemPedido() {
 		return itemPedido;
 	}
@@ -148,12 +153,35 @@ public class Produto {
 		this.itemPedido = itemPedido;
 	}
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public StatusProduto getStatusProduto() {
+		return statusProduto;
+	}
+
+	public void setStatusProduto(StatusProduto statusProduto) {
+		this.statusProduto = statusProduto;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nomeProduto=" + nomeProduto + ", preco=" + preco + ", url=" + url
-				+ ", descricao=" + descricao + ", peso=" + peso + ", idcategoria=" + categoria + ", idmarca="
-				+ marca + ", idstatusProduto=" + statusProduto + "]";
+				+ ", descricao=" + descricao + ", peso=" + peso + ", idcategoria=" + categoria + ", idmarca=" + marca
+				+ ", idstatusProduto=" + statusProduto + "]";
 	}
-
 
 }

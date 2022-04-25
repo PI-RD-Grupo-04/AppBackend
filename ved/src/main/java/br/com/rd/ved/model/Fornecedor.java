@@ -41,7 +41,22 @@ public class Fornecedor {
 			@JoinColumn(name = "id_fornecedor") }, inverseJoinColumns = { @JoinColumn(name = "id_endereco") })
 	private List<Endereco> enderecos;
 
+	@Fetch(FetchMode.SELECT)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "fornecedor_produto", joinColumns = {
+			@JoinColumn(name = "id_fornecedor") }, inverseJoinColumns = { @JoinColumn(name = "id_produto") })
+	private List<Produto> produtos; 
 
+	
+	
+	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
 
 	public Fornecedor() {
 		super();
