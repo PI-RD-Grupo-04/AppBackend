@@ -155,7 +155,7 @@ public class VedApplication implements CommandLineRunner {
 				categoriaService.iniciar(sc);
 				break;
 			case 6:
-				System.out.println("cliente");
+				clienteService.iniciar(sc);
 				break;
 			case 7:
 				cupomDescontoService.iniciar(sc);

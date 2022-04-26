@@ -30,7 +30,7 @@ public class Cartao {
 	@Column(name = "ano_vencimento", nullable = false)
 	private Integer anoVencimento;
 
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_bandeira", nullable=false)
 	private Bandeira idBandeira;
 

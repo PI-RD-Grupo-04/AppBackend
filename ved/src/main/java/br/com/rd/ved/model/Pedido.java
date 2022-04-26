@@ -49,6 +49,9 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itemPedidos;
 	
+	@OneToMany(mappedBy = "pedido")
+	private List <NotaFiscal> notafiscal; 
+	
 
 	public Pedido() {
 		super();

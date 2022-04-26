@@ -51,11 +51,9 @@ public class CupomDescontoService {
 	private void deletar(Scanner sc) {
 		int id;
 		System.out.println("Informe o ID da cupomDesconto a ser Deletado");
-
-		id = sc.nextInt();
+		id = Integer.parseInt(sc.nextLine());
 
 		cupomDescontoRepository.deleteById(id);
-
 		System.out.println("cupomDesconto deletado com sucesso");
 
 	}
@@ -71,8 +69,8 @@ public class CupomDescontoService {
 		String descricao = sc.nextLine();
 
 		System.out.println("Informe a Porcentagem Desconto");
-		Integer porcentagemDesconto = sc.nextInt();
-
+		Integer porcentagemDesconto = Integer.parseInt(sc.nextLine());
+		
 		CupomDesconto cupomDesconto = new CupomDesconto();
 		cupomDesconto.setDescricao(descricao);
 		cupomDesconto.setPorcentagemDesconto(porcentagemDesconto);
@@ -86,16 +84,12 @@ public class CupomDescontoService {
 	private void salvar(Scanner sc) throws ParseException {
 
 		System.out.println("Informe o nome da cupomDesconto");
-		sc.nextLine();
 		String descricao = sc.nextLine();
 
-		System.out.println("Informe a porcentagem");
-		Integer porcentagemDesconto = sc.nextInt();
+		System.out.println("Informe a porcentagem do desconto");
+		Integer porcentagemDesconto = Integer.parseInt(sc.nextLine());
 
-		CupomDesconto cupomDesconto = new CupomDesconto();
-		cupomDesconto.setDescricao(descricao);
-		cupomDesconto.setPorcentagemDesconto(porcentagemDesconto);
-
+		CupomDesconto cupomDesconto = new CupomDesconto(descricao, porcentagemDesconto);		
 		cupomDescontoRepository.save(cupomDesconto);
 
 		System.out.println("Cupom de Desconto Salvo com Sucesso");
