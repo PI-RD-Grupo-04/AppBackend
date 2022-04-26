@@ -54,10 +54,7 @@
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
-<<<<<<< HEAD
-=======
 			<version>2.0.1.Final</version>
->>>>>>> 6d3470ffaabd88566cd2c7984f5de4786850107d
 		</dependency>
 		<dependency>
 			<groupId>at.favre.lib</groupId>
