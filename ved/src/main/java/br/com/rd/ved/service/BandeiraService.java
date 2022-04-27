@@ -46,7 +46,7 @@ public class BandeiraService {
 
 	private void salvar(Scanner sc) {
 		System.out.println("Informe descrição para o Nome da bandeira");
-		String nome = sc.next();
+		String nome = sc.nextLine();
 		Bandeira bandeira = new Bandeira(nome);
 		bandeiraRepository.save(bandeira);
 
