@@ -49,7 +49,7 @@ public class Produto {
 	@JoinColumn(name = "id_status_produto", nullable = false)
 	private StatusProduto statusProduto;
 
-	@OneToMany(mappedBy = "produto")
+	@OneToMany(mappedBy = "produtos")
 	private List<ItemPedido> itemPedido;
 
 	

@@ -4,10 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
 import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.repository.ClienteRepository;
 
@@ -17,16 +16,9 @@ public class ClienteService {
 	private Boolean sistema = true;
 
 	private Integer id;
-	private String nomeCliente;
-	private String sobreNomeCliente;
-	private String nomeSocial;
-	private String cpf;
 	private Date dataNascimento;
-	private String email;
 	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	private String telefone;
-	private String senha;
-
+	
 	public ClienteService(ClienteRepository clienteRepository) {
 		this.clienteRepository = clienteRepository;
 	}
@@ -41,7 +33,7 @@ public class ClienteService {
 			System.out.println("3 - Visualizar");
 			System.out.println("4 - Deletar");
 
-			acao = sc.nextInt();
+			acao = Integer.parseInt(sc.nextLine());
 
 			switch (acao) {
 			case 1:
@@ -67,7 +59,7 @@ public class ClienteService {
 		int id;
 		System.out.println("Informe o ID do Cliente a ser Deletado");
 
-		id = sc.nextInt();
+		id = Integer.parseInt(sc.nextLine());
 
 		clienteRepository.deleteById(id);
 
@@ -83,25 +75,24 @@ public class ClienteService {
 	private void atualizar(Scanner sc) {
 
 		System.out.println("Informe o Id do registro a ser atualizado");
-		id = sc.nextInt();
+		id = Integer.parseInt(sc.nextLine());
 		Cliente cliente = clienteRepository.findById(id).get(); //select no banco pelo id
 		
 		System.out.println("Informe o nome para o Cliente");
-		sc.nextLine();
-		nomeCliente = sc.nextLine();
+		String nomeCliente = sc.next();
 		
 
 		System.out.println("Informe o sobre Nome para o Cliente");
-		sobreNomeCliente = sc.nextLine();
+		String sobreNomeCliente = sc.nextLine();
 
 		System.out.println("Informe o nome Social para o Cliente");
-		nomeSocial = sc.nextLine();
+		String nomeSocial = sc.nextLine();
 
 		System.out.println("Informe a nova telefone para o Cliente");
-		telefone = sc.nextLine();
+		String telefone = sc.nextLine();
 
 		System.out.println("Informe a nova senha para o Cliente");
-		senha = sc.nextLine();
+		String senha = sc.nextLine();
 		
 		cliente.setNome(nomeCliente);
 		cliente.setSobreNome(sobreNomeCliente);
@@ -120,31 +111,32 @@ public class ClienteService {
 		
 	
 		System.out.println("Informe o nome para o Cliente");
+		String nomeCliente = sc.next();
 		sc.nextLine();
-		nomeCliente = sc.nextLine();
-		
 
 		System.out.println("Informe o sobre Nome para o Cliente");
-		sobreNomeCliente = sc.nextLine();
-
+		String sobreNomeCliente = sc.next();
+		sc.nextLine();
+		
 		System.out.println("Informe o nome Social para o Cliente");
-		nomeSocial = sc.nextLine();
-
+		String nomeSocial = sc.nextLine();
+				
 		System.out.println("Informe o cpf do Cliente");
-		cpf = sc.nextLine();
-
+		String cpf = sc.nextLine();
+		
 		System.out.println("Informe a data de nascimento do Cliente (--/--/----)");
 		String dt = sc.nextLine();
 		dataNascimento = formato.parse(dt);
 
 		System.out.println("Informe seu email para o Cliente");
-		email = sc.nextLine();
+		String email = sc.nextLine();
 
 		System.out.println("Informe o telefone do Cliente");
-		telefone = sc.nextLine();
+		String telefone = sc.nextLine();
 
 		System.out.println("Informe uma senha para o Cliente");
-		senha = sc.nextLine();
+		String senha = sc.nextLine();
+		senha = codificarSenha(senha);
 
 		Cliente cliente = new Cliente();
 		cliente.setId(id);
@@ -162,4 +154,14 @@ public class ClienteService {
 		System.out.println("Cliente Salvo com Sucesso");
 
 	}
+	
+	public String codificarSenha(String senha) {
+        return BCrypt.withDefaults().hashToString(12, senha.toCharArray());
+        
+    }
+	
+//	public boolean validarSenha(String senha, String senhaCrypto) {
+//        BCrypt.Result response = BCrypt.verifyer().verify(senha.toCharArray(), senhaCrypto);
+//        return response.verified;
+//    }
 }
