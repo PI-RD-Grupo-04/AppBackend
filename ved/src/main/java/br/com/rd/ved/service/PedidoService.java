@@ -50,7 +50,7 @@ public class PedidoService {
 		int acao;
 
 		while (sistema) {
-			System.out.println("Qual a ação que será realizada no frete");
+			System.out.println("Qual a ação que será realizada em pedido");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
 			System.out.println("2 - Atualizar");
