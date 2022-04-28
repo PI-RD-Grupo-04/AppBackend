@@ -4,13 +4,20 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "clientes")
@@ -60,6 +67,14 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 
+	
+	@Fetch(FetchMode.SELECT)
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "cliente_cartao", joinColumns = {
+	@JoinColumn(name = "id_cliente") }, inverseJoinColumns = { @JoinColumn(name = "id_cartao") })
+	private List<Cartao>cartoes;
+
+	
 	public Cliente() {
 		super();
 	}
