@@ -41,20 +41,21 @@ public class Endereco {
 	@Column(name = "cidade")
 	@Size(max = 50)
 	private String cidade;
-	
+
 	@OneToMany(mappedBy = "enderecos")
-	private List <Pedido> pedidos; 
+	private List<Pedido> pedidos;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
-	
-	@ManyToMany(mappedBy="enderecos",fetch = FetchType.EAGER)
-	private List<Fornecedor> fornecedores; 
-	
-	
+
+	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
+	private List<Fornecedor> fornecedores;
+
+	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
+	private List<Cliente> clientes;
+
 	public Endereco() {
-		super();
 	}
 
 	public Endereco(String cep, String rua, Integer numero, String complemento, String municipio, String cidade) {
@@ -74,7 +75,6 @@ public class Endereco {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -131,7 +131,7 @@ public class Endereco {
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
-	
+
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}

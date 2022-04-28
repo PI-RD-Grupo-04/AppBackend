@@ -4,13 +4,20 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "cliente")
@@ -21,18 +28,18 @@ public class Cliente {
 	@Column(name = "id_cliente")
 	private Integer id;
 	@NotBlank
-	@Column(name = "nome", nullable = false, length = 3)
+	@Column(name = "nome", nullable = false)
 	@Size(max = 50)
 	private String nome;
 	@NotBlank
 	@Column(name = "sobrenome", nullable = false)
 	@Size(max = 50)
 	private String sobreNome;
-	
+
 	@Column(name = "nome_social")
 	@Size(max = 30)
 	private String nomeSocial;
-	
+
 	@NotBlank
 	@Column(name = "cpf", nullable = false)
 	@Size(max = 16)
@@ -55,6 +62,13 @@ public class Cliente {
 	@OneToMany(mappedBy = "cupomDesconto")
 	private List<Pedido> pedidos;
 
+	@Fetch(FetchMode.SELECT)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "cliente_endereco", joinColumns = {
+			@JoinColumn(name = "id_cliente") }, inverseJoinColumns = { @JoinColumn(name = "id_endereco") })
+	private List<Endereco> enderecos;
+	
+	
 	public Cliente() {
 		super();
 	}
@@ -150,7 +164,6 @@ public class Cliente {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-
 
 	@Override
 	public String toString() {
