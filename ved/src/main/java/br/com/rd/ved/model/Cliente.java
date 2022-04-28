@@ -52,7 +52,7 @@ public class Cliente {
 	@Column(name = "senha", nullable = false)
 	private String senha;
 
-	@OneToMany(mappedBy = "cupomDesconto")
+	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 
 	public Cliente() {
