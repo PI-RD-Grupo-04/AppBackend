@@ -3,6 +3,7 @@ package br.com.rd.ved.formdto;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class ClientePedidoForm {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	
-	
+	@GetMapping
 	public List<ClientePedidoDTO> listar(Integer idCliente){
 		if(idCliente == null) {
 			List<Pedido> pedidos = pedidoRepository.findAll();
@@ -31,4 +32,6 @@ public class ClientePedidoForm {
 			return ClientePedidoDTO.converter(pedidos);
 		}
 	}
+	
+	
 }
