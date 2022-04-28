@@ -128,12 +128,12 @@ public class VedApplication implements CommandLineRunner {
 			System.out.println("16 - Pix");
 			System.out.println("17 - Produto");
 			System.out.println("18 - Receita");
-			System.out.println("19 - Serie");
+			System.out.println("19 - Série");
 			System.out.println("20 - Status-Produto");
 			System.out.println("21 - Tipo-Frete");
 			System.out.println("22 - Tipo-Pagamento");
 			System.out.println("23 - UF");
-			System.out.println("24 - Usuario");
+			System.out.println("24 - Usuário");
 			System.out.print(">>>");
 
 			acao = Integer.parseInt(sc.nextLine());
@@ -215,7 +215,7 @@ public class VedApplication implements CommandLineRunner {
 				this.sistema = false;
 				break;
 			default:
-				System.out.println("Numero Invalido!");
+				System.out.println("Número Inválido!");
 			}
 		}
 		sc.close();
