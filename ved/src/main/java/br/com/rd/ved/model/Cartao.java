@@ -1,5 +1,7 @@
 package br.com.rd.ved.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,6 +36,10 @@ public class Cartao {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_bandeira", nullable=false)
 	private Bandeira idBandeira;
+	
+	@ManyToMany(mappedBy="cartoes",fetch = FetchType.LAZY)
+	private List<Cliente> cliente; 
+	
 
 	public Cartao() {
 		super();
