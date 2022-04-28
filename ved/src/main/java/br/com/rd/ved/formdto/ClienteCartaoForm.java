@@ -1,5 +1,5 @@
 package br.com.rd.ved.formdto;
 
-public class ClenteCartaoForm {
+public class ClienteCartaoForm {
 
 }
