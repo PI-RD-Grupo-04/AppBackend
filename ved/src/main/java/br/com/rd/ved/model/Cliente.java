@@ -13,17 +13,19 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "clientes")
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
+	
 	@NotBlank
 	@Column(name = "nome", nullable = false, length = 3)
 	@Size(max = 50)
 	private String nome;
+	
 	@NotBlank
 	@Column(name = "sobrenome", nullable = false)
 	@Size(max = 50)
@@ -37,6 +39,7 @@ public class Cliente {
 	@Column(name = "cpf", nullable = false)
 	@Size(max = 16)
 	private String cpf;
+	
 	@NotBlank
 	@Column(name = "data_nascimento", nullable = false)
 	private Date dataNascimento;
@@ -44,10 +47,12 @@ public class Cliente {
 	@Column(name = "email", nullable = false)
 	@Size(max = 30)
 	private String email;
+	
 	@NotBlank
 	@Column(name = "telefone", nullable = false)
 	@Size(max = 16)
 	private String telefone;
+	
 	@NotBlank
 	@Column(name = "senha", nullable = false)
 	private String senha;

@@ -5,6 +5,7 @@ import br.com.rd.ved.model.Cliente;
 
 
 public class ClienteDTO {
+	
 	@NotBlank
 	private Integer id;
 	
