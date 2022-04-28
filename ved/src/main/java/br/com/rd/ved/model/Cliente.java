@@ -29,7 +29,7 @@ public class Cliente {
 	private Integer id;
 	
 	@NotBlank
-	@Column(name = "nome", nullable = false, length = 3)
+	@Column(name = "nome", nullable = false)
 	@Size(max = 50)
 	private String nome;
 	
@@ -37,11 +37,11 @@ public class Cliente {
 	@Column(name = "sobrenome", nullable = false)
 	@Size(max = 50)
 	private String sobreNome;
-	
+
 	@Column(name = "nome_social")
 	@Size(max = 30)
 	private String nomeSocial;
-	
+
 	@NotBlank
 	@Column(name = "cpf", nullable = false)
 	@Size(max = 16)
@@ -74,6 +74,12 @@ public class Cliente {
 	@JoinColumn(name = "id_cliente") }, inverseJoinColumns = { @JoinColumn(name = "id_cartao") })
 	private List<Cartao>cartoes;
 
+	@Fetch(FetchMode.SELECT)
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "cliente_endereco", joinColumns = {
+			@JoinColumn(name = "id_cliente") }, inverseJoinColumns = { @JoinColumn(name = "id_endereco") })
+	private List<Endereco> enderecos;
+	
 	
 	public Cliente() {
 		super();
@@ -170,7 +176,6 @@ public class Cliente {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-
 
 	@Override
 	public String toString() {
