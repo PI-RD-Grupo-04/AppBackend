@@ -16,13 +16,12 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@GetMapping
 	public List<Cliente> Listar() {
-	
-		List<Cliente> clientes = clienteRepository.findAll(); 
+
+		List<Cliente> clientes = clienteRepository.findAll();
 		return clientes;
 	}
-	
-	
+
 }
