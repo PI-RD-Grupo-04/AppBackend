@@ -2,6 +2,7 @@ package br.com.rd.ved.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,6 +24,7 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido")
 	private Integer id;
+	
 	@Column(name = "data_pedido")
 	private Date data;
 	
@@ -140,6 +142,23 @@ public class Pedido {
 
 	public void setItemPedidos(List<ItemPedido> itemPedidos) {
 		this.itemPedidos = itemPedidos;
+	}
+		
+	@Override
+	public int hashCode() {
+		return Objects.hash(data, id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pedido other = (Pedido) obj;
+		return Objects.equals(data, other.data) && Objects.equals(id, other.id);
 	}
 
 	@Override

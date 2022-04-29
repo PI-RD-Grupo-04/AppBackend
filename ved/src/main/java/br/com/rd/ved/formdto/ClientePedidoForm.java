@@ -1,37 +1,77 @@
 package br.com.rd.ved.formdto;
 
+import java.util.Date;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.stream.Collectors;
 
 import br.com.rd.ved.dto.ClientePedidoDTO;
+import br.com.rd.ved.model.Cliente;
+import br.com.rd.ved.model.CupomDesconto;
+import br.com.rd.ved.model.Endereco;
+import br.com.rd.ved.model.Frete;
 import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.repository.ClienteRepository;
-import br.com.rd.ved.repository.PedidoRepository;
 
-@RestController
-@RequestMapping("/pedido")
+
 public class ClientePedidoForm {
 
-	@Autowired
-	private ClienteRepository clienterepository;
-	
-	@Autowired
-	private PedidoRepository pedidoRepository;
-	
-	@GetMapping
-	public List<ClientePedidoDTO> listar(Integer idCliente){
-		if(idCliente == null) {
-			List<Pedido> pedidos = pedidoRepository.findAll();
-			return ClientePedidoDTO.converter(pedidos);
-		} else {
-			List<Pedido> pedidos = pedidoRepository.findByClienteId(idCliente);
-			return ClientePedidoDTO.converter(pedidos);
-		}
+	private Date data;
+	private Cliente cliente;
+	private CupomDesconto cupomDesconto;
+	private Frete frete;
+	private Endereco enderecos;
+
+	public ClientePedidoForm(Date data, Cliente cliente, CupomDesconto cupomDesconto, Frete frete, Endereco enderecos) {
+
+		this.data = data;
+		this.cliente = cliente;
+		this.cupomDesconto = cupomDesconto;
+		this.frete = frete;
+		this.enderecos = enderecos;
 	}
-	
-	
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public CupomDesconto getCupomDesconto() {
+		return cupomDesconto;
+	}
+
+	public void setCupomDesconto(CupomDesconto cupomDesconto) {
+		this.cupomDesconto = cupomDesconto;
+	}
+
+	public Frete getFrete() {
+		return frete;
+	}
+
+	public void setFrete(Frete frete) {
+		this.frete = frete;
+	}
+
+	public Endereco getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(Endereco enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public static List<ClientePedidoDTO> converter(List<Pedido> pedidos) {
+
+		return pedidos.stream().map(ClientePedidoDTO::new).collect(Collectors.toList());
+	}
+
 }
