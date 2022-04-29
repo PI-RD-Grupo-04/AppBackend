@@ -1,6 +1,7 @@
 package br.com.rd.ved.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "endereco")
@@ -42,6 +45,7 @@ public class Endereco {
 	@Size(max = 50)
 	private String cidade;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "enderecos")
 	private List<Pedido> pedidos;
 
@@ -49,9 +53,11 @@ public class Endereco {
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Fornecedor> fornecedores;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Cliente> clientes;
 
@@ -146,6 +152,23 @@ public class Endereco {
 
 	public void setFornecedores(List<Fornecedor> fornecedores) {
 		this.fornecedores = fornecedores;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override

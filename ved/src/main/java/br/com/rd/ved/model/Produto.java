@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "produto")
 public class Produto {
@@ -49,10 +51,11 @@ public class Produto {
 	@JoinColumn(name = "id_status_produto", nullable = false)
 	private StatusProduto statusProduto;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "produtos")
 	private List<ItemPedido> itemPedido;
 
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy="produtos",fetch = FetchType.EAGER)
 	private List<Fornecedor> fornecedores;
 	

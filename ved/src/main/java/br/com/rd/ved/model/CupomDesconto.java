@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="cupom_desconto")
 public class CupomDesconto {
@@ -25,6 +27,7 @@ public class CupomDesconto {
 	@Column(name="porcentagem_desconto")
 	private Integer porcentagemDesconto;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cupomDesconto")
 	private List <Pedido> pedidos; 
 	
