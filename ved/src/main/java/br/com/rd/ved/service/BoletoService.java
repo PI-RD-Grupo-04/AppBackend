@@ -47,7 +47,7 @@ public class BoletoService {
 	private void salvar(Scanner sc) {
 		 String codigoBarras;
 			System.out.println("Informe descrição para o pix");
-			codigoBarras = sc.next(); 
+			codigoBarras = sc.nextLine(); 
 			Boleto boleto = new Boleto(codigoBarras);
 			boletoRepository.save(boleto);
 		
@@ -55,7 +55,6 @@ public class BoletoService {
 	
 	private void deletar(Scanner sc) {
 		System.out.println("Digite o ID do pix");
-		sc.nextLine(); 
 		Integer id = Integer.parseInt(sc.nextLine());
 		boletoRepository.deleteById(id);
 		System.out.println(" Deletado com Sucesso");
