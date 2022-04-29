@@ -1,31 +1,42 @@
-package br.com.rd.ved.formdto;
+package br.com.rd.ved.dto;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.rd.ved.dto.ClientePedidoDTO;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.CupomDesconto;
 import br.com.rd.ved.model.Endereco;
 import br.com.rd.ved.model.Frete;
 import br.com.rd.ved.model.Pedido;
+import br.com.rd.ved.model.PedidoStatus;
 
+public class PedidoDTO {
 
-public class ClientePedidoForm {
-
+	private Integer id;
 	private Date data;
 	private Cliente cliente;
 	private CupomDesconto cupomDesconto;
+	private PedidoStatus pedidoStatus;
 	private Frete frete;
 	private Endereco enderecos;
 
-	public ClientePedidoForm(Date data, Cliente cliente, CupomDesconto cupomDesconto, Frete frete, Endereco enderecos) {
-		this.data = data;
-		this.cliente = cliente;
-		this.cupomDesconto = cupomDesconto;
-		this.frete = frete;
-		this.enderecos = enderecos;
+	public PedidoDTO(Pedido pedido) {
+		this.id = pedido.getId();
+		this.data = pedido.getData();
+		this.cliente = pedido.getCliente();
+		this.cupomDesconto = pedido.getCupomDesconto();
+		this.pedidoStatus = pedido.getPedidoStatus();
+		this.frete = pedido.getFrete();
+		this.enderecos = pedido.getEnderecos();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Date getData() {
@@ -52,6 +63,14 @@ public class ClientePedidoForm {
 		this.cupomDesconto = cupomDesconto;
 	}
 
+	public PedidoStatus getPedidoStatus() {
+		return pedidoStatus;
+	}
+
+	public void setPedidoStatus(PedidoStatus pedidoStatus) {
+		this.pedidoStatus = pedidoStatus;
+	}
+
 	public Frete getFrete() {
 		return frete;
 	}
@@ -68,6 +87,7 @@ public class ClientePedidoForm {
 		this.enderecos = enderecos;
 	}
 
-
-
+	public static List<PedidoDTO> converter(List<Pedido> pedidos) {
+		return pedidos.stream().map(PedidoDTO::new).collect(Collectors.toList());
+	}
 }

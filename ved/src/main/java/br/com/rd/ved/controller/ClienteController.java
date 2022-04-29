@@ -29,10 +29,10 @@ public class ClienteController {
 
 	@GetMapping
 	public List<ClienteDTO> Listar() {
-
 		List<Cliente> clientes = clienteRepository.findAll();  
 		return 	ClienteDTO.converter(clientes);
 	} 
+
 	
 	@PostMapping 
 	@Transactional

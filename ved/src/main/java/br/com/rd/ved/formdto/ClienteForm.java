@@ -16,22 +16,29 @@ public class ClienteForm {
 	@NotNull
 	@NotEmpty
 	private String nome;
+	
 	@NotNull
 	@NotEmpty
 	private String sobrenome;
+	
 	private String nomeSocial;
+	
 	@NotNull
 	@NotEmpty
 	private String cpf;
+	
 	@NotNull
 	@NotEmpty
 	private Date dataNascimento;
+	
 	@NotNull
 	@NotEmpty
 	private String email;
+	
 	@NotNull
 	@NotEmpty
 	private String telefone;
+	
 	@NotNull
 	@NotEmpty
 	private String senha;
@@ -114,8 +121,7 @@ public class ClienteForm {
 		this.senha = senha;
 	}
 
-	public Cliente converter(ClienteRepository clienteRepository) { 
-		
+	public Cliente converter(ClienteRepository clienteRepository) { 		
 		return new Cliente(nome, sobrenome, nomeSocial, cpf, dataNascimento, email, telefone, senha);
 
 	}

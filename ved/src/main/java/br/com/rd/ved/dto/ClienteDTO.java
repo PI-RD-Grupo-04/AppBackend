@@ -24,7 +24,6 @@ public class ClienteDTO {
 
 	@NotBlank
 	private String cpf;
-
 	
 	private Date dataNascimento;
 
@@ -88,7 +87,6 @@ public class ClienteDTO {
 	}
 
 	public static List<ClienteDTO> converter(List<Cliente> cliente) {
-
 		return cliente.stream().map(ClienteDTO::new).collect(Collectors.toList());
 	}
 
