@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tipo_frete")
 public class TipoFrete {
@@ -23,6 +25,7 @@ public class TipoFrete {
 	@Size(max = 50)
 	private String descricao;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "tipoFrete")
 	private List<Frete> fretes;
 	

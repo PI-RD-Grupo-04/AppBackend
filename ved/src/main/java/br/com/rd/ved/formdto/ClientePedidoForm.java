@@ -21,7 +21,6 @@ public class ClientePedidoForm {
 	private Endereco enderecos;
 
 	public ClientePedidoForm(Date data, Cliente cliente, CupomDesconto cupomDesconto, Frete frete, Endereco enderecos) {
-
 		this.data = data;
 		this.cliente = cliente;
 		this.cupomDesconto = cupomDesconto;
@@ -69,9 +68,8 @@ public class ClientePedidoForm {
 		this.enderecos = enderecos;
 	}
 
-	public static List<ClientePedidoDTO> converter(List<Pedido> pedidos) {
-
-		return pedidos.stream().map(ClientePedidoDTO::new).collect(Collectors.toList());
-	}
+//	public static List<ClientePedidoForm> converter(List<Pedido> pedidos) {
+//		return pedidos.stream().map(ClientePedidoForm::new).collect(Collectors.toList());
+//	}
 
 }

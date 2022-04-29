@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "status_produto")
 public class StatusProduto {
@@ -23,6 +25,7 @@ public class StatusProduto {
 	@Size(max = 30)
 	private String descricao;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "statusProduto")
 	private List <Produto> produtos;
 

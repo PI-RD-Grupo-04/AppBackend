@@ -31,5 +31,5 @@ public class ClientePedidoController {
 			List<Pedido> pedidos = pedidoRepository.findByClienteId(idCliente);
 			return ClientePedidoDTO.converter(pedidos);
 		}
-	}
+	}	
 }

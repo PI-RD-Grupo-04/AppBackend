@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "frete")
 public class Frete {
@@ -32,7 +34,7 @@ public class Frete {
 	@JoinColumn(name = "id_tipo_frete", nullable = false)
 	private TipoFrete tipoFrete;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "pedidoStatus")
 	private List <Pedido> lista; 
 

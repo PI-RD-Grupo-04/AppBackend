@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pedidos")
+@Table(name = "pedido")
 public class Pedido {
 
 	@Id
@@ -33,7 +33,7 @@ public class Pedido {
 	private Cliente cliente;
 	
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_cupomDesconto", nullable=false)
+	@JoinColumn(name="id_cupomDesconto", nullable=true)
 	private CupomDesconto cupomDesconto;
 	
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)

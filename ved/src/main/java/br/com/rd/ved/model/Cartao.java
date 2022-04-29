@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cartao")
 public class Cartao {
@@ -37,6 +39,7 @@ public class Cartao {
 	@JoinColumn(name="id_bandeira", nullable=false)
 	private Bandeira idBandeira;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="cartoes",fetch = FetchType.LAZY)
 	private List<Cliente> cliente; 
 	
