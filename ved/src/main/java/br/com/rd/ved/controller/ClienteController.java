@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.rd.ved.dto.ClienteDTO;
+import br.com.rd.ved.formdto.AtualizarClienteForm;
 import br.com.rd.ved.formdto.ClienteForm;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.repository.ClienteRepository;
@@ -69,6 +71,19 @@ public class ClienteController {
 		}
 		return ResponseEntity.notFound().build();
 		
+	}
+	
+	
+	@PutMapping("/atualiza={id}")
+	@Transactional
+	public ResponseEntity<ClienteDTO> atualizar(@PathVariable("id") Integer id,
+						@RequestBody @Valid AtualizarClienteForm clienteForm){
+		Optional<Cliente> cliente = clienteRepository.findById(id); 
+		if(cliente.isPresent()) {
+			Cliente atualizado = clienteForm.atualizar(id, clienteRepository);
+			return ResponseEntity.ok(new ClienteDTO(atualizado));
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 }

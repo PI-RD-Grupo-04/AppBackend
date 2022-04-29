@@ -17,7 +17,7 @@ public class ClienteDTO {
 	private String nome;
 
 	@NotBlank
-	private String sobreNome;
+	private String sobrenome;
 
 	@NotBlank
 	private String nomeSocial;
@@ -48,8 +48,8 @@ public class ClienteDTO {
 		return nome;
 	}
 
-	public String getSobreNome() {
-		return sobreNome;
+	public String getSobrenome() {
+		return sobrenome;
 	}
 
 	public String getNomeSocial() {
@@ -78,7 +78,7 @@ public class ClienteDTO {
 
 	public ClienteDTO(Cliente obj) {
 		nome = obj.getNome();
-		sobreNome = obj.getSobreNome();
+		sobrenome = obj.getSobreNome();
 		nomeSocial = obj.getNomeSocial();
 		cpf = obj.getCpf();
 		dataNascimento = obj.getDataNascimento();
