@@ -25,7 +25,6 @@ public class ClienteDTO {
 	@NotBlank
 	private String cpf;
 
-	
 	private Date dataNascimento;
 
 	@NotBlank

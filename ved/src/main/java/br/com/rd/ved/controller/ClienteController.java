@@ -2,6 +2,7 @@ package br.com.rd.ved.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,19 +31,29 @@ public class ClienteController {
 
 	@GetMapping
 	public List<ClienteDTO> Listar() {
+		List<Cliente> clientes = clienteRepository.findAll();
+		return ClienteDTO.converter(clientes);
+	}
 
-		List<Cliente> clientes = clienteRepository.findAll();  
-		return 	ClienteDTO.converter(clientes);
-	} 
-	
-	@PostMapping 
+	@PostMapping
 	@Transactional
 	public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid ClienteForm clienteForm,
-			                                    UriComponentsBuilder uriBuilder){
+			UriComponentsBuilder uriBuilder) {
 		Cliente cliente = clienteForm.converter(clienteRepository);
-		clienteRepository.save(cliente); 
+		clienteRepository.save(cliente);
 		URI uri = uriBuilder.path("/cliente/{id}").buildAndExpand(cliente.getId()).toUri();
-		return ResponseEntity.created(uri).body(new ClienteDTO(cliente)) ;
+		return ResponseEntity.created(uri).body(new ClienteDTO(cliente));
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<ClienteDTO> detalhar(@PathVariable("id") Integer id) {
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+
+		if (cliente.isPresent()) {
+			return ResponseEntity.ok(new ClienteDTO(cliente.get()));
+		}
+
+		return ResponseEntity.notFound().build();
 	}
 
 }
