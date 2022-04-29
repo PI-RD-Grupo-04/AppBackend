@@ -2,6 +2,8 @@ package br.com.rd.ved.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,67 +22,59 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "cliente")
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
-	
-	@NotBlank
+
 	@Column(name = "nome", nullable = false)
 	@Size(max = 50)
 	private String nome;
-	
-	@NotBlank
+
 	@Column(name = "sobrenome", nullable = false)
 	@Size(max = 50)
-	private String sobreNome;
+	private String sobrenome;
 
 	@Column(name = "nome_social")
 	@Size(max = 30)
 	private String nomeSocial;
 
-	@NotBlank
 	@Column(name = "cpf", nullable = false)
 	@Size(max = 16)
 	private String cpf;
-	
-	@NotBlank
+
 	@Column(name = "data_nascimento", nullable = false)
 	private Date dataNascimento;
 	@NotBlank
 	@Column(name = "email", nullable = false)
 	@Size(max = 30)
 	private String email;
-	
-	@NotBlank
+
 	@Column(name = "telefone", nullable = false)
 	@Size(max = 16)
 	private String telefone;
-	
-	@NotBlank
+
 	@Column(name = "senha", nullable = false)
 	private String senha;
 
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 
-	
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "cliente_cartao", joinColumns = {
-	@JoinColumn(name = "id_cliente") }, inverseJoinColumns = { @JoinColumn(name = "id_cartao") })
-	private List<Cartao>cartoes;
+	@JoinTable(name = "cliente_cartao", joinColumns = { @JoinColumn(name = "id_cliente") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_cartao") })
+	private List<Cartao> cartoes;
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "cliente_endereco", joinColumns = {
-			@JoinColumn(name = "id_cliente") }, inverseJoinColumns = { @JoinColumn(name = "id_endereco") })
+	@JoinTable(name = "cliente_endereco", joinColumns = { @JoinColumn(name = "id_cliente") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_endereco") })
 	private List<Endereco> enderecos;
-	
-	
+
 	public Cliente() {
 		super();
 	}
@@ -88,7 +82,7 @@ public class Cliente {
 	public Cliente(String nome, String sobreNome, String nomeSocial, String cpf, Date dataNascimento, String email,
 			String telefone, String senha) {
 		this.nome = nome;
-		this.sobreNome = sobreNome;
+		this.sobrenome = sobreNome;
 		this.nomeSocial = nomeSocial;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
@@ -114,11 +108,11 @@ public class Cliente {
 	}
 
 	public String getSobreNome() {
-		return sobreNome;
+		return sobrenome;
 	}
 
 	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
+		this.sobrenome = sobreNome;
 	}
 
 	public String getNomeSocial() {
@@ -179,9 +173,26 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", sobreNome=" + sobreNome + ", nomeSocial=" + nomeSocial
-				+ ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", email=" + email + ", telefone=" + telefone
+		return "Cliente [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nome Social=" + nomeSocial
+				+ ", cpf=" + cpf + ", data de Nascimento=" + dataNascimento + ", email=" + email + ", telefone=" + telefone
 				+ ", senha=" + senha + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(id, other.id);
 	}
 
 }
