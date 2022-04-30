@@ -65,17 +65,5 @@ public class PedidoController {
 		return ResponseEntity.notFound().build();
 		
 	}
-	
-	
-//	@PutMapping("/atualiza={id}")
-//	@Transactional
-//	public ResponseEntity<PedidoDTO> atualizar(@PathVariable("id") Integer id,
-//						@RequestBody @Valid AtualizarPedidoForm clienteForm){
-//		Optional<Pedido> pedido = pedidoRepository.findById(id); 
-//		if(pedido.isPresent()) {
-//			Pedido atualizado = pedidoForm.atualizar(id, pedidoRepository);
-//			return ResponseEntity.ok(new PedidoDTO(atualizado));
-//		}
-//		return ResponseEntity.notFound().build();
-//	}
+
 }
