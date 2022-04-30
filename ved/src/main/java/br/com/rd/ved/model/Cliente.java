@@ -31,7 +31,6 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
-
 	@Column(name = "nome", nullable = false)
 	@Size(max = 50)
 	private String nome;

@@ -33,21 +33,13 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 
 	@GetMapping
+
 	public List<ClienteDTO> Listar() {
-<<<<<<< HEAD
 		List<Cliente> clientes = clienteRepository.findAll();
 		return ClienteDTO.converter(clientes);
 	}
 
 	@PostMapping
-=======
-		List<Cliente> clientes = clienteRepository.findAll();  
-		return 	ClienteDTO.converter(clientes);
-	} 
-
-	
-	@PostMapping 
->>>>>>> b3526d56daffb2106f4a6f5afc88d7a7ce74c333
 	@Transactional
 	public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid ClienteForm clienteForm,
 			UriComponentsBuilder uriBuilder) {
@@ -93,6 +85,8 @@ public class ClienteController {
 			return ResponseEntity.ok(new ClienteDTO(atualizado));
 		}
 		return ResponseEntity.notFound().build();
+
+
 	}
 
 }
