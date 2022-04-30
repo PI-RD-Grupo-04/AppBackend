@@ -20,7 +20,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "cliente")
 public class Cliente {
 
 	@Id

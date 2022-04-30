@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import br.com.rd.ved.model.Bandeira;
 import br.com.rd.ved.model.Cartao;
 
-public class ClienteCartaoDTO {
+public class CartaoDTO {
 
 	
 
@@ -17,7 +17,7 @@ public class ClienteCartaoDTO {
 	
 	
 	
-	ClienteCartaoDTO (Cartao cartao){
+	public CartaoDTO (Cartao cartao){
 		this.numeroCartao = cartao.getNumeroCartao();
 		this.anoVencimento = cartao.getAnoVencimento();
 		this.diaVencimento = cartao.getDiaVencimento();
@@ -51,9 +51,9 @@ public class ClienteCartaoDTO {
 		this.diaVencimento = diaVencimento;
 	}
 	
-	public static List<ClienteCartaoDTO> converter(List<Cartao> cartoes) {
+	public static List<CartaoDTO> converter(List<Cartao> cartoes) {
 
-		return cartoes.stream().map(ClienteCartaoDTO::new).collect(Collectors.toList());
+		return cartoes.stream().map(CartaoDTO::new).collect(Collectors.toList());
 	
 	}
 }
