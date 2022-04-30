@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotBlank;
+
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.CupomDesconto;
 import br.com.rd.ved.model.Endereco;
@@ -13,12 +15,25 @@ import br.com.rd.ved.model.PedidoStatus;
 
 public class PedidoDTO {
 
+	@NotBlank
 	private Integer id;
+	
+	@NotBlank
 	private Date data;
+	
+	@NotBlank
 	private Cliente cliente;
+	
+	@NotBlank
 	private CupomDesconto cupomDesconto;
+	
+	@NotBlank
 	private PedidoStatus pedidoStatus;
+	
+	@NotBlank
 	private Frete frete;
+	
+	@NotBlank
 	private Endereco enderecos;
 
 	public PedidoDTO(Pedido pedido) {
