@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rd.ved.dto.ClientePedidoDTO;
 import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.repository.ClienteRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 
 @RestController
@@ -17,19 +16,16 @@ import br.com.rd.ved.repository.PedidoRepository;
 public class ClientePedidoController {
 
 	@Autowired
-	private ClienteRepository clienterepository;
-	
-	@Autowired
 	private PedidoRepository pedidoRepository;
-	
+
 	@GetMapping
-	public List<ClientePedidoDTO> listar(Integer idCliente){
-		if(idCliente == null) {
+	public List<ClientePedidoDTO> listar(Integer idCliente) {
+		if (idCliente == null) {
 			List<Pedido> pedidos = pedidoRepository.findAll();
 			return ClientePedidoDTO.converter(pedidos);
 		} else {
 			List<Pedido> pedidos = pedidoRepository.findByClienteId(idCliente);
 			return ClientePedidoDTO.converter(pedidos);
 		}
-	}	
+	}
 }
