@@ -57,29 +57,26 @@ public class ClienteController {
 		}
 
 		return ResponseEntity.notFound().build();
-	} 
-	
-	
+	}
+
 	@DeleteMapping("/delete={id}")
 	@Transactional
-	public ResponseEntity<?> remover(@PathVariable("id") Integer id){
+	public ResponseEntity<?> remover(@PathVariable("id") Integer id) {
 		Optional<Cliente> cliente = clienteRepository.findById(id);
-		
-		if(cliente.isPresent()) {
+
+		if (cliente.isPresent()) {
 			clienteRepository.deleteById(id);
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.notFound().build();
-		
 	}
-	
-	
+
 	@PutMapping("/atualiza={id}")
 	@Transactional
 	public ResponseEntity<ClienteDTO> atualizar(@PathVariable("id") Integer id,
-						@RequestBody @Valid AtualizarClienteForm clienteForm){
-		Optional<Cliente> cliente = clienteRepository.findById(id); 
-		if(cliente.isPresent()) {
+			@RequestBody @Valid AtualizarClienteForm clienteForm) {
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		if (cliente.isPresent()) {
 			Cliente atualizado = clienteForm.atualizar(id, clienteRepository);
 			return ResponseEntity.ok(new ClienteDTO(atualizado));
 		}
