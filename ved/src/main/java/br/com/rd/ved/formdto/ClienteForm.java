@@ -13,6 +13,7 @@ import br.com.rd.ved.repository.ClienteRepository;
 
 public class ClienteForm {
 
+<<<<<<< HEAD
 	@NotNull
 	@NotEmpty
 	private String nome;
@@ -125,4 +126,7 @@ public class ClienteForm {
 		return new Cliente(nome, sobrenome, nomeSocial, cpf, dataNascimento, email, telefone, senha);
 
 	}
+=======
+	
+>>>>>>> 46be304d326f7e50706c0708c13e5405ff8ffd6a
 }

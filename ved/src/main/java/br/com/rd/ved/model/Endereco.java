@@ -177,4 +177,16 @@ public class Endereco {
 				+ complemento + ", municipio=" + municipio + ", cidade=" + cidade + ", uf=" + uf + "]";
 	}
 
+	public Endereco getEndereco() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Cliente getCliente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
 }
