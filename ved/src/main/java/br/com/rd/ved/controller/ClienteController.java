@@ -3,10 +3,8 @@ package br.com.rd.ved.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import br.com.rd.ved.dto.ClienteDTO;
 import br.com.rd.ved.formdto.AtualizarClienteForm;
 import br.com.rd.ved.formdto.ClienteForm;
@@ -37,6 +34,7 @@ public class ClienteController {
 	public List<ClienteDTO> Listar() {
 		List<Cliente> clientes = clienteRepository.findAll();
 		return ClienteDTO.converter(clientes);
+
 	}
 
 	@PostMapping
@@ -82,7 +80,6 @@ public class ClienteController {
 			return ResponseEntity.ok(new ClienteDTO(atualizado));
 		}
 		return ResponseEntity.notFound().build();
-
 
 	}
 
