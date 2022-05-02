@@ -68,11 +68,9 @@ public class PedidoForm {
 		this.data = data;
 	}
 
-
 	public SimpleDateFormat getFormato() {
 		return formato;
 	}
-
 
 	public void setFormato(SimpleDateFormat formato) {
 		this.formato = formato;

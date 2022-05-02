@@ -76,7 +76,7 @@ public class PedidoController {
 	} 
 	
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete={id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable("id") Integer id){
 		Optional<Pedido> pedido = pedidoRepository.findById(id);		
