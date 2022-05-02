@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import br.com.rd.ved.dto.CartaoDTO;
 import br.com.rd.ved.formdto.ClienteCartaoForm;
 import br.com.rd.ved.model.Cartao;
+import br.com.rd.ved.model.Cliente;
+import br.com.rd.ved.repository.BandeiraRepository;
 import br.com.rd.ved.repository.CartaoRepository;
+import br.com.rd.ved.repository.ClienteRepository;
 
 @RestController
 @RequestMapping("/cartao")
@@ -28,7 +32,15 @@ public class CartaoController {
 
 	@Autowired
 	private CartaoRepository cartaoRepository;
+	
+	@Autowired
+	private ClienteRepository clienterepository;
 
+	@Autowired
+	private BandeiraRepository bandeiraRepository;
+
+	
+	
 	@GetMapping
 	public List<CartaoDTO> listar(Integer idcliente) {
 		if (idcliente == null) {
@@ -39,16 +51,16 @@ public class CartaoController {
 		}
 	}
 
-	@PostMapping
-	@Transactional
-	public ResponseEntity<CartaoDTO> cadastrar(@RequestBody @Valid ClienteCartaoForm cartaform,
-			UriComponentsBuilder uriBuilder) {
-		Cartao cartao = cartaform.converter(cartaoRepository);
-		cartaoRepository.save(cartao);
-
-		URI uri = uriBuilder.path("/cartao/{id}").buildAndExpand(cartao.getId()).toUri();
-		return ResponseEntity.created(uri).body(new CartaoDTO(cartao));
-	}
+//	@PostMapping
+//	@Transactional
+//	public ResponseEntity<CartaoDTO> cadastrar(@RequestBody @Valid ClienteCartaoForm cartaform,
+//			UriComponentsBuilder uriBuilder) {
+//		Cartao cartao = cartaform.converter(cartaoRepository);
+//		cartaoRepository.save(cartao);
+//
+//		URI uri = uriBuilder.path("/cartao/{id}").buildAndExpand(cartao.getId()).toUri();
+//		return ResponseEntity.created(uri).body(new CartaoDTO(cartao));
+//	}
 
 	@DeleteMapping("/{id}")
 	@Transactional
@@ -62,4 +74,22 @@ public class CartaoController {
 
 		return ResponseEntity.notFound().build();
 	}
+	
+	
+	@PostMapping("/novo/{id}")
+	@Transactional
+	public ResponseEntity<CartaoDTO> cadastrar(@PathVariable("id") Integer id,
+			@RequestBody @Valid ClienteCartaoForm clienteCartaoForm, UriComponentsBuilder uriBuilder) {
+		
+		Optional<Cliente> cliente = clienterepository.findById(id);
+		
+		Cartao cartao = clienteCartaoForm.converter(bandeiraRepository);
+		cartaoRepository.save(cartao);
+		clienteCartaoForm.cadastrarCartao(cartao, cliente.get(), clienterepository);
+		
+		URI uri = uriBuilder.path("/cartao/novo/{id}").buildAndExpand(cartao.getId()).toUri();
+		return ResponseEntity.created(uri).body(new CartaoDTO(cartao));
+
+	}
+
 }

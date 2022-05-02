@@ -56,7 +56,7 @@ public class Cartao {
 	@JoinColumn(name="id_bandeira", nullable=false)
 	private Bandeira idBandeira;
 	
-	@JsonIgnore
+
 	@ManyToMany(mappedBy="cartoes",fetch = FetchType.LAZY)
 	private List<Cliente> cliente; 
 	
@@ -65,9 +65,9 @@ public class Cartao {
 		super();
 	}
 
-	public Cartao(Integer id, String numeroCartao, String nomeTitular, String cpfTitular, Integer diaVencimento,
+	public Cartao(String numeroCartao, String nomeTitular, String cpfTitular, Integer diaVencimento,
 			Integer anoVencimento, Bandeira idBandeira) {
-		this.id = id;
+
 		this.numeroCartao = numeroCartao;
 		this.nomeTitular = nomeTitular;
 		this.cpfTitular = cpfTitular;
