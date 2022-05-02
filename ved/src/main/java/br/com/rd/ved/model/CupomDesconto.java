@@ -27,7 +27,7 @@ public class CupomDesconto {
 	@Column(name="porcentagem_desconto")
 	private Integer porcentagemDesconto;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "cupomDesconto")
 	private List <Pedido> pedidos; 
 	

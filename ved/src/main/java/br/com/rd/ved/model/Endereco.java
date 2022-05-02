@@ -51,7 +51,7 @@ public class Endereco {
 	@Size(max = 50)
 	private String cidade;
 
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "enderecos")
 	private List<Pedido> pedidos;
 
@@ -63,7 +63,7 @@ public class Endereco {
 	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Fornecedor> fornecedores;
 
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Cliente> clientes;
 

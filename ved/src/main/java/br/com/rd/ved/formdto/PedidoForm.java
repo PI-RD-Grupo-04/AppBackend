@@ -31,22 +31,27 @@ public class PedidoForm {
 	@NotNull
 	@NotEmpty
 	private Integer cliente;
+	private Cliente cliente2;
 	
 	@NotNull
 	@NotEmpty
 	private Integer cupomDesconto;
+	private CupomDesconto cupomDesconto2;
 	
 	@NotNull
 	@NotEmpty
 	private Integer pedidoStatus;
+	private PedidoStatus pedidoStatus2;
 	
 	@NotNull
 	@NotEmpty
 	private Integer frete;
+	private Frete frete2;
 	
 	@NotNull
 	@NotEmpty
 	private Integer enderecos;
+	private Endereco endereco2;
 
 
 	public PedidoForm(@NotEmpty String data,@NotEmpty String cliente, String cupomDesconto,
@@ -58,6 +63,19 @@ public class PedidoForm {
 		this.frete = Integer.parseInt(frete);
 		this.enderecos = Integer.parseInt(enderecos);
 	}
+
+	
+
+	public PedidoForm(@NotEmpty Date data, Cliente cliente2, CupomDesconto cupomDesconto2, PedidoStatus pedidoStatus2,
+			Frete frete2, Endereco endereco2) {
+		this.data = data;
+		this.cliente2 = cliente2;
+		this.cupomDesconto2 = cupomDesconto2;
+		this.pedidoStatus2 = pedidoStatus2;
+		this.frete2 = frete2;
+		this.endereco2 = endereco2;
+	}
+
 
 
 	public Date getData() {
@@ -117,17 +135,6 @@ public class PedidoForm {
 	public void setEnderecos(Integer enderecos) {
 		this.enderecos = enderecos;
 	}
-
-//	public Pedido converter(PedidoRepository pedidoRepository) { 
-//		Pedido pedido = new Pedido(data, 
-//				pedidoRepository.encontrarClientePorId(cliente), 
-//				pedidoRepository.encontrarCupomPorId(cupomDesconto), 
-//				pedidoRepository.encontrarStatusPorId(pedidoStatus), 
-//				pedidoRepository.encontrarFretePorId(frete), 
-//				pedidoRepository.encontrarEnderecoPorId(enderecos));		
-//		return pedido;
-//
-//	}	
 	
 	public Pedido converter(PedidoRepository pedidoRepository, 
 							ClienteRepository clienteRepository,
@@ -142,9 +149,11 @@ public class PedidoForm {
 		Optional<Frete> frete = freteRepository.findById(this.frete);
 		Optional<Endereco> endereco = enderecoRepository.findById(this.enderecos);
 		Pedido pedido = new Pedido(data, cliente.get(), cupomDesconto.get(), pedidoStatus.get(), frete.get(), endereco.get());
-		
-		
+				
 		return pedido;
 
 	}
-}
+	
+	public Pedido converter1(PedidoRepository pedidoRepository) { 
+		return new Pedido(data, cliente2, cupomDesconto2, pedidoStatus2, frete2, endereco2); } } 
+

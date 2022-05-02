@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "cliente")
@@ -31,6 +31,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
+	
 	@Column(name = "nome", nullable = false)
 	@Size(max = 50)
 	private String nome;
@@ -61,7 +62,7 @@ public class Cliente {
 	@Column(name = "senha", nullable = false)
 	private String senha;
 
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 
