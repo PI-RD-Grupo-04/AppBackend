@@ -30,7 +30,6 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 
 	@GetMapping
-
 	public List<ClienteDTO> Listar() {
 		List<Cliente> clientes = clienteRepository.findAll();
 		return ClienteDTO.converter(clientes);
