@@ -9,8 +9,7 @@ import br.com.rd.ved.dto.ClientePedidoDTO;
 import br.com.rd.ved.model.Pedido;
 import br.com.rd.ved.repository.PedidoRepository;
 
-@RestController
-@RequestMapping("/pedido")
+
 public class ClientePedidoController {
 
 	@Autowired

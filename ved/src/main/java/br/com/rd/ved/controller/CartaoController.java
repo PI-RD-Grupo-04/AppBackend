@@ -1,6 +1,7 @@
 package br.com.rd.ved.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,15 +33,13 @@ public class CartaoController {
 
 	@Autowired
 	private CartaoRepository cartaoRepository;
-	
+
 	@Autowired
-	private ClienteRepository clienterepository;
+	private ClienteRepository clienteRepository;
 
 	@Autowired
 	private BandeiraRepository bandeiraRepository;
 
-	
-	
 	@GetMapping
 	public List<CartaoDTO> listar(Integer idcliente) {
 		if (idcliente == null) {
@@ -51,45 +50,56 @@ public class CartaoController {
 		}
 	}
 
-//	@PostMapping
-//	@Transactional
-//	public ResponseEntity<CartaoDTO> cadastrar(@RequestBody @Valid ClienteCartaoForm cartaform,
-//			UriComponentsBuilder uriBuilder) {
-//		Cartao cartao = cartaform.converter(cartaoRepository);
-//		cartaoRepository.save(cartao);
-//
-//		URI uri = uriBuilder.path("/cartao/{id}").buildAndExpand(cartao.getId()).toUri();
-//		return ResponseEntity.created(uri).body(new CartaoDTO(cartao));
-//	}
-
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/cliente={id}/delete/{cartao}")
 	@Transactional
-	public ResponseEntity<?> remover(@PathVariable("id") Integer idcartao) {
-		Optional<Cartao> optional = cartaoRepository.findById(idcartao);
+	public ResponseEntity<?> remover(@PathVariable("id") Integer id, @PathVariable("cartao") Integer idcartao) {
 
-		if (optional.isPresent()) {
-			cartaoRepository.deleteById(idcartao);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		Optional<Cartao> cartao = cartaoRepository.findById(idcartao);
+
+		if (cartao.isPresent() && cliente.isPresent()) {
+			List<Cartao> cartoes = new ArrayList<>();
+			cartoes = cliente.get().getCartoes();
+
+			cartoes.remove(cartao.get());
+			cliente.get().setCartoes(cartoes);
+
+			clienteRepository.save(cliente.get());
 			return ResponseEntity.ok().build();
 		}
-
 		return ResponseEntity.notFound().build();
 	}
-	
-	
+
 	@PostMapping("/novo/{id}")
 	@Transactional
 	public ResponseEntity<CartaoDTO> cadastrar(@PathVariable("id") Integer id,
 			@RequestBody @Valid ClienteCartaoForm clienteCartaoForm, UriComponentsBuilder uriBuilder) {
-		
-		Optional<Cliente> cliente = clienterepository.findById(id);
-		
+
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+
 		Cartao cartao = clienteCartaoForm.converter(bandeiraRepository);
 		cartaoRepository.save(cartao);
-		clienteCartaoForm.cadastrarCartao(cartao, cliente.get(), clienterepository);
-		
+		clienteCartaoForm.cadastrarCartao(cartao, cliente.get(), clienteRepository);
+
 		URI uri = uriBuilder.path("/cartao/novo/{id}").buildAndExpand(cartao.getId()).toUri();
 		return ResponseEntity.created(uri).body(new CartaoDTO(cartao));
 
+	}
+
+	@GetMapping("/cliente={id}/detalhar/{cartao}")
+	public ResponseEntity<CartaoDTO> detalhar(@PathVariable("id") Integer id,
+			@PathVariable("cartao") Integer idCartao) {
+
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		Optional<Cartao> cartao = cartaoRepository.findById(idCartao);
+		List<Cartao> cartoes = new ArrayList<>();
+		cartoes = cliente.get().getCartoes();
+
+		if (cliente.isPresent() && cartoes.contains(cartao.get())) {
+
+			return ResponseEntity.ok().body(new CartaoDTO(cartao.get()));
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 }

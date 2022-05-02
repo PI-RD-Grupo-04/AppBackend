@@ -20,7 +20,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.formdto.PedidoForm;
+import br.com.rd.ved.model.Cliente;
+import br.com.rd.ved.model.CupomDesconto;
+import br.com.rd.ved.model.Endereco;
+import br.com.rd.ved.model.Frete;
 import br.com.rd.ved.model.Pedido;
+import br.com.rd.ved.model.PedidoStatus;
 import br.com.rd.ved.repository.ClienteRepository;
 import br.com.rd.ved.repository.CupomDescontoRepository;
 import br.com.rd.ved.repository.EnderecoRepository;
@@ -76,11 +81,22 @@ public class PedidoController {
 	} 
 	
 	
-	@DeleteMapping("/delete={id}")
+	@DeleteMapping("/cliente={id}/delete/{pedido}")
 	@Transactional
-	public ResponseEntity<?> remover(@PathVariable("id") Integer id){
-		Optional<Pedido> pedido = pedidoRepository.findById(id);		
-		if(pedido.isPresent()) {
+	public ResponseEntity<?> remover(@PathVariable("id") Integer id,@PathVariable("pedido") Integer idPedido ){
+		Optional<Pedido> pedido = pedidoRepository.findById(id);
+		Optional<Cliente> cliente = clienteRepository.findById(idPedido);
+		Optional<CupomDesconto> cupom = cupomDescontoRepository.findById(idPedido);
+		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(idPedido);
+		Optional<Frete> frete = freteRepository.findById(idPedido);
+		Optional<Endereco> endereco = enderecoRepository.findById(idPedido);
+		
+		if(pedido.isPresent()&& cliente.isPresent()) {
+//			List<Pedido> pedidos = new ArrayList<>();
+//			pedidos = cliente.get().getPedidos();
+//			
+//			pedidos = cupom.get().getPedidos();
+//			pedidos = pedidoStatus.get().get
 			pedidoRepository.deleteById(id);
 			return ResponseEntity.ok().build();
 		}
