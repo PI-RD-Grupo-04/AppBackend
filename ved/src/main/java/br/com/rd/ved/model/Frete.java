@@ -34,7 +34,7 @@ public class Frete {
 	@JoinColumn(name = "id_tipo_frete", nullable = false)
 	private TipoFrete tipoFrete;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "pedidoStatus")
 	private List <Pedido> lista; 
 
