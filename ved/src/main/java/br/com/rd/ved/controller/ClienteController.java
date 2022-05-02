@@ -33,7 +33,6 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 
 	@GetMapping
-
 	public List<ClienteDTO> Listar() {
 		List<Cliente> clientes = clienteRepository.findAll();
 		return ClienteDTO.converter(clientes);
@@ -82,7 +81,6 @@ public class ClienteController {
 			return ResponseEntity.ok(new ClienteDTO(atualizado));
 		}
 		return ResponseEntity.notFound().build();
-
 
 	}
 

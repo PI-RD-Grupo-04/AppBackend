@@ -13,41 +13,41 @@ import br.com.rd.ved.repository.ClienteRepository;
 
 public class ClienteForm {
 
-<<<<<<< HEAD
 	@NotNull
 	@NotEmpty
 	private String nome;
-	
+
 	@NotNull
 	@NotEmpty
 	private String sobrenome;
-	
+
 	private String nomeSocial;
-	
+
 	@NotNull
 	@NotEmpty
 	private String cpf;
-	
+
 	@NotNull
 	@NotEmpty
 	private Date dataNascimento;
-	
+
 	@NotNull
 	@NotEmpty
 	private String email;
-	
+
 	@NotNull
 	@NotEmpty
 	private String telefone;
-	
+
 	@NotNull
 	@NotEmpty
 	private String senha;
 
 	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	
+
 	public ClienteForm(@NotEmpty String nome, @NotEmpty String sobrenome, String nomeSocial, @NotEmpty String cpf,
-			@NotEmpty String dataNascimento, @NotEmpty String email, @NotEmpty String telefone, @NotEmpty String senha) throws ParseException {
+			@NotEmpty String dataNascimento, @NotEmpty String email, @NotEmpty String telefone, @NotEmpty String senha)
+			throws ParseException {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.nomeSocial = nomeSocial;
@@ -122,11 +122,9 @@ public class ClienteForm {
 		this.senha = senha;
 	}
 
-	public Cliente converter(ClienteRepository clienteRepository) { 		
+	public Cliente converter(ClienteRepository clienteRepository) {
 		return new Cliente(nome, sobrenome, nomeSocial, cpf, dataNascimento, email, telefone, senha);
 
 	}
-=======
-	
->>>>>>> 46be304d326f7e50706c0708c13e5405ff8ffd6a
+
 }
