@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.rd.ved.dto.ClienteDTO;
 import br.com.rd.ved.dto.EnderecoDTO;
 import br.com.rd.ved.formdto.EnderecoForm;
 import br.com.rd.ved.model.Cliente;
@@ -101,7 +100,7 @@ public class EnderecoController {
 	}
 	
 	@PutMapping("/cliente={id}/atualizar/{endereco}")
-	@Transactional
+	@Transactional	
 	public ResponseEntity<EnderecoDTO> atualizar(@PathVariable("id") Integer id, @PathVariable("endereco") Integer idEndereco,
 			@RequestBody @Valid EnderecoForm enderecoForm) {
 		Optional<Cliente> cliente = cr.findById(id);
