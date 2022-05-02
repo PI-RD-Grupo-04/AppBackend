@@ -19,9 +19,9 @@ public class EnderecoForm {
 	private String municipio;
 	private String cidade;
 	private Integer uf;
-
+	
 	public EnderecoForm(String cep, String rua, String numero, String complemento, String municipio, String cidade
-			,String uf) {
+			, String uf) {
 		this.cep = cep;
 		this.rua = rua;
 		this.numero = Integer.parseInt(numero);
@@ -102,5 +102,19 @@ public class EnderecoForm {
 		cr.save(cliente);
 		return EnderecoDTO.converter(enderecos);
 
-	}
+	} 
+	
+	public List<EnderecoDTO> deletarEndereco(Endereco endereco, Cliente cliente, ClienteRepository cr) {
+		List<Endereco> enderecos;
+		enderecos = cliente.getEnderecos();
+		enderecos.add(endereco);
+		cliente.setEnderecos(enderecos);
+		cr.save(cliente);
+		return EnderecoDTO.converter(enderecos);
+
+	} 
+	
+	
+	
+	
 }

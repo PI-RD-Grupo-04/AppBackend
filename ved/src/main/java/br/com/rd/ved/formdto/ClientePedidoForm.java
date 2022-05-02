@@ -1,15 +1,11 @@
 package br.com.rd.ved.formdto;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import br.com.rd.ved.dto.ClientePedidoDTO;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.CupomDesconto;
 import br.com.rd.ved.model.Endereco;
 import br.com.rd.ved.model.Frete;
-import br.com.rd.ved.model.Pedido;
 
 
 public class ClientePedidoForm {
