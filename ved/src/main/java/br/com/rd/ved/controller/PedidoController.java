@@ -13,20 +13,37 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.formdto.PedidoForm;
 import br.com.rd.ved.model.Pedido;
+import br.com.rd.ved.repository.ClienteRepository;
+import br.com.rd.ved.repository.CupomDescontoRepository;
+import br.com.rd.ved.repository.EnderecoRepository;
+import br.com.rd.ved.repository.FreteRepository;
 import br.com.rd.ved.repository.PedidoRepository;
+import br.com.rd.ved.repository.PedidoStatusRepository;
 
-
+@RestController
+@RequestMapping("/pedido")
 public class PedidoController {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	@Autowired
+	private  ClienteRepository clienteRepository;
+	@Autowired
+	private  CupomDescontoRepository cupomDescontoRepository;
+	@Autowired
+	private  PedidoStatusRepository pedidoStatusRepository;
+	@Autowired
+	private  FreteRepository freteRepository;
+	@Autowired
+	private  EnderecoRepository enderecoRepository;
 
 	@GetMapping
 	public List<PedidoDTO> Listar() {
@@ -38,7 +55,12 @@ public class PedidoController {
 	@Transactional
 	public ResponseEntity<PedidoDTO> cadastrar(@RequestBody @Valid PedidoForm pedidoForm,
 			UriComponentsBuilder uriBuilder) {
-		Pedido pedido = pedidoForm.converter(pedidoRepository);
+		Pedido pedido = pedidoForm.converter(pedidoRepository, 
+											 clienteRepository, 
+											 cupomDescontoRepository,
+											 pedidoStatusRepository,
+											 freteRepository,
+											 enderecoRepository);
 		pedidoRepository.save(pedido);
 		URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getId()).toUri();
 		return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
@@ -54,7 +76,7 @@ public class PedidoController {
 	} 
 	
 	
-	@DeleteMapping("/delete={id}")
+	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable("id") Integer id){
 		Optional<Pedido> pedido = pedidoRepository.findById(id);		

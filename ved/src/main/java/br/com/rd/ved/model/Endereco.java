@@ -26,21 +26,27 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_endereco")
 	private Integer id;
+	
 	@Column(name = "cep")
 	@Size(max = 10)
 	private String cep;
+	
 	@Column(name = "rua")
 	@Size(max = 100)
 	private String rua;
+	
 	@Column(name = "numero")
 	@Size(max = 10)
 	private Integer numero;
+	
 	@Column(name = "complemento")
 	@Size(max = 50)
 	private String complemento;
+	
 	@Column(name = "municipio")
 	@Size(max = 50)
 	private String municipio;
+	
 	@Column(name = "cidade")
 	@Size(max = 50)
 	private String cidade;

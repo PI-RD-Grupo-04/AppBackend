@@ -37,7 +37,6 @@ public class PedidoDTO {
 	private Endereco enderecos;
 
 	public PedidoDTO(Pedido pedido) {
-		this.id = pedido.getId();
 		this.data = pedido.getData();
 		this.cliente = pedido.getCliente();
 		this.cupomDesconto = pedido.getCupomDesconto();
