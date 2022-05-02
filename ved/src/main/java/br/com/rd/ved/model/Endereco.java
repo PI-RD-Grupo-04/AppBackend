@@ -49,7 +49,7 @@ public class Endereco {
 	@OneToMany(mappedBy = "enderecos")
 	private List<Pedido> pedidos;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
 
@@ -57,7 +57,7 @@ public class Endereco {
 	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Fornecedor> fornecedores;
 
-	@JsonIgnore
+	
 	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Cliente> clientes;
 
@@ -154,6 +154,14 @@ public class Endereco {
 		this.fornecedores = fornecedores;
 	}
 	
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
