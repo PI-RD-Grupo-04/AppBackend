@@ -64,15 +64,19 @@ public class Cliente {
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
-
+	
+	@JsonIgnore
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "cliente_cartao", joinColumns = { @JoinColumn(name = "id_cliente") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_cartao") })
 	private List<Cartao> cartoes;
-
+	
+	
+	
+	@JsonIgnore
 	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "cliente_endereco", joinColumns = { @JoinColumn(name = "id_cliente") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_endereco") })
 	private List<Endereco> enderecos;
@@ -200,8 +204,8 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nome Social=" + nomeSocial
-				+ ", cpf=" + cpf + ", data de Nascimento=" + dataNascimento + ", email=" + email + ", telefone=" + telefone
-				+ ", senha=" + senha + "]";
+				+ ", cpf=" + cpf + ", data de Nascimento=" + dataNascimento + ", email=" + email + ", telefone="
+				+ telefone + ", senha=" + senha + "]";
 	}
 
 	@Override

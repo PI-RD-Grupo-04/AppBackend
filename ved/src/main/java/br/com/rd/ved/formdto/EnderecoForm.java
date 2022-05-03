@@ -8,7 +8,6 @@ import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.Endereco;
 import br.com.rd.ved.model.Uf;
 import br.com.rd.ved.repository.ClienteRepository;
-import br.com.rd.ved.repository.EnderecoRepository;
 import br.com.rd.ved.repository.UfRepository;
 
 public class EnderecoForm {

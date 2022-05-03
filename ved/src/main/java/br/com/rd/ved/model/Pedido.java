@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -47,10 +49,10 @@ public class Pedido {
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name="id_endereco", nullable=false)
 	private Endereco enderecos;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itemPedidos;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
 	private List <NotaFiscal> notafiscal; 
 	
@@ -59,16 +61,6 @@ public class Pedido {
 		super();
 	}
 
-	public Pedido(Integer id, Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus,
-			Frete frete, Endereco enderecos) {
-		this.id = id;
-		this.data = data;
-		this.cliente = cliente;
-		this.cupomDesconto = cupomDesconto;
-		this.pedidoStatus = pedidoStatus;
-		this.frete = frete;
-		this.enderecos = enderecos;
-	}
 
 	public Pedido(Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus, Frete frete,
 			Endereco enderecos) {
@@ -163,8 +155,8 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		return "Pedido [id=" + id + ", data=" + data + ", cliente=" + cliente + ", cupomDesconto=" + cupomDesconto
-				+ ", pedidoStatus=" + pedidoStatus + ", frete=" + frete + ", endereco=" + enderecos + "]";
+		return "Pedido [id=" + id + ", data=" + data + ", cliente=" + cliente.getNome() + ", cupomDesconto=" + cupomDesconto.getDescricao()
+				+ ", pedidoStatus=" + pedidoStatus.getDescricao() + ", frete=" + frete + ", endereco=" + enderecos + "]";
 	}
 
 }

@@ -70,7 +70,7 @@ public class CartaoController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@PostMapping("/novo/{id}")
+	@PostMapping("/cliente={id}/novo")
 	@Transactional
 	public ResponseEntity<CartaoDTO> cadastrar(@PathVariable("id") Integer id,
 			@RequestBody @Valid ClienteCartaoForm clienteCartaoForm, UriComponentsBuilder uriBuilder) {
