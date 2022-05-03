@@ -23,6 +23,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -31,6 +33,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
+	
 	@Column(name = "nome", nullable = false)
 	@Size(max = 50)
 	private String nome;

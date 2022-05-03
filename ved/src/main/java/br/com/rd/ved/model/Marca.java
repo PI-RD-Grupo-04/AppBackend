@@ -31,6 +31,7 @@ public class Marca {
 	
 	
 
+	@JsonIgnore
 	public List<Produto> getProdutos() {
 		return produtos;
 	}

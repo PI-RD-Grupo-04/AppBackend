@@ -21,7 +21,7 @@ import br.com.rd.ved.repository.FreteRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.PedidoStatusRepository;
 
-@Service
+
 public class PedidoService {
 	
 	private final PedidoRepository pedidoRepository;

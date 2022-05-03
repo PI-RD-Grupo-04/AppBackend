@@ -52,7 +52,7 @@ public class Endereco {
 	private String cidade;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "enderecos")
+	@OneToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Pedido> pedidos;
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
