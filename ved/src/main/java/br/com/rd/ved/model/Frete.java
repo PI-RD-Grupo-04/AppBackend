@@ -25,12 +25,11 @@ public class Frete {
 	private Integer id;
 	@Column(name = "valor")
 	private BigDecimal valor;
-
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
-
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_frete", nullable = false)
 	private TipoFrete tipoFrete;

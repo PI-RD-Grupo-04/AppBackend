@@ -8,7 +8,6 @@ import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.Endereco;
 import br.com.rd.ved.model.Uf;
 import br.com.rd.ved.repository.ClienteRepository;
-import br.com.rd.ved.repository.EnderecoRepository;
 import br.com.rd.ved.repository.UfRepository;
 
 public class EnderecoForm {
@@ -115,13 +114,15 @@ public class EnderecoForm {
 
 	} 
 	
-	public Endereco atualizar(Endereco endereco) {
+	public Endereco atualizar(Endereco endereco, UfRepository ur ) {
 		endereco.setCep(cep);
 		endereco.setCidade(cidade);
 		endereco.setComplemento(complemento);
 		endereco.setMunicipio(municipio);
 		endereco.setNumero(numero);
 		endereco.setRua(rua);
+		Optional<Uf> uf = ur.findById(this.uf); 
+		endereco.setUf(uf.get());
 		return endereco ; 
 		
 	}

@@ -25,7 +25,7 @@ public class Uf {
 	@Size(max = 50)
 	private String descricao;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "uf")
 	private List<Frete> fretes;
 	

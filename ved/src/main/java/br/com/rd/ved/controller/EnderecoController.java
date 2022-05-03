@@ -29,7 +29,7 @@ import br.com.rd.ved.repository.EnderecoRepository;
 import br.com.rd.ved.repository.UfRepository;
 
 @RestController
-@RequestMapping("/endereco")
+@RequestMapping("/cliente/endereco")
 public class EnderecoController {
 
 	@Autowired
@@ -46,7 +46,7 @@ public class EnderecoController {
 		return EnderecoDTO.converter(enderecos);
 	}
 
-	@PostMapping("/cliente={id}/novo")
+	@PostMapping("/{id}/novo")
 	@Transactional
 	public ResponseEntity<EnderecoDTO> cadastrar(@PathVariable("id") Integer id,
 			@RequestBody @Valid EnderecoForm enderecoForm, UriComponentsBuilder uriBuilder) {
@@ -55,12 +55,12 @@ public class EnderecoController {
 		Endereco endereco = enderecoForm.converter(ur);
 		er.save(endereco);
 		enderecoForm.cadastrarEndereco(endereco, cliente.get(), cr);
-		URI uri = uriBuilder.path("/endereco/novo/{id}").buildAndExpand(endereco.getId()).toUri();
+		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(endereco.getId()).toUri();
 		return ResponseEntity.created(uri).body(new EnderecoDTO(endereco));
 
 	}
 
-	@GetMapping("/cliente={id}/detalhar/{endereco}")
+	@GetMapping("/{id}/detalhar/{endereco}")
 	public ResponseEntity<EnderecoDTO> detalhar(@PathVariable("id") Integer id,
 			@PathVariable("endereco") Integer idEndereco) {
 
@@ -76,7 +76,7 @@ public class EnderecoController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@DeleteMapping("/cliente={id}/delete/{endereco}")
+	@DeleteMapping("/{id}/delete/{endereco}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable("id") Integer id, @PathVariable("endereco") Integer idEndereco) {
 
@@ -86,20 +86,15 @@ public class EnderecoController {
 		if (endereco.isPresent() && cliente.isPresent()) {
 			List<Endereco> enderecos = new ArrayList<>();
 			enderecos = cliente.get().getEnderecos();
-			
-			//enderecos.removeIf(end -> enderecos.equals(endereco)); 
 			enderecos.remove(endereco.get());
 			cliente.get().setEnderecos(enderecos); 
-			//cliente.get().getEnderecos().removeIf(end -> endereco.equals(endereco));
-			//er.deleteById(idEndereco);
-			
 			cr.save(cliente.get());
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PutMapping("/cliente={id}/atualizar/{endereco}")
+	@PutMapping("/{id}/atualizar/{endereco}")
 	@Transactional	
 	public ResponseEntity<EnderecoDTO> atualizar(@PathVariable("id") Integer id, @PathVariable("endereco") Integer idEndereco,
 			@RequestBody @Valid EnderecoForm enderecoForm) {
@@ -109,7 +104,7 @@ public class EnderecoController {
 		enderecos = cliente.get().getEnderecos();
 		
 		if (cliente.isPresent() && enderecos.contains(endereco.get())) {
-			Endereco atualizado = enderecoForm.atualizar(endereco.get()); 
+			Endereco atualizado = enderecoForm.atualizar(endereco.get(),ur); 
 			er.save(atualizado);
 			return ResponseEntity.ok(new EnderecoDTO(atualizado));
 		}

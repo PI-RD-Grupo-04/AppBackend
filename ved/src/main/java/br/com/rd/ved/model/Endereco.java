@@ -54,7 +54,7 @@ public class Endereco {
 	@JsonIgnore
 	@OneToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Pedido> pedidos;
-
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;

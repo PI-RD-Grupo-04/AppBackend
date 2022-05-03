@@ -6,6 +6,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.constraints.NotEmpty;
+
+import com.sun.istack.NotNull;
+
+import br.com.rd.ved.dto.ClienteDTO;
 import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.CupomDesconto;
@@ -109,7 +114,7 @@ public class PedidoForm {
 							FreteRepository freteRepository,
 							EnderecoRepository enderecoRepository) { 
 		
-		Optional<Cliente> cliente = clienteRepository.findById(this.cliente);
+		Optional<Cliente> cliente = clienteRepository.findById(this.cliente);		
 		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(this.cupomDesconto);
 		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(this.pedidoStatus);
 		Optional<Frete> frete = freteRepository.findById(this.frete);
