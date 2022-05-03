@@ -28,7 +28,7 @@ import br.com.rd.ved.repository.CartaoRepository;
 import br.com.rd.ved.repository.ClienteRepository;
 
 @RestController
-@RequestMapping("/cartao")
+@RequestMapping("/cliente/cartao")
 public class CartaoController {
 
 	@Autowired
@@ -50,7 +50,7 @@ public class CartaoController {
 		}
 	}
 
-	@DeleteMapping("/cliente={id}/delete/{cartao}")
+	@DeleteMapping("/{id}/deletar/{cartao}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable("id") Integer id, @PathVariable("cartao") Integer idcartao) {
 
@@ -70,7 +70,7 @@ public class CartaoController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@PostMapping("/cliente={id}/novo")
+	@PostMapping("/{id}/novo")
 	@Transactional
 	public ResponseEntity<CartaoDTO> cadastrar(@PathVariable("id") Integer id,
 			@RequestBody @Valid ClienteCartaoForm clienteCartaoForm, UriComponentsBuilder uriBuilder) {
@@ -81,12 +81,12 @@ public class CartaoController {
 		cartaoRepository.save(cartao);
 		clienteCartaoForm.cadastrarCartao(cartao, cliente.get(), clienteRepository);
 
-		URI uri = uriBuilder.path("/cartao/novo/{id}").buildAndExpand(cartao.getId()).toUri();
+		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(cartao.getId()).toUri();
 		return ResponseEntity.created(uri).body(new CartaoDTO(cartao));
 
 	}
 
-	@GetMapping("/cliente={id}/detalhar/{cartao}")
+	@GetMapping("/{id}/detalhar/{cartao}")
 	public ResponseEntity<CartaoDTO> detalhar(@PathVariable("id") Integer id,
 			@PathVariable("cartao") Integer idCartao) {
 

@@ -114,13 +114,15 @@ public class EnderecoForm {
 
 	} 
 	
-	public Endereco atualizar(Endereco endereco) {
+	public Endereco atualizar(Endereco endereco, UfRepository ur ) {
 		endereco.setCep(cep);
 		endereco.setCidade(cidade);
 		endereco.setComplemento(complemento);
 		endereco.setMunicipio(municipio);
 		endereco.setNumero(numero);
 		endereco.setRua(rua);
+		Optional<Uf> uf = ur.findById(this.uf); 
+		endereco.setUf(uf.get());
 		return endereco ; 
 		
 	}
