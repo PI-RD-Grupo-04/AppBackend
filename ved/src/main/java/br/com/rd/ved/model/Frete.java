@@ -30,13 +30,14 @@ public class Frete {
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
 
+	
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_frete", nullable = false)
 	private TipoFrete tipoFrete;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedidoStatus")
-	private List <Pedido> lista; 
+	private List <Pedido> listaPedido; 
 
 	public Frete() {
 		super();
@@ -78,6 +79,15 @@ public class Frete {
 
 	public void setTipoFrete(TipoFrete tipoFrete) {
 		this.tipoFrete = tipoFrete;
+	}
+
+	
+	public List<Pedido> getListaPedido() {
+		return listaPedido;
+	}
+
+	public void setListaPedido(List<Pedido> listaPedido) {
+		this.listaPedido = listaPedido;
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public class Uf {
 	@OneToMany(mappedBy = "uf")
 	private List<Frete> fretes;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "uf")
 	private List<Endereco> enderecos;
 	

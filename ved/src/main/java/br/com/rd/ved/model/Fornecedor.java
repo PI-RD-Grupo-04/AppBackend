@@ -17,6 +17,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "fornecedor")
 public class Fornecedor {
@@ -47,6 +49,7 @@ public class Fornecedor {
 			@JoinColumn(name = "id_fornecedor") }, inverseJoinColumns = { @JoinColumn(name = "id_produto") })
 	private List<Produto> produtos;
 
+	@JsonIgnore
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
