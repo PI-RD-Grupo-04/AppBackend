@@ -51,8 +51,8 @@ public class Endereco {
 	@Size(max = 50)
 	private String cidade;
 
-	
-	@OneToMany(mappedBy = "enderecos")
+	@JsonIgnore
+	@OneToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Pedido> pedidos;
 
 	@ManyToOne(fetch = FetchType.LAZY)

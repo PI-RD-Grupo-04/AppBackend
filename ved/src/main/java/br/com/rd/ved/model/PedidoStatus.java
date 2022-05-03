@@ -25,7 +25,7 @@ public class PedidoStatus {
 	@Size(max = 50)
 	private String descricao;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "pedidoStatus")
 	private List <Pedido> listaPedido; 
 	

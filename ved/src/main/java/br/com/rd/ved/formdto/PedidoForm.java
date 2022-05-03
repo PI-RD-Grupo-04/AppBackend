@@ -3,11 +3,10 @@ package br.com.rd.ved.formdto;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
-import javax.validation.constraints.NotEmpty;
-import com.sun.istack.NotNull;
-
+import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.CupomDesconto;
 import br.com.rd.ved.model.Endereco;
@@ -23,39 +22,19 @@ import br.com.rd.ved.repository.PedidoStatusRepository;
 
 public class PedidoForm {
 	
-	@NotNull
-	@NotEmpty
+	
 	private Date data;
 	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	
-	@NotNull
-	@NotEmpty
 	private Integer cliente;
-	private Cliente cliente2;
-	
-	@NotNull
-	@NotEmpty
 	private Integer cupomDesconto;
-	private CupomDesconto cupomDesconto2;
-	
-	@NotNull
-	@NotEmpty
 	private Integer pedidoStatus;
-	private PedidoStatus pedidoStatus2;
-	
-	@NotNull
-	@NotEmpty
 	private Integer frete;
-	private Frete frete2;
-	
-	@NotNull
-	@NotEmpty
 	private Integer enderecos;
-	private Endereco endereco2;
 
 
-	public PedidoForm(@NotEmpty String data,@NotEmpty String cliente, String cupomDesconto,
-			@NotEmpty String pedidoStatus, @NotEmpty String frete, @NotEmpty String enderecos) throws ParseException {
+
+	public PedidoForm(String data, String cliente, String cupomDesconto,
+			String pedidoStatus, String frete, String enderecos) throws ParseException {
 		this.data = formato.parse(data);
 		this.cliente = Integer.parseInt(cliente);
 		this.cupomDesconto = Integer.parseInt(cupomDesconto);
@@ -63,19 +42,6 @@ public class PedidoForm {
 		this.frete = Integer.parseInt(frete);
 		this.enderecos = Integer.parseInt(enderecos);
 	}
-
-	
-
-	public PedidoForm(@NotEmpty Date data, Cliente cliente2, CupomDesconto cupomDesconto2, PedidoStatus pedidoStatus2,
-			Frete frete2, Endereco endereco2) {
-		this.data = data;
-		this.cliente2 = cliente2;
-		this.cupomDesconto2 = cupomDesconto2;
-		this.pedidoStatus2 = pedidoStatus2;
-		this.frete2 = frete2;
-		this.endereco2 = endereco2;
-	}
-
 
 
 	public Date getData() {
@@ -154,6 +120,23 @@ public class PedidoForm {
 
 	}
 	
-	public Pedido converter1(PedidoRepository pedidoRepository) { 
-		return new Pedido(data, cliente2, cupomDesconto2, pedidoStatus2, frete2, endereco2); } } 
+	public List<PedidoDTO> cadastrarPedido(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository) {
+		List<Pedido> pedidos;
+		pedidos = cliente.getPedidos();
+		pedidos.add(pedido);
+		cliente.setPedidos(pedidos);
+		pedidoRepository.save(cliente);
+		return PedidoDTO.converter(pedidos);
 
+	} 
+	
+	public List<PedidoDTO> deletarEndereco(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository ) {
+		List<Pedido> pedidos;
+		pedidos = cliente.getPedidos();
+		pedidos.add(pedido);
+		cliente.setPedidos(pedidos);
+		pedidoRepository.save(cliente);
+		return PedidoDTO.converter(pedidos);
+
+	} 
+}
