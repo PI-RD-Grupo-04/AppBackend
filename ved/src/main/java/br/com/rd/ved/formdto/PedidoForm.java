@@ -135,7 +135,7 @@ public class PedidoForm {
 
 	} 
 	
-	public List<PedidoDTO> deletarEndereco(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository ) {
+	public List<PedidoDTO> deletarPedido(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository ) {
 		List<Pedido> pedidos;
 		pedidos = cliente.getPedidos();
 		pedidos.add(pedido);
@@ -143,5 +143,8 @@ public class PedidoForm {
 		pedidoRepository.save(cliente);
 		return PedidoDTO.converter(pedidos);
 
-	} 
+	}
+
+
+	
 }
