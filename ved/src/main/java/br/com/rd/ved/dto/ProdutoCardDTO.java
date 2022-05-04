@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Produto;
-import br.com.rd.ved.model.StatusProduto;
 
 public class ProdutoCardDTO {
 
@@ -14,7 +13,7 @@ public class ProdutoCardDTO {
 	private BigDecimal preco;
 	private String url;
 	private String descricao;
-	private StatusProduto statusProduto;
+	private String statusProduto;
 
 	public ProdutoCardDTO(Produto produto) {
 		this.id = produto.getId();
@@ -22,12 +21,10 @@ public class ProdutoCardDTO {
 		this.preco = produto.getPreco();
 		this.url = produto.getUrl();
 		this.descricao = produto.getDescricao();
-		this.statusProduto = produto.getStatusProduto();
+		this.statusProduto = produto.getStatusProduto().toString();
 	}
-
 	
 	public ProdutoCardDTO() {
-
 	}
 
 	public Integer getId() {
@@ -50,7 +47,7 @@ public class ProdutoCardDTO {
 		return descricao;
 	}
 
-	public StatusProduto getStatusProduto() {
+	public String getStatusProduto() {
 		return statusProduto;
 	} 
 	
