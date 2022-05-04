@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rd.ved.dto.ProdutoCardDTO;
 import br.com.rd.ved.dto.ProdutoDTO;
+import br.com.rd.ved.dto.ReceitaDTO;
 import br.com.rd.ved.model.Produto;
 import br.com.rd.ved.repository.ProdutoRepository;
 
@@ -36,6 +37,17 @@ public class ProdutoController {
 			return ResponseEntity.ok(new ProdutoDTO(produto.get()));
 		}
 		return ResponseEntity.notFound().build();
-	} 	
+	} 	 
+	
+	@GetMapping("/{id}/receita")
+	public ResponseEntity<ReceitaDTO> Receita(@PathVariable("id") Integer id) {
+		Optional<Produto> produto = produtoRepository.findById(id);
+
+		if (produto.isPresent()) {
+			return ResponseEntity.ok(new ReceitaDTO(produto.get().getReceita()));
+		}
+		return ResponseEntity.notFound().build();
+	} 
+	
 
 }
