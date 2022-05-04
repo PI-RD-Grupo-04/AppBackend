@@ -1,5 +1,9 @@
 package br.com.rd.ved.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.Uf;
 
 public class UfDTO {
@@ -26,5 +30,9 @@ public class UfDTO {
 		this.id = uf.getId();
 
 	}
+	
+	public static List<UfDTO> converter(List<Uf> uf) {
+		return uf.stream().map(UfDTO::new).collect(Collectors.toList());
 
+}
 }
