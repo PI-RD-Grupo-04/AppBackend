@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rd.ved.dto.PedidoDTO;
+import br.com.rd.ved.dto.ProdutoCardDTO;
 import br.com.rd.ved.model.Categoria;
-import br.com.rd.ved.model.Cliente;
-import br.com.rd.ved.model.Pedido;
+import br.com.rd.ved.model.Produto;
 import br.com.rd.ved.repository.CategoriaRepository;
 import br.com.rd.ved.repository.ProdutoRepository;
 
@@ -30,28 +29,29 @@ public class CategoriaController {
 	
 	
 	@GetMapping
-	public List<ProdutoDTO> listar() {
-		List<Produto> produtos = produtoRepository.findAll();
-		return ProdutoDTO.converter(produtos);
-	}
+	public List<Categoria> listar() {
+		List<Categoria> categoria = categoriaRepository.findAll();
+		return categoria;
+		}
 	
 	
-	
-	
-	@GetMapping("/produto={id}/categoria")
-	public ResponseEntity<ProdutoDTO> visualizar(@PathVariable("id") Integer id,
-			@PathVariable("produto") Integer idProduto) {
+		
+	@GetMapping("/categoria={id}/produtos")
+	public ResponseEntity<List<ProdutoCardDTO>> visualizar(@PathVariable("id") Integer id){
 
 		Optional<Categoria> categoria = categoriaRepository.findById(id);
-		Optional<Produto> produto = produtoRepository.findById(idProduto);
-		List<Produto> produtos = new ArrayList<>();
-		produtos = categoria.get().getProdutos();
+		
 
-		if (categoria.isPresent() && produtos.contains(produto.get())) {
-
-			return ResponseEntity.ok().body(new PedidoDTO(produto.get()));
+		if (categoria.isPresent()) {
+			List<Produto> produtos = new ArrayList<>();
+			produtos = categoria.get().getProdutos();
+			return ResponseEntity.ok().body(ProdutoCardDTO.converter(produtos));
 		}
 		return ResponseEntity.notFound().build();
 	}
+	
+	
+
+	
 	
 }
