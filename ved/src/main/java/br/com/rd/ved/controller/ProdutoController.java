@@ -48,6 +48,13 @@ public class ProdutoController {
 		}
 		return ResponseEntity.notFound().build();
 	} 
+	 
 	
+	@GetMapping("/{id}/")
+	public List<ProdutoCardDTO> demais(@PathVariable("id") Integer id) {
+		Optional<Produto> produto = produtoRepository.findById(id);
+		List<Produto> produtos = produtoRepository.findProdutosPorCategoria(produto.get().getCategoria().getDescricao());
+		return  ProdutoCardDTO.converter(produtos);
+	} 
 
 }
