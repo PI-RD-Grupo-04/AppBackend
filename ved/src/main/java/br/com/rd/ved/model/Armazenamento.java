@@ -1,10 +1,13 @@
 package br.com.rd.ved.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -18,7 +21,10 @@ public class Armazenamento {
 	private Integer id; 
 	@Column(name="descricao_armazenamento", nullable = false) 
 	@Size(max = 50)
-	private String descricao;
+	private String descricao; 
+	
+	@OneToMany(mappedBy = "armazenamento")
+	private List<Produto> produtos;
 	
 	public Armazenamento() {
 		super();
@@ -51,7 +57,7 @@ public class Armazenamento {
 
 	@Override
 	public String toString() {
-		return "Armazenamento [id=" + id + ", descricao=" + descricao + "]";
+		return descricao;
 	}
 	
 	

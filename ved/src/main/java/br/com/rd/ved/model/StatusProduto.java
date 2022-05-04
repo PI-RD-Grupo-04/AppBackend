@@ -63,7 +63,7 @@ public class StatusProduto {
 
 	@Override
 	public String toString() {
-		return "StatusProduto [id=" + id + ", descricao=" + descricao + "]";
+		return descricao;
 	}
 
 }

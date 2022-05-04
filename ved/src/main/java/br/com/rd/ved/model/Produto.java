@@ -3,6 +3,7 @@ package br.com.rd.ved.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -57,7 +58,16 @@ public class Produto {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy="produtos",fetch = FetchType.EAGER)
-	private List<Fornecedor> fornecedores;
+	private List<Fornecedor> fornecedores; 
+	
+	
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_armazenamento", nullable=false)
+	private Armazenamento armazenamento;
+	
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_receita", nullable=true)
+	private Receita receita;
 	
 	public Produto() {
 		super();
@@ -97,6 +107,22 @@ public class Produto {
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+
+	public Armazenamento getArmazenamento() {
+		return armazenamento;
+	}
+
+	public void setArmazenamento(Armazenamento armazenamento) {
+		this.armazenamento = armazenamento;
+	}
+
+	public Receita getReceita() {
+		return receita;
+	}
+
+	public void setReceita(Receita receita) {
+		this.receita = receita;
 	}
 
 	public String getUrl() {

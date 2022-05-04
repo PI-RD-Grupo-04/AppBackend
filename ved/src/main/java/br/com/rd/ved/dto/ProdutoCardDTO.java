@@ -24,10 +24,8 @@ public class ProdutoCardDTO {
 		this.descricao = produto.getDescricao();
 		this.statusProduto = produto.getStatusProduto();
 	}
-
 	
 	public ProdutoCardDTO() {
-
 	}
 
 	public Integer getId() {
