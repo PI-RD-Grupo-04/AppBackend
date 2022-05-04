@@ -11,9 +11,6 @@ import br.com.rd.ved.model.Cliente;
 public class ClienteDTO {
 
 	@NotBlank
-	private Integer id;
-
-	@NotBlank
 	private String nome;
 
 	@NotBlank
@@ -24,24 +21,18 @@ public class ClienteDTO {
 
 	@NotBlank
 	private String cpf;
-	
+
 	private Date dataNascimento;
 
+	// private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	@NotBlank
 	private String email;
 
 	@NotBlank
 	private String telefone;
 
-	@NotBlank
-	private String senha;
-
 	public ClienteDTO() {
 
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	public String getNome() {
@@ -70,10 +61,6 @@ public class ClienteDTO {
 
 	public String getTelefone() {
 		return telefone;
-	}
-
-	public String getSenha() {
-		return senha;
 	}
 
 	public ClienteDTO(Cliente obj) {
