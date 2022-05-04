@@ -12,9 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -55,6 +60,14 @@ public class Pedido {
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
 	private List <NotaFiscal> notafiscal; 
+	
+	@JsonIgnore
+	@Fetch(FetchMode.SELECT)
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "pagamento", joinColumns = { @JoinColumn(name = "id_pedido") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_tipo_pagamento") })
+	private List<TipoPagamento> tipoPagamento;
+	
 	
 
 	public Pedido() {
