@@ -3,14 +3,12 @@ package br.com.rd.ved.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.rd.ved.dto.ProdutoCardDTO;
 import br.com.rd.ved.model.Categoria;
 import br.com.rd.ved.model.Produto;
@@ -28,6 +26,22 @@ public class CategoriaController {
 	private ProdutoRepository produtoRepository;
 	
 	
+	@GetMapping("/valor/{valor}")
+	public List<ProdutoCardDTO> filtroPorValor (@PathVariable("valor") Integer real ) {
+		List<Produto> prod = produtoRepository.findProdutosPorValor(real);
+		
+		return ProdutoCardDTO.converter(prod);
+	}
+	
+	
+	@GetMapping("/palavra/{palavra}")
+	public List<ProdutoCardDTO> filtroPorPalavra (@PathVariable("palavra") String letra ) {
+		List<Produto> produto = produtoRepository.findProdutosPorPalavra(letra);
+		
+		return ProdutoCardDTO.converter(produto);
+	}
+
+
 	@GetMapping
 	public List<Categoria> listar() {
 		List<Categoria> categoria = categoriaRepository.findAll();
