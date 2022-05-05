@@ -1,6 +1,5 @@
 package br.com.rd.ved.dto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,10 +21,10 @@ public class ClienteDTO {
 
 	@NotBlank
 	private String cpf;
-	
+
 	private Date dataNascimento;
 
-	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+	// private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	@NotBlank
 	private String email;
 
@@ -52,9 +51,8 @@ public class ClienteDTO {
 		return cpf;
 	}
 
-	public String getDataNascimento() { 
-		String hoje = formato.format(dataNascimento); 
-		return hoje ;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 
 	public String getEmail() {
