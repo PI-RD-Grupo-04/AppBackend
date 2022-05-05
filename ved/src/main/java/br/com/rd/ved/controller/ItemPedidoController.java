@@ -50,7 +50,38 @@ public class ItemPedidoController {
 		}
 	}
 
-	@DeleteMapping("/{id}/deletar/{itemPedido}")
+	@PostMapping("/pedido={id}/novo")
+	@Transactional
+	public ResponseEntity<ItemPedidoDTO> cadastrar(@PathVariable("id") Integer id,
+			@RequestBody @Valid ItemPedidoForm itemPedidoForm, UriComponentsBuilder uriBuilder) {
+
+		Optional<Pedido> pedido = pedidoRepository.findById(id);
+		ItemPedido itemPedido = itemPedidoForm.converter(produtoRepository, pedidoRepository);
+		itemPedidoRepository.save(itemPedido);
+		itemPedidoForm.cadastrarItemPedido(itemPedido, pedido.get(), pedidoRepository);
+
+		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(itemPedido.getId()).toUri();
+		return ResponseEntity.created(uri).body(new ItemPedidoDTO(itemPedido));
+
+	}
+
+	@GetMapping("/pedido={id}/detalhar/{itemPedido}")
+	public ResponseEntity<ItemPedidoDTO> detalhar(@PathVariable("id") Integer id,
+			@PathVariable("itemPedido") Integer idItemPedido) {
+
+		Optional<Pedido> pedido = pedidoRepository.findById(id);
+		Optional<ItemPedido> itemPedido = itemPedidoRepository.findById(idItemPedido);
+		List<ItemPedido> itemPedidos = new ArrayList<>();
+		itemPedidos = pedido.get().getItemPedidos();
+
+		if (pedido.isPresent() && itemPedidos.contains(itemPedido.get())) {
+
+			return ResponseEntity.ok().body(new ItemPedidoDTO(itemPedido.get()));
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("/pedido={id}/deletar/{itemPedido}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable("id") Integer id, @PathVariable("itemPedido") Integer idItemPedido) {
 
@@ -66,38 +97,6 @@ public class ItemPedidoController {
 
 			pedidoRepository.save(pedido.get());
 			return ResponseEntity.ok().build();
-		}
-		return ResponseEntity.notFound().build();
-	}
-
-	@PostMapping("/{id}/novo")
-	@Transactional
-	public ResponseEntity<ItemPedidoDTO> cadastrar(@PathVariable("id") Integer id,
-			@RequestBody @Valid ItemPedidoForm itemPedidoForm, UriComponentsBuilder uriBuilder) {
-
-		Optional<Pedido> pedido = pedidoRepository.findById(id);
-
-		ItemPedido itemPedido = itemPedidoForm.converter(produtoRepository);
-		itemPedidoRepository.save(itemPedido);
-		itemPedidoForm.cadastrarItemPedido(itemPedido, pedido.get(), pedidoRepository);
-
-		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(itemPedido.getId()).toUri();
-		return ResponseEntity.created(uri).body(new ItemPedidoDTO(itemPedido));
-
-	}
-
-	@GetMapping("/{id}/detalhar/{cartao}")
-	public ResponseEntity<ItemPedidoDTO> detalhar(@PathVariable("id") Integer id,
-			@PathVariable("cartao") Integer idItemPedido) {
-
-		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		Optional<ItemPedido> itemPedido = itemPedidoRepository.findById(idItemPedido);
-		List<ItemPedido> itemPedidos = new ArrayList<>();
-		itemPedidos = pedido.get().getItemPedidos();
-
-		if (pedido.isPresent() && itemPedidos.contains(itemPedido.get())) {
-
-			return ResponseEntity.ok().body(new ItemPedidoDTO(itemPedido.get()));
 		}
 		return ResponseEntity.notFound().build();
 	}
