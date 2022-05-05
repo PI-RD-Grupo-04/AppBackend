@@ -14,8 +14,9 @@ public class ProdutoDTO {
 	private String descricao;
 	private Double peso;
 	private String categoria;
-	private String statusProduto; 
+	private String statusProduto;
 	private String armazenamento;
+	private Integer quantidade;
 
 	public ProdutoDTO(Produto produto) {
 		this.id = produto.getId();
@@ -25,8 +26,9 @@ public class ProdutoDTO {
 		this.descricao = produto.getDescricao();
 		this.peso = produto.getPeso();
 		this.categoria = produto.getCategoria().toString();
-		this.statusProduto = produto.getStatusProduto().toString(); 
+		this.statusProduto = produto.getStatusProduto().toString();
 		this.armazenamento = produto.getArmazenamento().toString();
+		this.quantidade = produto.getQuantidade();
 	}
 
 	public ProdutoDTO() {
@@ -67,6 +69,10 @@ public class ProdutoDTO {
 
 	public String getStatusProduto() {
 		return statusProduto;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
 	}
 
 	public static List<ProdutoDTO> converter(List<Produto> produto) {
