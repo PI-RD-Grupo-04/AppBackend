@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -43,10 +44,7 @@ public class Fornecedor {
 			@JoinColumn(name = "id_fornecedor") }, inverseJoinColumns = { @JoinColumn(name = "id_endereco") })
 	private List<Endereco> enderecos;
 
-	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "fornecedor_produto", joinColumns = {
-			@JoinColumn(name = "id_fornecedor") }, inverseJoinColumns = { @JoinColumn(name = "id_produto") })
+	@OneToMany(mappedBy = "fornecedores")
 	private List<Produto> produtos;
 
 	@JsonIgnore

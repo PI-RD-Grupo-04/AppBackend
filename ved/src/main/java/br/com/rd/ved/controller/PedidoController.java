@@ -122,7 +122,7 @@ public class PedidoController {
 											 @RequestBody @Valid PedidoForm pedidoForm,
 											 UriComponentsBuilder uriBuilder) {
 		Optional<Cliente> cliente = clienteRepository.findById(id);
-		Optional<Pedido> pedidos = pedidoRepository.findById(idPedido);
+	//	Optional<Pedido> pedidos = pedidoRepository.findById(idPedido);
 		Pedido pedido = pedidoForm.converter(pedidoRepository, 
 											 clienteRepository, 
 											 cupomDescontoRepository, 

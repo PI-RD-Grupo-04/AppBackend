@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -39,6 +38,8 @@ public class Produto {
 	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
+	@Column(name = "quantidade")
+	private int quantidade;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_categoria", nullable = false)
@@ -57,32 +58,37 @@ public class Produto {
 	private List<ItemPedido> itemPedido;
 
 	@JsonIgnore
-	@ManyToMany(mappedBy="produtos",fetch = FetchType.EAGER)
-	private List<Fornecedor> fornecedores; 
-	
-	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_armazenamento", nullable=false)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) 
+	@JoinColumn(name = "id_fornecedor", nullable = false)
+	private Fornecedor fornecedores;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_armazenamento", nullable = false)
 	private Armazenamento armazenamento;
-	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_receita", nullable=true)
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_receita", nullable = true)
 	private Receita receita;
-	
+
 	public Produto() {
 		super();
 	}
 
-	public Produto(String nomeProduto, BigDecimal preco, String url, String descricao, Double peso,
-			Categoria categoria, Marca marca, StatusProduto statusProduto) {
+	public Produto(@Size(max = 50) String nomeProduto, BigDecimal preco, String url, String descricao,
+			@Size(max = 100) Double peso, int quantidade, Categoria categoria, Marca marca, StatusProduto statusProduto,
+			 Fornecedor fornecedores, Armazenamento armazenamento, Receita receita) {
 		this.nomeProduto = nomeProduto;
 		this.preco = preco;
 		this.url = url;
 		this.descricao = descricao;
 		this.peso = peso;
+		this.quantidade = quantidade;
 		this.categoria = categoria;
 		this.marca = marca;
 		this.statusProduto = statusProduto;
+		this.fornecedores = fornecedores;
+		this.armazenamento = armazenamento;
+		this.receita = receita;
 	}
 
 	public Integer getId() {
@@ -115,6 +121,14 @@ public class Produto {
 
 	public void setArmazenamento(Armazenamento armazenamento) {
 		this.armazenamento = armazenamento;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public Receita getReceita() {
