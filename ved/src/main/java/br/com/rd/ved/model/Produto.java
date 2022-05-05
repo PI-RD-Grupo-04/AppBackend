@@ -212,6 +212,7 @@ public class Produto {
 	}
 
 	public StatusProduto getStatusProduto() {
+		
 		return statusProduto;
 	}
 
