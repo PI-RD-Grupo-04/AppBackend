@@ -33,68 +33,68 @@ import br.com.rd.ved.repository.PedidoStatusRepository;
 @RestController
 @RequestMapping("/pedido")
 public class PedidoController {
-
-	@Autowired
-	private PedidoRepository pedidoRepository;
-	
-	@Autowired
-	private  ClienteRepository clienteRepository;
-	
-	@Autowired
-	private  CupomDescontoRepository cupomDescontoRepository;
-	
-	@Autowired
-	private  PedidoStatusRepository pedidoStatusRepository;
-	
-	@Autowired
-	private  FreteRepository freteRepository;
-	
-	@Autowired
-	private  EnderecoRepository enderecoRepository;
-
-	 @GetMapping
-	 public List<PedidoDTO> listar() {
-	 	List<Pedido> pedidos = pedidoRepository.findAll();
-	 	return PedidoDTO.converter(pedidos);
-	 }
-
-
-	@PostMapping("/cliente={id}/novo")
-	@Transactional
-	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id, 
-											   @RequestBody @Valid PedidoForm pedidoForm,
-											   UriComponentsBuilder uriBuilder) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		Pedido pedido = pedidoForm.converter(pedidoRepository, 
-											 clienteRepository, 
-											 cupomDescontoRepository, 
-											 pedidoStatusRepository, 
-											 freteRepository, 
-											 enderecoRepository);
-		pedidoRepository.save(pedido);
-		pedidoForm.cadastrarPedido(pedido, cliente.get(), pedidoRepository);
-		URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getId()).toUri();
-		return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
-	}
-
-	@GetMapping("/cliente={id}/detalhar/{pedido}")
-	public ResponseEntity<PedidoDTO> detalhar(@PathVariable("id") Integer id,
-											  @PathVariable("pedido") 
-											  Integer idPedido) {
-
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		Optional<Pedido> pedido = pedidoRepository.findById(idPedido);
-		List<Pedido> pedidos = new ArrayList<>();
-		pedidos = cliente.get().getPedidos();
-
-		if (cliente.isPresent() && pedidos.contains(pedido.get())) {
-
-			return ResponseEntity.ok().body(new PedidoDTO(pedido.get()));
-		}
-		return ResponseEntity.notFound().build();
-	}
-	
-	
+//
+//	@Autowired
+//	private PedidoRepository pedidoRepository;
+//	
+//	@Autowired
+//	private  ClienteRepository clienteRepository;
+//	
+//	@Autowired
+//	private  CupomDescontoRepository cupomDescontoRepository;
+//	
+//	@Autowired
+//	private  PedidoStatusRepository pedidoStatusRepository;
+//	
+//	@Autowired
+//	private  FreteRepository freteRepository;
+//	
+//	@Autowired
+//	private  EnderecoRepository enderecoRepository;
+//
+//	 @GetMapping
+//	 public List<PedidoDTO> listar() {
+//	 	List<Pedido> pedidos = pedidoRepository.findAll();
+//	 	return PedidoDTO.converter(pedidos);
+//	 }
+//
+//
+//	@PostMapping("/cliente={id}/novo")
+//	@Transactional
+//	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id, 
+//											   @RequestBody @Valid PedidoForm pedidoForm,
+//											   UriComponentsBuilder uriBuilder) {
+//		Optional<Cliente> cliente = clienteRepository.findById(id);
+//		Pedido pedido = pedidoForm.converter(pedidoRepository, 
+//											 clienteRepository, 
+//											 cupomDescontoRepository, 
+//											 pedidoStatusRepository, 
+//											 freteRepository, 
+//											 enderecoRepository);
+//		pedidoRepository.save(pedido);
+//		pedidoForm.cadastrarPedido(pedido, cliente.get(), pedidoRepository);
+//		URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getId()).toUri();
+//		return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
+//	}
+//
+//	@GetMapping("/cliente={id}/detalhar/{pedido}")
+//	public ResponseEntity<PedidoDTO> detalhar(@PathVariable("id") Integer id,
+//											  @PathVariable("pedido") 
+//											  Integer idPedido) {
+//
+//		Optional<Cliente> cliente = clienteRepository.findById(id);
+//		Optional<Pedido> pedido = pedidoRepository.findById(idPedido);
+//		List<Pedido> pedidos = new ArrayList<>();
+//		pedidos = cliente.get().getPedidos();
+//
+//		if (cliente.isPresent() && pedidos.contains(pedido.get())) {
+//
+//			return ResponseEntity.ok().body(new PedidoDTO(pedido.get()));
+//		}
+//		return ResponseEntity.notFound().build();
+//	}
+//	
+//	
 //	@DeleteMapping("/{id}/delete/{pedido}")
 //	@Transactional
 //	public ResponseEntity<?> remover(@PathVariable("id") Integer id, @PathVariable("pedido") Integer idPedido) {
@@ -113,26 +113,26 @@ public class PedidoController {
 //		}
 //		return ResponseEntity.notFound().build();
 //	}
-	
-	
-	@DeleteMapping("/cliente={id}/delete={idPedido}")
-	@Transactional
-	public ResponseEntity<PedidoDTO> deletar(@PathVariable("id") Integer id,
-											 @PathVariable("idPedido") Integer idPedido,
-											 @RequestBody @Valid PedidoForm pedidoForm,
-											 UriComponentsBuilder uriBuilder) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		Optional<Pedido> pedidos = pedidoRepository.findById(idPedido);
-		Pedido pedido = pedidoForm.converter(pedidoRepository, 
-											 clienteRepository, 
-											 cupomDescontoRepository, 
-											 pedidoStatusRepository, 
-											 freteRepository, 
-											 enderecoRepository);
-		pedidoRepository.delete(pedido);
-		pedidoRepository.deleteById(idPedido);
-		pedidoForm.deletarPedido(pedido, cliente.get(), pedidoRepository);
-		URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getId()).toUri();
-		return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
-	}
+//	
+//	
+//	@DeleteMapping("/cliente={id}/delete={idPedido}")
+//	@Transactional
+//	public ResponseEntity<PedidoDTO> deletar(@PathVariable("id") Integer id,
+//											 @PathVariable("idPedido") Integer idPedido,
+//											 @RequestBody @Valid PedidoForm pedidoForm,
+//											 UriComponentsBuilder uriBuilder) {
+//		Optional<Cliente> cliente = clienteRepository.findById(id);
+//		Optional<Pedido> pedidos = pedidoRepository.findById(idPedido);
+//		Pedido pedido = pedidoForm.converter(pedidoRepository, 
+//											 clienteRepository, 
+//											 cupomDescontoRepository, 
+//											 pedidoStatusRepository, 
+//											 freteRepository, 
+//											 enderecoRepository);
+//		pedidoRepository.delete(pedido);
+//		pedidoRepository.deleteById(idPedido);
+//		pedidoForm.deletarPedido(pedido, cliente.get(), pedidoRepository);
+//		URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getId()).toUri();
+//		return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
+//	}
 }

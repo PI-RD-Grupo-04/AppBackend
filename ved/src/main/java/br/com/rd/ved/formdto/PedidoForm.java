@@ -107,23 +107,23 @@ public class PedidoForm {
 		this.enderecos = enderecos;
 	}
 	
-	public Pedido converter(PedidoRepository pedidoRepository, 
-							ClienteRepository clienteRepository,
-							CupomDescontoRepository cupomDescontoRepository,
-							PedidoStatusRepository pedidoStatusRepository,
-							FreteRepository freteRepository,
-							EnderecoRepository enderecoRepository) { 
-		
-		Optional<Cliente> cliente = clienteRepository.findById(this.cliente);		
-		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(this.cupomDesconto);
-		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(this.pedidoStatus);
-		Optional<Frete> frete = freteRepository.findById(this.frete);
-		Optional<Endereco> endereco = enderecoRepository.findById(this.enderecos);
-		Pedido pedido = new Pedido(data, cliente.get(), cupomDesconto.get(), pedidoStatus.get(), frete.get(), endereco.get());
-				
-		return pedido;
-
-	}
+//	public Pedido converter(PedidoRepository pedidoRepository, 
+//							ClienteRepository clienteRepository,
+//							CupomDescontoRepository cupomDescontoRepository,
+//							PedidoStatusRepository pedidoStatusRepository,
+//							FreteRepository freteRepository,
+//							EnderecoRepository enderecoRepository) { 
+//		
+//		Optional<Cliente> cliente = clienteRepository.findById(this.cliente);		
+//		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(this.cupomDesconto);
+//		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(this.pedidoStatus);
+//		Optional<Frete> frete = freteRepository.findById(this.frete);
+//		Optional<Endereco> endereco = enderecoRepository.findById(this.enderecos);
+//		Pedido pedido = new Pedido(data, cliente.get(), cupomDesconto.get(), pedidoStatus.get(), frete.get(), endereco.get());
+//				
+//		return pedido;
+//
+//	}
 	
 	public List<PedidoDTO> cadastrarPedido(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository) {
 		List<Pedido> pedidos;

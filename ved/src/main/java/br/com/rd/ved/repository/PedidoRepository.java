@@ -1,6 +1,7 @@
 package br.com.rd.ved.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
@@ -16,6 +17,10 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>, CrudRe
 	 List<Pedido> findByClienteId(Integer idCliente);
 
 	void save(Cliente cliente);
+	
+	List<Pedido> findByCliente(Cliente cliente);
+    
+    Optional<Pedido> findByIdFetchItems(Integer id);
 
 	 
 }
