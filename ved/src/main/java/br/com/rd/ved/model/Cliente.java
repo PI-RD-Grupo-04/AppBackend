@@ -23,6 +23,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -31,6 +33,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private Integer id;
+	
 	@Column(name = "nome", nullable = false)
 	@Size(max = 50)
 	private String nome;
@@ -64,15 +67,19 @@ public class Cliente {
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
-
+	
+	@JsonIgnore
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "cliente_cartao", joinColumns = { @JoinColumn(name = "id_cliente") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_cartao") })
 	private List<Cartao> cartoes;
-
+	
+	
+	
+	@JsonIgnore
 	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "cliente_endereco", joinColumns = { @JoinColumn(name = "id_cliente") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_endereco") })
 	private List<Endereco> enderecos;
@@ -103,6 +110,30 @@ public class Cliente {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+	public List<Cartao> getCartoes() {
+		return cartoes;
+	}
+
+	public void setCartoes(List<Cartao> cartoes) {
+		this.cartoes = cartoes;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	public void setNome(String nome) {
@@ -176,8 +207,8 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nome Social=" + nomeSocial
-				+ ", cpf=" + cpf + ", data de Nascimento=" + dataNascimento + ", email=" + email + ", telefone=" + telefone
-				+ ", senha=" + senha + "]";
+				+ ", cpf=" + cpf + ", data de Nascimento=" + dataNascimento + ", email=" + email + ", telefone="
+				+ telefone + ", senha=" + senha + "]";
 	}
 
 	@Override

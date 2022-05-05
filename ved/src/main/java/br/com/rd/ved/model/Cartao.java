@@ -65,9 +65,9 @@ public class Cartao {
 		super();
 	}
 
-	public Cartao(Integer id, String numeroCartao, String nomeTitular, String cpfTitular, Integer diaVencimento,
+	public Cartao(String numeroCartao, String nomeTitular, String cpfTitular, Integer diaVencimento,
 			Integer anoVencimento, Bandeira idBandeira) {
-		this.id = id;
+
 		this.numeroCartao = numeroCartao;
 		this.nomeTitular = nomeTitular;
 		this.cpfTitular = cpfTitular;

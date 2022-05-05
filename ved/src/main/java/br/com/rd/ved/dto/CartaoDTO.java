@@ -8,52 +8,50 @@ import br.com.rd.ved.model.Cartao;
 
 public class CartaoDTO {
 
-	
-
 	private String numeroCartao;
+	private String titular;
 	private Integer anoVencimento;
 	private Integer diaVencimento;
 	private Bandeira idBandeira;
-	
-	
-	
-	public CartaoDTO (Cartao cartao){
+
+	public CartaoDTO(Cartao cartao) {
 		this.numeroCartao = cartao.getNumeroCartao();
 		this.anoVencimento = cartao.getAnoVencimento();
 		this.diaVencimento = cartao.getDiaVencimento();
-		this.idBandeira = cartao.getBandeiraId();
-		
+		this.idBandeira = cartao.getBandeiraId(); 
+		this.titular = cartao.getNomeTitular();
+
 	}
-	
+
 	
 	public String getNumeroCartao() {
 		return numeroCartao;
 	}
-	public void setNumeroCartao(String numeroCartao) {
-		this.numeroCartao = numeroCartao;
+
+
+	public String getTitular() {
+		return titular;
 	}
+
+
 	public Integer getAnoVencimento() {
 		return anoVencimento;
 	}
-	public void setAnoVencimento(Integer anoVencimento) {
-		this.anoVencimento = anoVencimento;
-	}
-	public Bandeira getIdBandeira() {
-		return idBandeira;
-	}
-	public void setIdBandeira(Bandeira idBandeira) {
-		this.idBandeira = idBandeira;
-	}
+
+
 	public Integer getDiaVencimento() {
 		return diaVencimento;
 	}
-	public void setDiaVencimento(Integer diaVencimento) {
-		this.diaVencimento = diaVencimento;
+
+
+	public Bandeira getIdBandeira() {
+		return idBandeira;
 	}
-	
+
+
 	public static List<CartaoDTO> converter(List<Cartao> cartoes) {
 
 		return cartoes.stream().map(CartaoDTO::new).collect(Collectors.toList());
-	
+
 	}
 }

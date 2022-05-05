@@ -27,7 +27,7 @@ public class PedidoStatus {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedidoStatus")
-	private List <Pedido> lista; 
+	private List <Pedido> listaPedido; 
 	
 	public PedidoStatus() {
 		super();
@@ -57,6 +57,8 @@ public class PedidoStatus {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	
 
 	@Override
 	public String toString() {

@@ -26,30 +26,36 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_endereco")
 	private Integer id;
+	
 	@Column(name = "cep")
 	@Size(max = 10)
 	private String cep;
+	
 	@Column(name = "rua")
 	@Size(max = 100)
 	private String rua;
+	
 	@Column(name = "numero")
 	@Size(max = 10)
 	private Integer numero;
+	
 	@Column(name = "complemento")
 	@Size(max = 50)
 	private String complemento;
+	
 	@Column(name = "municipio")
 	@Size(max = 50)
 	private String municipio;
+	
 	@Column(name = "cidade")
 	@Size(max = 50)
 	private String cidade;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "enderecos")
+	@OneToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Pedido> pedidos;
-
-	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
 
@@ -154,6 +160,14 @@ public class Endereco {
 		this.fornecedores = fornecedores;
 	}
 	
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

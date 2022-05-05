@@ -63,9 +63,8 @@ public class Produto {
 		super();
 	}
 
-	public Produto(Integer id, String nomeProduto, BigDecimal preco, String url, String descricao, Double peso,
+	public Produto(String nomeProduto, BigDecimal preco, String url, String descricao, Double peso,
 			Categoria categoria, Marca marca, StatusProduto statusProduto) {
-		this.id = id;
 		this.nomeProduto = nomeProduto;
 		this.preco = preco;
 		this.url = url;
