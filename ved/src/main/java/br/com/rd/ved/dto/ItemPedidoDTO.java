@@ -9,14 +9,18 @@ import br.com.rd.ved.model.Produto;
 
 public class ItemPedidoDTO {
 
+	private Integer codigo_pedido;
 	private Integer quantidade;	
 	private BigDecimal preco;
-	private Produto idProduto;
+	private String Produto;
+	
+	
 		
 	public ItemPedidoDTO(ItemPedido itemPedido) {
+		this.codigo_pedido = itemPedido.getPedido().getId();
 		this.preco = itemPedido.getProduto().getPreco();
 		this.quantidade = itemPedido.getQuantidade();
-		this.idProduto = itemPedido.getProduto();
+		this.Produto = itemPedido.getProduto().getNomeProduto();		
 	}
 
 	public Integer getQuantidade() {
@@ -35,14 +39,23 @@ public class ItemPedidoDTO {
 		this.preco = preco;
 	}
 
-	public Produto getIdProduto() {
-		return idProduto;
+	public String getProduto() {
+		return Produto;
 	}
 
-	public void setIdProduto(Produto idProduto) {
-		this.idProduto = idProduto;
+	public void setProduto(String produto) {
+		Produto = produto;
 	}
 
+	public Integer getCodigo_pedido() {
+		return codigo_pedido;
+	}
+
+	public void setCodigo_pedido(Integer codigo_pedido) {
+		this.codigo_pedido = codigo_pedido;
+	}
+	
+	
 	public static List<ItemPedidoDTO> converter(List<ItemPedido> itemPedidos) {
 		return itemPedidos.stream().map(ItemPedidoDTO::new).collect(Collectors.toList());
 	}

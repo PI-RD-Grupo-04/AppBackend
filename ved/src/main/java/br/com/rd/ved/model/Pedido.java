@@ -54,9 +54,11 @@ public class Pedido {
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name="id_endereco", nullable=false)
 	private Endereco enderecos;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itemPedidos;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
 	private List <NotaFiscal> notafiscal; 
