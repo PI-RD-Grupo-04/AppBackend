@@ -14,6 +14,7 @@ public class EnderecoDTO {
 	private String municipio;
 	private String cidade;
 	private String uf;
+	
 	public EnderecoDTO(Endereco endereco) {
 		this.cep = endereco.getCep();
 		this.rua = endereco.getRua();
