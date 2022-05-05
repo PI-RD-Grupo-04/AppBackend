@@ -12,7 +12,7 @@ import br.com.rd.ved.repository.NotaFiscalRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.SerieRepository;
 
-@Service
+
 public class NotaFiscalService {
 	private final NotaFiscalRepository notaFiscalRepository;
 	private final PedidoRepository pedidoRepository;

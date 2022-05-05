@@ -12,7 +12,7 @@ import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.ProdutoRepository;
 
-@Service
+
 public class ItemPedidoService {
 
 	private final ItemPedidoRepository itemPedidoRepository;
