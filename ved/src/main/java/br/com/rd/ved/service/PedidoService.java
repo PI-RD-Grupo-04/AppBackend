@@ -1,164 +1,104 @@
 package br.com.rd.ved.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import br.com.rd.ved.dto.ItemPedidoDTO;
+import br.com.rd.ved.dto.PedidoDTO;
+import br.com.rd.ved.enums.StatusPedido;
+import br.com.rd.ved.exception.PedidoNaoEncontradoException;
+import br.com.rd.ved.exception.RegraNegocioException;
 import br.com.rd.ved.model.Cliente;
-import br.com.rd.ved.model.CupomDesconto;
-import br.com.rd.ved.model.Endereco;
-import br.com.rd.ved.model.Frete;
+import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.PedidoStatus;
+import br.com.rd.ved.model.Produto;
 import br.com.rd.ved.repository.ClienteRepository;
-import br.com.rd.ved.repository.CupomDescontoRepository;
-import br.com.rd.ved.repository.EnderecoRepository;
-import br.com.rd.ved.repository.FreteRepository;
+import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
-import br.com.rd.ved.repository.PedidoStatusRepository;
+import br.com.rd.ved.repository.ProdutoRepository;
 
-
+@Service
 public class PedidoService {
 	
 	private final PedidoRepository pedidoRepository;
-	private final ClienteRepository clienteRepository;
-	private final CupomDescontoRepository cupomDescontoRepository;
-	private final PedidoStatusRepository pedidoStatusRepository;
-	private final FreteRepository freteRepository;
-	private final EnderecoRepository enderecoRepository;
-	
-	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	private Boolean sistema = true;
-			
-	public PedidoService(PedidoRepository pedidoRepository, ClienteRepository clienteRepository,
-			CupomDescontoRepository cupomDescontoRepository, PedidoStatusRepository pedidoStatusRepository,
-			FreteRepository freteRepository, EnderecoRepository enderecoRepository) {
-		super();
+    private final ClienteRepository clienteRepository;
+    private final ProdutoRepository produtoRepository;
+    private final ItemPedidoRepository itemPedidoRepository;
+    
+    public PedidoService(PedidoRepository pedidoRepository, ClienteRepository clienteRepository,
+			ProdutoRepository produtoRepository, ItemPedidoRepository itemPedidoRepository) {
 		this.pedidoRepository = pedidoRepository;
 		this.clienteRepository = clienteRepository;
-		this.cupomDescontoRepository = cupomDescontoRepository;
-		this.pedidoStatusRepository = pedidoStatusRepository;
-		this.freteRepository = freteRepository;
-		this.enderecoRepository = enderecoRepository;
+		this.produtoRepository = produtoRepository;
+		this.itemPedidoRepository = itemPedidoRepository;
 	}
 
-	public void iniciar(Scanner sc) throws ParseException {
-		int acao;
+	@Transactional
+    public Pedido salvar( PedidoDTO dto ) {
+        Integer idCliente = dto.getCliente().getId();
+        Cliente cliente = clienteRepository
+                .findById(idCliente)
+                .orElseThrow(() -> new RegraNegocioException("Código de cliente inválido."));
 
-		while (sistema) {
-			System.out.println("Qual a ação que será realizada em pedido");
-			System.out.println("0 - Sair");
-			System.out.println("1 - Salvar");
-			System.out.println("2 - Atualizar");
-			System.out.println("3 - Visualizar");
-			System.out.println("4 - Deletar");
+        Pedido pedido = new Pedido();
+        pedido.setTotal(dto.getTotal());
+        pedido.setData(LocalDate.now());
+        pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
-			acao = Integer.parseInt(sc.nextLine());
+        List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
+        pedidoRepository.save(pedido);
+        itemPedidoRepository.saveAll(itemsPedido);
+        pedido.setItemPedidos(itemsPedido);
+        return pedido;
+    }
 
-			switch (acao) {
-			case 1:
-				salvar(sc);
-				break;
-			case 2:
-				atualizar(sc);
-				break;
-			case 3:
-				visualizar();
-				break;
-			case 4:
-				deletar(sc);
-				break;
-			default:
-				sistema = false;
-				break;
-			}
-		}
-	}
+	@Transactional
+    public Optional<Pedido> obterPedidoCompleto(Integer id) {
+        return pedidoRepository.findByIdFetchItems(id);
+    }
 
-	private void salvar(Scanner sc) throws ParseException {
-		
-		System.out.println("Informe a data do Pedido (dd/MM/yyyy)");
-		String dt = sc.nextLine();
-		Date dataPedido = formato.parse(dt);
-				
-		System.out.println("Digite o ID do Cliente para Pedido:");
-		Integer clienteId = Integer.parseInt(sc.nextLine());
-		Optional<Cliente> cliente = clienteRepository.findById(clienteId);
+    
+    @Transactional
+    public void atualizaStatus( Integer id, StatusPedido statusPedido ) {
+        pedidoRepository
+                .findById(id)
+                .map( pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return pedidoRepository.save(pedido);
+                }).orElseThrow(() -> new PedidoNaoEncontradoException() );
+    }
 
-		System.out.println("Digite o ID do Cupom Desconto para Pedido:");
-		Integer cupomDescontoId = Integer.parseInt(sc.nextLine());
-		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(cupomDescontoId);
-		
-		System.out.println("Digite o ID do Status do Pedido para Pedido:");
-		Integer pedidoStatusId = Integer.parseInt(sc.nextLine());
-		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(pedidoStatusId);
-		
-		System.out.println("Digite o ID do Frete para Pedido:");
-		Integer freteId = Integer.parseInt(sc.nextLine());
-		Optional<Frete> frete = freteRepository.findById(freteId);
-		
-		System.out.println("Digite o ID do Endereco para Pedido:");
-		Integer enderecoId = Integer.parseInt(sc.nextLine());
-		Optional<Endereco> endereco = enderecoRepository.findById(enderecoId);
-				
-		Pedido pedido = new Pedido(dataPedido, cliente.get(), cupomDesconto.get(), pedidoStatus.get(), frete.get(), endereco.get());
-		pedidoRepository.save(pedido);
-		System.out.println("Pedido Salvo com Sucesso");
+    @Transactional
+    private List<ItemPedido> converterItems(Pedido pedido, List<ItemPedidoDTO> items){
+        if(items.isEmpty()){
+            throw new RegraNegocioException("Não é possível realizar um pedido sem items.");
+        }
 
-	}
+        return items
+                .stream()
+                .map( dto -> {
+                    Integer idProduto = dto.getProduto();
+                    Produto produto = produtoRepository
+                            .findById(idProduto)
+                            .orElseThrow(
+                                    () -> new RegraNegocioException(
+                                            "Código de produto inválido: "+ idProduto
+                                    ));
 
-	private void atualizar(Scanner sc) throws ParseException {
-		System.out.println("Informe o ID do Pedido a ser atualizado:");
-		Integer id = Integer.parseInt(sc.nextLine());
-		
-		System.out.println("Informe a data do Pedido (dd/MM/yyyy)");
-		String dt = sc.nextLine();
-		Date dataPedido = formato.parse(dt);
-		
-		System.out.println("Digite o ID do Cliente para Pedido:");
-		Integer clienteId = Integer.parseInt(sc.nextLine());
+                    ItemPedido itemPedido = new ItemPedido();
+                    itemPedido.setQuantidade(dto.getQuantidade());
+                    itemPedido.setPedido(pedido);
+                    itemPedido.setProduto(produto);
+                    return itemPedido;
+                }).collect(Collectors.toList());
 
-		System.out.println("Digite o ID do Cupom Desconto para Pedido:");
-		Integer cupomDescontoId = Integer.parseInt(sc.nextLine());
-		
-		System.out.println("Digite o ID do Status para Pedido:");
-		Integer pedidoStatusId = Integer.parseInt(sc.nextLine());
-		
-		System.out.println("Digite o ID do Frete para Pedido:");
-		Integer freteId = Integer.parseInt(sc.nextLine());
-		
-		System.out.println("Digite o ID do Endereco para Pedido:");
-		Integer enderecoId = Integer.parseInt(sc.nextLine());
+    }
 
-		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		Optional<Cliente> cliente = clienteRepository.findById(clienteId);
-		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(cupomDescontoId);
-		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(pedidoStatusId);
-		Optional<Frete> frete = freteRepository.findById(freteId);
-		Optional<Endereco> endereco = enderecoRepository.findById(enderecoId);
-		pedido.get().setData(dataPedido);
-		pedido.get().setCliente(cliente.get());
-		pedido.get().setCupomDesconto(cupomDesconto.get());
-		pedido.get().setPedidoStatus(pedidoStatus.get());
-		pedido.get().setFrete(frete.get());
-		pedido.get().setEnderecos(endereco.get());
-		pedidoRepository.save(pedido.get());
-		System.out.println("Pedido Alterado com Sucesso");
-	}
-
-	private void visualizar() {
-		Iterable<Pedido> pedido = pedidoRepository.findAll();
-		pedido.forEach(f -> System.out.println(f));
-	}
-
-	private void deletar(Scanner sc) {
-		System.out.println("Digite o ID do Pedido");
-		Integer id = Integer.parseInt(sc.nextLine());
-		freteRepository.deleteById(id);
-		System.out.println("Pedido Deletado com Sucesso");
-	}
 }

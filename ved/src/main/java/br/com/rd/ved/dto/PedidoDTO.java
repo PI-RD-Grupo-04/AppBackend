@@ -1,8 +1,10 @@
 package br.com.rd.ved.dto;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.CupomDesconto;
 import br.com.rd.ved.model.Endereco;
@@ -14,12 +16,14 @@ public class PedidoDTO {
 
 
 	private Integer id;
-	private Date data;
+	private LocalDate data;
 	private Cliente cliente;
 	private CupomDesconto cupomDesconto;
 	private PedidoStatus pedidoStatus;
 	private Frete frete;
 	private Endereco enderecos;
+	private BigDecimal total;
+	private List<ItemPedidoDTO> items;
 
 	public PedidoDTO(Pedido pedido) {
 		this.data = pedido.getData();
@@ -38,11 +42,11 @@ public class PedidoDTO {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
@@ -84,6 +88,22 @@ public class PedidoDTO {
 
 	public void setEnderecos(Endereco enderecos) {
 		this.enderecos = enderecos;
+	}
+	
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+	
+	public List<ItemPedidoDTO> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ItemPedidoDTO> items) {
+		this.items = items;
 	}
 
 	public static List<PedidoDTO> converter(List<Pedido> pedidos) {

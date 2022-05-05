@@ -1,12 +1,15 @@
 package br.com.rd.ved.model;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +26,8 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.rd.ved.enums.StatusPedido;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -33,7 +38,14 @@ public class Pedido {
 	private Integer id;
 	
 	@Column(name = "data_pedido")
-	private Date data;
+	private LocalDate data;
+	
+	@Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusPedido status;
+	
+	@Column(name = "total", precision = 20, scale = 2)
+    private BigDecimal total;
 	
 	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
 	@JoinColumn(name="id_cliente", nullable=false)
@@ -74,15 +86,21 @@ public class Pedido {
 		super();
 	}
 
-
-	public Pedido(Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus, Frete frete,
-			Endereco enderecos) {
+	public Pedido(Integer id, LocalDate data, StatusPedido status, BigDecimal total, Cliente cliente,
+			CupomDesconto cupomDesconto, PedidoStatus pedidoStatus, Frete frete, Endereco enderecos,
+			List<ItemPedido> itemPedidos, List<NotaFiscal> notafiscal, List<TipoPagamento> tipoPagamento) {
+		this.id = id;
 		this.data = data;
+		this.status = status;
+		this.total = total;
 		this.cliente = cliente;
 		this.cupomDesconto = cupomDesconto;
 		this.pedidoStatus = pedidoStatus;
 		this.frete = frete;
 		this.enderecos = enderecos;
+		this.itemPedidos = itemPedidos;
+		this.notafiscal = notafiscal;
+		this.tipoPagamento = tipoPagamento;
 	}
 
 	public Integer getId() {
@@ -93,11 +111,11 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
@@ -148,7 +166,47 @@ public class Pedido {
 	public void setItemPedidos(List<ItemPedido> itemPedidos) {
 		this.itemPedidos = itemPedidos;
 	}
-		
+			
+	public StatusPedido getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(StatusPedido status) {
+		this.status = status;
+	}
+
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+
+	public List<NotaFiscal> getNotafiscal() {
+		return notafiscal;
+	}
+
+
+	public void setNotafiscal(List<NotaFiscal> notafiscal) {
+		this.notafiscal = notafiscal;
+	}
+
+
+	public List<TipoPagamento> getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+
+	public void setTipoPagamento(List<TipoPagamento> tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(data, id);
