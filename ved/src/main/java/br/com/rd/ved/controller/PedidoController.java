@@ -23,6 +23,7 @@ import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.formdto.PedidoForm;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.Pedido;
+import br.com.rd.ved.model.PedidoStatus;
 import br.com.rd.ved.repository.ClienteRepository;
 import br.com.rd.ved.repository.CupomDescontoRepository;
 import br.com.rd.ved.repository.EnderecoRepository;
@@ -89,7 +90,7 @@ public class PedidoController {
 
 	@DeleteMapping("/cliente={id}/delete/{pedido}")
 	@Transactional
-	public ResponseEntity<?> remover(@PathVariable("id") Integer id, @PathVariable("pedido") Integer idPedido) {
+	public ResponseEntity<?> cancelar(@PathVariable("id") Integer id, @PathVariable("pedido") Integer idPedido) {
 
 		Optional<Cliente> cliente = clienteRepository.findById(id);
 		Optional<Pedido> pedido = pedidoRepository.findById(idPedido);
@@ -97,12 +98,11 @@ public class PedidoController {
 		if (pedido.isPresent() && cliente.isPresent()) {
 			List<Pedido> pedidos = new ArrayList<>();
 			pedidos = cliente.get().getPedidos();
-			pedidos.remove(pedido.get());
+			pedido.get().setPedidoStatus(pedidoStatusRepository.findByDescricao("Cancelado"));
+			pedidos.add(pedido.get());
 			cliente.get().setPedidos(pedidos);
-			//cliente.get().getPedidos().removeIf(end -> pedido.equals(pedido));
-			
-			pedidoRepository.deleteById(idPedido);
 			clienteRepository.save(cliente.get());
+			pedidoRepository.save(pedido.get());
 			return ResponseEntity.ok().build();
 		}
 
