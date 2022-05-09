@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.ItemPedido;
-import br.com.rd.ved.model.Produto;
 
 public class ItemPedidoDTO {
 
