@@ -1,88 +1,79 @@
 package br.com.rd.ved.dto;
 
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import br.com.rd.ved.model.Cliente;
-import br.com.rd.ved.model.CupomDesconto;
-import br.com.rd.ved.model.Endereco;
-import br.com.rd.ved.model.Frete;
-import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.PedidoStatus;
 
+import br.com.rd.ved.model.Pedido;
 public class PedidoDTO {
 
-
-	private Integer id;
-	private Date data;
-	private Cliente cliente;
-	private CupomDesconto cupomDesconto;
-	private PedidoStatus pedidoStatus;
-	private Frete frete;
-	private Endereco enderecos;
-
-	public PedidoDTO(Pedido pedido) {
+	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+	private Date data;	
+	private Integer cliente;
+	private Integer cupomDesconto;
+	private Integer pedidoStatus;
+	private Integer frete;
+	private Integer enderecos;
+	
+	public PedidoDTO(Pedido pedido) {		
 		this.data = pedido.getData();
-		this.cliente = pedido.getCliente();
-		this.cupomDesconto = pedido.getCupomDesconto();
-		this.pedidoStatus = pedido.getPedidoStatus();
-		this.frete = pedido.getFrete();
-		this.enderecos = pedido.getEnderecos();
+		this.cliente = pedido.getCliente().getId();
+		this.cupomDesconto = pedido.getCupomDesconto().getId();
+		this.pedidoStatus = pedido.getPedidoStatus().getId();
+		this.frete = pedido.getFrete().getId();
+		this.enderecos = pedido.getEnderecos().getId();
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Date getData() {
-		return data;
-	}
+	
+	
+	public String getData() { 
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		String hoje = formato.format(data); 
+		return hoje ; 
+	} 
 
 	public void setData(Date data) {
 		this.data = data;
 	}
 
-	public Cliente getCliente() {
+	public Integer getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(Integer cliente) {
 		this.cliente = cliente;
 	}
 
-	public CupomDesconto getCupomDesconto() {
+	public Integer getCupomDesconto() {
 		return cupomDesconto;
 	}
 
-	public void setCupomDesconto(CupomDesconto cupomDesconto) {
+	public void setCupomDesconto(Integer cupomDesconto) {
 		this.cupomDesconto = cupomDesconto;
 	}
 
-	public PedidoStatus getPedidoStatus() {
+	public Integer getPedidoStatus() {
 		return pedidoStatus;
 	}
 
-	public void setPedidoStatus(PedidoStatus pedidoStatus) {
+	public void setPedidoStatus(Integer pedidoStatus) {
 		this.pedidoStatus = pedidoStatus;
 	}
 
-	public Frete getFrete() {
+	public Integer getFrete() {
 		return frete;
 	}
 
-	public void setFrete(Frete frete) {
+	public void setFrete(Integer frete) {
 		this.frete = frete;
 	}
 
-	public Endereco getEnderecos() {
+	public Integer getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(Endereco enderecos) {
+	public void setEnderecos(Integer enderecos) {
 		this.enderecos = enderecos;
 	}
 

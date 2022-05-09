@@ -54,6 +54,7 @@ public class Endereco {
 	@JsonIgnore
 	@OneToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
 	private List<Pedido> pedidos;
+	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_uf", nullable = false)
@@ -190,17 +191,5 @@ public class Endereco {
 		return "Endereco [id=" + id + ", cep=" + cep + ", rua=" + rua + ", numero=" + numero + ", complemento="
 				+ complemento + ", municipio=" + municipio + ", cidade=" + cidade + ", uf=" + uf + "]";
 	}
-
-	public Endereco getEndereco() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Cliente getCliente() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 }

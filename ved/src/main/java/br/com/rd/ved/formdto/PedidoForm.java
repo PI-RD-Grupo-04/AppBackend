@@ -6,11 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.constraints.NotEmpty;
-
-import com.sun.istack.NotNull;
-
-import br.com.rd.ved.dto.ClienteDTO;
 import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.CupomDesconto;
