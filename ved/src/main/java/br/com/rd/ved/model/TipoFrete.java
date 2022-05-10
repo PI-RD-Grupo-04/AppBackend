@@ -68,7 +68,7 @@ public class TipoFrete {
 
 	@Override
 	public String toString() {
-		return "TipoFrete [id=" + id + ", descricao=" + descricao + "]";
+		return  descricao ;
 	}
 	
 	
