@@ -32,7 +32,6 @@ public class PedidoForm {
 	private Integer enderecos;
 
 
-
 	public PedidoForm(String data, String cliente, String cupomDesconto,
 			String pedidoStatus, String frete, String enderecos) throws ParseException {
 		this.data = formato.parse(data);
