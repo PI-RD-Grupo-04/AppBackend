@@ -13,6 +13,7 @@ public class PixDTO {
 	private Pix preco;
 	private Pix produto;
 	private Pix pedido;
+	private Pix cupomDesconto;
 
 	public Integer getId() {
 		return id;
@@ -29,6 +30,7 @@ public class PixDTO {
 		this.preco = pix.getPreco();
 		this.produto = pix.getProduto().getPreco();
 		this.pedido = pix.getPedido();
+		this.cupomDesconto = pix.CupomDesconto();
 	}
 
 	public Pix getQuantidade() {
@@ -45,6 +47,12 @@ public class PixDTO {
 
 	public Pix getProduto() {
 		return produto;
+	}
+
+	
+
+	public Pix getCupomDesconto() {
+		return cupomDesconto;
 	}
 
 	public static List<PixDTO> converter(List<Pix> pixs) {

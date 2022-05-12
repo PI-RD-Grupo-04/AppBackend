@@ -77,11 +77,17 @@ public class Pix {
 		
 		return null;
 	}
+	public Pix CupomDesconto() {
+		
+		return null;
+	}
+	
 
 	@Override
 	public String toString() {
 		return "Pix [id=" + id + ", codigoPix=" + codigoPix + ", tipoPagamento=" + tipoPagamento + "]";
 	}
+
 	
 
 	
