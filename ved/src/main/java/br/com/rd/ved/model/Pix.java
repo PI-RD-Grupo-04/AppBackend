@@ -12,20 +12,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pix")
+@Table(name = "pix")
 public class Pix {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_pix")
+	@Column(name = "id_pix")
 	private Integer id;
-	@Column(name="codigo_pix")
+	@Column(name = "codigo_pix")
 	private String codigoPix;
-	
-	
-	@OneToMany(mappedBy="pix",fetch = FetchType.LAZY)
-	private List <TipoPagamento> tipoPagamento; 
-	
+
+	@OneToMany(mappedBy = "pix", fetch = FetchType.LAZY)
+	private List<TipoPagamento> tipoPagamento;
+
 	public Pix() {
 		super();
 	}
@@ -55,41 +54,39 @@ public class Pix {
 		this.codigoPix = codigoPix;
 	}
 
-	
-
 	public Pix getPreco() {
 		return null;
-		
-		
+
 	}
 
 	public Pix getQuantidade() {
-		
+
 		return null;
 	}
 
 	public Pix getProduto() {
-		
+
 		return null;
 	}
 
 	public Pix getPedido() {
-		
+
 		return null;
 	}
+
 	public Pix CupomDesconto() {
-		
+
 		return null;
 	}
-	
+
+	public Pix getCupomDesconto() {
+
+		return null;
+	}
 
 	@Override
 	public String toString() {
 		return "Pix [id=" + id + ", codigoPix=" + codigoPix + ", tipoPagamento=" + tipoPagamento + "]";
 	}
 
-	
-
-	
-	
 }

@@ -30,7 +30,7 @@ public class PixDTO {
 		this.preco = pix.getPreco();
 		this.produto = pix.getProduto().getPreco();
 		this.pedido = pix.getPedido();
-		this.cupomDesconto = pix.CupomDesconto();
+		this.cupomDesconto = pix.getCupomDesconto();
 	}
 
 	public Pix getQuantidade() {
@@ -48,8 +48,6 @@ public class PixDTO {
 	public Pix getProduto() {
 		return produto;
 	}
-
-	
 
 	public Pix getCupomDesconto() {
 		return cupomDesconto;
