@@ -55,11 +55,35 @@ public class Pix {
 		this.codigoPix = codigoPix;
 	}
 
+	
+
+	public Pix getPreco() {
+		return null;
+		
+		
+	}
+
+	public Pix getQuantidade() {
+		
+		return null;
+	}
+
+	public Pix getProduto() {
+		
+		return null;
+	}
+
+	public Pix getPedido() {
+		
+		return null;
+	}
+
 	@Override
 	public String toString() {
-		return "Pix [id=" + id + ", codigoPix=" + codigoPix + "]";
+		return "Pix [id=" + id + ", codigoPix=" + codigoPix + ", tipoPagamento=" + tipoPagamento + "]";
 	}
 	
+
 	
 	
 }
