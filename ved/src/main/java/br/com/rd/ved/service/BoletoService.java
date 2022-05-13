@@ -48,8 +48,8 @@ public class BoletoService {
 		 String codigoBarras;
 			System.out.println("Informe descrição para o pix");
 			codigoBarras = sc.nextLine(); 
-			Boleto boleto = new Boleto(codigoBarras);
-			boletoRepository.save(boleto);
+		//	Boleto boleto = new Boleto(codigoBarras);
+		//	boletoRepository.save(boleto);
 		
 	}
 	
