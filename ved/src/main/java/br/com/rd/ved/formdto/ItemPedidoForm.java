@@ -12,21 +12,21 @@ import br.com.rd.ved.repository.ProdutoRepository;
 
 public class ItemPedidoForm {
 
+	private Integer pedido;
+	private Integer produto;
 	private Integer quantidade;
 	private Double porcentagemIcms;
 	private Double valorIcms;
-	private Integer produto;
-	private Integer pedido;
 	
 	public ItemPedidoForm() {}
 	
-	public ItemPedidoForm(String quantidade, String porcentagemIcms, String valorIcms, String produto,
-			String pedido) {
+	public ItemPedidoForm(String pedido, String produto, String quantidade, String porcentagemIcms, 
+			String valorIcms) {
+		this.pedido = Integer.parseInt(pedido);
+		this.produto = Integer.parseInt(produto);
 		this.quantidade = Integer.parseInt(quantidade);
 		this.porcentagemIcms = Double.parseDouble(porcentagemIcms);
-		this.valorIcms = Double.parseDouble(porcentagemIcms);
-		this.produto = Integer.parseInt(produto);
-		this.pedido = Integer.parseInt(pedido);
+		this.valorIcms = Double.parseDouble(porcentagemIcms);		
 	}
 
 	public Integer getQuantidade() {
@@ -83,7 +83,7 @@ public class ItemPedidoForm {
 		Optional<Produto> produto = produtoRepository.findById(this.produto);
 		Optional<Pedido> pedido = pedidoRepository.findById(this.pedido);
 		
-		ItemPedido itemPedido = new ItemPedido(quantidade, porcentagemIcms, valorIcms, produto.get(), pedido.get());
+		ItemPedido itemPedido = new ItemPedido(pedido.get(), produto.get(), quantidade, porcentagemIcms, valorIcms);
 		itemPedido.setProduto(produto.get());
 		itemPedido.setPedido(pedido.get());
 		return itemPedido;

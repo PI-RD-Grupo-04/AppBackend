@@ -2,11 +2,9 @@ package br.com.rd.ved.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -16,56 +14,51 @@ import javax.validation.constraints.Size;
 @Table(name = "item_pedido")
 public class ItemPedido {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_item_pedido")
-	private Integer id;
+	
+	@EmbeddedId
+	private PedidoProdutoID id;
+	
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_pedido", nullable=false, insertable=false, updatable=false)
+	private Pedido pedido;
+	
+	@ManyToOne(fetch=FetchType.EAGER )
+	@JoinColumn(name="id_produto", nullable=false, insertable=false, updatable=false)
+	private Produto produtos;
+	
 	@Column(name = "quantidade_total")
 	@Size(max = 50)
 	private Integer quantidade;
+	
 	@Column(name = "porcentagem_icms")
 	private Double porcentagemIcms;
+	
 	@Column(name = "valor_icms")
 	private Double valorIcms;
-	
-	
-	@ManyToOne(fetch=FetchType.EAGER )
-	@JoinColumn(name="id_produto", nullable=false)
-	private Produto produtos;
-	
-	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_pedido", nullable=false)
-	private Pedido pedido;
 
-	public ItemPedido() {
-		super();
-	}
-
-	public ItemPedido(Integer id, Integer quantidade, Double porcentagemIcms, Double valorIcms, Produto produto,
-			Pedido pedido) {
-		this.id = id;
+	public ItemPedido(Pedido pedido, Produto produtos, @Size(max = 50) Integer quantidade, Double porcentagemIcms,
+			Double valorIcms) {
+		this.pedido = pedido;
+		this.produtos = produtos;
 		this.quantidade = quantidade;
 		this.porcentagemIcms = porcentagemIcms;
 		this.valorIcms = valorIcms;
-		this.produtos = produto;
-		this.pedido = pedido;
 	}
 
-	public ItemPedido(Integer quantidade, Double porcentagemIcms, Double valorIcms, Produto produto, Pedido pedido) {
-		this.quantidade = quantidade;
-		this.porcentagemIcms = porcentagemIcms;
-		this.valorIcms = valorIcms;
-		this.produtos = produto;
-		this.pedido = pedido;
-	}
-
-	public Integer getId() {
+	public PedidoProdutoID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(PedidoProdutoID id) {
 		this.id = id;
+	}
+
+	public Produto getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(Produto produtos) {
+		this.produtos = produtos;
 	}
 
 	public Integer getQuantidade() {
@@ -110,8 +103,9 @@ public class ItemPedido {
 
 	@Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", quantidade=" + quantidade + ", porcentagemIcms=" + porcentagemIcms
-				+ ", valorIcms=" + valorIcms + ", produto=" + produtos + ", pedido=" + pedido + "]";
+		return "ItemPedido [id=" + id + ", pedido=" + pedido + ", produtos=" + produtos + ", quantidade=" + quantidade
+				+ ", porcentagemIcms=" + porcentagemIcms + ", valorIcms=" + valorIcms + "]";
 	}
+
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,21 +24,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Produto {
 
 	@Id
+	@EmbeddedId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
 	private Integer id;
+	
 	@Column(name = "nome_produto")
 	@Size(max = 50)
 	private String nomeProduto;
+	
 	@Column(name = "preco")
 	private BigDecimal preco;
+	
 	@Column(name = "imagem_url")
 	private String url;
+	
 	@Column(name = "descricao_produto")
 	private String descricao;
+	
 	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
+	
 	@Column(name = "quantidade")
 	private int quantidade;
 

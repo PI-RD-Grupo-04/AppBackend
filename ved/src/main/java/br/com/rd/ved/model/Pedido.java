@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Pedido {
 
 	@Id
+	@EmbeddedId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido")
 	private Integer id;
@@ -56,7 +58,7 @@ public class Pedido {
 	private Endereco enderecos;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itemPedidos;
 	
 	@JsonIgnore
@@ -70,12 +72,9 @@ public class Pedido {
 			@JoinColumn(name = "id_tipo_pagamento") })
 	private List<TipoPagamento> tipoPagamento;
 	
-	
-
 	public Pedido() {
 		super();
 	}
-
 
 	public Pedido(Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus, Frete frete,
 			Endereco enderecos) {

@@ -11,12 +11,14 @@ import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.CupomDesconto;
 import br.com.rd.ved.model.Endereco;
 import br.com.rd.ved.model.Frete;
+import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
 import br.com.rd.ved.model.PedidoStatus;
 import br.com.rd.ved.repository.ClienteRepository;
 import br.com.rd.ved.repository.CupomDescontoRepository;
 import br.com.rd.ved.repository.EnderecoRepository;
 import br.com.rd.ved.repository.FreteRepository;
+import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.PedidoStatusRepository;
 
@@ -30,6 +32,7 @@ public class PedidoForm {
 	private Integer pedidoStatus;
 	private Integer frete;
 	private Integer enderecos;
+
 
 
 	public PedidoForm(String data, String cliente, String cupomDesconto,
@@ -100,19 +103,23 @@ public class PedidoForm {
 	public void setEnderecos(Integer enderecos) {
 		this.enderecos = enderecos;
 	}
-	
+		
+
+
+
 	public Pedido converter(PedidoRepository pedidoRepository, 
 							ClienteRepository clienteRepository,
 							CupomDescontoRepository cupomDescontoRepository,
 							PedidoStatusRepository pedidoStatusRepository,
 							FreteRepository freteRepository,
-							EnderecoRepository enderecoRepository) { 
+							EnderecoRepository enderecoRepository){ 
 		
 		Optional<Cliente> cliente = clienteRepository.findById(this.cliente);		
 		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(this.cupomDesconto);
 		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(this.pedidoStatus);
 		Optional<Frete> frete = freteRepository.findById(this.frete);
 		Optional<Endereco> endereco = enderecoRepository.findById(this.enderecos);
+		
 		Pedido pedido = new Pedido(data, cliente.get(), cupomDesconto.get(), pedidoStatus.get(), frete.get(), endereco.get());
 				
 		return pedido;
