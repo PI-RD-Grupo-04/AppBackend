@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 
-import br.com.rd.ved.model.Boleto;
 import br.com.rd.ved.repository.BoletoRepository;
 
 @Service
