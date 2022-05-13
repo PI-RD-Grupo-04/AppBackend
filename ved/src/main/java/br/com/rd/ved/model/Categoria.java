@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "categoria")
 public class Categoria {
@@ -23,6 +25,7 @@ public class Categoria {
 	@Size(max = 50)
 	private String descricao;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "categoria")
 	private List<Produto> produtos;
 
@@ -54,10 +57,20 @@ public class Categoria {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", descricao=" + descricao + "]";
+		return  descricao;
 	}
+
+	
 
 }

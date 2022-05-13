@@ -1,6 +1,7 @@
 package br.com.rd.ved.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "endereco")
 public class Endereco {
@@ -23,38 +26,49 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_endereco")
 	private Integer id;
+	
 	@Column(name = "cep")
 	@Size(max = 10)
 	private String cep;
+	
 	@Column(name = "rua")
 	@Size(max = 100)
 	private String rua;
+	
 	@Column(name = "numero")
 	@Size(max = 10)
 	private Integer numero;
+	
 	@Column(name = "complemento")
 	@Size(max = 50)
 	private String complemento;
+	
 	@Column(name = "municipio")
 	@Size(max = 50)
 	private String municipio;
+	
 	@Column(name = "cidade")
 	@Size(max = 50)
 	private String cidade;
-	
-	@OneToMany(mappedBy = "enderecos")
-	private List <Pedido> pedidos; 
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
+	private List<Pedido> pedidos;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_uf", nullable = false)
 	private Uf uf;
-	
-	@ManyToMany(mappedBy="enderecos",fetch = FetchType.EAGER)
-	private List<Fornecedor> fornecedores; 
-	
-	
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
+	private List<Fornecedor> fornecedores;
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
+	private List<Cliente> clientes;
+
 	public Endereco() {
-		super();
 	}
 
 	public Endereco(String cep, String rua, Integer numero, String complemento, String municipio, String cidade) {
@@ -74,7 +88,6 @@ public class Endereco {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -131,7 +144,7 @@ public class Endereco {
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
-	
+
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
@@ -146,6 +159,31 @@ public class Endereco {
 
 	public void setFornecedores(List<Fornecedor> fornecedores) {
 		this.fornecedores = fornecedores;
+	}
+	
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override

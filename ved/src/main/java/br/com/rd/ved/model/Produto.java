@@ -3,39 +3,51 @@ package br.com.rd.ved.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "produto")
 public class Produto {
 
 	@Id
+	@EmbeddedId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
 	private Integer id;
+	
 	@Column(name = "nome_produto")
 	@Size(max = 50)
 	private String nomeProduto;
+	
 	@Column(name = "preco")
 	private BigDecimal preco;
+	
 	@Column(name = "imagem_url")
 	private String url;
+	
 	@Column(name = "descricao_produto")
 	private String descricao;
+	
 	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
+	
+	@Column(name = "quantidade")
+	private int quantidade;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_categoria", nullable = false)
@@ -49,28 +61,42 @@ public class Produto {
 	@JoinColumn(name = "id_status_produto", nullable = false)
 	private StatusProduto statusProduto;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "produtos")
 	private List<ItemPedido> itemPedido;
 
-	
-	@ManyToMany(mappedBy="produtos",fetch = FetchType.EAGER)
-	private List<Fornecedor> fornecedores;
-	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) 
+	@JoinColumn(name = "id_fornecedor", nullable = false)
+	private Fornecedor fornecedores;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_armazenamento", nullable = false)
+	private Armazenamento armazenamento;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_receita", nullable = true)
+	private Receita receita;
+
 	public Produto() {
 		super();
 	}
 
-	public Produto(Integer id, String nomeProduto, BigDecimal preco, String url, String descricao, Double peso,
-			Categoria categoria, Marca marca, StatusProduto statusProduto) {
-		this.id = id;
+	public Produto(@Size(max = 50) String nomeProduto, BigDecimal preco, String url, String descricao,
+			@Size(max = 100) Double peso, int quantidade, Categoria categoria, Marca marca, StatusProduto statusProduto,
+			 Fornecedor fornecedores, Armazenamento armazenamento, Receita receita) {
 		this.nomeProduto = nomeProduto;
 		this.preco = preco;
 		this.url = url;
 		this.descricao = descricao;
 		this.peso = peso;
+		this.quantidade = quantidade;
 		this.categoria = categoria;
 		this.marca = marca;
 		this.statusProduto = statusProduto;
+		this.fornecedores = fornecedores;
+		this.armazenamento = armazenamento;
+		this.receita = receita;
 	}
 
 	public Integer getId() {
@@ -95,6 +121,30 @@ public class Produto {
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+
+	public Armazenamento getArmazenamento() {
+		return armazenamento;
+	}
+
+	public void setArmazenamento(Armazenamento armazenamento) {
+		this.armazenamento = armazenamento;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Receita getReceita() {
+		return receita;
+	}
+
+	public void setReceita(Receita receita) {
+		this.receita = receita;
 	}
 
 	public String getUrl() {
@@ -170,6 +220,7 @@ public class Produto {
 	}
 
 	public StatusProduto getStatusProduto() {
+		
 		return statusProduto;
 	}
 
@@ -185,3 +236,4 @@ public class Produto {
 	}
 
 }
+

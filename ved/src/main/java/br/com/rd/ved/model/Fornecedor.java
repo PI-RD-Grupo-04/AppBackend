@@ -17,6 +17,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "fornecedor")
 public class Fornecedor {
@@ -34,7 +36,7 @@ public class Fornecedor {
 	@Column(name = "email")
 	@Size(max = 30)
 	private String email;
-	
+
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "fornecedor_endereco", joinColumns = {
@@ -45,11 +47,9 @@ public class Fornecedor {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "fornecedor_produto", joinColumns = {
 			@JoinColumn(name = "id_fornecedor") }, inverseJoinColumns = { @JoinColumn(name = "id_produto") })
-	private List<Produto> produtos; 
+	private List<Produto> produtos;
 
-	
-	
-	
+	@JsonIgnore
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
@@ -99,7 +99,7 @@ public class Fornecedor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-		
+
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
@@ -113,6 +113,5 @@ public class Fornecedor {
 		return "Fornecedor [id=" + id + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + ", email=" + email
 				+ ", enderecos=" + enderecos + "]";
 	}
-
 
 }

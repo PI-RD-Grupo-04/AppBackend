@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="serie")
 public class Serie {
@@ -23,7 +25,7 @@ public class Serie {
 	@Size(max = 50)
 	private String descricao;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="serie")
 	private List <NotaFiscal> series; 
 	

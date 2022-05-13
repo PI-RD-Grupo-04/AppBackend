@@ -47,7 +47,7 @@ public class ArmazenamentoService {
 	private void salvar(Scanner sc) {
 		 String descricao;
 			System.out.println("Informe descrição para o armazenamento");
-			descricao = sc.next(); 
+			descricao = sc.nextLine(); 
 			Armazenamento armazenamento = new Armazenamento(descricao);
 			armazenamentoRepository.save(armazenamento);
 		

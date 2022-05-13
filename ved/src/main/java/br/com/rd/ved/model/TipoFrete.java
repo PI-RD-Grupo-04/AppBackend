@@ -1,7 +1,6 @@
 package br.com.rd.ved.model;
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tipo_frete")
@@ -23,6 +23,7 @@ public class TipoFrete {
 	@Size(max = 50)
 	private String descricao;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "tipoFrete")
 	private List<Frete> fretes;
 	

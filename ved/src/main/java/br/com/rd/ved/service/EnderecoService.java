@@ -3,6 +3,7 @@ package br.com.rd.ved.service;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import br.com.rd.ved.model.Endereco;
@@ -17,10 +18,10 @@ public class EnderecoService {
 	private Boolean sistema = true;
 	
 	
-	public EnderecoService(EnderecoRepository enderecoRepository, UfRepository ufRepository) {
+	public EnderecoService(EnderecoRepository enderecoRepository, CrudRepository ufRepository) {
 		super();
 		this.enderecoRepository = enderecoRepository;
-		this.ufRepository = ufRepository;
+		this.ufRepository = (UfRepository) ufRepository;
 	}
 
 	public void iniciar(Scanner sc) {

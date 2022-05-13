@@ -9,4 +9,5 @@ import br.com.rd.ved.model.PedidoStatus;
 @Repository
 public interface PedidoStatusRepository extends JpaRepository<PedidoStatus, Integer>,  CrudRepository<PedidoStatus,Integer>{
 
+	PedidoStatus findByDescricao(String descricao);
 }

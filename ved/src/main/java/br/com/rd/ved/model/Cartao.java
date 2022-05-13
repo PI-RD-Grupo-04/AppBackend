@@ -1,6 +1,8 @@
 package br.com.rd.ved.model;
 
-import javax.persistence.CascadeType;
+import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,12 +10,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "cartao")
 public class Cartao {
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cartao other = (Cartao) obj;
+		return Objects.equals(id, other.id);
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,14 +56,21 @@ public class Cartao {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_bandeira", nullable=false)
 	private Bandeira idBandeira;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy="cartoes",fetch = FetchType.LAZY)
+	private List<Cliente> cliente; 
+	
+	@OneToMany(mappedBy="cartao",fetch = FetchType.LAZY)
+	private List <TipoPagamento> tipoPagamento; 
 
 	public Cartao() {
 		super();
 	}
 
-	public Cartao(Integer id, String numeroCartao, String nomeTitular, String cpfTitular, Integer diaVencimento,
+	public Cartao(String numeroCartao, String nomeTitular, String cpfTitular, Integer diaVencimento,
 			Integer anoVencimento, Bandeira idBandeira) {
-		this.id = id;
+
 		this.numeroCartao = numeroCartao;
 		this.nomeTitular = nomeTitular;
 		this.cpfTitular = cpfTitular;
