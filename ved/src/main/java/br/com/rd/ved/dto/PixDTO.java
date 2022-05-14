@@ -2,18 +2,13 @@ package br.com.rd.ved.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import br.com.rd.ved.model.Pix;
 
 public class PixDTO {
 
 	private Integer id;
 	private String codigoPix;
-	private Pix quantidade;
-	private Pix preco;
-	private Pix produto;
-	private Pix pedido;
-	private Pix cupomDesconto;
+	private String QRcodePix;
 
 	public Integer getId() {
 		return id;
@@ -23,34 +18,14 @@ public class PixDTO {
 		return codigoPix;
 	}
 
+	public String getQRcode() {
+		return QRcodePix;
+	}
+
 	public PixDTO(Pix pix) {
-
+		this.id = pix.getId();
 		this.codigoPix = pix.getCodigoPix();
-		this.quantidade = pix.getQuantidade();
-		this.preco = pix.getPreco();
-		this.produto = pix.getProduto().getPreco();
-		this.pedido = pix.getPedido();
-		this.cupomDesconto = pix.getCupomDesconto();
-	}
-
-	public Pix getQuantidade() {
-		return quantidade;
-	}
-
-	public Pix getPreco() {
-		return preco;
-	}
-
-	public Pix getPedido() {
-		return pedido;
-	}
-
-	public Pix getProduto() {
-		return produto;
-	}
-
-	public Pix getCupomDesconto() {
-		return cupomDesconto;
+		this.QRcodePix = pix.getCodigoPix();
 	}
 
 	public static List<PixDTO> converter(List<Pix> pixs) {

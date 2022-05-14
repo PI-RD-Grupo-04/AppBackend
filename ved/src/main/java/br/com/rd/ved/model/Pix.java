@@ -22,6 +22,9 @@ public class Pix {
 	@Column(name = "codigo_pix")
 	private String codigoPix;
 
+	@Column(name = "QR_code")
+	private String QRcode;
+
 	@OneToMany(mappedBy = "pix", fetch = FetchType.LAZY)
 	private List<TipoPagamento> tipoPagamento;
 
@@ -54,39 +57,14 @@ public class Pix {
 		this.codigoPix = codigoPix;
 	}
 
-	public Pix getPreco() {
-		return null;
-
-	}
-
-	public Pix getQuantidade() {
-
-		return null;
-	}
-
-	public Pix getProduto() {
-
-		return null;
-	}
-
-	public Pix getPedido() {
-
-		return null;
-	}
-
-	public Pix CupomDesconto() {
-
-		return null;
-	}
-
-	public Pix getCupomDesconto() {
-
-		return null;
+	public void setQRcode(String qRcode) {
+		QRcode = qRcode;
 	}
 
 	@Override
 	public String toString() {
-		return "Pix [id=" + id + ", codigoPix=" + codigoPix + ", tipoPagamento=" + tipoPagamento + "]";
+		return "Pix [id=" + id + ", codigoPix=" + codigoPix + ", QRcode=" + QRcode + ", tipoPagamento=" + tipoPagamento
+				+ "]";
 	}
 
 }
