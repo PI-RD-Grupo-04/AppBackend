@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.rd.ved.dto.PedidoDTO;
+import br.com.rd.ved.dto.PedidoDetalheDTO;
+import br.com.rd.ved.dto.meusPedidosDTO;
 import br.com.rd.ved.formdto.PedidoForm;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.PedidoStatus;
 import br.com.rd.ved.repository.ClienteRepository;
 import br.com.rd.ved.repository.CupomDescontoRepository;
 import br.com.rd.ved.repository.EnderecoRepository;
@@ -54,16 +55,18 @@ public class PedidoController {
 	private EnderecoRepository enderecoRepository;
 
 	@GetMapping
-	public List<PedidoDTO> listar() {
+	public List<PedidoDetalheDTO> listar() {
 		List<Pedido> pedidos = pedidoRepository.findAll();
-		return PedidoDTO.converter(pedidos);
+		return PedidoDetalheDTO.converter(pedidos);
 	}
 
 	@PostMapping("/cliente={id}/novo")
 	@Transactional
 	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id,
 			@RequestBody @Valid PedidoForm pedidoForm, UriComponentsBuilder uriBuilder) {
+		
 		Optional<Cliente> cliente = clienteRepository.findById(id);
+		
 		Pedido pedido = pedidoForm.converter(pedidoRepository, clienteRepository, cupomDescontoRepository,
 				pedidoStatusRepository, freteRepository, enderecoRepository);
 		pedidoRepository.save(pedido);
@@ -73,7 +76,7 @@ public class PedidoController {
 	}
 
 	@GetMapping("/cliente={id}/detalhar/{pedido}")
-	public ResponseEntity<PedidoDTO> detalhar(@PathVariable("id") Integer id,
+	public ResponseEntity<PedidoDetalheDTO> detalhar(@PathVariable("id") Integer id,
 			@PathVariable("pedido") Integer idPedido) {
 
 		Optional<Cliente> cliente = clienteRepository.findById(id);
@@ -83,12 +86,12 @@ public class PedidoController {
 
 		if (cliente.isPresent() && pedidos.contains(pedido.get())) {
 
-			return ResponseEntity.ok().body(new PedidoDTO(pedido.get()));
+			return ResponseEntity.ok().body(new PedidoDetalheDTO(pedido.get()));
 		}
 		return ResponseEntity.notFound().build();
 	}
 
-	@DeleteMapping("/cliente={id}/delete/{pedido}")
+	@DeleteMapping("/cliente={id}/cancelar/{pedido}")
 	@Transactional
 	public ResponseEntity<?> cancelar(@PathVariable("id") Integer id, @PathVariable("pedido") Integer idPedido) {
 
@@ -107,6 +110,14 @@ public class PedidoController {
 		}
 
 		return ResponseEntity.notFound().build();
+	} 
+	
+	
+	@GetMapping("/cliente={id}/pedidos")
+	public List<meusPedidosDTO> detalhar(@PathVariable("id") Integer id) {
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		List<Pedido> pedidos = cliente.get().getPedidos();
+		return meusPedidosDTO.converter(pedidos);
 	}
 
 }

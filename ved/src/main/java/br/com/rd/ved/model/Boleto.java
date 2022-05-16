@@ -13,35 +13,37 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="boleto")
+@Table(name = "boleto")
 public class Boleto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_boleto")
+	@Column(name = "id_boleto")
 	private Integer id;
-	@Column(name="codigo_barra", nullable = false)
+	@Column(name = "codigo_barra", nullable = false)
 	@Size(max = 25)
 	private String codigoBarras;
-	
-	@OneToMany(mappedBy="boleto",fetch = FetchType.LAZY)
-	private List <TipoPagamento> tipoPagamento; 
-	
-	
-	
-	
+	@Column(name = "nome", nullable = false)
+	@Size(max = 50)
+	private String nome;
+	@Column(name = "cpf", nullable = false)
+	@Size(max = 15)
+	private String cpf;
+
+	@OneToMany(mappedBy = "boleto", fetch = FetchType.LAZY)
+	private List<TipoPagamento> tipoPagamento;
+
 	public Boleto() {
 		super();
 	}
 
-	public Boleto(Integer id, String codigoBarras) {
-		this.id = id;
+	public Boleto(@Size(max = 25) String codigoBarras, @Size(max = 50) String nome, @Size(max = 15) String cpf) {
+		super();
 		this.codigoBarras = codigoBarras;
+		this.nome = nome;
+		this.cpf = cpf;
 	}
 
-	public Boleto(String codigoBarras) {
-		this.codigoBarras = codigoBarras;
-	}
 
 	public Integer getId() {
 		return id;
@@ -56,15 +58,28 @@ public class Boleto {
 	}
 
 	public void setCodigoBarras(String codigoBarras) {
-		this.codigoBarras = codigoBarras;
+		this.codigoBarras =codigoBarras;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
 	@Override
 	public String toString() {
 		return "Boleto [id=" + id + ", codigoBarras=" + codigoBarras + "]";
 	}
-	
-	
-	
+
 }

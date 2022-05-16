@@ -39,7 +39,7 @@ public class Produto {
 	@Column(name = "peso_kilo")
 	private Double peso;
 	@Column(name = "quantidade")
-	private Integer quantidade;
+	private int quantidade;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_categoria", nullable = false)
@@ -75,7 +75,7 @@ public class Produto {
 	}
 
 	public Produto(@Size(max = 50) String nomeProduto, BigDecimal preco, String url, String descricao,
-			@Size(max = 100) Double peso, Integer quantidade, Categoria categoria, Marca marca, StatusProduto statusProduto,
+			@Size(max = 100) Double peso, int quantidade, Categoria categoria, Marca marca, StatusProduto statusProduto,
 			 Fornecedor fornecedores, Armazenamento armazenamento, Receita receita) {
 		this.nomeProduto = nomeProduto;
 		this.preco = preco;
@@ -123,11 +123,11 @@ public class Produto {
 		this.armazenamento = armazenamento;
 	}
 
-	public Integer getQuantidade() {
+	public int getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Integer quantidade) {
+	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
 

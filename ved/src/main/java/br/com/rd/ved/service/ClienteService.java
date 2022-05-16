@@ -18,7 +18,7 @@ public class ClienteService {
 	private Integer id;
 	private Date dataNascimento;
 	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-
+	
 	public ClienteService(ClienteRepository clienteRepository) {
 		this.clienteRepository = clienteRepository;
 	}
@@ -71,16 +71,16 @@ public class ClienteService {
 		Iterable<Cliente> clientes = clienteRepository.findAll();
 		clientes.forEach(cliente -> System.out.println(cliente));
 	}
-
-	@Transactional // não executa se todos não derem certo
+@Transactional	//não executa se todos não derem certo
 	private void atualizar(Scanner sc) {
 
 		System.out.println("Informe o Id do registro a ser atualizado");
 		id = Integer.parseInt(sc.nextLine());
-		Cliente cliente = clienteRepository.findById(id).get(); // select no banco pelo id
-
+		Cliente cliente = clienteRepository.findById(id).get(); //select no banco pelo id
+		
 		System.out.println("Informe o nome para o Cliente");
 		String nomeCliente = sc.next();
+		
 
 		System.out.println("Informe o sobre Nome para o Cliente");
 		String sobreNomeCliente = sc.nextLine();
@@ -93,13 +93,14 @@ public class ClienteService {
 
 		System.out.println("Informe a nova senha para o Cliente");
 		String senha = sc.nextLine();
-
+		
 		cliente.setNome(nomeCliente);
 		cliente.setSobreNome(sobreNomeCliente);
 		cliente.setNomeSocial(nomeSocial);
 		cliente.setTelefone(telefone);
 		cliente.setSenha(senha);
-
+		
+		
 		clienteRepository.saveAndFlush(cliente);
 
 		System.out.println("Cliente Atualizado com Sucesso");
@@ -107,7 +108,8 @@ public class ClienteService {
 	}
 
 	private void salvar(Scanner sc) throws ParseException {
-
+		
+	
 		System.out.println("Informe o nome para o Cliente");
 		String nomeCliente = sc.next();
 		sc.nextLine();
@@ -115,13 +117,13 @@ public class ClienteService {
 		System.out.println("Informe o sobre Nome para o Cliente");
 		String sobreNomeCliente = sc.next();
 		sc.nextLine();
-
+		
 		System.out.println("Informe o nome Social para o Cliente");
 		String nomeSocial = sc.nextLine();
-
+				
 		System.out.println("Informe o cpf do Cliente");
 		String cpf = sc.nextLine();
-
+		
 		System.out.println("Informe a data de nascimento do Cliente (--/--/----)");
 		String dt = sc.nextLine();
 		dataNascimento = formato.parse(dt);
@@ -152,12 +154,12 @@ public class ClienteService {
 		System.out.println("Cliente Salvo com Sucesso");
 
 	}
-
+	
 	public String codificarSenha(String senha) {
-		return BCrypt.withDefaults().hashToString(12, senha.toCharArray());
-
-	}
-
+        return BCrypt.withDefaults().hashToString(12, senha.toCharArray());
+        
+    }
+	
 //	public boolean validarSenha(String senha, String senhaCrypto) {
 //        BCrypt.Result response = BCrypt.verifyer().verify(senha.toCharArray(), senhaCrypto);
 //        return response.verified;

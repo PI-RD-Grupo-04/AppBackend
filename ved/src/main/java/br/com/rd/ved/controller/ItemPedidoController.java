@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,15 +39,6 @@ public class ItemPedidoController {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
-	@GetMapping
-	public List<ItemPedidoDTO> listar(Integer idpedido) {
-		if (idpedido == null) {
-			List<ItemPedido> itemPedidos = itemPedidoRepository.findAll();
-			return ItemPedidoDTO.converter(itemPedidos);
-		} else {
-			return null;
-		}
-	}
 
 	@PostMapping("/pedido={id}/novo")
 	@Transactional
@@ -65,39 +55,17 @@ public class ItemPedidoController {
 
 	}
 
-	@GetMapping("/pedido={id}/detalhar/{itemPedido}")
-	public ResponseEntity<ItemPedidoDTO> detalhar(@PathVariable("id") Integer id,
-			@PathVariable("itemPedido") Integer idItemPedido) {
-
+	
+	@GetMapping("/pedido={id}/items")
+	public ResponseEntity<List<ItemPedidoDTO>> visualizar(@PathVariable("id") Integer id){
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		Optional<ItemPedido> itemPedido = itemPedidoRepository.findById(idItemPedido);
-		List<ItemPedido> itemPedidos = new ArrayList<>();
-		itemPedidos = pedido.get().getItemPedidos();
-
-		if (pedido.isPresent() && itemPedidos.contains(itemPedido.get())) {
-
-			return ResponseEntity.ok().body(new ItemPedidoDTO(itemPedido.get()));
+		
+		if (pedido.isPresent()) {
+			List<ItemPedido> itemPedidos = new ArrayList<>();
+			itemPedidos = pedido.get().getItemPedidos();
+			return ResponseEntity.ok().body(ItemPedidoDTO.converter(itemPedidos));
 		}
 		return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping("/pedido={id}/deletar/{itemPedido}")
-	@Transactional
-	public ResponseEntity<?> remover(@PathVariable("id") Integer id, @PathVariable("itemPedido") Integer idItemPedido) {
-
-		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		Optional<ItemPedido> itemPedido = itemPedidoRepository.findById(idItemPedido);
-
-		if (itemPedido.isPresent() && pedido.isPresent()) {
-			List<ItemPedido> itemPedidos = new ArrayList<>();
-			itemPedidos = pedido.get().getItemPedidos();
-
-			itemPedidos.remove(itemPedido.get());
-			pedido.get().setItemPedidos(itemPedidos);
-
-			pedidoRepository.save(pedido.get());
-			return ResponseEntity.ok().build();
-		}
-		return ResponseEntity.notFound().build();
-	}
 }

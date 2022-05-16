@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.sun.istack.NotNull;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.repository.ClienteRepository;
 
@@ -121,10 +122,14 @@ public class ClienteForm {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public String codificarSenha(String senha) {
+        return BCrypt.withDefaults().hashToString(12, senha.toCharArray());
+        
+    }
 
 	public Cliente converter(ClienteRepository clienteRepository) {
-		return new Cliente(nome, sobrenome, nomeSocial, cpf, dataNascimento, email, telefone, senha);
-
+		this.senha = codificarSenha(senha);
+	return new Cliente(nome, sobrenome, nomeSocial, cpf, dataNascimento, email, telefone, senha);
+		
 	}
-
 }

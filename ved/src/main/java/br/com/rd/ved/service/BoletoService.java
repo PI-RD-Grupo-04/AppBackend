@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 
-import br.com.rd.ved.model.Boleto;
 import br.com.rd.ved.repository.BoletoRepository;
 
 @Service
@@ -48,8 +47,8 @@ public class BoletoService {
 		 String codigoBarras;
 			System.out.println("Informe descrição para o pix");
 			codigoBarras = sc.nextLine(); 
-			Boleto boleto = new Boleto(codigoBarras);
-			boletoRepository.save(boleto);
+		//	Boleto boleto = new Boleto(codigoBarras);
+		//	boletoRepository.save(boleto);
 		
 	}
 	
