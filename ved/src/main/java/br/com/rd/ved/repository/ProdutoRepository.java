@@ -30,6 +30,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer>, Crud
 	@Query(value = " select * from produto where nome_produto like :palavra%", nativeQuery = true)
 	List<Produto> findProdutosPorPalavra(@Param("palavra")String palavra); 
 	
-}
+	}
 
 
