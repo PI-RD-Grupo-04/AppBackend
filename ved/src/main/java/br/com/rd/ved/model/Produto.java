@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Produto {
 
 	@Id
-	//@EmbeddedId  
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
 	private Integer id;
@@ -62,7 +61,7 @@ public class Produto {
 	private StatusProduto statusProduto;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "produtos")
+	@OneToMany(mappedBy = "produto")
 	private List<ItemPedido> itemPedido;
 
 	@JsonIgnore

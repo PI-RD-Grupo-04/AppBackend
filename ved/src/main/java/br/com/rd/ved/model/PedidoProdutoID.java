@@ -3,6 +3,7 @@ package br.com.rd.ved.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 
@@ -12,41 +13,61 @@ public class PedidoProdutoID implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id_pedido;
+	@Column(name="id_pedido")
+	private Integer idPedido;
 	
-	private Integer id_produto;
+	@Column(name="id_produto")
+	private Integer idProduto;
 	
 	
 	
 	public PedidoProdutoID() {}
-	
-	public PedidoProdutoID(Integer id_pedido, Integer id_produto) {
-		this.id_pedido = id_pedido;
-		this.id_produto = id_produto;
+
+
+
+	public PedidoProdutoID(Integer idPedido, Integer idProduto) {
+		this.idPedido = idPedido;
+		this.idProduto = idProduto;
 	}
 
 
 
-	public Integer getId_pedido() {
-		return id_pedido;
+	public Integer getIdPedido() {
+		return idPedido;
 	}
-	
-	public void setId_pedido(Integer id_pedido) {
-		this.id_pedido = id_pedido;
+
+
+
+	public void setIdPedido(Integer idPedido) {
+		this.idPedido = idPedido;
 	}
-	
-	public Integer getId_produto() {
-		return id_produto;
+
+
+
+	public Integer getIdProduto() {
+		return idProduto;
 	}
-	
-	public void setId_produto(Integer id_produto) {
-		this.id_produto = id_produto;
+
+
+
+	public void setIdProduto(Integer idProduto) {
+		this.idProduto = idProduto;
 	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id_pedido, id_produto);
+		return Objects.hash(idPedido, idProduto);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -57,6 +78,8 @@ public class PedidoProdutoID implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PedidoProdutoID other = (PedidoProdutoID) obj;
-		return Objects.equals(id_pedido, other.id_pedido) && Objects.equals(id_produto, other.id_produto);
-	}		
+		return Objects.equals(idPedido, other.idPedido) && Objects.equals(idProduto, other.idProduto);
+	}
+	
+		
 }
