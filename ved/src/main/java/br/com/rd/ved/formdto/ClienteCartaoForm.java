@@ -82,7 +82,7 @@ public class ClienteCartaoForm {
 
 		public Cartao converter(BandeiraRepository bandeiraRepository) {
 			Optional<Bandeira> bandeira = bandeiraRepository.findById(this.idBandeira);
-			Cartao cartao = new Cartao(numeroCartao, nomeTitular, cpfTitular, diaVencimento, anoVencimento, bandeira.get() );
+			Cartao cartao = new Cartao(anoVencimento, numeroCartao, nomeTitular, cpfTitular, diaVencimento, anoVencimento, bandeira.get(), null, null, anoVencimento, anoVencimento );
 			cartao.setBandeiraId(bandeira.get());
 			return cartao;
 		}

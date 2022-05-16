@@ -53,30 +53,38 @@ public class Cartao {
 	@Column(name = "ano_vencimento", nullable = false)
 	private Integer anoVencimento;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id_bandeira", nullable=false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_bandeira", nullable = false)
 	private Bandeira idBandeira;
-	
+
 	@JsonIgnore
-	@ManyToMany(mappedBy="cartoes",fetch = FetchType.LAZY)
-	private List<Cliente> cliente; 
-	
-	@OneToMany(mappedBy="cartao",fetch = FetchType.LAZY)
-	private List <TipoPagamento> tipoPagamento; 
+	@ManyToMany(mappedBy = "cartoes", fetch = FetchType.LAZY)
+	private List<Cliente> cliente;
+
+	@OneToMany(mappedBy = "cartao", fetch = FetchType.LAZY)
+	private List<TipoPagamento> tipoPagamento;
+	private Integer NParcelas;
+	private Integer parcelas;
 
 	public Cartao() {
 		super();
 	}
 
-	public Cartao(String numeroCartao, String nomeTitular, String cpfTitular, Integer diaVencimento,
-			Integer anoVencimento, Bandeira idBandeira) {
-
+	public Cartao(Integer id, String numeroCartao, String nomeTitular, String cpfTitular, Integer diaVencimento,
+			Integer anoVencimento, Bandeira idBandeira, List<Cliente> cliente, List<TipoPagamento> tipoPagamento,
+			Integer nParcelas, Integer parcelas) {
+		super();
+		this.id = id;
 		this.numeroCartao = numeroCartao;
 		this.nomeTitular = nomeTitular;
 		this.cpfTitular = cpfTitular;
 		this.diaVencimento = diaVencimento;
 		this.anoVencimento = anoVencimento;
 		this.idBandeira = idBandeira;
+		this.cliente = cliente;
+		this.tipoPagamento = tipoPagamento;
+		NParcelas = nParcelas;
+		this.parcelas = parcelas;
 	}
 
 	public Integer getId() {
@@ -135,11 +143,28 @@ public class Cartao {
 		this.idBandeira = bandeiraId;
 	}
 
+	public Integer getNParcelas(Integer NParcelas) {
+		return NParcelas;
+	}
+
+	public <NParcelas> void setNparcelas(NParcelas nParcelas) {
+		this.NParcelas = parcelas;
+	}
+
+	public Integer getNParcelas() {
+		return NParcelas;
+	}
+
 	@Override
 	public String toString() {
 		return "Cartao [id=" + id + ", numeroCartao=" + numeroCartao + ", nomeTitular=" + nomeTitular + ", cpfTitular="
-				+ cpfTitular + ", diaVencimento=" + diaVencimento + ", anoVencimento=" + anoVencimento + ", bandeiraId="
-				+ idBandeira + "]";
+				+ cpfTitular + ", diaVencimento=" + diaVencimento + ", anoVencimento=" + anoVencimento + ", idBandeira="
+				+ idBandeira + ", cliente=" + cliente + ", tipoPagamento=" + tipoPagamento + ", NParcelas=" + NParcelas
+				+ ", parcelas=" + parcelas + "]";
+	}
+
+	public void setNParcelas(Integer nParcelas) {
+		NParcelas = nParcelas;
 	}
 
 }

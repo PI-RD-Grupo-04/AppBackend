@@ -13,45 +13,46 @@ public class CartaoDTO {
 	private Integer anoVencimento;
 	private Integer diaVencimento;
 	private Bandeira idBandeira;
+	private Integer NParcelas;
 
 	public CartaoDTO(Cartao cartao) {
 		this.numeroCartao = cartao.getNumeroCartao();
 		this.anoVencimento = cartao.getAnoVencimento();
 		this.diaVencimento = cartao.getDiaVencimento();
-		this.idBandeira = cartao.getBandeiraId(); 
+		this.idBandeira = cartao.getBandeiraId();
 		this.titular = cartao.getNomeTitular();
+		this.NParcelas = cartao.getNParcelas();
 
 	}
 
-	
 	public String getNumeroCartao() {
 		return numeroCartao;
 	}
-
 
 	public String getTitular() {
 		return titular;
 	}
 
-
 	public Integer getAnoVencimento() {
 		return anoVencimento;
 	}
-
 
 	public Integer getDiaVencimento() {
 		return diaVencimento;
 	}
 
-
 	public Bandeira getIdBandeira() {
 		return idBandeira;
 	}
 
+	public Integer getNParcelas() {
+		return NParcelas;
+	}
 
 	public static List<CartaoDTO> converter(List<Cartao> cartoes) {
 
 		return cartoes.stream().map(CartaoDTO::new).collect(Collectors.toList());
 
 	}
+
 }
