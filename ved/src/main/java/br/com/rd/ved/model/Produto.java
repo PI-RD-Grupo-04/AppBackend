@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Produto {
 
 	@Id
-	@EmbeddedId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
 	private Integer id;
