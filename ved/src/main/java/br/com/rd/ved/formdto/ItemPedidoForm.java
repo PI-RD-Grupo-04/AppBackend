@@ -6,6 +6,7 @@ import java.util.Optional;
 import br.com.rd.ved.dto.ItemPedidoDTO;
 import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
+import br.com.rd.ved.model.PedidoProdutoID;
 import br.com.rd.ved.model.Produto;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.ProdutoRepository;
@@ -80,8 +81,9 @@ public class ItemPedidoForm {
 	}
 
 	public ItemPedido converter(ProdutoRepository produtoRepository, PedidoRepository pedidoRepository) {
-		Optional<Produto> produto = produtoRepository.findById(this.produto);
-		Optional<Pedido> pedido = pedidoRepository.findById(this.pedido);
+		PedidoProdutoID compost = new PedidoProdutoID();
+		Optional<Produto> produto = produtoRepository.findById(compost.getIdPedido());
+		Optional<Pedido> pedido = pedidoRepository.findById(compost.getIdProduto());
 		
 		ItemPedido itemPedido = new ItemPedido(pedido.get(), produto.get(), quantidade, porcentagemIcms, valorIcms);
 		itemPedido.setProduto(produto.get());

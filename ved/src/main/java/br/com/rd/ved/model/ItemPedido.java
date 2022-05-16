@@ -24,7 +24,7 @@ public class ItemPedido {
 	
 	@ManyToOne(fetch=FetchType.EAGER )
 	@JoinColumn(name="id_produto", nullable=false, insertable=false, updatable=false)
-	private Produto produtos;
+	private Produto produto;
 	
 	@Column(name = "quantidade_total")
 	@Size(max = 50)
@@ -39,7 +39,7 @@ public class ItemPedido {
 	public ItemPedido(Pedido pedido, Produto produtos, @Size(max = 50) Integer quantidade, Double porcentagemIcms,
 			Double valorIcms) {
 		this.pedido = pedido;
-		this.produtos = produtos;
+		this.produto = produtos;
 		this.quantidade = quantidade;
 		this.porcentagemIcms = porcentagemIcms;
 		this.valorIcms = valorIcms;
@@ -53,12 +53,20 @@ public class ItemPedido {
 		this.id = id;
 	}
 
-	public Produto getProdutos() {
-		return produtos;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setProdutos(Produto produtos) {
-		this.produtos = produtos;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public Integer getQuantidade() {
@@ -85,27 +93,10 @@ public class ItemPedido {
 		this.valorIcms = valorIcms;
 	}
 
-	public Produto getProduto() {
-		return produtos;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produtos = produto;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-
 	@Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", pedido=" + pedido + ", produtos=" + produtos + ", quantidade=" + quantidade
+		return "ItemPedido [id=" + id + ", pedido=" + pedido + ", produto=" + produto + ", quantidade=" + quantidade
 				+ ", porcentagemIcms=" + porcentagemIcms + ", valorIcms=" + valorIcms + "]";
 	}
-
 
 }

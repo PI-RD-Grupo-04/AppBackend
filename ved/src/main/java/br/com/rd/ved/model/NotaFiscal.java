@@ -19,6 +19,7 @@ public class NotaFiscal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_nota_fiscal")
 	private Integer id;
+	
 	@Column(name="chave_acesso")
 	private String chaveAcesso;
 	
