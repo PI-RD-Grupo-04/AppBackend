@@ -57,7 +57,7 @@ public class ProdutoController {
 	} 
 	
 	//Escolher plano por id
-	@GetMapping("plano/{id}")
+	@GetMapping("/plano/{id}")
 	public ResponseEntity<PlanoDTO> planos (@PathVariable("id") Integer id) {
 		Optional<Produto> produto = produtoRepository.findById(id);
 
