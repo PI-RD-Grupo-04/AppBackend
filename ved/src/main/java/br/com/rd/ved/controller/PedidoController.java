@@ -28,7 +28,6 @@ import br.com.rd.ved.repository.ClienteRepository;
 import br.com.rd.ved.repository.CupomDescontoRepository;
 import br.com.rd.ved.repository.EnderecoRepository;
 import br.com.rd.ved.repository.FreteRepository;
-import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.PedidoStatusRepository;
 

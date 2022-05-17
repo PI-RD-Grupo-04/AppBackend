@@ -1,15 +1,14 @@
 package br.com.rd.ved.formdto;
 
 import java.util.List;
-import java.util.Optional;
 
 import br.com.rd.ved.dto.ItemPedidoDTO;
 import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
 import br.com.rd.ved.model.PedidoProdutoID;
 import br.com.rd.ved.model.Produto;
+import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
-import br.com.rd.ved.repository.ProdutoRepository;
 
 public class ItemPedidoForm {
 
@@ -54,6 +53,11 @@ public class ItemPedidoForm {
 		this.valorIcms = valorIcms;
 	}
 
+	
+	public Integer getPedido() {
+		return pedido;
+	}
+
 	public Integer getProduto() {
 		return produto;
 	}
@@ -62,9 +66,6 @@ public class ItemPedidoForm {
 		this.produto = produto;
 	}
 
-	public Integer getPedido() {
-		return pedido;
-	}
 
 	public void setPedido(Integer pedido) {
 		this.pedido = pedido;
@@ -80,14 +81,13 @@ public class ItemPedidoForm {
 		
 	}
 
-	public ItemPedido converter(ProdutoRepository produtoRepository, PedidoRepository pedidoRepository) {
+	public ItemPedido converter(ItemPedidoRepository ipr, Pedido pedido, Produto produto) {
 		PedidoProdutoID compost = new PedidoProdutoID();
-		Optional<Produto> produto = produtoRepository.findById(compost.getIdPedido());
-		Optional<Pedido> pedido = pedidoRepository.findById(compost.getIdProduto());
+		compost.setIdPedido(pedido.getId());
+		compost.setIdProduto(produto.getId());
 		
-		ItemPedido itemPedido = new ItemPedido(pedido.get(), produto.get(), quantidade, porcentagemIcms, valorIcms);
-		itemPedido.setProduto(produto.get());
-		itemPedido.setPedido(pedido.get());
+		ItemPedido itemPedido = new ItemPedido(pedido, produto, quantidade, porcentagemIcms, valorIcms);
+		ipr.save(itemPedido);
 		return itemPedido;
 	}
 
