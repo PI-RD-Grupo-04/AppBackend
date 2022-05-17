@@ -40,7 +40,6 @@ public class ItemPedidoController {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
-
 	@PostMapping("/novo")
 	@Transactional
 	public ResponseEntity<ItemPedidoDTO> cadastrar(@RequestBody @Valid ItemPedidoForm itemPedidoForm, 
