@@ -50,6 +50,7 @@ public class ItemPedidoController {
 		ItemPedido itemPedido = itemPedidoForm.converter(itemPedidoRepository, pedido.get(), produto.get());
 		
 		itemPedidoForm.cadastrarItemPedido(itemPedido, pedido.get(), pedidoRepository);
+		
 		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(itemPedido.getId()).toUri();
 		return ResponseEntity.created(uri).body(new ItemPedidoDTO(itemPedido));
 

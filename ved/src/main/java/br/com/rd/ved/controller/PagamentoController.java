@@ -38,6 +38,8 @@ public class PagamentoController {
 		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(boleto.getId()).toUri();
 		return ResponseEntity.created(uri).body(new BoletoDTO(boleto));
 	} 
+	  
+	
 	
 	
 	@GetMapping("/{id}")

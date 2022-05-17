@@ -16,6 +16,7 @@ import br.com.rd.ved.repository.ProdutoRepository;
 public class HomeController {
 	@Autowired
 	private ProdutoRepository produtoRepository;  
+	   
 	
 	@GetMapping("/ofertas")
 	public List<ProdutoCardDTO> ofertas() {
