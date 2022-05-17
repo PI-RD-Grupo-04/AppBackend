@@ -2,14 +2,12 @@ package br.com.rd.ved.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.rd.ved.dto.PlanoDTO;
 import br.com.rd.ved.dto.ProdutoCardDTO;
 import br.com.rd.ved.dto.ProdutoDTO;
@@ -58,8 +56,7 @@ public class ProdutoController {
 		return  ProdutoCardDTO.converter(produtos);
 	} 
 	
-	//Assinatura dos planos
-
+	//Escolher plano por id
 	@GetMapping("plano/{id}")
 	public ResponseEntity<PlanoDTO> planos (@PathVariable("id") Integer id) {
 		Optional<Produto> produto = produtoRepository.findById(id);
