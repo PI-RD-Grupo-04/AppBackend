@@ -5,10 +5,12 @@ import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Boleto;
 
+
 public class BoletoDTO {
 
+	
 	private Integer id;
-	private String codigoBarras; 
+	private String codigoBarras;
 
 	public Integer getId() {
 		return id;

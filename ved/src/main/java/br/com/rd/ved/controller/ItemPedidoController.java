@@ -41,15 +41,14 @@ public class ItemPedidoController {
 	private PedidoRepository pedidoRepository;
 
 
-	@PostMapping("/novo")
+	@PostMapping("/pedido={id}/novo")
 	@Transactional
-	public ResponseEntity<ItemPedidoDTO> cadastrar(@RequestBody @Valid ItemPedidoForm itemPedidoForm, 
-												UriComponentsBuilder uriBuilder) {
-		Optional<Pedido> pedido = pedidoRepository.findById(itemPedidoForm.getPedido());
-		Optional<Produto> produto = produtoRepository.findById(itemPedidoForm.getProduto());
-		
-		ItemPedido itemPedido = itemPedidoForm.converter(itemPedidoRepository, pedido.get(), produto.get());
-		
+	public ResponseEntity<ItemPedidoDTO> cadastrar(@PathVariable("id") Integer id,
+			@RequestBody @Valid ItemPedidoForm itemPedidoForm, UriComponentsBuilder uriBuilder) {
+
+		Optional<Pedido> pedido = pedidoRepository.findById(id);
+		ItemPedido itemPedido = itemPedidoForm.converter(produtoRepository, pedidoRepository);
+		itemPedidoRepository.save(itemPedido);
 		itemPedidoForm.cadastrarItemPedido(itemPedido, pedido.get(), pedidoRepository);
 		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(itemPedido.getId()).toUri();
 		return ResponseEntity.created(uri).body(new ItemPedidoDTO(itemPedido));

@@ -52,8 +52,6 @@ public class PedidoController {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
-
 
 	@GetMapping
 	public List<PedidoDetalheDTO> listar() {
@@ -111,9 +109,6 @@ public class PedidoController {
 		}
 
 		return ResponseEntity.notFound().build();
-	} 
-	
-	
-
+	}
 
 }

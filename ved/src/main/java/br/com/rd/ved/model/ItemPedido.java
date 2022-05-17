@@ -18,36 +18,46 @@ public class ItemPedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_item_pedido")
 	private Integer id;
-
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_pedido", nullable = false, insertable = false, updatable = false)
-	private Pedido pedido;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_produto", nullable = false, insertable = false, updatable = false)
-	private Produto produto;
-
 	@Column(name = "quantidade_total")
 	@Size(max = 50)
 	private Integer quantidade;
-
 	@Column(name = "porcentagem_icms")
 	private Double porcentagemIcms;
-
 	@Column(name = "valor_icms")
 	private Double valorIcms;
+	
+	
+	@ManyToOne(fetch=FetchType.EAGER )
+	@JoinColumn(name="id_produto", nullable=false)
+	private Produto produtos;
+	
+	
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="id_pedido", nullable=false)
+	private Pedido pedido;
 
-	public ItemPedido(Pedido pedido, Produto produtos, Integer quantidade, Double porcentagemIcms, Double valorIcms) {
-		this.pedido = pedido;
-		this.produto = produtos;
+	public ItemPedido() {
+		super();
+	}
+
+	public ItemPedido(Integer id, Integer quantidade, Double porcentagemIcms, Double valorIcms, Produto produto,
+			Pedido pedido) {
+		this.id = id;
 		this.quantidade = quantidade;
 		this.porcentagemIcms = porcentagemIcms;
 		this.valorIcms = valorIcms;
+		this.produtos = produto;
+		this.pedido = pedido;
 	}
 
-	public ItemPedido() {
-		// TODO Auto-generated constructor stub
+	public ItemPedido(Integer quantidade, Double porcentagemIcms, Double valorIcms, Produto produto, Pedido pedido) {
+		this.quantidade = quantidade;
+		this.porcentagemIcms = porcentagemIcms;
+		this.valorIcms = valorIcms;
+		this.produtos = produto;
+		this.pedido = pedido;
 	}
 
 	public Integer getId() {
@@ -56,22 +66,6 @@ public class ItemPedido {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
 	}
 
 	public Integer getQuantidade() {
@@ -98,10 +92,26 @@ public class ItemPedido {
 		this.valorIcms = valorIcms;
 	}
 
+	public Produto getProduto() {
+		return produtos;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produtos = produto;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
 	@Override
 	public String toString() {
-		return "ItemPedido [id=" + id + ", pedido=" + pedido + ", produto=" + produto + ", quantidade=" + quantidade
-				+ ", porcentagemIcms=" + porcentagemIcms + ", valorIcms=" + valorIcms + "]";
+		return "ItemPedido [id=" + id + ", quantidade=" + quantidade + ", porcentagemIcms=" + porcentagemIcms
+				+ ", valorIcms=" + valorIcms + ", produto=" + produtos + ", pedido=" + pedido + "]";
 	}
 
 }

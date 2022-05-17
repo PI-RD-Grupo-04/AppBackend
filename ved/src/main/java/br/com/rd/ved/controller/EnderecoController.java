@@ -52,12 +52,8 @@ public class EnderecoController {
 			@RequestBody @Valid EnderecoForm enderecoForm, UriComponentsBuilder uriBuilder) {
 
 		Optional<Cliente> cliente = cr.findById(id);
-		
 		Endereco endereco = enderecoForm.converter(ur);
 		er.save(endereco);
-		
-		
-		
 		enderecoForm.cadastrarEndereco(endereco, cliente.get(), cr);
 		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(endereco.getId()).toUri();
 		return ResponseEntity.created(uri).body(new EnderecoDTO(endereco));

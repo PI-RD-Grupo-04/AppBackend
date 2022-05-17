@@ -25,24 +25,18 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
 	private Integer id;
-
 	@Column(name = "nome_produto")
 	@Size(max = 50)
 	private String nomeProduto;
-
 	@Column(name = "preco")
 	private BigDecimal preco;
-
 	@Column(name = "imagem_url")
 	private String url;
-
 	@Column(name = "descricao_produto")
 	private String descricao;
-
 	@Size(max = 100)
 	@Column(name = "peso_kilo")
 	private Double peso;
-
 	@Column(name = "quantidade")
 	private int quantidade;
 
@@ -59,7 +53,7 @@ public class Produto {
 	private StatusProduto statusProduto;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "produto")
+	@OneToMany(mappedBy = "produtos")
 	private List<ItemPedido> itemPedido;
 
 	@JsonIgnore

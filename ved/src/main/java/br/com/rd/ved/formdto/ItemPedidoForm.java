@@ -5,28 +5,27 @@ import java.util.List;
 import br.com.rd.ved.dto.ItemPedidoDTO;
 import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.PedidoProdutoID;
 import br.com.rd.ved.model.Produto;
 import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 
 public class ItemPedidoForm {
 
-	private Integer pedido;
-	private Integer produto;
 	private Integer quantidade;
 	private Double porcentagemIcms;
 	private Double valorIcms;
+	private Integer produto;
+	private Integer pedido;
 	
 	public ItemPedidoForm() {}
 	
-	public ItemPedidoForm(String pedido, String produto, String quantidade, String porcentagemIcms, 
-			String valorIcms) {
-		this.pedido = Integer.parseInt(pedido);
-		this.produto = Integer.parseInt(produto);
+	public ItemPedidoForm(String quantidade, String porcentagemIcms, String valorIcms, String produto,
+			String pedido) {
 		this.quantidade = Integer.parseInt(quantidade);
 		this.porcentagemIcms = Double.parseDouble(porcentagemIcms);
-		this.valorIcms = Double.parseDouble(porcentagemIcms);		
+		this.valorIcms = Double.parseDouble(porcentagemIcms);
+		this.produto = Integer.parseInt(produto);
+		this.pedido = Integer.parseInt(pedido);
 	}
 
 	public Integer getQuantidade() {
@@ -81,13 +80,13 @@ public class ItemPedidoForm {
 		
 	}
 
-	public ItemPedido converter(ItemPedidoRepository ipr, Pedido pedido, Produto produto) {
-		PedidoProdutoID compost = new PedidoProdutoID();
-		compost.setIdPedido(pedido.getId());
-		compost.setIdProduto(produto.getId());
+	public ItemPedido converter(ProdutoRepository produtoRepository, PedidoRepository pedidoRepository) {
+		Optional<Produto> produto = produtoRepository.findById(this.produto);
+		Optional<Pedido> pedido = pedidoRepository.findById(this.pedido);
 		
-		ItemPedido itemPedido = new ItemPedido(pedido, produto, quantidade, porcentagemIcms, valorIcms);
-		ipr.save(itemPedido);
+		ItemPedido itemPedido = new ItemPedido(quantidade, porcentagemIcms, valorIcms, produto.get(), pedido.get());
+		itemPedido.setProduto(produto.get());
+		itemPedido.setPedido(pedido.get());
 		return itemPedido;
 	}
 
