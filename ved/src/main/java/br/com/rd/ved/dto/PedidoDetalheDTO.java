@@ -22,7 +22,7 @@ public class PedidoDetalheDTO {
 	private String tipoFrete;
 	private BigDecimal valor_frete;
 	private Endereco enderecos;
-	//private List<ItemPedido> items;
+	private List<ItemPedido> items;
 	private BigDecimal total;
 
 	public PedidoDetalheDTO(Pedido pedido) {
@@ -35,8 +35,8 @@ public class PedidoDetalheDTO {
 		this.tipoFrete = pedido.getFrete().getTipoFrete().getDescricao();
 		this.valor_frete = pedido.getFrete().getValor();
 		this.enderecos = pedido.getEnderecos();
-		//this.items = pedido.getItemPedidos();
-		//this.total = this.totalPedido(items);
+		this.items = pedido.getItemPedidos();
+		this.total = this.totalPedido(items);
 	}
 	
 	public Integer getCodigo_pedido() {
@@ -112,14 +112,14 @@ public class PedidoDetalheDTO {
 		this.enderecos = enderecos;
 	}
 
-//	public List<ItemPedidoDTO> getItems() {
-//		List<ItemPedidoDTO> nova = ItemPedidoDTO.converter(items);
-//		return nova;
-//	}
-//
-//	public void setItems(List<ItemPedido> items) {
-//		this.items = items;
-//	}
+	public List<ItemPedidoDTO> getItems() {
+		List<ItemPedidoDTO> nova = ItemPedidoDTO.converter(items);
+		return nova;
+	}
+
+	public void setItems(List<ItemPedido> items) {
+		this.items = items;
+	}
 
 	public BigDecimal getTotal() {
 		return total;
