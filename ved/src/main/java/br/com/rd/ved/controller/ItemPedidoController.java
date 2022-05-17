@@ -22,7 +22,7 @@ import br.com.rd.ved.dto.ItemPedidoDTO;
 import br.com.rd.ved.formdto.ItemPedidoForm;
 import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.PedidoProdutoID;
+import br.com.rd.ved.model.Produto;
 import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.ProdutoRepository;
@@ -45,12 +45,12 @@ public class ItemPedidoController {
 	@Transactional
 	public ResponseEntity<ItemPedidoDTO> cadastrar(@RequestBody @Valid ItemPedidoForm itemPedidoForm, 
 												UriComponentsBuilder uriBuilder) {
-		PedidoProdutoID compost = new PedidoProdutoID();
-		Optional<Pedido> pedido = pedidoRepository.findById(compost.getIdPedido());
-		ItemPedido itemPedido = itemPedidoForm.converter(produtoRepository, pedidoRepository);
-		itemPedidoRepository.save(itemPedido);
+		Optional<Pedido> pedido = pedidoRepository.findById(itemPedidoForm.getPedido());
+		Optional<Produto> produto = produtoRepository.findById(itemPedidoForm.getProduto());
+		
+		ItemPedido itemPedido = itemPedidoForm.converter(itemPedidoRepository, pedido.get(), produto.get());
+		
 		itemPedidoForm.cadastrarItemPedido(itemPedido, pedido.get(), pedidoRepository);
-
 		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(itemPedido.getId()).toUri();
 		return ResponseEntity.created(uri).body(new ItemPedidoDTO(itemPedido));
 

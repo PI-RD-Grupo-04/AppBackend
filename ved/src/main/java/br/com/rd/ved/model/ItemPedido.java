@@ -2,9 +2,11 @@ package br.com.rd.ved.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,30 +16,29 @@ import javax.validation.constraints.Size;
 @Table(name = "item_pedido")
 public class ItemPedido {
 
-	
-	@EmbeddedId
-	private PedidoProdutoID id;
-	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_pedido", nullable=false, insertable=false, updatable=false)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_pedido", nullable = false, insertable = false, updatable = false)
 	private Pedido pedido;
-	
-	@ManyToOne(fetch=FetchType.EAGER )
-	@JoinColumn(name="id_produto", nullable=false, insertable=false, updatable=false)
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_produto", nullable = false, insertable = false, updatable = false)
 	private Produto produto;
-	
+
 	@Column(name = "quantidade_total")
 	@Size(max = 50)
 	private Integer quantidade;
-	
+
 	@Column(name = "porcentagem_icms")
 	private Double porcentagemIcms;
-	
+
 	@Column(name = "valor_icms")
 	private Double valorIcms;
 
-	public ItemPedido(Pedido pedido, Produto produtos, @Size(max = 50) Integer quantidade, Double porcentagemIcms,
-			Double valorIcms) {
+	public ItemPedido(Pedido pedido, Produto produtos, Integer quantidade, Double porcentagemIcms, Double valorIcms) {
 		this.pedido = pedido;
 		this.produto = produtos;
 		this.quantidade = quantidade;
@@ -45,11 +46,15 @@ public class ItemPedido {
 		this.valorIcms = valorIcms;
 	}
 
-	public PedidoProdutoID getId() {
+	public ItemPedido() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(PedidoProdutoID id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
