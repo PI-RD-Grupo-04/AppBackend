@@ -15,6 +15,7 @@ public class ProdutoDTO {
 	private Double peso;
 	private String categoria;
 	private String statusProduto; 
+	private Integer quantidade;
 	private String armazenamento;
 
 	public ProdutoDTO(Produto produto) {
@@ -24,6 +25,7 @@ public class ProdutoDTO {
 		this.url = produto.getUrl();
 		this.descricao = produto.getDescricao();
 		this.peso = produto.getPeso();
+		this.quantidade = produto.getQuantidade();
 		this.categoria = produto.getCategoria().toString();
 		this.statusProduto = produto.getStatusProduto().toString(); 
 		this.armazenamento = produto.getArmazenamento().toString();
@@ -63,6 +65,11 @@ public class ProdutoDTO {
 
 	public String getCategoria() {
 		return categoria;
+	}
+
+	
+	public Integer getQuantidade() {
+		return quantidade;
 	}
 
 	public String getStatusProduto() {

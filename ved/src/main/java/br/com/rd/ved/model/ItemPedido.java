@@ -19,7 +19,7 @@ public class ItemPedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item_pedido")
-	private Integer id;
+	private Integer id;	
 	@Column(name = "quantidade_total")
 	@Size(max = 50)
 	private Integer quantidade;
