@@ -1,8 +1,10 @@
 package br.com.rd.ved.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -55,9 +57,9 @@ public class Pedido {
 	@JoinColumn(name="id_endereco", nullable=false)
 	private Endereco enderecos;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "pedido")
-	private List<ItemPedido> itemPedidos;
+	
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<ItemPedido> itemPedido = new HashSet<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
@@ -143,14 +145,31 @@ public class Pedido {
 		this.enderecos = endereco;
 	}
 	
-	public List<ItemPedido> getItemPedidos() {
-		return itemPedidos;
+	public Set<ItemPedido> getItemPedidos() {
+		return itemPedido;
+	}
+	
+	public void setItemPedido(Set<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
-	public void setItemPedidos(List<ItemPedido> itemPedidos) {
-		this.itemPedidos = itemPedidos;
+	public List<NotaFiscal> getNotafiscal() {
+		return notafiscal;
 	}
-		
+
+	public void setNotafiscal(List<NotaFiscal> notafiscal) {
+		this.notafiscal = notafiscal;
+	}
+
+	public List<TipoPagamento> getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+	public void setTipoPagamento(List<TipoPagamento> tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(data, id);

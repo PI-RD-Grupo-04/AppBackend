@@ -2,6 +2,7 @@ package br.com.rd.ved.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.ItemPedido;
@@ -55,7 +56,7 @@ public class ItemPedidoDTO {
 	}
 	
 	
-	public static List<ItemPedidoDTO> converter(List<ItemPedido> itemPedidos) {
+	public static List<ItemPedidoDTO> converter(Set<ItemPedido> itemPedidos) {
 		return itemPedidos.stream().map(ItemPedidoDTO::new).collect(Collectors.toList());
 	}
 	
