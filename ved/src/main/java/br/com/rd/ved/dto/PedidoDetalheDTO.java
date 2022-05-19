@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Endereco;
@@ -22,7 +23,7 @@ public class PedidoDetalheDTO {
 	private String tipoFrete;
 	private BigDecimal valor_frete;
 	private Endereco enderecos;
-	private List<ItemPedido> items;
+	private Set<ItemPedido> items;
 	private BigDecimal total;
 
 	public PedidoDetalheDTO(Pedido pedido) {
@@ -44,7 +45,7 @@ public class PedidoDetalheDTO {
 	}
 
 	public void setCodigo_pedido(Integer codigo_pedido) {
-		this.codigo_pedido = codigo_pedido;
+		codigo_pedido = codigo_pedido;
 	}
 
 	public String getData() { 
@@ -117,7 +118,7 @@ public class PedidoDetalheDTO {
 		return nova;
 	}
 
-	public void setItems(List<ItemPedido> items) {
+	public void setItems(Set<ItemPedido> items) {
 		this.items = items;
 	}
 
@@ -129,7 +130,7 @@ public class PedidoDetalheDTO {
 		this.total = total;
 	}
 
-	public  BigDecimal totalPedido(List<ItemPedido> valor) {
+	public  BigDecimal totalPedido(Set<ItemPedido> valor) {
 		List<ItemPedidoDTO> nova = ItemPedidoDTO.converter(valor);
 		BigDecimal soma = nova.stream().map(produto -> produto.getPreco()).reduce(BigDecimal.ZERO, BigDecimal::add);	
 		return soma;

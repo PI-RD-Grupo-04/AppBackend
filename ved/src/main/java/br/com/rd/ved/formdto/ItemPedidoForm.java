@@ -1,12 +1,15 @@
 package br.com.rd.ved.formdto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import br.com.rd.ved.dto.ItemPedidoDTO;
 import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
 import br.com.rd.ved.model.Produto;
+import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.ProdutoRepository;
 
@@ -53,11 +56,6 @@ public class ItemPedidoForm {
 		this.valorIcms = valorIcms;
 	}
 
-	
-	public Integer getPedido() {
-		return pedido;
-	}
-
 	public Integer getProduto() {
 		return produto;
 	}
@@ -67,16 +65,17 @@ public class ItemPedidoForm {
 	}
 
 
-	public void setPedido(Integer pedido) {
-		this.pedido = pedido;
-	}
-
-	public List<ItemPedidoDTO> cadastrarItemPedido(ItemPedido itemPedido, Pedido pedido, PedidoRepository pedidoRepository) {
-		List<ItemPedido> itemPedidos;
+	public List<ItemPedidoDTO> cadastrarItemPedido(ItemPedido itemPedido, Pedido pedido, Produto produto,
+			ItemPedidoRepository itemPedidoRepository, PedidoRepository pedidoRepository, ProdutoRepository produtoRepository) {
+		
+		Set<ItemPedido> itemPedidos;
+		
 		itemPedidos = pedido.getItemPedidos();
+		itemPedidos = produto.getItemPedido();
 		itemPedidos.add(itemPedido);
-		pedido.setItemPedidos(itemPedidos);
-		pedidoRepository.save(pedido);
+		pedido.setItemPedido(itemPedidos);
+		produto.setItemPedido(itemPedidos);
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedido));
 		return ItemPedidoDTO.converter(itemPedidos);
 		
 	}
@@ -85,9 +84,7 @@ public class ItemPedidoForm {
 		Optional<Produto> produto = produtoRepository.findById(this.produto);
 		Optional<Pedido> pedido = pedidoRepository.findById(this.pedido);
 		
-		ItemPedido itemPedido = new ItemPedido(quantidade, porcentagemIcms, valorIcms, produto.get(), pedido.get());
-		itemPedido.setProduto(produto.get());
-		itemPedido.setPedido(pedido.get());
+		ItemPedido itemPedido = new ItemPedido(pedido.get(), produto.get(), quantidade, porcentagemIcms, valorIcms);
 		return itemPedido;
 	}
 

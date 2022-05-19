@@ -1,7 +1,9 @@
 package br.com.rd.ved.model;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -52,9 +55,9 @@ public class Produto {
 	@JoinColumn(name = "id_status_produto", nullable = false)
 	private StatusProduto statusProduto;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "produtos")
-	private List<ItemPedido> itemPedido;
+	
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itemPedido = new HashSet<>();
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -186,12 +189,29 @@ public class Produto {
 		this.statusProduto = idstatusProduto;
 	}
 
-	public List<ItemPedido> getItemPedido() {
+	@JsonIgnore
+	public Set<Pedido> getPedidos() {
+		Set<Pedido> set = new HashSet<>();
+		for (ItemPedido x : itemPedido) {
+			set.add(x.getPedido());
+		}
+		return set;
+	}
+	
+	public Set<ItemPedido> getItemPedido() {
 		return itemPedido;
 	}
 
-	public void setItemPedido(List<ItemPedido> itemPedido) {
+	public void setItemPedido(Set<ItemPedido> itemPedido) {
 		this.itemPedido = itemPedido;
+	}
+
+	public Fornecedor getFornecedores() {
+		return fornecedores;
+	}
+
+	public void setFornecedores(Fornecedor fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 
 	public Categoria getCategoria() {
@@ -220,10 +240,20 @@ public class Produto {
 	}
 
 	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", nomeProduto=" + nomeProduto + ", preco=" + preco + ", url=" + url
-				+ ", descricao=" + descricao + ", peso=" + peso + ", idcategoria=" + categoria + ", idmarca=" + marca
-				+ ", idstatusProduto=" + statusProduto + "]";
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		return Objects.equals(id, other.id);
 	}
 
 }

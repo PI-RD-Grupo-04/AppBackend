@@ -2,8 +2,10 @@ package br.com.rd.ved.controller;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -41,17 +43,19 @@ public class ItemPedidoController {
 	private PedidoRepository pedidoRepository;
 
 
-	@PostMapping("/pedido={id}/novo")
+	@PostMapping("/{idPedido}/{idProduto}/novo")
 	@Transactional
-	public ResponseEntity<ItemPedidoDTO> cadastrar(@PathVariable("id") Integer id,
+	public ResponseEntity<ItemPedidoDTO> cadastrar(@PathVariable("idPedido") Integer idPedido,
+			@PathVariable("idProduto") Integer idProduto,
 			@RequestBody @Valid ItemPedidoForm itemPedidoForm, UriComponentsBuilder uriBuilder) {
 
-		Optional<Pedido> pedido = pedidoRepository.findById(id);
+		Optional<Pedido> pedido = pedidoRepository.findById(idPedido);
+		Optional<Produto> produto = produtoRepository.findById(idProduto);
 		ItemPedido itemPedido = itemPedidoForm.converter(produtoRepository, pedidoRepository);
 		itemPedidoRepository.save(itemPedido);
-		itemPedidoForm.cadastrarItemPedido(itemPedido, pedido.get(), pedidoRepository);
+		itemPedidoForm.cadastrarItemPedido(itemPedido, pedido.get(), produto.get(), itemPedidoRepository, pedidoRepository, produtoRepository);
 		
-		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(itemPedido.getId()).toUri();
+		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(itemPedido).toUri();
 		return ResponseEntity.created(uri).body(new ItemPedidoDTO(itemPedido));
 
 	}
@@ -59,12 +63,13 @@ public class ItemPedidoController {
 	
 	@GetMapping("/pedido={id}/items")
 	public ResponseEntity<List<ItemPedidoDTO>> visualizar(@PathVariable("id") Integer id){
+		
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
 		
 		if (pedido.isPresent()) {
-			List<ItemPedido> itemPedidos = new ArrayList<>();
-			itemPedidos = pedido.get().getItemPedidos();
-			return ResponseEntity.ok().body(ItemPedidoDTO.converter(itemPedidos));
+			Set<ItemPedido> itemPedido = new HashSet<>();
+			itemPedido = pedido.get().getItemPedidos();
+			return ResponseEntity.ok().body(ItemPedidoDTO.converter(itemPedido));
 		}
 		return ResponseEntity.notFound().build();
 	}
