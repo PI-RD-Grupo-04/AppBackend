@@ -40,14 +40,11 @@ public class CartaoController {
 	@Autowired
 	private BandeiraRepository bandeiraRepository;
 
-	@GetMapping
-	public List<CartaoDTO> listar(Integer idcliente) {
-		if (idcliente == null) {
-			List<Cartao> cartoes = cartaoRepository.findAll();
-			return CartaoDTO.converter(cartoes);
-		} else {
-			return null;
-		}
+	@GetMapping("/{id}/detalhes")
+	public List<CartaoDTO> listar(@PathVariable("id") Integer id) {
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		List<Cartao> cartoes = cliente.get().getCartoes();  
+		return CartaoDTO.converter(cartoes);
 	}
 
 	@DeleteMapping("/{id}/deletar/{cartao}")

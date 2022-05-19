@@ -1,6 +1,7 @@
 package br.com.rd.ved.formdto;
 
 import java.util.List;
+import java.util.Optional;
 
 import br.com.rd.ved.dto.ItemPedidoDTO;
 import br.com.rd.ved.model.ItemPedido;
@@ -9,6 +10,7 @@ import br.com.rd.ved.model.PedidoProdutoID;
 import br.com.rd.ved.model.Produto;
 import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
+import br.com.rd.ved.repository.ProdutoRepository;
 
 public class ItemPedidoForm {
 
@@ -89,6 +91,8 @@ public class ItemPedidoForm {
 		ItemPedido itemPedido = new ItemPedido(pedido, produto, quantidade, porcentagemIcms, valorIcms);
 		ipr.save(itemPedido);
 		return itemPedido;
-	}
+	} 
+	
+	
 
 }

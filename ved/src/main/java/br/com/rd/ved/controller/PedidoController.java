@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.rd.ved.dto.MyPedidosDTO;
 import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.dto.PedidoDetalheDTO;
-import br.com.rd.ved.dto.meusPedidosDTO;
 import br.com.rd.ved.formdto.PedidoForm;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.Pedido;
@@ -116,10 +116,10 @@ public class PedidoController {
 	
 	
 	@GetMapping("/cliente={id}/pedidos")
-	public List<meusPedidosDTO> detalhar(@PathVariable("id") Integer id) {
+	public List<MyPedidosDTO > detalhar(@PathVariable("id") Integer id) {
 		Optional<Cliente> cliente = clienteRepository.findById(id);
 		List<Pedido> pedidos = cliente.get().getPedidos();
-		return meusPedidosDTO.converter(pedidos);
+		return MyPedidosDTO .converter(pedidos);
 	}
 	
 	
