@@ -24,6 +24,7 @@ import br.com.rd.ved.dto.ItemPedidoDTO;
 import br.com.rd.ved.formdto.ItemPedidoForm;
 import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
+import br.com.rd.ved.model.Produto;
 import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.ProdutoRepository;
