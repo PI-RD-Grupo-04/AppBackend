@@ -42,11 +42,6 @@ public class ProdutoDTO {
 	public String getNome() {
 		return nome;
 	}
-	
-
-	public Integer getQuantidade() {
-		return quantidade;
-	}
 
 	public BigDecimal getPreco() {
 		return preco;
@@ -70,6 +65,11 @@ public class ProdutoDTO {
 
 	public String getCategoria() {
 		return categoria;
+	}
+
+	
+	public Integer getQuantidade() {
+		return quantidade;
 	}
 
 	public String getStatusProduto() {

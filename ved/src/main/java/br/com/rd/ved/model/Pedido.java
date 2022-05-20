@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -57,8 +56,8 @@ public class Pedido {
 	private Endereco enderecos;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-	private List<ItemPedido> itemPedidos;
+	@OneToMany(mappedBy = "pedido")
+	private List<ItemPedido> itemPedido;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
@@ -71,9 +70,12 @@ public class Pedido {
 			@JoinColumn(name = "id_tipo_pagamento") })
 	private List<TipoPagamento> tipoPagamento;
 	
+	
+
 	public Pedido() {
 		super();
 	}
+
 
 	public Pedido(Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus, Frete frete,
 			Endereco enderecos) {
@@ -142,13 +144,30 @@ public class Pedido {
 	}
 	
 	public List<ItemPedido> getItemPedidos() {
-		return itemPedidos;
+		return itemPedido;
+	}
+	
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
-	public void setItemPedidos(List<ItemPedido> itemPedidos) {
-		this.itemPedidos = itemPedidos;
+	public List<NotaFiscal> getNotafiscal() {
+		return notafiscal;
 	}
-		
+
+	public void setNotafiscal(List<NotaFiscal> notafiscal) {
+		this.notafiscal = notafiscal;
+	}
+
+	public List<TipoPagamento> getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+	public void setTipoPagamento(List<TipoPagamento> tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(data, id);

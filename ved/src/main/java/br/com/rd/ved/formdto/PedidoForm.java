@@ -2,6 +2,7 @@ package br.com.rd.ved.formdto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class PedidoForm {
 	private Integer pedidoStatus;
 	private Integer frete;
 	private Integer enderecos;
-
+	private List<ItemPedido> itemPedido;
 
 
 	public PedidoForm(String data, String cliente, String cupomDesconto,
@@ -103,8 +104,15 @@ public class PedidoForm {
 	public void setEnderecos(Integer enderecos) {
 		this.enderecos = enderecos;
 	}
-		
+	
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
 
+
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
+	}
 
 
 	public Pedido converter(PedidoRepository pedidoRepository, 
@@ -112,13 +120,16 @@ public class PedidoForm {
 							CupomDescontoRepository cupomDescontoRepository,
 							PedidoStatusRepository pedidoStatusRepository,
 							FreteRepository freteRepository,
-							EnderecoRepository enderecoRepository){ 
+							EnderecoRepository enderecoRepository,
+							ItemPedidoRepository itemPedidoRepository) { 
 		
 		Optional<Cliente> cliente = clienteRepository.findById(this.cliente);		
 		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(this.cupomDesconto);
 		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(this.pedidoStatus);
 		Optional<Frete> frete = freteRepository.findById(this.frete);
 		Optional<Endereco> endereco = enderecoRepository.findById(this.enderecos);
+		List<ItemPedido> items = new ArrayList<ItemPedido>();
+		items.add((ItemPedido) this.itemPedido);
 		
 		Pedido pedido = new Pedido(data, cliente.get(), cupomDesconto.get(), pedidoStatus.get(), frete.get(), endereco.get());
 				
@@ -128,6 +139,7 @@ public class PedidoForm {
 	
 	public List<PedidoDTO> cadastrarPedido(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository) {
 		List<Pedido> pedidos;
+		
 		pedidos = cliente.getPedidos();
 		pedidos.add(pedido);
 		cliente.setPedidos(pedidos);

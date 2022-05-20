@@ -37,6 +37,7 @@ public class CategoriaController {
 	@GetMapping("/palavra/{palavra}")
 	public List<ProdutoCardDTO> filtroPorPalavra(@PathVariable("palavra") String letra) {
 		List<Produto> produto = produtoRepository.findProdutosPorPalavra(letra);
+		
 		return ProdutoCardDTO.converter(produto);
 	}
 
@@ -48,10 +49,12 @@ public class CategoriaController {
 	
 	
 		
-	@GetMapping("/{id}/categoria")
+	@GetMapping("/categoria={id}/produtos")
 	public ResponseEntity<List<ProdutoCardDTO>> visualizar(@PathVariable("id") Integer id){
+
 		Optional<Categoria> categoria = categoriaRepository.findById(id);
 		
+
 		if (categoria.isPresent()) {
 			List<Produto> produtos = new ArrayList<>();
 			produtos = categoria.get().getProdutos();

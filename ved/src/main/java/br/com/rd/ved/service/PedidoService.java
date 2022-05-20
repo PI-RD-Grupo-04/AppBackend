@@ -22,8 +22,8 @@ import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.PedidoStatusRepository;
 
 @Service
-public class PedidoService {}
-//	
+public class PedidoService {
+	
 //	private final PedidoRepository pedidoRepository;
 //	private final ClienteRepository clienteRepository;
 //	private final CupomDescontoRepository cupomDescontoRepository;
@@ -161,4 +161,4 @@ public class PedidoService {}
 //		freteRepository.deleteById(id);
 //		System.out.println("Pedido Deletado com Sucesso");
 //	}
-//}
+}

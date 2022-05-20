@@ -1,78 +1,58 @@
 package br.com.rd.ved.formdto;
 
-import java.util.List;
-import java.util.Optional;
-
-import br.com.rd.ved.dto.ItemPedidoDTO;
-import br.com.rd.ved.model.ItemPedido;
-import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.PedidoProdutoID;
-import br.com.rd.ved.model.Produto;
-import br.com.rd.ved.repository.ItemPedidoRepository;
-import br.com.rd.ved.repository.PedidoRepository;
-import br.com.rd.ved.repository.ProdutoRepository;
 
 public class ItemPedidoForm {
 
-	private Integer pedido;
-	private Integer produto;
-	private Integer quantidade;
-	private Double porcentagemIcms;
-	private Double valorIcms;
+	private String quantidade;
+	private String porcentagemIcms;
+	private String valorIcms;
+	private String produto;
+	private String pedido;
 	
 	public ItemPedidoForm() {}
 	
-	public ItemPedidoForm(String pedido, String produto, String quantidade, String porcentagemIcms, 
-			String valorIcms) {
-		this.pedido = Integer.parseInt(pedido);
-		this.produto = Integer.parseInt(produto);
-		this.quantidade = Integer.parseInt(quantidade);
-		this.porcentagemIcms = Double.parseDouble(porcentagemIcms);
-		this.valorIcms = Double.parseDouble(porcentagemIcms);		
-	}
 
-	public Integer getQuantidade() {
+	public String getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Integer quantidade) {
+	public void setQuantidade(String quantidade) {
 		this.quantidade = quantidade;
 	}
 
-	public Double getPorcentagemIcms() {
+	public String getPorcentagemIcms() {
 		return porcentagemIcms;
 	}
 
-	public void setPorcentagemIcms(Double porcentagemIcms) {
+	public void setPorcentagemIcms(String porcentagemIcms) {
 		this.porcentagemIcms = porcentagemIcms;
 	}
 
-	public Double getValorIcms() {
+	public String getValorIcms() {
 		return valorIcms;
 	}
 
-	public void setValorIcms(Double valorIcms) {
+	public void setValorIcms(String valorIcms) {
 		this.valorIcms = valorIcms;
 	}
 
-	
-	public Integer getPedido() {
-		return pedido;
-	}
-
-	public Integer getProduto() {
+	public String getProduto() {
 		return produto;
 	}
 
-	public void setProduto(Integer produto) {
+	public void setProduto(String produto) {
 		this.produto = produto;
 	}
 
+	public String getPedido() {
+		return pedido;
+	}
 
-	public void setPedido(Integer pedido) {
+	public void setPedido(String pedido) {
 		this.pedido = pedido;
 	}
 
+<<<<<<< HEAD
 	public List<ItemPedidoDTO> cadastrarItemPedido(ItemPedido itemPedido, Pedido pedido, PedidoRepository pedidoRepository) {
 		List<ItemPedido> itemPedidos;
 		itemPedidos = pedido.getItemPedidos();
@@ -95,4 +75,6 @@ public class ItemPedidoForm {
 	
 	
 
+=======
+>>>>>>> f3a18c271a986d09b2d0cc8d0993ad51ac0eda39
 }

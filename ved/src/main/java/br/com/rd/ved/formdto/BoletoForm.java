@@ -31,7 +31,7 @@ public class BoletoForm {
 	} 
 	
 	public Boleto converter() { 
-		return new Boleto(codigo, nome, cpf); 
+		return new Boleto(null, codigo); 
 		
 	}
 

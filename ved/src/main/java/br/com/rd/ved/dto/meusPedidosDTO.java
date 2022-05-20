@@ -26,5 +26,4 @@ public class meusPedidosDTO {
 	public static List<meusPedidosDTO> converter(List<Pedido> pedidos){
 		return pedidos.stream().map(meusPedidosDTO::new).collect(Collectors.toList());
 	} 
-
 }

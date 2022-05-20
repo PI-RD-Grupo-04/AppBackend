@@ -5,56 +5,70 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.ItemPedido;
+import br.com.rd.ved.model.PK.PedidoIntemPedidoCH;
 
 public class ItemPedidoDTO {
 
-	private Integer codigo_pedido;
-	private Integer quantidade;	
+	private Integer codigo_produto;
+	private String produto;
 	private BigDecimal preco;
-	private String Produto;
+	private Integer quantidade;
+	private PedidoIntemPedidoCH chave;
 	
 	
 		
 	public ItemPedidoDTO(ItemPedido itemPedido) {
-		this.codigo_pedido = itemPedido.getPedido().getId();
-		this.preco = itemPedido.getProduto().getPreco();
+		this.chave = itemPedido.getIdch();
 		this.quantidade = itemPedido.getQuantidade();
-		this.Produto = itemPedido.getProduto().getNomeProduto();		
+//		this.produto = itemPedido.getProduto().getNomeProduto();
+//		this.codigo_produto = itemPedido.getProduto().getId();
+//		this.preco = itemPedido.getProduto().getPreco();
 	}
+
 
 	public Integer getQuantidade() {
 		return quantidade;
 	}
 
+
+
 	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+		quantidade = quantidade;
 	}
+
+	public void setChave(PedidoIntemPedidoCH chave) {
+		this.chave = chave;
+	}
+	
+	public String getProduto() {
+		return produto;
+	}
+
+
+	public void setProduto(String produto) {
+		this.produto = produto;
+	}
+
+	public Integer getCodigo_produto() {
+		return codigo_produto;
+	}
+
+
+	public void setCodigo_produto(Integer codigo_produto) {
+		this.codigo_produto = codigo_produto;
+	}
+
 
 	public BigDecimal getPreco() {
 		return preco;
 	}
 
+
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
-	public String getProduto() {
-		return Produto;
-	}
 
-	public void setProduto(String produto) {
-		Produto = produto;
-	}
-
-	public Integer getCodigo_pedido() {
-		return codigo_pedido;
-	}
-
-	public void setCodigo_pedido(Integer codigo_pedido) {
-		this.codigo_pedido = codigo_pedido;
-	}
-	
-	
 	public static List<ItemPedidoDTO> converter(List<ItemPedido> itemPedidos) {
 		return itemPedidos.stream().map(ItemPedidoDTO::new).collect(Collectors.toList());
 	}
