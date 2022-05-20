@@ -35,6 +35,8 @@ public class ItemPedidoService {
 		id.setProduto(Integer.parseInt(form.getProduto()));
 		entity.setIdch(id);
 		entity.setQuantidade(Integer.parseInt(form.getQuantidade()));
+		entity.setPorcentagemIcms(Double.parseDouble(form.getPorcentagemIcms()));
+		entity.setValorIcms(Double.parseDouble(form.getValorIcms()));
 		entity = itemPedidoRepository.save(entity);
 		return new ItemPedidoDTO(entity);
 	}

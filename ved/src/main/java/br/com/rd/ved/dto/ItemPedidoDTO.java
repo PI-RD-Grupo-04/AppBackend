@@ -12,28 +12,28 @@ public class ItemPedidoDTO {
 	private Integer codigo_produto;
 	private String produto;
 	private BigDecimal preco;
-	private Integer Quantidade;
+	private Integer quantidade;
 	private PedidoIntemPedidoCH chave;
 	
 	
 		
 	public ItemPedidoDTO(ItemPedido itemPedido) {
 		this.chave = itemPedido.getIdch();
-		this.Quantidade = itemPedido.getQuantidade();
-		this.produto = itemPedido.getProduto().getNomeProduto();
-		this.codigo_produto = itemPedido.getProduto().getId();
-		this.preco = itemPedido.getProduto().getPreco();
+		this.quantidade = itemPedido.getQuantidade();
+//		this.produto = itemPedido.getProduto().getNomeProduto();
+//		this.codigo_produto = itemPedido.getProduto().getId();
+//		this.preco = itemPedido.getProduto().getPreco();
 	}
 
 
 	public Integer getQuantidade() {
-		return Quantidade;
+		return quantidade;
 	}
 
 
 
 	public void setQuantidade(Integer quantidade) {
-		Quantidade = quantidade;
+		quantidade = quantidade;
 	}
 
 	public void setChave(PedidoIntemPedidoCH chave) {
