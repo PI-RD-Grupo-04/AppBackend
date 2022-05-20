@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Endereco;
@@ -113,8 +112,8 @@ public class PedidoDetalheDTO {
 		this.enderecos = enderecos;
 	}
 
-	public List<ItemPedidoDTO> getItems() {
-		List<ItemPedidoDTO> nova = ItemPedidoDTO.converter(items);
+	public List<ItemPedidoDetalheDTO> getItems() {
+		List<ItemPedidoDetalheDTO> nova = ItemPedidoDetalheDTO.converter(items);
 		return nova;
 	}
 
@@ -131,9 +130,10 @@ public class PedidoDetalheDTO {
 	}
 
 	public  BigDecimal totalPedido(List<ItemPedido> valor) {
-		List<ItemPedidoDTO> nova = ItemPedidoDTO.converter(valor);
-		BigDecimal soma = nova.stream().map(produto -> produto.getPreco()).reduce(BigDecimal.ZERO, BigDecimal::add);	
-		return soma;
+		List<ItemPedidoDetalheDTO> nova = ItemPedidoDetalheDTO.converter(valor);
+		BigDecimal soma = nova.stream().map(produto -> produto.getPreco()).reduce(BigDecimal.ZERO, BigDecimal::add);
+		BigDecimal soma2 = soma.add(this.valor_frete);
+		return soma2;
 	}
 
 	public static List<PedidoDetalheDTO> converter(List<Pedido> pedidos) {
