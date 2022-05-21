@@ -1,7 +1,6 @@
 package br.com.rd.ved.formdto;
 
 
-
 public class ItemPedidoForm {
 
 	private String quantidade;
