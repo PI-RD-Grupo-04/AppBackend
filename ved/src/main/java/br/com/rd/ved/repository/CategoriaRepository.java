@@ -8,5 +8,5 @@ import br.com.rd.ved.model.Categoria;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer>, CrudRepository<Categoria, Integer> {
-
+	
 }

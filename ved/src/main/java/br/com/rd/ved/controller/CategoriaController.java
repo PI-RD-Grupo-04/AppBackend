@@ -49,8 +49,8 @@ public class CategoriaController {
 	
 	
 		
-	@GetMapping("/categoria={id}/produtos")
-	public ResponseEntity<List<ProdutoCardDTO>> visualizar(@PathVariable("id") Integer id){
+	@GetMapping("/{id}")
+	public ResponseEntity<List<ProdutoCardDTO>> buscaPorCategoia(@PathVariable("id") Integer id){
 
 		Optional<Categoria> categoria = categoriaRepository.findById(id);
 		

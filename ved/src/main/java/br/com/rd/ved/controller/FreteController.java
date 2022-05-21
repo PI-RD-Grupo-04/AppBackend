@@ -17,7 +17,7 @@ public class FreteController {
 	@Autowired
 	private FreteRepository freterepository;
 
-	@GetMapping("/frete={uf}/tipodefrete")
+	@GetMapping("/{uf}")
 	public List<FreteDTO> filtroPorTipoFrete(@PathVariable("uf") Integer tipo) {
 		List<Frete> frete = freterepository.findFretePorTipo(tipo);
 
