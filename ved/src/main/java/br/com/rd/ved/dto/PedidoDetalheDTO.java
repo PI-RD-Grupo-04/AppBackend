@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Endereco;
