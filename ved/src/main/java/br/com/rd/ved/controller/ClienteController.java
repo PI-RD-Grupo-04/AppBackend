@@ -69,17 +69,25 @@ public class ClienteController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@PutMapping("/atualiza={id}")
+	@PutMapping("/atualizar")
 	@Transactional
-	public ResponseEntity<ClienteDTO> atualizar(@PathVariable("id") Integer id,
+	public ResponseEntity<ClienteDTO> atualizar(
 			@RequestBody @Valid AtualizarClienteForm clienteForm) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		if (cliente.isPresent()) {
-			Cliente atualizado = clienteForm.atualizar(id, clienteRepository);
+		
+		Optional<Cliente> cliente = clienteRepository.findByEmail(clienteForm.getEmail()); 
+		
+		if (cliente.isPresent() && clienteForm.validarSenha(clienteForm.getSenha(), cliente.get().getSenha()) ) {
+			
+			Cliente atualizado = clienteForm.atualizar(cliente.get());
+			 clienteRepository.save(atualizado);
 			return ResponseEntity.ok(new ClienteDTO(atualizado));
 		}
 		return ResponseEntity.notFound().build();
 
-	}
+	} 
+	
+
+	
+	
 
 }
