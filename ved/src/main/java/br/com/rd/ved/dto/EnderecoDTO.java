@@ -13,7 +13,8 @@ public class EnderecoDTO {
 	private String complemento;
 	private String municipio;
 	private String cidade;
-	private String uf;
+	private String uf; 
+	private Integer idUf;
 	
 	public EnderecoDTO(Endereco endereco) {
 		this.cep = endereco.getCep();
@@ -23,7 +24,8 @@ public class EnderecoDTO {
 		this.municipio = endereco.getMunicipio();
 		this.cidade = endereco.getCidade(); 
 		this.uf = endereco.getUf().getDescricao(); 
-		this.id = endereco.getId();
+		this.id = endereco.getId(); 
+		this.idUf = endereco.getUf().getId(); 
 	}
 
 	public String getCep() {
@@ -52,6 +54,11 @@ public class EnderecoDTO {
 
 	public String getMunicipio() {
 		return municipio;
+	}
+	
+
+	public Integer getIdUf() {
+		return idUf;
 	}
 
 	public String getCidade() {

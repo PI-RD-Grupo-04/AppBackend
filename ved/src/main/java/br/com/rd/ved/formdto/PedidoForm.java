@@ -148,13 +148,4 @@ public class PedidoForm {
 
 	} 
 	
-	public List<PedidoDTO> deletarEndereco(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository ) {
-		List<Pedido> pedidos;
-		pedidos = cliente.getPedidos();
-		pedidos.add(pedido);
-		cliente.setPedidos(pedidos);
-		pedidoRepository.save(cliente);
-		return PedidoDTO.converter(pedidos);
-
-	} 
 }
