@@ -1,31 +1,30 @@
 package br.com.rd.ved.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import br.com.rd.ved.model.PK.PedidoIntemPedidoCH;
-
 @Entity
 @Table(name = "item_pedido")
-public class ItemPedido implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class ItemPedido {
 
-	@EmbeddedId
-	private PedidoIntemPedidoCH idch;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_ItemPedido")
+	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_pedido", insertable = false, updatable = false)
+	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_produto", insertable = false, updatable = false)
+	@JoinColumn(name = "id_produto")
 	private Produto produto;
 	
 	@Column(name = "quantidade_total")
@@ -59,15 +58,6 @@ public class ItemPedido implements Serializable {
 		this.valorIcms = valorIcms;
 	}
 
-	
-
-	public PedidoIntemPedidoCH getIdch() {
-		return idch;
-	}
-
-	public void setIdch(PedidoIntemPedidoCH idch) {
-		this.idch = idch;
-	}
 
 	public Pedido getPedido() {
 		return pedido;
@@ -108,4 +98,14 @@ public class ItemPedido implements Serializable {
 	public void setValorIcms(Double valorIcms) {
 		this.valorIcms = valorIcms;
 	}
+
+	@Override
+	public String toString() {
+		return "ItemPedido [id=" + id + ", pedido=" + pedido + ", produto=" + produto + ", quantidade=" + quantidade
+				+ ", porcentagemIcms=" + porcentagemIcms + ", valorIcms=" + valorIcms + "]";
+	}
+
+
+	
+	
 }

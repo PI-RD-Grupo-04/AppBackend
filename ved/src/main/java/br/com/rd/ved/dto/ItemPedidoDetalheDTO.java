@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.ItemPedido;
-import br.com.rd.ved.model.PK.PedidoIntemPedidoCH;
+
 
 public class ItemPedidoDetalheDTO {
 
@@ -13,12 +13,10 @@ public class ItemPedidoDetalheDTO {
 	private String produto;
 	private BigDecimal preco;
 	private Integer Quantidade;
-	private PedidoIntemPedidoCH chave;
 	
 	
 		
 	public ItemPedidoDetalheDTO(ItemPedido itemPedido) {
-		this.chave = itemPedido.getIdch();
 		this.Quantidade = itemPedido.getQuantidade();
 		this.produto = itemPedido.getProduto().getNomeProduto();
 		this.codigo_produto = itemPedido.getProduto().getId();
@@ -36,10 +34,6 @@ public class ItemPedidoDetalheDTO {
 		Quantidade = quantidade;
 	}
 
-	public void setChave(PedidoIntemPedidoCH chave) {
-		this.chave = chave;
-	}
-	
 	public String getProduto() {
 		return produto;
 	}

@@ -1,6 +1,7 @@
 package br.com.rd.ved.formdto;
 
 
+
 public class ItemPedidoForm {
 
 	private String quantidade;
@@ -53,4 +54,13 @@ public class ItemPedidoForm {
 		this.pedido = pedido;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "ItemPedidoForm [quantidade=" + quantidade + ", porcentagemIcms=" + porcentagemIcms + ", valorIcms="
+				+ valorIcms + ", produto=" + produto + ", pedido=" + pedido + "]";
+	}
+
+	
 }

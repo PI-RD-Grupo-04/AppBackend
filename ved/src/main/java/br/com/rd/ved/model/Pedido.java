@@ -35,7 +35,7 @@ public class Pedido {
 	@Column(name = "data_pedido")
 	private Date data;
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_cliente", nullable=false)
 	private Cliente cliente;
 	
@@ -51,16 +51,16 @@ public class Pedido {
 	@JoinColumn(name="id_frete", nullable=false)
 	private Frete frete;
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="id_endereco", nullable=false)
 	private Endereco enderecos;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itemPedido;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
 	private List <NotaFiscal> notafiscal; 
 	
 	@JsonIgnore

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.rd.ved.dto.MyPedidosDTO;
 import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.dto.PedidoDetalheDTO;
 import br.com.rd.ved.formdto.PedidoForm;
@@ -29,7 +28,6 @@ import br.com.rd.ved.repository.ClienteRepository;
 import br.com.rd.ved.repository.CupomDescontoRepository;
 import br.com.rd.ved.repository.EnderecoRepository;
 import br.com.rd.ved.repository.FreteRepository;
-import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.PedidoStatusRepository;
 
@@ -54,9 +52,6 @@ public class PedidoController {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
-	@Autowired
-	private ItemPedidoRepository itemPedidoRepository;
 
 	@GetMapping
 	public List<PedidoDetalheDTO> listar() {
@@ -64,14 +59,15 @@ public class PedidoController {
 		return PedidoDetalheDTO.converter(pedidos);
 	}
 
-	@PostMapping("/novo")
+	@PostMapping("/cliente={id}/novo")
 	@Transactional
-	public ResponseEntity<PedidoDTO> cadastrar(@RequestBody @Valid PedidoForm pedidoForm, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id,
+			@RequestBody @Valid PedidoForm pedidoForm, UriComponentsBuilder uriBuilder) {
 		
-		Optional<Cliente> cliente = clienteRepository.findById(	pedidoForm.getCliente());
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 		
 		Pedido pedido = pedidoForm.converter(pedidoRepository, clienteRepository, cupomDescontoRepository,
-				pedidoStatusRepository, freteRepository, enderecoRepository,itemPedidoRepository);
+				pedidoStatusRepository, freteRepository, enderecoRepository);
 		pedidoRepository.save(pedido);
 		pedidoForm.cadastrarPedido(pedido, cliente.get(), pedidoRepository);
 		URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getId()).toUri();
@@ -113,16 +109,6 @@ public class PedidoController {
 		}
 
 		return ResponseEntity.notFound().build();
-	}  
-	
-	
-	@GetMapping("/cliente={id}/pedidos")
-	public List<MyPedidosDTO > detalhar(@PathVariable("id") Integer id) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		List<Pedido> pedidos = cliente.get().getPedidos();
-		return MyPedidosDTO .converter(pedidos);
 	}
-	
-	
 
 }
