@@ -41,15 +41,10 @@ public class ItemPedidoController {
 
 	@PostMapping("/novo")
 	public ResponseEntity<ItemPedidoDTO> insert(@RequestBody List<ItemPedidoForm> form) {			
-//		System.out.println(form);
-//		System.out.println(form.size());
 				for(int i = 0; i < form.size(); i++) {	
 					System.out.println(i);
 					ItemPedidoDTO entity = itemService.insert(form.get(i));	
 					System.out.println(entity);
-//					URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//							.buildAndExpand(entity).toUri();
-//					return ResponseEntity.created(uri).body(entity);
 				}
 				return null;
 	}
