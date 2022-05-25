@@ -1,47 +1,37 @@
 package br.com.rd.ved.dto;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import br.com.rd.ved.model.ItemPedido;
-import br.com.rd.ved.model.Produto;
+import br.com.rd.ved.model.PK.PedidoIntemPedidoCH;
 
 public class ItemPedidoDTO {
 
-	private Integer quantidade;	
-	private BigDecimal preco;
-	private Produto idProduto;
+	private Integer Quantidade;
+	private PedidoIntemPedidoCH chave;
+	
+	
 		
 	public ItemPedidoDTO(ItemPedido itemPedido) {
-		this.preco = itemPedido.getProduto().getPreco();
-		this.quantidade = itemPedido.getQuantidade();
-		this.idProduto = itemPedido.getProduto();
+		this.chave = itemPedido.getIdch();
+		this.Quantidade = itemPedido.getQuantidade();
 	}
+
 
 	public Integer getQuantidade() {
-		return quantidade;
+		return Quantidade;
 	}
+
+
 
 	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+		Quantidade = quantidade;
 	}
 
-	public BigDecimal getPreco() {
-		return preco;
+	public void setChave(PedidoIntemPedidoCH chave) {
+		this.chave = chave;
 	}
-
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
-	}
-
-	public Produto getIdProduto() {
-		return idProduto;
-	}
-
-	public void setIdProduto(Produto idProduto) {
-		this.idProduto = idProduto;
-	}
+	
 
 	public static List<ItemPedidoDTO> converter(List<ItemPedido> itemPedidos) {
 		return itemPedidos.stream().map(ItemPedidoDTO::new).collect(Collectors.toList());

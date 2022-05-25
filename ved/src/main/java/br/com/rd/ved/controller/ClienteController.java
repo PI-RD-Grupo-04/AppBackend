@@ -3,13 +3,10 @@ package br.com.rd.ved.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import br.com.rd.ved.dto.ClienteDTO;
 import br.com.rd.ved.formdto.AtualizarClienteForm;
 import br.com.rd.ved.formdto.ClienteForm;
@@ -41,7 +36,7 @@ public class ClienteController {
 
 	}
 
-	@PostMapping("/novo")
+	@PostMapping
 	@Transactional
 	public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid ClienteForm clienteForm,
 			UriComponentsBuilder uriBuilder) {
@@ -74,17 +69,25 @@ public class ClienteController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@PutMapping("/atualiza={id}")
+	@PutMapping("/atualizar")
 	@Transactional
-	public ResponseEntity<ClienteDTO> atualizar(@PathVariable("id") Integer id,
+	public ResponseEntity<ClienteDTO> atualizar(
 			@RequestBody @Valid AtualizarClienteForm clienteForm) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		if (cliente.isPresent()) {
-			Cliente atualizado = clienteForm.atualizar(id, clienteRepository);
+		
+		Optional<Cliente> cliente = clienteRepository.findByEmail(clienteForm.getEmail()); 
+		
+		if (cliente.isPresent() && clienteForm.validarSenha(clienteForm.getSenha(), cliente.get().getSenha()) ) {
+			
+			Cliente atualizado = clienteForm.atualizar(cliente.get());
+			 clienteRepository.save(atualizado);
 			return ResponseEntity.ok(new ClienteDTO(atualizado));
 		}
 		return ResponseEntity.notFound().build();
 
-	}
+	} 
+	
+
+
+	
 
 }
