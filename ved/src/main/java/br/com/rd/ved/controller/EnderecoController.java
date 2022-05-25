@@ -35,14 +35,14 @@ public class EnderecoController {
 	@Autowired
 	private EnderecoRepository er;
 	@Autowired
-	private ClienteRepository cr;
+	private ClienteRepository clienteRepository;
 
 	@Autowired
 	private UfRepository ur;
 
 	@GetMapping("/{id}/detalhes")
 	public List<EnderecoDTO> listar(@PathVariable("id") Integer id) {
-		Optional<Cliente> cliente =cr.findById(id);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 		List<Endereco> enderecos = cliente.get().getEnderecos(); 
 		return EnderecoDTO.converter(enderecos);
 	}
@@ -52,10 +52,11 @@ public class EnderecoController {
 	public ResponseEntity<EnderecoDTO> cadastrar(@PathVariable("id") Integer id,
 			@RequestBody @Valid EnderecoForm enderecoForm, UriComponentsBuilder uriBuilder) {
 
-		Optional<Cliente> cliente = cr.findById(id);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 		Endereco endereco = enderecoForm.converter(ur);
 		er.save(endereco);
-		enderecoForm.cadastrarEndereco(endereco, cliente.get(), cr);
+		
+		enderecoForm.cadastrarEndereco(endereco, cliente.get(), clienteRepository);
 		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(endereco.getId()).toUri();
 		return ResponseEntity.created(uri).body(new EnderecoDTO(endereco));
 
@@ -65,7 +66,7 @@ public class EnderecoController {
 	public ResponseEntity<EnderecoDTO> detalhar(@PathVariable("id") Integer id,
 			@PathVariable("endereco") Integer idEndereco) {
 
-		Optional<Cliente> cliente = cr.findById(id);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 		Optional<Endereco> endereco = er.findById(idEndereco);
 		List<Endereco> enderecos = new ArrayList<>();
 		enderecos = cliente.get().getEnderecos();
@@ -81,7 +82,7 @@ public class EnderecoController {
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable("id") Integer id, @PathVariable("endereco") Integer idEndereco) {
 
-		Optional<Cliente> cliente = cr.findById(id);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 		Optional<Endereco> endereco = er.findById(idEndereco);
 
 		if (endereco.isPresent() && cliente.isPresent()) {
@@ -89,7 +90,7 @@ public class EnderecoController {
 			enderecos = cliente.get().getEnderecos();
 			enderecos.remove(endereco.get());
 			cliente.get().setEnderecos(enderecos); 
-			cr.save(cliente.get());
+			clienteRepository.save(cliente.get());
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.notFound().build();
@@ -99,7 +100,7 @@ public class EnderecoController {
 	@Transactional	
 	public ResponseEntity<EnderecoDTO> atualizar(@PathVariable("id") Integer id, @PathVariable("endereco") Integer idEndereco,
 			@RequestBody @Valid EnderecoForm enderecoForm) {
-		Optional<Cliente> cliente = cr.findById(id);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 		Optional<Endereco> endereco = er.findById(idEndereco);
 		List<Endereco> enderecos = new ArrayList<>();
 		enderecos = cliente.get().getEnderecos();
