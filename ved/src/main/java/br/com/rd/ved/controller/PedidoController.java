@@ -118,8 +118,8 @@ public class PedidoController {
 	}  
 	
 	
-	@GetMapping("/cliente={id}/pedidos")
-	public List<meusPedidosDTO> detalhar(@PathVariable("id") Integer id) {
+	@GetMapping("/{id}/pedidos")
+	public List<MyPedidosDTO > pedidos(@PathVariable("id") Integer id) {
 		Optional<Cliente> cliente = clienteRepository.findById(id);
 		List<Pedido> pedidos = cliente.get().getPedidos();
 		return meusPedidosDTO.converter(pedidos);
