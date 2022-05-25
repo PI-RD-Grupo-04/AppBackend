@@ -64,12 +64,11 @@ public class PedidoController {
 		return PedidoDetalheDTO.converter(pedidos);
 	}
 
-	@PostMapping("/cliente={id}/novo")
+	@PostMapping("/novo")
 	@Transactional
-	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id,
-			@RequestBody @Valid PedidoForm pedidoForm, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<PedidoDTO> cadastrar(@RequestBody @Valid PedidoForm pedidoForm, UriComponentsBuilder uriBuilder) {
 		
-		Optional<Cliente> cliente = clienteRepository.findById(id);
+		Optional<Cliente> cliente = clienteRepository.findById(	pedidoForm.getCliente());
 		
 		Pedido pedido = pedidoForm.converter(pedidoRepository, clienteRepository, cupomDescontoRepository,
 				pedidoStatusRepository, freteRepository, enderecoRepository,itemPedidoRepository);
@@ -79,7 +78,7 @@ public class PedidoController {
 		return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
 	}
 
-	@GetMapping("/cliente={id}/detalhar/{pedido}")
+	@GetMapping("/{id}/detalhar/{pedido}")
 	public ResponseEntity<PedidoDetalheDTO> detalhar(@PathVariable("id") Integer id,
 			@PathVariable("pedido") Integer idPedido) {
 
