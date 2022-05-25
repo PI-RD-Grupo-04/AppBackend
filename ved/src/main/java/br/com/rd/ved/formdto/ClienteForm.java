@@ -131,10 +131,7 @@ public class ClienteForm {
 		this.senha = codificarSenha(senha);
 	return new Cliente(nome, sobrenome, nomeSocial, cpf, dataNascimento, email, telefone, senha);
 		
-<<<<<<< HEAD
 		
 
-=======
->>>>>>> af087d76951652b9a39f0118706f3e256a536da1
 	}
 }
