@@ -56,7 +56,7 @@ public class Pedido {
 	private Endereco enderecos;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itemPedido;
 	
 	@JsonIgnore
