@@ -40,9 +40,10 @@ public class EnderecoController {
 	@Autowired
 	private UfRepository ur;
 
-	@GetMapping
-	public List<EnderecoDTO> listar() {
-		List<Endereco> enderecos = er.findAll();
+	@GetMapping("/{id}/detalhes")
+	public List<EnderecoDTO> listar(@PathVariable("id") Integer id) {
+		Optional<Cliente> cliente =cr.findById(id);
+		List<Endereco> enderecos = cliente.get().getEnderecos(); 
 		return EnderecoDTO.converter(enderecos);
 	}
 
