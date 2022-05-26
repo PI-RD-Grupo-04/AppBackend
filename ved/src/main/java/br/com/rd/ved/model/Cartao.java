@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -61,9 +60,6 @@ public class Cartao {
 	@ManyToMany(mappedBy="cartoes",fetch = FetchType.LAZY)
 	private List<Cliente> cliente; 
 	
-	@OneToMany(mappedBy="cartao",fetch = FetchType.LAZY)
-	private List <TipoPagamento> tipoPagamento; 
-
 	public Cartao() {
 		super();
 	}

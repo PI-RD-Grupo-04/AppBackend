@@ -12,10 +12,6 @@ public class BoletoDTO {
 	private Integer id;
 	private String codigoBarras;
 
-	public Integer getId() {
-		return id;
-	}
-
 	public String getCodigoBarras() {
 		return codigoBarras;
 	}

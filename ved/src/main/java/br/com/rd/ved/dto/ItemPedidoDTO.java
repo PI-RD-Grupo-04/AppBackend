@@ -8,6 +8,7 @@ import br.com.rd.ved.model.PK.PedidoIntemPedidoCH;
 public class ItemPedidoDTO {
 
 	private Integer Quantidade;
+	@SuppressWarnings("unused")
 	private PedidoIntemPedidoCH chave;
 	
 	

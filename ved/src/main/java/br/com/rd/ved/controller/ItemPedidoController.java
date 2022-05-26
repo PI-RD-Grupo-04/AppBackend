@@ -41,6 +41,7 @@ public class ItemPedidoController {
 	public ResponseEntity<ItemPedidoDTO> insert(@RequestBody List<ItemPedidoForm> form) {
 
 		for(int i = 0; i < form.size(); i++) {	
+			@SuppressWarnings("unused")
 			ItemPedidoDTO entity = itemService.insert(form.get(i));	
 		}
 		return null;	

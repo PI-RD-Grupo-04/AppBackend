@@ -22,6 +22,7 @@ public class PedidoDetalheDTO {
 	private String tipoFrete;
 	private BigDecimal valor_frete;
 	private Endereco enderecos;
+	private String tipoPagamento;
 	private List<ItemPedido> items;
 	private BigDecimal total;
 
@@ -35,8 +36,9 @@ public class PedidoDetalheDTO {
 		this.tipoFrete = pedido.getFrete().getTipoFrete().getDescricao();
 		this.valor_frete = pedido.getFrete().getValor();
 		this.enderecos = pedido.getEnderecos();
+		this.tipoPagamento = pedido.getTipoPagamento();
 		this.items = pedido.getItemPedidos();
-		this.total = this.totalPedido(items);
+		this.total = pedido.getValorTotal();
 	}
 	
 	public Integer getCodigo_pedido() {
@@ -44,7 +46,7 @@ public class PedidoDetalheDTO {
 	}
 
 	public void setCodigo_pedido(Integer codigo_pedido) {
-		codigo_pedido = codigo_pedido;
+		this.codigo_pedido = codigo_pedido;
 	}
 
 	public String getData() { 
@@ -129,12 +131,14 @@ public class PedidoDetalheDTO {
 		this.total = total;
 	}
 
-	public  BigDecimal totalPedido(List<ItemPedido> valor) {
-		List<ItemPedidoDetalheDTO> nova = ItemPedidoDetalheDTO.converter(valor);
-		BigDecimal soma = nova.stream().map(produto -> produto.getPreco()).reduce(BigDecimal.ZERO, BigDecimal::add);
-		BigDecimal soma2 = soma.add(this.valor_frete);
-		return soma2;
+	public String getTipoPagamento() {
+		return tipoPagamento;
 	}
+
+	public void setTipoPagamento(String tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
 
 	public static List<PedidoDetalheDTO> converter(List<Pedido> pedidos) {
 		return pedidos.stream().map(PedidoDetalheDTO::new).collect(Collectors.toList());

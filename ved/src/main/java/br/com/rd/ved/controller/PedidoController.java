@@ -68,7 +68,7 @@ public class PedidoController {
 	@Transactional
 	public ResponseEntity<PedidoDTO> cadastrar(@RequestBody @Valid PedidoForm pedidoForm, UriComponentsBuilder uriBuilder) {
 		
-		Optional<Cliente> cliente = clienteRepository.findById(	pedidoForm.getCliente());
+		Optional<Cliente> cliente = clienteRepository.findById(pedidoForm.getCliente());
 		
 		Pedido pedido = pedidoForm.converter(pedidoRepository, clienteRepository, cupomDescontoRepository,
 				pedidoStatusRepository, freteRepository, enderecoRepository,itemPedidoRepository);
@@ -78,7 +78,7 @@ public class PedidoController {
 		return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
 	}
 
-	@GetMapping("/{id}/detalhar/{pedido}")
+	@GetMapping("/cliente={id}/detalhar/{pedido}")
 	public ResponseEntity<PedidoDetalheDTO> detalhar(@PathVariable("id") Integer id,
 			@PathVariable("pedido") Integer idPedido) {
 
