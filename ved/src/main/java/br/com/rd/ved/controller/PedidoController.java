@@ -22,7 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.rd.ved.dto.MyPedidosDTO;
 import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.dto.PedidoDetalheDTO;
-import br.com.rd.ved.dto.meusPedidosDTO;
 import br.com.rd.ved.formdto.PedidoForm;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.Pedido;
