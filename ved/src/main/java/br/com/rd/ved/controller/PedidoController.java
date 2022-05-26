@@ -94,7 +94,7 @@ public class PedidoController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-
+		
 	@DeleteMapping("/cliente={id}/cancelar/{pedido}")
 	@Transactional
 	public ResponseEntity<?> cancelar(@PathVariable("id") Integer id, @PathVariable("pedido") Integer idPedido) {

@@ -14,15 +14,18 @@ public class PagamentoCartaoDto {
 	private BigDecimal valorParcela;
 	
 	private Cartao cartao;
+	
+	private Integer numeroPedido;
 
 	public PagamentoCartaoDto() {
 	}
 
-	public PagamentoCartaoDto(PagamentoCartaoForm form, Cartao cartao) {
+	public PagamentoCartaoDto(PagamentoCartaoForm form, Cartao cartao, Integer numeroPedido) {
 		this.parcela = form.getParcela();
 		this.valorTotal = form.getValorTotal();
 		this.valorParcela = form.getValorParcela();
 		this.cartao = cartao;
+		this.numeroPedido = numeroPedido;
 	}
 
 	public Integer getParcela() {
@@ -55,6 +58,14 @@ public class PagamentoCartaoDto {
 
 	public void setCartao(Cartao cartao) {
 		this.cartao = cartao;
+	}
+	
+	public Integer getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(Integer numeroPedido) {
+		this.numeroPedido = numeroPedido;
 	}
 
 	public BigDecimal valorParcelas(BigDecimal ValorTotal, Integer parcelas) {
