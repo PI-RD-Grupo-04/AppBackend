@@ -47,6 +47,7 @@ public class ItemPedidoController {
 		return null;	
 	}
 
+	
 	@GetMapping("/pedido={id}/items")
 	public ResponseEntity<List<ItemPedidoDetalheDTO>> visualizar(@PathVariable("id") Integer id) {
 

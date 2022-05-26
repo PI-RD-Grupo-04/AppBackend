@@ -6,14 +6,15 @@ import java.util.stream.Collectors;
 import br.com.rd.ved.model.Endereco;
 
 public class EnderecoDTO {
-
+	private Integer id;
 	private String cep;
 	private String rua;
 	private Integer numero;
 	private String complemento;
 	private String municipio;
 	private String cidade;
-	private String uf;
+	private String uf; 
+	private Integer idUf;
 	
 	public EnderecoDTO(Endereco endereco) {
 		this.cep = endereco.getCep();
@@ -22,7 +23,9 @@ public class EnderecoDTO {
 		this.complemento = endereco.getComplemento();
 		this.municipio = endereco.getMunicipio();
 		this.cidade = endereco.getCidade(); 
-		this.uf = endereco.getUf().getDescricao();
+		this.uf = endereco.getUf().getDescricao(); 
+		this.id = endereco.getId(); 
+		this.idUf = endereco.getUf().getId(); 
 	}
 
 	public String getCep() {
@@ -45,8 +48,17 @@ public class EnderecoDTO {
 		return complemento;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
 	public String getMunicipio() {
 		return municipio;
+	}
+	
+
+	public Integer getIdUf() {
+		return idUf;
 	}
 
 	public String getCidade() {
