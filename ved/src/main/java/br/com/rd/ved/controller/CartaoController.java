@@ -40,11 +40,10 @@ public class CartaoController {
 	@Autowired
 	private BandeiraRepository bandeiraRepository;
 
-	@GetMapping("/{id}/detalhes")
-	public List<CartaoDTO> listar(@PathVariable("id") Integer id) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		List<Cartao> cartoes = cliente.get().getCartoes();  
-		return CartaoDTO.converter(cartoes);
+	@GetMapping("/{id}/detalhes") public List<CartaoDTO> listar(@PathVariable("id") Integer id) {
+		Optional<Cliente> cliente = clienteRepository.findById(id); 
+		List<Cartao> cartoes = cliente.get().getCartoes();
+		return CartaoDTO.converter(cartoes); 
 	}
 
 	@DeleteMapping("/{id}/deletar/{cartao}")
@@ -83,7 +82,7 @@ public class CartaoController {
 
 	}
 
-	@GetMapping("/{id}/detalhar/{cartao}")
+	@GetMapping("/{id}/detalhes/{cartao}")
 	public ResponseEntity<CartaoDTO> detalhar(@PathVariable("id") Integer id,
 			@PathVariable("cartao") Integer idCartao) {
 

@@ -18,8 +18,11 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer>, Crud
 			+ " where c.descricao_categoria = :categoria order by id_produto desc limit 4 ", nativeQuery = true)
 	List<Produto> findProdutosPorCategoria(@Param("categoria") String categoria);
 
-	@Query(value = "select * from produto  p  where p.id_categoria != 5 order by p.id_produto  desc limit 8", nativeQuery = true)
+	@Query(value = "select * from produto p order by p.id_produto desc limit 4", nativeQuery = true)
 	List<Produto> findNovidades();
+	
+	@Query(value = "select * from produto p   where p.id_categoria != 5 order by  p.preco  desc limit 8", nativeQuery = true)
+	List<Produto> findOfertas();
 
 	@Query(value = " select * from produto where preco <= :valor", nativeQuery = true)
 	List<Produto> findProdutosPorValor(@Param("valor") Integer valor);
@@ -28,3 +31,4 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer>, Crud
 	List<Produto> findProdutosPorPalavra(@Param("palavra") String palavra);
 
 }
+ 

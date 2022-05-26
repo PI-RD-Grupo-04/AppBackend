@@ -32,18 +32,18 @@ public class PedidoForm {
 	private Integer cupomDesconto;
 	private Integer pedidoStatus;
 	private Integer frete;
-	private Integer enderecos;
+	private Integer endereco;
 	private List<ItemPedido> itemPedido;
 
 
 	public PedidoForm(String data, String cliente, String cupomDesconto,
-			String pedidoStatus, String frete, String enderecos) throws ParseException {
+			String pedidoStatus, String frete, String endereco) throws ParseException {
 		this.data = formato.parse(data);
 		this.cliente = Integer.parseInt(cliente);
 		this.cupomDesconto = Integer.parseInt(cupomDesconto);
 		this.pedidoStatus = Integer.parseInt(pedidoStatus);
 		this.frete = Integer.parseInt(frete);
-		this.enderecos = Integer.parseInt(enderecos);
+		this.endereco = Integer.parseInt(endereco);
 	}
 
 
@@ -96,13 +96,13 @@ public class PedidoForm {
 		this.frete = frete;
 	}
 
-	public Integer getEnderecos() {
-		return enderecos;
+	public Integer getEndereco() {
+		return endereco;
 	}
 
 
-	public void setEnderecos(Integer enderecos) {
-		this.enderecos = enderecos;
+	public void setEndereco(Integer enderecos) {
+		this.endereco = enderecos;
 	}
 	
 	public List<ItemPedido> getItemPedido() {
@@ -127,7 +127,7 @@ public class PedidoForm {
 		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(this.cupomDesconto);
 		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(this.pedidoStatus);
 		Optional<Frete> frete = freteRepository.findById(this.frete);
-		Optional<Endereco> endereco = enderecoRepository.findById(this.enderecos);
+		Optional<Endereco> endereco = enderecoRepository.findById(this.endereco);
 		List<ItemPedido> items = new ArrayList<ItemPedido>();
 		items.add((ItemPedido) this.itemPedido);
 		

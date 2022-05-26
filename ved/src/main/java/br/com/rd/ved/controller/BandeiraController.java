@@ -7,22 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.rd.ved.dto.UfDTO;
-import br.com.rd.ved.model.Uf;
-import br.com.rd.ved.repository.UfRepository;
+
+import br.com.rd.ved.model.Bandeira;
+import br.com.rd.ved.repository.BandeiraRepository;
+
 
 @RestController
-@RequestMapping("/uf")
-public class UfController { 
-	
+@RequestMapping("/bandeira")
+public class BandeiraController {
+
+
 	@Autowired
-	private UfRepository ufRepository; 
-	
+	private BandeiraRepository bandeiraRepository;
+
 	
 	@GetMapping
-	public List<UfDTO> listar(){
-		List<Uf> ufs = ufRepository.findAll();
-		return UfDTO.converter(ufs);
-	}
-	
+	public List <Bandeira> Listar() {
+				List<Bandeira> bandeiras = bandeiraRepository.findAll();
+	return bandeiras;
+}
 }
