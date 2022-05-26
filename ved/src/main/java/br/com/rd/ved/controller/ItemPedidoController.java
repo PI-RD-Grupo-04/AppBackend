@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.rd.ved.dto.ItemPedidoDTO;
-import br.com.rd.ved.dto.ItemPedidoDetalheDTO;
 import br.com.rd.ved.formdto.ItemPedidoForm;
 import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
@@ -53,14 +52,14 @@ public class ItemPedidoController {
 }
 
 	@GetMapping("/pedido={id}/items")
-	public ResponseEntity<List<ItemPedidoDetalheDTO>> visualizar(@PathVariable("id") Integer id) {
+	public ResponseEntity<List<ItemPedidoDTO>> visualizar(@PathVariable("id") Integer id) {
 
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
 
 		if (pedido.isPresent()) {
 			List<ItemPedido> itemPedido;
 			itemPedido = pedido.get().getItemPedidos();
-			return ResponseEntity.ok().body(ItemPedidoDetalheDTO.converter(itemPedido));
+			return ResponseEntity.ok().body(ItemPedidoDTO.converter(itemPedido));
 		}
 		return ResponseEntity.notFound().build();
 	}
