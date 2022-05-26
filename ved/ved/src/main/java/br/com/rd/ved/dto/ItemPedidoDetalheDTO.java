@@ -13,6 +13,7 @@ public class ItemPedidoDetalheDTO {
 	private String produto;
 	private BigDecimal preco;
 	private Integer Quantidade;
+	@SuppressWarnings("unused")
 	private PedidoIntemPedidoCH chave;
 	
 	

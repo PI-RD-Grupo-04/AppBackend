@@ -1,6 +1,7 @@
 package br.com.rd.ved.dto;
 
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -9,13 +10,15 @@ import java.util.stream.Collectors;
 import br.com.rd.ved.model.Pedido;
 public class PedidoDTO {
 
-	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+//	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	private Date data;	
 	private Integer cliente;
 	private Integer cupomDesconto;
 	private Integer pedidoStatus;
 	private Integer frete;
 	private Integer enderecos;
+	private String tipoPagamento;
+	private BigDecimal valorTotal;
 	
 	public PedidoDTO(Pedido pedido) {		
 		this.data = pedido.getData();
@@ -24,6 +27,8 @@ public class PedidoDTO {
 		this.pedidoStatus = pedido.getPedidoStatus().getId();
 		this.frete = pedido.getFrete().getId();
 		this.enderecos = pedido.getEnderecos().getId();
+		this.tipoPagamento = pedido.getTipoPagamento();
+		this.valorTotal = pedido.getValorTotal();
 	}
 	
 	
@@ -76,6 +81,26 @@ public class PedidoDTO {
 	public void setEnderecos(Integer enderecos) {
 		this.enderecos = enderecos;
 	}
+
+	public String getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+
+	public void setTipoPagamento(String tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
 
 	public static List<PedidoDTO> converter(List<Pedido> pedidos) {
 		return pedidos.stream().map(PedidoDTO::new).collect(Collectors.toList());
