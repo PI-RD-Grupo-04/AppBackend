@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+
 import br.com.rd.ved.model.Produto;
 
 public class ProdutoCardDTO {
@@ -55,4 +57,5 @@ public class ProdutoCardDTO {
 		return produto.stream().map(ProdutoCardDTO::new).collect(Collectors.toList());
 	}
 
+	
 }
