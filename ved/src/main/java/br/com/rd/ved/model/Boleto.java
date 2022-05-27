@@ -1,12 +1,17 @@
 package br.com.rd.ved.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="boleto")
@@ -26,6 +31,10 @@ public class Boleto {
 	
 	@Column(name="cpf", nullable = false)
 	private String cpf;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "boleto")
+	private List <HistoricoPgamento> HistoricoPagamento; 
 	
 	public Boleto() {
 		super();
@@ -53,6 +62,29 @@ public class Boleto {
 		this.codigoBarras = codigoBarras;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public List<HistoricoPgamento> getHistoricoPagamento() {
+		return HistoricoPagamento;
+	}
+
+	public void setHistoricoPagamento(List<HistoricoPgamento> historicoPagamento) {
+		HistoricoPagamento = historicoPagamento;
+	}
 
 	@Override
 	public String toString() {

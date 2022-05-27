@@ -6,6 +6,7 @@ import br.com.rd.ved.model.Pix;
 
 public class PixDTO {
 
+	@SuppressWarnings("unused")
 	private Integer id;
 	private String codigoPix;
 	private String img;

@@ -59,6 +59,10 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido")
 	private List <NotaFiscal> notafiscal; 
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "pedido")
+	private List <HistoricoPgamento> HistoricoPagamento; 
+	
 	
 	private String tipoPagamento;
 	
@@ -180,6 +184,16 @@ public class Pedido {
 	public int hashCode() {
 		return Objects.hash(data, id);
 	}
+	
+	public List<HistoricoPgamento> getHistoricoPagamento() {
+		return HistoricoPagamento;
+	}
+
+
+	public void setHistoricoPagamento(List<HistoricoPgamento> historicoPagamento) {
+		HistoricoPagamento = historicoPagamento;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {
