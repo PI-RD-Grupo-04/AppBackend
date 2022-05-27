@@ -30,8 +30,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer>, Crud
 	@Query(value = " select * from produto where nome_produto like :palavra%", nativeQuery = true)
 	List<Produto> findProdutosPorPalavra(@Param("palavra") String palavra);
 
-	@Query(value = "select * from product p where p.id_categoria != 5 order by p.preco desc limit 8", nativeQuery = true)
-	List<Produto> findOfertas();
+
 
 }
  

@@ -8,7 +8,7 @@ import br.com.rd.ved.model.Produto;
 
 public class ProdutoDTO {
 	private Integer id;
-	private String nome;
+	private String nomeProduto;
 	private BigDecimal preco;
 	private String url;
 	private String descricao;
@@ -21,7 +21,7 @@ public class ProdutoDTO {
 
 	public ProdutoDTO(Produto produto) {
 		this.id = produto.getId();
-		this.nome = produto.getNomeProduto();
+		this.nomeProduto = produto.getNomeProduto();
 		this.preco = produto.getPreco();
 		this.url = produto.getUrl();
 		this.descricao = produto.getDescricao();
@@ -40,8 +40,8 @@ public class ProdutoDTO {
 		return id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeProduto() {
+		return nomeProduto;
 	}
 
 	public BigDecimal getPreco() {
