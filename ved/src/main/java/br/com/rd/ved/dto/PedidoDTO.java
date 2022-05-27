@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Pedido;
 public class PedidoDTO {
-
+	private Integer id;
 //	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	private Date data;	
 	private Integer cliente;
@@ -20,7 +20,8 @@ public class PedidoDTO {
 	private String tipoPagamento;
 	private BigDecimal valorTotal;
 	
-	public PedidoDTO(Pedido pedido) {		
+	public PedidoDTO(Pedido pedido) {	
+		this.id = pedido.getId();
 		this.data = pedido.getData();
 		this.cliente = pedido.getCliente().getId();
 		this.cupomDesconto = pedido.getCupomDesconto().getId();
@@ -57,6 +58,12 @@ public class PedidoDTO {
 	public void setCupomDesconto(Integer cupomDesconto) {
 		this.cupomDesconto = cupomDesconto;
 	}
+
+	
+	public Integer getId() {
+		return id;
+	}
+
 
 	public Integer getPedidoStatus() {
 		return pedidoStatus;
