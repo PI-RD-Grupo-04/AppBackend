@@ -19,7 +19,7 @@ public class HomeController {
 	
 	@GetMapping("/ofertas")
 	public List<ProdutoCardDTO> ofertas() {
-		List<Produto> produtos = produtoRepository.findNovidades();
+		List<Produto> produtos = produtoRepository.findOfertas();
 		return ProdutoCardDTO.converter(produtos);
 	}
 	

@@ -28,25 +28,12 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
-//	@GetMapping
-//	public List<ProdutoCardDTO> listarCard() {
-//		List<Produto> produtos = produtoRepository.findAll();
-//		return ProdutoCardDTO.converter(produtos);
-//	}
-	
-	//Paginação -> 6 produtos por página
-
-	
 	@GetMapping
-	public Page<ProdutoCardDTO> listarCard (Pageable pageable) {
-		Page<Produto> produtos = produtoRepository.findTeste(pageable);
-		return new PageImpl<ProdutoCardDTO>(
-                produtos.getContent().stream()
-                .map(produto -> new ProdutoCardDTO(produto)).collect(Collectors.toList()),
-                pageable, produtos.getTotalElements());
+	public List<ProdutoCardDTO> listarCard() {
+		List<Produto> produtos = produtoRepository.findAll();
+		return ProdutoCardDTO.converter(produtos);
 	}
-
-
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<ProdutoDTO> detalhar(@PathVariable("id") Integer id) {
 		Optional<Produto> produto = produtoRepository.findById(id);
