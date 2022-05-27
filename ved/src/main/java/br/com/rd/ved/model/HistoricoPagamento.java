@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "historico_pagamento")
-public class HistoricoPgamento {
+public class HistoricoPagamento {
 
 	
 	@Id
@@ -44,9 +44,9 @@ public class HistoricoPgamento {
 	
 	private String statusPagamento;
 
-	public HistoricoPgamento() {}
+	public HistoricoPagamento() {}
 
-	public HistoricoPgamento(Pedido pedido, Cliente cliente, Pix pix, Boleto boleto, Cartao cartao,
+	public HistoricoPagamento(Pedido pedido, Cliente cliente, Pix pix, Boleto boleto, Cartao cartao,
 			String statusPagamento) {
 		this.pedido = pedido;
 		this.cliente = cliente;
@@ -125,7 +125,7 @@ public class HistoricoPgamento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		HistoricoPgamento other = (HistoricoPgamento) obj;
+		HistoricoPagamento other = (HistoricoPagamento) obj;
 		return Objects.equals(id, other.id);
 	}
 	

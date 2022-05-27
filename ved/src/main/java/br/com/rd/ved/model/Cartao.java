@@ -63,7 +63,7 @@ public class Cartao {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cartao")
-	private List <HistoricoPgamento> HistoricoPagamento; 
+	private List <HistoricoPagamento> HistoricoPagamento; 
 	
 	public Cartao() {
 		super();
@@ -153,11 +153,11 @@ public class Cartao {
 		this.cliente = cliente;
 	}
 
-	public List<HistoricoPgamento> getHistoricoPagamento() {
+	public List<HistoricoPagamento> getHistoricoPagamento() {
 		return HistoricoPagamento;
 	}
 
-	public void setHistoricoPagamento(List<HistoricoPgamento> historicoPagamento) {
+	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
 		HistoricoPagamento = historicoPagamento;
 	}
 

@@ -29,7 +29,7 @@ public class Pix {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pix")
-	private List <HistoricoPgamento> HistoricoPagamento; 
+	private List <HistoricoPagamento> HistoricoPagamento; 
 		
 	public Pix() {
 		super();
@@ -69,11 +69,11 @@ public class Pix {
 		this.img = img;
 	}
 
-	public List<HistoricoPgamento> getHistoricoPagamento() {
+	public List<HistoricoPagamento> getHistoricoPagamento() {
 		return HistoricoPagamento;
 	}
 
-	public void setHistoricoPagamento(List<HistoricoPgamento> historicoPagamento) {
+	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
 		HistoricoPagamento = historicoPagamento;
 	}
 	

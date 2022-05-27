@@ -34,7 +34,7 @@ public class Boleto {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "boleto")
-	private List <HistoricoPgamento> HistoricoPagamento; 
+	private List <HistoricoPagamento> HistoricoPagamento; 
 	
 	public Boleto() {
 		super();
@@ -78,11 +78,11 @@ public class Boleto {
 		this.cpf = cpf;
 	}
 
-	public List<HistoricoPgamento> getHistoricoPagamento() {
+	public List<HistoricoPagamento> getHistoricoPagamento() {
 		return HistoricoPagamento;
 	}
 
-	public void setHistoricoPagamento(List<HistoricoPgamento> historicoPagamento) {
+	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
 		HistoricoPagamento = historicoPagamento;
 	}
 

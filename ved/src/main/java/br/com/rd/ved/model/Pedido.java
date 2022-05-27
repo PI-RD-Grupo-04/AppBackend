@@ -61,7 +61,7 @@ public class Pedido {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
-	private List <HistoricoPgamento> HistoricoPagamento; 
+	private List <HistoricoPagamento> HistoricoPagamento; 
 	
 	
 	private String tipoPagamento;
@@ -185,12 +185,12 @@ public class Pedido {
 		return Objects.hash(data, id);
 	}
 	
-	public List<HistoricoPgamento> getHistoricoPagamento() {
+	public List<HistoricoPagamento> getHistoricoPagamento() {
 		return HistoricoPagamento;
 	}
 
 
-	public void setHistoricoPagamento(List<HistoricoPgamento> historicoPagamento) {
+	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
 		HistoricoPagamento = historicoPagamento;
 	}
 
