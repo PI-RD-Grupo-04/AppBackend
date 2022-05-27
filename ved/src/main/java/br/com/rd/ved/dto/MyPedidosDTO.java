@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Pedido;
 
-public class meusPedidosDTO {
+public class MyPedidosDTO {
 
 	private Integer id;
 	private String status;
 
-	public meusPedidosDTO(Pedido pedido) {
+	public MyPedidosDTO (Pedido pedido) {
 		this.id = pedido.getId();
 		this.status = pedido.getPedidoStatus().getDescricao();
 	}
@@ -23,7 +23,8 @@ public class meusPedidosDTO {
 		return status;
 	} 
 	
-	public static List<meusPedidosDTO> converter(List<Pedido> pedidos){
-		return pedidos.stream().map(meusPedidosDTO::new).collect(Collectors.toList());
+	public static List<MyPedidosDTO > converter(List<Pedido> pedidos){
+		return pedidos.stream().map(MyPedidosDTO ::new).collect(Collectors.toList());
 	} 
+
 }

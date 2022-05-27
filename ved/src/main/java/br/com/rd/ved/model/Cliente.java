@@ -228,4 +228,32 @@ public class Cliente {
 		return Objects.equals(id, other.id);
 	}
 
+	
+
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setPassword(String encode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void cliente(String authority) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEnabled(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+
+	
+
+
 }

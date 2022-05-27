@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Frete;
-import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.Produto;
-import br.com.rd.ved.model.TipoFrete;
-import br.com.rd.ved.model.Uf;
+
 
 public class FreteDTO {
 	private Integer id;

@@ -1,7 +1,9 @@
 package br.com.rd.ved.formdto;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +26,6 @@ import br.com.rd.ved.repository.PedidoStatusRepository;
 
 public class PedidoForm {
 	
-	
 	private Date data;
 	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	private Integer cliente;
@@ -32,17 +33,21 @@ public class PedidoForm {
 	private Integer pedidoStatus;
 	private Integer frete;
 	private Integer enderecos;
-
+	private List<ItemPedido> itemPedido;
+	private String tipoPagamento;
+	private BigDecimal valorTotal;
 
 
 	public PedidoForm(String data, String cliente, String cupomDesconto,
-			String pedidoStatus, String frete, String enderecos) throws ParseException {
+			String pedidoStatus, String frete, String enderecos, String tipoPagamento, String valorTotal) throws ParseException {
 		this.data = formato.parse(data);
 		this.cliente = Integer.parseInt(cliente);
 		this.cupomDesconto = Integer.parseInt(cupomDesconto);
 		this.pedidoStatus = Integer.parseInt(pedidoStatus);
 		this.frete = Integer.parseInt(frete);
 		this.enderecos = Integer.parseInt(enderecos);
+		this.tipoPagamento = tipoPagamento;
+		this.valorTotal = new BigDecimal(valorTotal);
 	}
 
 
@@ -103,8 +108,33 @@ public class PedidoForm {
 	public void setEnderecos(Integer enderecos) {
 		this.enderecos = enderecos;
 	}
-		
+	
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
 
+
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
+	}
+	
+	public String getTipoPagamento() {
+		return tipoPagamento;
+	}
+
+
+	public void setTipoPagamento(String tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 
 
 	public Pedido converter(PedidoRepository pedidoRepository, 
@@ -112,15 +142,18 @@ public class PedidoForm {
 							CupomDescontoRepository cupomDescontoRepository,
 							PedidoStatusRepository pedidoStatusRepository,
 							FreteRepository freteRepository,
-							EnderecoRepository enderecoRepository){ 
+							EnderecoRepository enderecoRepository,
+							ItemPedidoRepository itemPedidoRepository) { 
 		
 		Optional<Cliente> cliente = clienteRepository.findById(this.cliente);		
 		Optional<CupomDesconto> cupomDesconto = cupomDescontoRepository.findById(this.cupomDesconto);
 		Optional<PedidoStatus> pedidoStatus = pedidoStatusRepository.findById(this.pedidoStatus);
 		Optional<Frete> frete = freteRepository.findById(this.frete);
 		Optional<Endereco> endereco = enderecoRepository.findById(this.enderecos);
+		List<ItemPedido> items = new ArrayList<ItemPedido>();
+		items.add((ItemPedido) this.itemPedido);
 		
-		Pedido pedido = new Pedido(data, cliente.get(), cupomDesconto.get(), pedidoStatus.get(), frete.get(), endereco.get());
+		Pedido pedido = new Pedido(data, cliente.get(), cupomDesconto.get(), pedidoStatus.get(), frete.get(), endereco.get(), tipoPagamento, valorTotal);
 				
 		return pedido;
 
@@ -128,6 +161,7 @@ public class PedidoForm {
 	
 	public List<PedidoDTO> cadastrarPedido(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository) {
 		List<Pedido> pedidos;
+		
 		pedidos = cliente.getPedidos();
 		pedidos.add(pedido);
 		cliente.setPedidos(pedidos);
@@ -136,13 +170,4 @@ public class PedidoForm {
 
 	} 
 	
-	public List<PedidoDTO> deletarEndereco(Pedido pedido, Cliente cliente, PedidoRepository pedidoRepository ) {
-		List<Pedido> pedidos;
-		pedidos = cliente.getPedidos();
-		pedidos.add(pedido);
-		cliente.setPedidos(pedidos);
-		pedidoRepository.save(cliente);
-		return PedidoDTO.converter(pedidos);
-
-	} 
 }

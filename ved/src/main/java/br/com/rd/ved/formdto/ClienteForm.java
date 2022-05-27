@@ -44,7 +44,7 @@ public class ClienteForm {
 	@NotEmpty
 	private String senha;
 
-	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+	private SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
 	public ClienteForm(@NotEmpty String nome, @NotEmpty String sobrenome, String nomeSocial, @NotEmpty String cpf,
 			@NotEmpty String dataNascimento, @NotEmpty String email, @NotEmpty String telefone, @NotEmpty String senha)
@@ -131,5 +131,7 @@ public class ClienteForm {
 		this.senha = codificarSenha(senha);
 	return new Cliente(nome, sobrenome, nomeSocial, cpf, dataNascimento, email, telefone, senha);
 		
+		
+
 	}
 }

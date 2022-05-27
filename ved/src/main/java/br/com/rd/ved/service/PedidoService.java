@@ -1,29 +1,14 @@
 package br.com.rd.ved.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
-import java.util.Scanner;
+
 
 import org.springframework.stereotype.Service;
 
-import br.com.rd.ved.model.Cliente;
-import br.com.rd.ved.model.CupomDesconto;
-import br.com.rd.ved.model.Endereco;
-import br.com.rd.ved.model.Frete;
-import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.PedidoStatus;
-import br.com.rd.ved.repository.ClienteRepository;
-import br.com.rd.ved.repository.CupomDescontoRepository;
-import br.com.rd.ved.repository.EnderecoRepository;
-import br.com.rd.ved.repository.FreteRepository;
-import br.com.rd.ved.repository.PedidoRepository;
-import br.com.rd.ved.repository.PedidoStatusRepository;
+
 
 @Service
-public class PedidoService {}
-//	
+public class PedidoService {
+	
 //	private final PedidoRepository pedidoRepository;
 //	private final ClienteRepository clienteRepository;
 //	private final CupomDescontoRepository cupomDescontoRepository;
@@ -161,4 +146,4 @@ public class PedidoService {}
 //		freteRepository.deleteById(id);
 //		System.out.println("Pedido Deletado com Sucesso");
 //	}
-//}
+}

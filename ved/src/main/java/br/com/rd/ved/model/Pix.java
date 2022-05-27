@@ -1,14 +1,10 @@
 package br.com.rd.ved.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,13 +15,13 @@ public class Pix {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_pix")
 	private Integer id;
+	
 	@Column(name="codigo_pix")
 	private String codigoPix;
 	
-	
-	@OneToMany(mappedBy="pix",fetch = FetchType.LAZY)
-	private List <TipoPagamento> tipoPagamento; 
-	
+	@Column(name="img")
+	private String img;
+		
 	public Pix() {
 		super();
 	}
@@ -35,8 +31,9 @@ public class Pix {
 		this.codigoPix = codigoPix;
 	}
 
-	public Pix(String codigoPix) {
+	public Pix(String codigoPix, String img) {
 		this.codigoPix = codigoPix;
+		this.img = img;
 	}
 
 	public Integer getId() {
@@ -54,12 +51,13 @@ public class Pix {
 	public void setCodigoPix(String codigoPix) {
 		this.codigoPix = codigoPix;
 	}
-
-	@Override
-	public String toString() {
-		return "Pix [id=" + id + ", codigoPix=" + codigoPix + "]";
+	
+	public String getImg() {
+		return img;
 	}
-	
-	
-	
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
 }

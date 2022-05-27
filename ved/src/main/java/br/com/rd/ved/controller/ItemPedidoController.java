@@ -1,12 +1,8 @@
 package br.com.rd.ved.controller;
 
-import java.net.URI;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
-
-import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,56 +12,52 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.rd.ved.dto.ItemPedidoDTO;
 import br.com.rd.ved.formdto.ItemPedidoForm;
 import br.com.rd.ved.model.ItemPedido;
 import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.repository.ItemPedidoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
-import br.com.rd.ved.repository.ProdutoRepository;
+import br.com.rd.ved.service.ItemPedidoService;
 
 @RestController
 @RequestMapping("/itemPedido")
 public class ItemPedidoController {
 
 	@Autowired
-	private ItemPedidoRepository itemPedidoRepository;
-
-	@Autowired
-	private ProdutoRepository produtoRepository;
-
-	@Autowired
 	private PedidoRepository pedidoRepository;
 
+	@Autowired
+	private ItemPedidoService itemService;
 
-	@PostMapping("/pedido={id}/novo")
-	@Transactional
-	public ResponseEntity<ItemPedidoDTO> cadastrar(@PathVariable("id") Integer id,
-			@RequestBody @Valid ItemPedidoForm itemPedidoForm, UriComponentsBuilder uriBuilder) {
+	@GetMapping
+	public ResponseEntity<List<ItemPedidoDTO>> findAll() {
+		List<ItemPedidoDTO> list = itemService.findAll();
+		return ResponseEntity.ok(list);
+	}
 
-		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		ItemPedido itemPedido = itemPedidoForm.converter(produtoRepository, pedidoRepository);
-		itemPedidoRepository.save(itemPedido);
-		itemPedidoForm.cadastrarItemPedido(itemPedido, pedido.get(), pedidoRepository);
+	@PostMapping("/novo")
+	public ResponseEntity<ItemPedidoDTO> insert(@RequestBody List<ItemPedidoForm> form) {
 
-		URI uri = uriBuilder.path("/novo/{id}").buildAndExpand(itemPedido.getId()).toUri();
-		return ResponseEntity.created(uri).body(new ItemPedidoDTO(itemPedido));
-
+		for(int i = 0; i < form.size(); i++) {	
+			@SuppressWarnings("unused")
+			ItemPedidoDTO entity = itemService.insert(form.get(i));	
+		}
+		return null;	
 	}
 
 	
 	@GetMapping("/pedido={id}/items")
-	public ResponseEntity<List<ItemPedidoDTO>> visualizar(@PathVariable("id") Integer id){
+	public ResponseEntity<List<ItemPedidoDTO>> visualizar(@PathVariable("id") Integer id) {
+
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		
+
 		if (pedido.isPresent()) {
-			List<ItemPedido> itemPedidos = new ArrayList<>();
-			itemPedidos = pedido.get().getItemPedidos();
-			return ResponseEntity.ok().body(ItemPedidoDTO.converter(itemPedidos));
+			List<ItemPedido> itemPedido;
+			itemPedido = pedido.get().getItemPedidos();
+			return ResponseEntity.ok().body(ItemPedidoDTO.converter(itemPedido));
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
+
 }
