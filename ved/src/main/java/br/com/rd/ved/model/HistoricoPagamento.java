@@ -1,7 +1,6 @@
 package br.com.rd.ved.model;
 
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,27 +18,27 @@ public class HistoricoPagamento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_categoria")
+	@Column(name = "id_historico")
 	private Integer id;
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_pedido", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_pedido")
 	private Pedido pedido;
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_cliente", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER )
+	@JoinColumn(name="id_cliente")
 	private Cliente cliente;
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_pix", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER )
+	@JoinColumn(name="id_pix", nullable = true)
 	private Pix pix;
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_boleto", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_boleto", nullable = true)
 	private Boleto boleto;
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
-	@JoinColumn(name="id_cartao", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_cartao", nullable = true)
 	private Cartao cartao;
 	
 	private String statusPagamento;
