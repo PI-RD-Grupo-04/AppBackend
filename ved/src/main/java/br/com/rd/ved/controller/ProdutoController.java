@@ -2,12 +2,8 @@ package br.com.rd.ved.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,24 +24,12 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
-//	@GetMapping
-//	public List<ProdutoCardDTO> listarCard() {
-//		List<Produto> produtos = produtoRepository.findAll();
-//		return ProdutoCardDTO.converter(produtos);
-//	}
-	
-	//Paginação -> 6 produtos por página
-
-	
 	@GetMapping
-	public Page<ProdutoCardDTO> listarCard (Pageable pageable) {
-		Page<Produto> produtos = produtoRepository.findTeste(pageable);
-		return new PageImpl<ProdutoCardDTO>(
-                produtos.getContent().stream()
-                .map(produto -> new ProdutoCardDTO(produto)).collect(Collectors.toList()),
-                pageable, produtos.getTotalElements());
+	public List<ProdutoCardDTO> listarCard() {
+		List<Produto> produtos = produtoRepository.findAll();
+		return ProdutoCardDTO.converter(produtos);
 	}
-
+	
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ProdutoDTO> detalhar(@PathVariable("id") Integer id) {
