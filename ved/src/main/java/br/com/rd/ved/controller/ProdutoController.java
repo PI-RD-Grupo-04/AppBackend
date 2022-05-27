@@ -2,14 +2,12 @@ package br.com.rd.ved.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.rd.ved.dto.PlanoDTO;
 import br.com.rd.ved.dto.ProdutoCardDTO;
 import br.com.rd.ved.dto.ProdutoDTO;
@@ -23,13 +21,12 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
+
 	@GetMapping
 	public List<ProdutoCardDTO> listarCard() {
 		List<Produto> produtos = produtoRepository.findAll();
 		return ProdutoCardDTO.converter(produtos);
 	}
-	
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ProdutoDTO> detalhar(@PathVariable("id") Integer id) {
@@ -69,6 +66,5 @@ public class ProdutoController {
 		}
 		return ResponseEntity.notFound().build();
 	} 
-	
 
 }

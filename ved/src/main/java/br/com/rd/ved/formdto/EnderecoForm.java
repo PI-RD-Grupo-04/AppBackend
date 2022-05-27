@@ -125,8 +125,5 @@ public class EnderecoForm {
 		endereco.setUf(uf.get());
 		return endereco ; 
 		
-	}
-	
-	
-	
+	}	
 }

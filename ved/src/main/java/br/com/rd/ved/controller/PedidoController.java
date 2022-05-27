@@ -127,6 +127,5 @@ public class PedidoController {
 		Optional<Pedido> pedido = pedidoRepository.ultimoPedido();
 		return pedido.get().getId();
 	}
-	
 
 }
