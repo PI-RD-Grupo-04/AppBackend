@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import br.com.rd.ved.model.Frete;
 
-
 public class FreteDTO {
 	private Integer id;
 	private BigDecimal valor;

@@ -7,7 +7,8 @@ import br.com.rd.ved.model.Bandeira;
 import br.com.rd.ved.model.Cartao;
 
 public class CartaoDTO {
-
+	
+	private Integer id;
 	private String numeroCartao;
 	private String titular;
 	private Integer anoVencimento;
@@ -15,6 +16,7 @@ public class CartaoDTO {
 	private Bandeira idBandeira;
 
 	public CartaoDTO(Cartao cartao) {
+		this.id = cartao.getId();
 		this.numeroCartao = cartao.getNumeroCartao();
 		this.anoVencimento = cartao.getAnoVencimento();
 		this.diaVencimento = cartao.getDiaVencimento();
@@ -46,6 +48,11 @@ public class CartaoDTO {
 
 	public Bandeira getIdBandeira() {
 		return idBandeira;
+	}
+
+
+	public Integer getId() {
+		return id;
 	}
 
 

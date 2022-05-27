@@ -23,5 +23,4 @@ public class FreteController {
 
 		return FreteDTO.converter(frete);
 	}
-
 }

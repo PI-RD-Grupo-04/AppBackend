@@ -1,9 +1,18 @@
 package br.com.rd.ved.service;
-
-
-
-
-public class EnderecoService {
+//
+//import java.util.Optional;
+//import java.util.Scanner;
+//
+//import org.springframework.data.repository.CrudRepository;
+//import org.springframework.stereotype.Service;
+//
+//import br.com.rd.ved.model.Endereco;
+//import br.com.rd.ved.model.Uf;
+//import br.com.rd.ved.repository.EnderecoRepository;
+//import br.com.rd.ved.repository.UfRepository;
+//
+//@Service
+//public class EnderecoService {
 //	private final EnderecoRepository enderecoRepository;
 //	private final UfRepository ufRepository;
 //	private Boolean sistema = true;
@@ -119,6 +128,6 @@ public class EnderecoService {
 //		enderecoRepository.deleteById(id);
 //		System.out.println("Endereco deletado com Sucesso");
 //	}
-
-	
-}
+//
+//	
+//}

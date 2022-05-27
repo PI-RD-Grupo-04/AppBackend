@@ -17,10 +17,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>, CrudRe
 
 	 List<Pedido> findByClienteId(Integer idCliente);
 
-	void save(Cliente cliente); 
+	void save(Cliente cliente);
 	
 	@Query(value = " select * from pedido ORDER BY id_pedido DESC LIMIT 1", nativeQuery = true)
-	Optional<Pedido> ultimoPedido();
-
-	 
+	Optional<Pedido> ultimoPedido();	 
 }

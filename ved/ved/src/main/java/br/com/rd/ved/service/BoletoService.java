@@ -1,7 +1,14 @@
 package br.com.rd.ved.service;
 
-
-public class BoletoService {
+//import java.util.Scanner;
+//
+//import org.springframework.stereotype.Service;
+//
+//import br.com.rd.ved.model.Boleto;
+//import br.com.rd.ved.repository.BoletoRepository;
+//
+//@Service
+//public class BoletoService {
 //	private final BoletoRepository boletoRepository;
 //	private Boolean sistema = true;
 //	
@@ -52,6 +59,6 @@ public class BoletoService {
 //		boletoRepository.deleteById(id);
 //		System.out.println(" Deletado com Sucesso");
 //	}
-	
-	
-}
+//	
+//	
+//}

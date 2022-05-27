@@ -58,7 +58,5 @@ public class Boleto {
 	public String toString() {
 		return "Boleto [id=" + id + ", codigoBarras=" + codigoBarras + "]";
 	}
-	
-	
-	
+		
 }

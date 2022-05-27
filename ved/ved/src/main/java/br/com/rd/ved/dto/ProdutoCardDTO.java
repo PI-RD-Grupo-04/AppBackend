@@ -16,7 +16,8 @@ public class ProdutoCardDTO {
 	private String url;
 	private String descricao;
 	private String statusProduto;
-	private Integer quantidade = 1;
+	private Integer quantidade = 1; 
+	private Integer estoque;
 
 	public ProdutoCardDTO(Produto produto) {
 		this.id = produto.getId();
@@ -24,8 +25,9 @@ public class ProdutoCardDTO {
 		this.preco = produto.getPreco();
 		this.url = produto.getUrl();
 		this.descricao = produto.getDescricao();
-		this.statusProduto = produto.getStatusProduto().toString(); 
-	}
+		this.statusProduto = produto.getStatusProduto().toString();  
+		this.estoque = produto.getQuantidade();
+		}
 	
 	public ProdutoCardDTO() {
 	}
@@ -51,6 +53,10 @@ public class ProdutoCardDTO {
 	}
 
 	
+	public Integer getEstoque() {
+		return estoque;
+	}
+
 	public Integer getQuantidade() {
 		return quantidade;
 	}

@@ -22,7 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.rd.ved.dto.MyPedidosDTO;
 import br.com.rd.ved.dto.PedidoDTO;
 import br.com.rd.ved.dto.PedidoDetalheDTO;
-import br.com.rd.ved.dto.meusPedidosDTO;
 import br.com.rd.ved.formdto.PedidoForm;
 import br.com.rd.ved.model.Cliente;
 import br.com.rd.ved.model.Pedido;
@@ -94,7 +93,7 @@ public class PedidoController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-
+		
 	@DeleteMapping("/cliente={id}/cancelar/{pedido}")
 	@Transactional
 	public ResponseEntity<?> cancelar(@PathVariable("id") Integer id, @PathVariable("pedido") Integer idPedido) {
@@ -128,6 +127,5 @@ public class PedidoController {
 		Optional<Pedido> pedido = pedidoRepository.ultimoPedido();
 		return pedido.get().getId();
 	}
-	
 
 }

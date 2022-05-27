@@ -22,9 +22,11 @@ import br.com.rd.ved.formdto.BoletoForm;
 import br.com.rd.ved.formdto.PagamentoCartaoForm;
 import br.com.rd.ved.model.Boleto;
 import br.com.rd.ved.model.Cartao;
+import br.com.rd.ved.model.Pedido;
 import br.com.rd.ved.model.Pix;
 import br.com.rd.ved.repository.BoletoRepository;
 import br.com.rd.ved.repository.CartaoRepository;
+import br.com.rd.ved.repository.PedidoRepository;
 import br.com.rd.ved.repository.PixRepository;
 
 @RestController
@@ -40,9 +42,13 @@ public class FormaPagamentoController {
 	@Autowired
 	private BoletoRepository boletoRepository;
 	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
 		
-	@GetMapping("/pix")
+	@GetMapping("/pix/{id}")
 	public ResponseEntity<PixDTO> pagaPix() {
+		System.err.println();
 		Optional<Pix> pix = pixRepository.findById(1);	
 		if (pix.isPresent()) {
 			return ResponseEntity.ok().body(new PixDTO(pix.get()));
@@ -70,13 +76,15 @@ public class FormaPagamentoController {
 		return ResponseEntity.notFound().build();	
 	}
 	
-	@PostMapping("/parcelas/{id}")
+	@PostMapping("/parcelas/{id}/{idPedido}")
 	public ResponseEntity<PagamentoCartaoDto> valorParcelas(@PathVariable("id") Integer id,
+			@PathVariable("idPedido") Integer idPedido,
 			@RequestBody @Valid PagamentoCartaoForm Form){
 
 		Optional<Cartao> cartao = cartaoRepository.findById(id);
+		Optional<Pedido> pedido = pedidoRepository.findById(idPedido);
 		
-		return ResponseEntity.ok().body(new PagamentoCartaoDto(Form, cartao.get()));	
+		return ResponseEntity.ok().body(new PagamentoCartaoDto(Form, cartao.get(), pedido.get().getId()));	
 	}
 		
 }

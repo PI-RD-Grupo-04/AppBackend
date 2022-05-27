@@ -26,7 +26,6 @@ import br.com.rd.ved.repository.PedidoStatusRepository;
 
 public class PedidoForm {
 	
-	
 	private Date data;
 	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	private Integer cliente;
