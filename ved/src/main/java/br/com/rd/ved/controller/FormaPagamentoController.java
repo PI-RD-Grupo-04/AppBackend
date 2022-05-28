@@ -46,9 +46,8 @@ public class FormaPagamentoController {
 	private PedidoRepository pedidoRepository;
 	
 		
-	@GetMapping("/pix/{id}")
+	@GetMapping("/pix")
 	public ResponseEntity<PixDTO> pagaPix() {
-		System.err.println();
 		Optional<Pix> pix = pixRepository.findById(1);	
 		if (pix.isPresent()) {
 			return ResponseEntity.ok().body(new PixDTO(pix.get()));
