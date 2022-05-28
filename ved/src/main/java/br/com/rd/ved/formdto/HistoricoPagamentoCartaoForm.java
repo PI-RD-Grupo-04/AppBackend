@@ -2,39 +2,30 @@ package br.com.rd.ved.formdto;
 
 import java.util.List;
 import java.util.Optional;
-
-import br.com.rd.ved.dto.HistoricoPagamentoDTO;
-import br.com.rd.ved.dto.PedidoDTO;
-import br.com.rd.ved.model.Boleto;
+import br.com.rd.ved.dto.HistoricoPagamentoCartaoDTO;
 import br.com.rd.ved.model.Cartao;
 import br.com.rd.ved.model.Cliente;
-import br.com.rd.ved.model.HistoricoPagamento;
+import br.com.rd.ved.model.HistoricoPagamentoCartao;
 import br.com.rd.ved.model.Pedido;
-import br.com.rd.ved.model.Pix;
-import br.com.rd.ved.repository.BoletoRepository;
 import br.com.rd.ved.repository.CartaoRepository;
 import br.com.rd.ved.repository.ClienteRepository;
-import br.com.rd.ved.repository.HistoricoPagamentoRepository;
+import br.com.rd.ved.repository.HistoricoPagamentoCartaoRepository;
 import br.com.rd.ved.repository.PedidoRepository;
-import br.com.rd.ved.repository.PixRepository;
 
-public class HistoricoPagamentoForm {
+public class HistoricoPagamentoCartaoForm {
 
 	private Integer pedido;
 	private Integer cliente;
-	private Integer pix;
-	private Integer boleto;
 	private Integer cartao;
+	private Integer numeroParcelas;
 	private String statusPagamento;
 
-	public HistoricoPagamentoForm(String pedido, String cliente, String pix, String boleto, String cartao,
+	public HistoricoPagamentoCartaoForm(String pedido, String cliente, String cartao, String numeroParcelas,
 			String statusPagamento) {
-		super();
 		this.pedido = Integer.parseInt(pedido);
 		this.cliente = Integer.parseInt(cliente);
-		this.pix = Integer.parseInt(pix);
-		this.boleto = Integer.parseInt(boleto);
 		this.cartao = Integer.parseInt(cartao);
+		this.numeroParcelas = Integer.parseInt(numeroParcelas);
 		this.statusPagamento = statusPagamento;
 	}
 
@@ -54,22 +45,6 @@ public class HistoricoPagamentoForm {
 		this.cliente = cliente;
 	}
 
-	public Integer getPix() {
-		return pix;
-	}
-
-	public void setPix(Integer pix) {
-		this.pix = pix;
-	}
-
-	public Integer getBoleto() {
-		return boleto;
-	}
-
-	public void setBoleto(Integer boleto) {
-		this.boleto = boleto;
-	}
-
 	public Integer getCartao() {
 		return cartao;
 	}
@@ -85,30 +60,32 @@ public class HistoricoPagamentoForm {
 	public void setStatusPagamento(String statusPagamento) {
 		this.statusPagamento = statusPagamento;
 	}
+	
+	public Integer getNumeroParcelas() {
+		return numeroParcelas;
+	}
 
-	public HistoricoPagamento converter(PedidoRepository pedidoRepository, ClienteRepository clienteRepository,
-							PixRepository pixRepository, BoletoRepository boletoRepository,
+	public void setNumeroParcelas(Integer numeroParcelas) {
+		this.numeroParcelas = numeroParcelas;
+	}
+
+	public HistoricoPagamentoCartao converter(PedidoRepository pedidoRepository, ClienteRepository clienteRepository,
 							CartaoRepository cartaoRepository) {
 
 		Optional<Pedido> pedido = pedidoRepository.findById(this.pedido);
 		Optional<Cliente> cliente = clienteRepository.findById(this.cliente);
-		Optional<Pix> pix = pixRepository.findById(this.pix);
-		Optional<Boleto> boleto = boletoRepository.findById(this.boleto);
 		Optional<Cartao> cartao = cartaoRepository.findById(this.cartao);
-
-		HistoricoPagamento historico = new HistoricoPagamento(pedido.get(), cliente.get(), pix.get(),boleto.get(),cartao.get(), statusPagamento);
-
+		HistoricoPagamentoCartao historico = new HistoricoPagamentoCartao(pedido.get(), cliente.get(),cartao.get(),numeroParcelas, statusPagamento);
 		return historico;
 
 	}
 	
-	public List<HistoricoPagamentoDTO> cadastrarHistorico(HistoricoPagamento historicoPagamento, Pedido pedido, HistoricoPagamentoRepository historicoPedidoRepository) {
-		List<HistoricoPagamento> historico;
-		
+	public List<HistoricoPagamentoCartaoDTO> cadastrarHistorico(HistoricoPagamentoCartao historicoPagamento, Pedido pedido, HistoricoPagamentoCartaoRepository historicoPedidoRepository) {
+		List<HistoricoPagamentoCartao> historico;		
 		historico = pedido.getHistoricoPagamento();
 		historico.add(historicoPagamento);
 		pedido.setHistoricoPagamento(historico);
 		historicoPedidoRepository.save(pedido);
-		return HistoricoPagamentoDTO.converter(historico);
+		return HistoricoPagamentoCartaoDTO.converter(historico);
 	} 
 }
