@@ -46,9 +46,8 @@ public class FormaPagamentoController {
 	private PedidoRepository pedidoRepository;
 	
 		
-	@GetMapping("/pix/{id}")
+	@GetMapping("/pix")
 	public ResponseEntity<PixDTO> pagaPix() {
-		System.err.println();
 		Optional<Pix> pix = pixRepository.findById(1);	
 		if (pix.isPresent()) {
 			return ResponseEntity.ok().body(new PixDTO(pix.get()));
@@ -57,10 +56,13 @@ public class FormaPagamentoController {
 	}
 	
 	
-	@PostMapping("/boleto")
-	public ResponseEntity<BoletoDTO> pagaBoleto(@RequestBody @Valid BoletoForm boletoForm,
+	@PostMapping("/boleto/{id}")
+	public ResponseEntity<BoletoDTO> geraBoleto(@PathVariable("id") Integer id, 
+			@RequestBody @Valid BoletoForm boletoForm,
 			UriComponentsBuilder uriBuilder) {
-		Boleto boleto = boletoForm.converter(boletoRepository);
+		Optional<Pedido> pedido = pedidoRepository.findById(id);
+		
+		Boleto boleto = boletoForm.converter(boletoRepository, pedido.get());
 		boletoRepository.save(boleto);
 		URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(boleto.getId()).toUri();
 		return ResponseEntity.created(uri).body(new BoletoDTO(boleto));
@@ -87,5 +89,7 @@ public class FormaPagamentoController {
 		return ResponseEntity.ok().body(new PagamentoCartaoDto(Form, cartao.get(), pedido.get().getId()));	
 	}
 		
+	
+
 }
 	

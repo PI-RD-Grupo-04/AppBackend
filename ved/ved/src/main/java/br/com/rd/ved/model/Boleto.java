@@ -2,11 +2,17 @@ package br.com.rd.ved.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="boleto")
@@ -27,14 +33,21 @@ public class Boleto {
 	@Column(name="cpf", nullable = false)
 	private String cpf;
 	
+	@JsonIgnore
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_pedido")
+	private Pedido pedido;
+	
+	
 	public Boleto() {
 		super();
 	}
 	
-	public Boleto(@Size(max = 25) String codigoBarras, String nome, String cpf) {
+	public Boleto(@Size(max = 25) String codigoBarras, String nome, String cpf, Pedido pedido) {
 		this.codigoBarras = codigoBarras;
 		this.nome = nome;
 		this.cpf = cpf;
+		this.pedido = pedido;
 	}
 
 	public Integer getId() {
@@ -53,6 +66,21 @@ public class Boleto {
 		this.codigoBarras = codigoBarras;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
 	@Override
 	public String toString() {

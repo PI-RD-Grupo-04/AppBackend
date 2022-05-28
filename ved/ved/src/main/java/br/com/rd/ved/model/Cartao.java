@@ -61,6 +61,10 @@ public class Cartao {
 	@ManyToMany(mappedBy="cartoes",fetch = FetchType.LAZY)
 	private List<Cliente> cliente; 
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cartao")
+	private List <HistoricoPagamentoCartao> HistoricoPagamento; 
+	
 	public Cartao() {
 		super();
 	}
@@ -132,11 +136,36 @@ public class Cartao {
 		this.idBandeira = bandeiraId;
 	}
 
+	
+	public Bandeira getIdBandeira() {
+		return idBandeira;
+	}
+
+	public void setIdBandeira(Bandeira idBandeira) {
+		this.idBandeira = idBandeira;
+	}
+
+	public List<Cliente> getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(List<Cliente> cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<HistoricoPagamentoCartao> getHistoricoPagamento() {
+		return HistoricoPagamento;
+	}
+
+	public void setHistoricoPagamento(List<HistoricoPagamentoCartao> historicoPagamento) {
+		HistoricoPagamento = historicoPagamento;
+	}
+
 	@Override
 	public String toString() {
 		return "Cartao [id=" + id + ", numeroCartao=" + numeroCartao + ", nomeTitular=" + nomeTitular + ", cpfTitular="
 				+ cpfTitular + ", diaVencimento=" + diaVencimento + ", anoVencimento=" + anoVencimento + ", bandeiraId="
-				+ idBandeira + "]";
+				+ idBandeira.getNome() + "]";
 	}
 
 }

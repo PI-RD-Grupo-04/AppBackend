@@ -78,7 +78,7 @@ public class PedidoController {
 		return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
 	}
 
-	@GetMapping("/cliente={id}/detalhar/{pedido}")
+	@GetMapping("/{id}/detalhar/{pedido}")
 	public ResponseEntity<PedidoDetalheDTO> detalhar(@PathVariable("id") Integer id,
 			@PathVariable("pedido") Integer idPedido) {
 
@@ -122,10 +122,5 @@ public class PedidoController {
 		return MyPedidosDTO.converter(pedidos);
 	}
 	
-	@GetMapping("/ultimo")
-	public Integer ultimo() {
-		Optional<Pedido> pedido = pedidoRepository.ultimoPedido();
-		return pedido.get().getId();
-	}
 
 }

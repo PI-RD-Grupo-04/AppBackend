@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="pix")
 public class Pix {
@@ -21,6 +22,7 @@ public class Pix {
 	
 	@Column(name="img")
 	private String img;
+	
 		
 	public Pix() {
 		super();

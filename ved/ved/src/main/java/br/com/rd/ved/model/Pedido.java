@@ -59,6 +59,14 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido")
 	private List <NotaFiscal> notafiscal; 
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "pedido")
+	private List <HistoricoPagamentoCartao> HistoricoPagamento; 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "pedido")
+	private List <Boleto> boleto; 
+	
 	
 	private String tipoPagamento;
 	
@@ -180,6 +188,25 @@ public class Pedido {
 	public int hashCode() {
 		return Objects.hash(data, id);
 	}
+	
+	public List<HistoricoPagamentoCartao> getHistoricoPagamento() {
+		return HistoricoPagamento;
+	}
+
+
+	public void setHistoricoPagamento(List<HistoricoPagamentoCartao> historicoPagamento) {
+		HistoricoPagamento = historicoPagamento;
+	}
+	
+	public List<Boleto> getBoleto() {
+		return boleto;
+	}
+
+
+	public void setBoleto(List<Boleto> boleto) {
+		this.boleto = boleto;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {

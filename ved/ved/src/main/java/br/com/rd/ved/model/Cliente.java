@@ -89,6 +89,10 @@ public class Cliente implements UserDetails{
 	@JoinTable(name = "cliente_endereco", joinColumns = { @JoinColumn(name = "id_cliente") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_endereco") })
 	private List<Endereco> enderecos;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List <HistoricoPagamentoCartao> HistoricoPagamento; 
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -212,6 +216,24 @@ public class Cliente implements UserDetails{
 
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
+	}
+	
+	
+
+	public List<HistoricoPagamentoCartao> getHistoricoPagamento() {
+		return HistoricoPagamento;
+	}
+
+	public void setHistoricoPagamento(List<HistoricoPagamentoCartao> historicoPagamento) {
+		HistoricoPagamento = historicoPagamento;
+	}
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
 	}
 
 	@Override
