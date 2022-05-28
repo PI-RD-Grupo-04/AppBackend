@@ -41,10 +41,10 @@ public class HistoricoPagamentoCartaoController {
 
 	
 	@GetMapping("/{id}/detalhes")
-	public List<HistoricoPagamentoCartaoDTO> listar(@PathVariable("id") Integer id) {
+	public HistoricoPagamentoCartaoDTO listar(@PathVariable("id") Integer id) {
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		List<HistoricoPagamentoCartao> historicos = pedido.get().getHistoricoPagamento(); 
-		return HistoricoPagamentoCartaoDTO.converter(historicos);
+		List <HistoricoPagamentoCartao> historicos = pedido.get().getHistoricoPagamento(); 
+		return new HistoricoPagamentoCartaoDTO(historicos.get(0));
 	}
 		
 		

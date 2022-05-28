@@ -165,7 +165,7 @@ public class Cartao {
 	public String toString() {
 		return "Cartao [id=" + id + ", numeroCartao=" + numeroCartao + ", nomeTitular=" + nomeTitular + ", cpfTitular="
 				+ cpfTitular + ", diaVencimento=" + diaVencimento + ", anoVencimento=" + anoVencimento + ", bandeiraId="
-				+ idBandeira + "]";
+				+ idBandeira.getNome() + "]";
 	}
 
 }
