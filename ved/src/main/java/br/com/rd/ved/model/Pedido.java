@@ -63,6 +63,10 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido")
 	private List <HistoricoPagamentoCartao> HistoricoPagamento; 
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "pedido")
+	private List <Boleto> boleto; 
+	
 	
 	private String tipoPagamento;
 	
@@ -192,6 +196,15 @@ public class Pedido {
 
 	public void setHistoricoPagamento(List<HistoricoPagamentoCartao> historicoPagamento) {
 		HistoricoPagamento = historicoPagamento;
+	}
+	
+	public List<Boleto> getBoleto() {
+		return boleto;
+	}
+
+
+	public void setBoleto(List<Boleto> boleto) {
+		this.boleto = boleto;
 	}
 
 
