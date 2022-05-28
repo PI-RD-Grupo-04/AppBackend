@@ -92,7 +92,7 @@ public class Cliente implements UserDetails{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
-	private List <HistoricoPagamento> HistoricoPagamento; 
+	private List <HistoricoPagamentoCartao> HistoricoPagamento; 
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -220,11 +220,11 @@ public class Cliente implements UserDetails{
 	
 	
 
-	public List<HistoricoPagamento> getHistoricoPagamento() {
+	public List<HistoricoPagamentoCartao> getHistoricoPagamento() {
 		return HistoricoPagamento;
 	}
 
-	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
+	public void setHistoricoPagamento(List<HistoricoPagamentoCartao> historicoPagamento) {
 		HistoricoPagamento = historicoPagamento;
 	}
 

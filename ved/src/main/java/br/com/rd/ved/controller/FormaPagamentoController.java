@@ -57,10 +57,13 @@ public class FormaPagamentoController {
 	}
 	
 	
-	@PostMapping("/boleto")
-	public ResponseEntity<BoletoDTO> pagaBoleto(@RequestBody @Valid BoletoForm boletoForm,
+	@PostMapping("/boleto/{id}")
+	public ResponseEntity<BoletoDTO> geraBoleto(@PathVariable("id") Integer id, 
+			@RequestBody @Valid BoletoForm boletoForm,
 			UriComponentsBuilder uriBuilder) {
-		Boleto boleto = boletoForm.converter(boletoRepository);
+		Optional<Pedido> pedido = pedidoRepository.findById(id);
+		
+		Boleto boleto = boletoForm.converter(boletoRepository, pedido.get());
 		boletoRepository.save(boleto);
 		URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(boleto.getId()).toUri();
 		return ResponseEntity.created(uri).body(new BoletoDTO(boleto));

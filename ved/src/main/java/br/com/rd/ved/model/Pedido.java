@@ -61,7 +61,11 @@ public class Pedido {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
-	private List <HistoricoPagamento> HistoricoPagamento; 
+	private List <HistoricoPagamentoCartao> HistoricoPagamento; 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "pedido")
+	private List <Boleto> boleto; 
 	
 	
 	private String tipoPagamento;
@@ -185,13 +189,22 @@ public class Pedido {
 		return Objects.hash(data, id);
 	}
 	
-	public List<HistoricoPagamento> getHistoricoPagamento() {
+	public List<HistoricoPagamentoCartao> getHistoricoPagamento() {
 		return HistoricoPagamento;
 	}
 
 
-	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
+	public void setHistoricoPagamento(List<HistoricoPagamentoCartao> historicoPagamento) {
 		HistoricoPagamento = historicoPagamento;
+	}
+	
+	public List<Boleto> getBoleto() {
+		return boleto;
+	}
+
+
+	public void setBoleto(List<Boleto> boleto) {
+		this.boleto = boleto;
 	}
 
 

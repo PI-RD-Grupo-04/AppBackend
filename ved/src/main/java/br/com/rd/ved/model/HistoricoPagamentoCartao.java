@@ -11,9 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "historico_pagamento")
-public class HistoricoPagamento {
+public class HistoricoPagamentoCartao {
 
 	
 	@Id
@@ -21,37 +23,33 @@ public class HistoricoPagamento {
 	@Column(name = "id_historico")
 	private Integer id;
 	
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_pedido")
 	private Pedido pedido;
 	
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER )
 	@JoinColumn(name="id_cliente")
 	private Cliente cliente;
 	
-	@ManyToOne(fetch=FetchType.EAGER )
-	@JoinColumn(name="id_pix", nullable = true)
-	private Pix pix;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="id_boleto", nullable = true)
-	private Boleto boleto;
-	
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_cartao", nullable = true)
 	private Cartao cartao;
 	
+	private Integer numeroParcela;
+	
 	private String statusPagamento;
 
-	public HistoricoPagamento() {}
+	public HistoricoPagamentoCartao() {}
 
-	public HistoricoPagamento(Pedido pedido, Cliente cliente, Pix pix, Boleto boleto, Cartao cartao,
+	public HistoricoPagamentoCartao(Pedido pedido, Cliente cliente, Cartao cartao, Integer numeroParcela,
 			String statusPagamento) {
 		this.pedido = pedido;
 		this.cliente = cliente;
-		this.pix = pix;
-		this.boleto = boleto;
 		this.cartao = cartao;
+		this.numeroParcela = numeroParcela;
 		this.statusPagamento = statusPagamento;
 	}
 
@@ -79,22 +77,6 @@ public class HistoricoPagamento {
 		this.cliente = cliente;
 	}
 
-	public Pix getPix() {
-		return pix;
-	}
-
-	public void setPix(Pix pix) {
-		this.pix = pix;
-	}
-
-	public Boleto getBoleto() {
-		return boleto;
-	}
-
-	public void setBoleto(Boleto boleto) {
-		this.boleto = boleto;
-	}
-
 	public Cartao getCartao() {
 		return cartao;
 	}
@@ -110,6 +92,14 @@ public class HistoricoPagamento {
 	public void setStatusPagamento(String statusPagamento) {
 		this.statusPagamento = statusPagamento;
 	}
+	
+	public Integer getNumeroParcela() {
+		return numeroParcela;
+	}
+
+	public void setNumeroParcela(Integer numeroParcela) {
+		this.numeroParcela = numeroParcela;
+	}
 
 	@Override
 	public int hashCode() {
@@ -124,7 +114,7 @@ public class HistoricoPagamento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		HistoricoPagamento other = (HistoricoPagamento) obj;
+		HistoricoPagamentoCartao other = (HistoricoPagamentoCartao) obj;
 		return Objects.equals(id, other.id);
 	}
 	

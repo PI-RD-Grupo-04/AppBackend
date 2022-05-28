@@ -1,17 +1,18 @@
 package br.com.rd.ved.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="boleto")
@@ -33,17 +34,20 @@ public class Boleto {
 	private String cpf;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "boleto")
-	private List <HistoricoPagamento> HistoricoPagamento; 
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_pedido")
+	private Pedido pedido;
+	
 	
 	public Boleto() {
 		super();
 	}
 	
-	public Boleto(@Size(max = 25) String codigoBarras, String nome, String cpf) {
+	public Boleto(@Size(max = 25) String codigoBarras, String nome, String cpf, Pedido pedido) {
 		this.codigoBarras = codigoBarras;
 		this.nome = nome;
 		this.cpf = cpf;
+		this.pedido = pedido;
 	}
 
 	public Integer getId() {
@@ -76,14 +80,6 @@ public class Boleto {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public List<HistoricoPagamento> getHistoricoPagamento() {
-		return HistoricoPagamento;
-	}
-
-	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
-		HistoricoPagamento = historicoPagamento;
 	}
 
 	@Override
