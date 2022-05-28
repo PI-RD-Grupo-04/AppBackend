@@ -13,9 +13,9 @@ import br.com.rd.ved.model.Frete;
 @Repository
 public interface FreteRepository extends JpaRepository<Frete, Integer>,  CrudRepository<Frete,Integer>{
 
-	@Query(value = "select * from frete f\r\n"
-			+ "inner join tipo_frete tf on f.id_tipo_frete = tf.id_tipo_frete  \r\n"
-			+ "inner join uf on f.id_uf = uf.id_uf\r\n"
+	@Query(value = "select * from frete f "
+			+ "inner join tipo_frete tf on f.id_tipo_frete = tf.id_tipo_frete "
+			+ "inner join uf on f.id_uf = uf.id_uf "
 			+ "where uf.id_uf = :tipo ", nativeQuery = true)
 	List<Frete> findFretePorTipo(@Param("tipo")Integer tipo);
 	

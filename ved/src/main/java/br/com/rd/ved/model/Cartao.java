@@ -58,6 +58,7 @@ public class Cartao {
 	private Bandeira idBandeira;
 
 	@JsonIgnore
+<<<<<<< HEAD
 	@ManyToMany(mappedBy = "cartoes", fetch = FetchType.LAZY)
 	private List<Cliente> cliente;
 
@@ -66,6 +67,15 @@ public class Cartao {
 	private Integer NParcelas;
 	private Integer parcelas;
 
+=======
+	@ManyToMany(mappedBy="cartoes",fetch = FetchType.LAZY)
+	private List<Cliente> cliente; 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cartao")
+	private List <HistoricoPagamento> HistoricoPagamento; 
+	
+>>>>>>> 6b06640e8620ce85588d71bf9f6a50d2fcb6f281
 	public Cartao() {
 		super();
 	}
@@ -143,6 +153,7 @@ public class Cartao {
 		this.idBandeira = bandeiraId;
 	}
 
+<<<<<<< HEAD
 	public Integer getNParcelas(Integer NParcelas) {
 		return NParcelas;
 	}
@@ -153,6 +164,31 @@ public class Cartao {
 
 	public Integer getNParcelas() {
 		return NParcelas;
+=======
+	
+	public Bandeira getIdBandeira() {
+		return idBandeira;
+	}
+
+	public void setIdBandeira(Bandeira idBandeira) {
+		this.idBandeira = idBandeira;
+	}
+
+	public List<Cliente> getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(List<Cliente> cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<HistoricoPagamento> getHistoricoPagamento() {
+		return HistoricoPagamento;
+	}
+
+	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
+		HistoricoPagamento = historicoPagamento;
+>>>>>>> 6b06640e8620ce85588d71bf9f6a50d2fcb6f281
 	}
 
 	@Override

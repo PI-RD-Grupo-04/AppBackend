@@ -1,5 +1,6 @@
 package br.com.rd.ved.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -12,14 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -56,7 +52,7 @@ public class Pedido {
 	private Endereco enderecos;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itemPedido;
 	
 	@JsonIgnore
@@ -64,27 +60,30 @@ public class Pedido {
 	private List <NotaFiscal> notafiscal; 
 	
 	@JsonIgnore
-	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "pagamento", joinColumns = { @JoinColumn(name = "id_pedido") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_tipo_pagamento") })
-	private List<TipoPagamento> tipoPagamento;
+	@OneToMany(mappedBy = "pedido")
+	private List <HistoricoPagamento> HistoricoPagamento; 
+	
+	
+	private String tipoPagamento;
+	
+	private BigDecimal valorTotal;
 	
 	
 
 	public Pedido() {
-		super();
 	}
 
 
 	public Pedido(Date data, Cliente cliente, CupomDesconto cupomDesconto, PedidoStatus pedidoStatus, Frete frete,
-			Endereco enderecos) {
+			Endereco enderecos, String tipoPagamento, BigDecimal valorTotal) {
 		this.data = data;
 		this.cliente = cliente;
 		this.cupomDesconto = cupomDesconto;
 		this.pedidoStatus = pedidoStatus;
 		this.frete = frete;
 		this.enderecos = enderecos;
+		this.tipoPagamento = tipoPagamento;
+		this.valorTotal = valorTotal;
 	}
 
 	public Integer getId() {
@@ -159,19 +158,42 @@ public class Pedido {
 		this.notafiscal = notafiscal;
 	}
 
-	public List<TipoPagamento> getTipoPagamento() {
+	public String getTipoPagamento() {
 		return tipoPagamento;
 	}
 
-	public void setTipoPagamento(List<TipoPagamento> tipoPagamento) {
+
+	public void setTipoPagamento(String tipoPagamento) {
 		this.tipoPagamento = tipoPagamento;
 	}
 
+
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
+	
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(data, id);
 	}
+	
+	public List<HistoricoPagamento> getHistoricoPagamento() {
+		return HistoricoPagamento;
+	}
+
+
+	public void setHistoricoPagamento(List<HistoricoPagamento> historicoPagamento) {
+		HistoricoPagamento = historicoPagamento;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {

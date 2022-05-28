@@ -2,17 +2,17 @@ package br.com.rd.ved.formdto;
 
 
 import java.util.List;
-import java.util.Optional;
+/* import java.util.Optional; */
 
 import javax.validation.constraints.NotEmpty;
 
 import com.sun.istack.NotNull;
 
 import br.com.rd.ved.dto.CartaoDTO;
-import br.com.rd.ved.model.Bandeira;
+/* import br.com.rd.ved.model.Bandeira; */
 import br.com.rd.ved.model.Cartao;
 import br.com.rd.ved.model.Cliente;
-import br.com.rd.ved.repository.BandeiraRepository;
+/* import br.com.rd.ved.repository.BandeiraRepository; */
 import br.com.rd.ved.repository.ClienteRepository;
 
 
@@ -80,13 +80,13 @@ public class ClienteCartaoForm {
 			this.idBandeira = Integer.parseInt(idBandeira);
 		}
 
-		public Cartao converter(BandeiraRepository bandeiraRepository) {
+		/* public Cartao converter(BandeiraRepository bandeiraRepository) {
 			Optional<Bandeira> bandeira = bandeiraRepository.findById(this.idBandeira);
 			Cartao cartao = new Cartao(anoVencimento, numeroCartao, nomeTitular, cpfTitular, diaVencimento, anoVencimento, bandeira.get(), null, null, anoVencimento, anoVencimento );
 			cartao.setBandeiraId(bandeira.get());
 			return cartao;
 		}
-		
+		 */
 		public List<CartaoDTO> cadastrarCartao(Cartao cartao, Cliente cliente, ClienteRepository clienteRepository) {
 			List<Cartao> cartoes;
 			cartoes = cliente.getCartoes();

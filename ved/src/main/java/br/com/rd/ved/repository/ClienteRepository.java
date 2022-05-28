@@ -14,8 +14,11 @@ import br.com.rd.ved.model.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>, CrudRepository<Cliente, Integer> {
 
-	List<Cliente> findByNome(String nomeCurso); 
-	
-	@Query(value = " select * from cliente c where c.email =  :email", nativeQuery = true)
-	Optional<Cliente> findByEmail(@Param("email") String email);
+	List<Cliente> findByNome(String nomeCurso);
+
+	Optional<Cliente> findByEmail(String email);
+
+	@Query("select c from Cliente c where c.email = :email")
+	Cliente getClienteByEmail(@Param("email") String email);
+
 }

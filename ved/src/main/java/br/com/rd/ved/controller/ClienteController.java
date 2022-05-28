@@ -36,7 +36,7 @@ public class ClienteController {
 
 	}
 
-	@PostMapping
+	@PostMapping("/novo")
 	@Transactional
 	public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid ClienteForm clienteForm,
 			UriComponentsBuilder uriBuilder) {
@@ -85,9 +85,4 @@ public class ClienteController {
 		return ResponseEntity.notFound().build();
 
 	} 
-	
-
-
-	
-
 }

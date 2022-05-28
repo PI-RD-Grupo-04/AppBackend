@@ -41,12 +41,16 @@ public class ItemPedidoController {
 	public ResponseEntity<ItemPedidoDTO> insert(@RequestBody List<ItemPedidoForm> form) {
 
 		for(int i = 0; i < form.size(); i++) {	
+			System.out.println(i);
 			ItemPedidoDTO entity = itemService.insert(form.get(i));	
+			System.out.println(entity);
 		}
-		return null;	
-	}
+		return null;
+
 
 	
+}
+
 	@GetMapping("/pedido={id}/items")
 	public ResponseEntity<List<ItemPedidoDetalheDTO>> visualizar(@PathVariable("id") Integer id) {
 

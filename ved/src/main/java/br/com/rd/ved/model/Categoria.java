@@ -21,6 +21,7 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_categoria")
 	private Integer id;
+	
 	@Column(name = "descricao_categoria")
 	@Size(max = 50)
 	private String descricao;
